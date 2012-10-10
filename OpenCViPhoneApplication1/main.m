@@ -3,6 +3,8 @@
 //  OpenCViPhoneApplication1
 //
 
+// A trivial change
+
 
 #import <UIKit/UIKit.h>
 
