@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
+		87C463C01635A2A3004DAD4D /* ColorSpaceMaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 87C463BE1635A2A3004DAD4D /* ColorSpaceMaker.cpp */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
 		B553DE851581157500855F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE841581157500855F6F /* Foundation.framework */; };
 		B553DE871581157500855F6F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE861581157500855F6F /* CoreGraphics.framework */; };
@@ -24,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		099AC32E1624580D00E12E63 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		87C463BE1635A2A3004DAD4D /* ColorSpaceMaker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorSpaceMaker.cpp; sourceTree = "<group>"; };
+		87C463BF1635A2A3004DAD4D /* ColorSpaceMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSpaceMaker.h; sourceTree = "<group>"; };
 		B553DE7E1581157500855F6F /* OpenCViPhoneApplication1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenCViPhoneApplication1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B553DE821581157500855F6F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B553DE841581157500855F6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -92,6 +95,8 @@
 			children = (
 				B553DE911581157500855F6F /* AppDelegate.h */,
 				B553DE921581157500855F6F /* AppDelegate.m */,
+				87C463BE1635A2A3004DAD4D /* ColorSpaceMaker.cpp */,
+				87C463BF1635A2A3004DAD4D /* ColorSpaceMaker.h */,
 				B553DE971581157500855F6F /* ViewController.h */,
 				B553DE981581157500855F6F /* ViewController.mm */,
 				B553DE891581157500855F6F /* Supporting Files */,
@@ -184,6 +189,7 @@
 				B553DE8F1581157500855F6F /* main.m in Sources */,
 				B553DE931581157500855F6F /* AppDelegate.m in Sources */,
 				B553DE991581157500855F6F /* ViewController.mm in Sources */,
+				87C463C01635A2A3004DAD4D /* ColorSpaceMaker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
