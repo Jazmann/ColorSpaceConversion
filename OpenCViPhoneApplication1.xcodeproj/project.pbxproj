@@ -95,6 +95,8 @@
 			children = (
 				B553DE911581157500855F6F /* AppDelegate.h */,
 				B553DE921581157500855F6F /* AppDelegate.m */,
+				87C463BE1635A2A3004DAD4D /* ColorSpaceMaker.cpp */,
+				87C463BF1635A2A3004DAD4D /* ColorSpaceMaker.h */,
 				B553DE971581157500855F6F /* ViewController.h */,
 				B553DE981581157500855F6F /* ViewController.mm */,
 				B553DE891581157500855F6F /* Supporting Files */,
