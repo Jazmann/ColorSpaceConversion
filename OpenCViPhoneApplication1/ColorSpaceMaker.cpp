@@ -125,24 +125,21 @@ class ColorSpace {
 
 
  ColorSpace::ColorSpace(Vec3i sp0, Vec3i sp1, Vec3i sp2){
-        
-    Vec3f a1, a2, a3;
+            
+    Vec3fi v1(1.0, sp1 - sp0);
+    Vec3fi v2(1.0, sp2 - sp0);
+     v1.factor(); v1.scale=1.0;
+     v2.factor(); v2.scale=1.0;
     
-    Vec3i v1 = sp1 - sp0;
-    Vec3i v2 = sp2 - sp0;
+     int v1Norm2 = v1.vecDot(v1); // (v1[0] * v1[0]) + (v1[1] * v1[1]) + (v1[2] * v1[2]);
+     int v2Norm2 = v2.vecDot(v2); // (v2[0] * v2[0]) + (v2[1] * v2[1]) + (v2[2] * v2[2]);
+     int v2DotV1 = v2.vecDot(v1); // v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
+     float v1V2Sin = sqrtf((float)(v1Norm2 * v2Norm2 - v2DotV1 * v2DotV1));
     
-    int v1Norm2 = (v1[0] * v1[0]) + (v1[1] * v1[1]) + (v1[2] * v1[2]);
-    int v2Norm2 = (v2[0] * v2[0]) + (v2[1] * v2[1]) + (v2[2] * v2[2]);
-    int v2DotV1 = v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
+     Vec3fi a1(1.0 / sqrtf((float)v1Norm2), v1.vec);
+     Vec3fi a2(1.0 / (v1Norm2 * v1V2Sin),v1Norm2 * v2.vec - v2DotV1 * v1.vec);
+     Vec3fi a3 = v1.cross(v2);
+     a3.scale = 1.0/v1V2Sin;
     
-    Vec3i a1Vec = v1;
-    Vec3i a2Vec = v1Norm2 * v2 - v2DotV1 * v1;
-    Vec3i a3Vec ((v1[1] * v2[2]) - (v1[2] * v2[1]), (v1[2] * v2[0]) - (v1[0] * v2[2]), (v1[0] * v2[1]) - (v1[1] * v2[0]));
-    
-    float v1V2Sin = sqrtf((float)(v1Norm2 * v2Norm2 - v2DotV1 * v2DotV1));
-    
-    float a1Scale = 1 / v1Norm2;
-    float a2Scale = 1 / (v1Norm2 * v1V2Sin);
-    float a3Scale = 1 / v1Norm2 * v2Norm2 - v2DotV1;
     
     }
