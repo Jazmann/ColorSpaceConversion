@@ -68,10 +68,18 @@ struct Vec3fi{
         int common = gcd(this->vec[0],this->vec[1],this->vec[2]);
         if (common>1){
             Vec3i vecTemp(this->vec[0]/common,this->vec[1]/common,this->vec[2]/common);
-            this->vec = vecTemp;
-                scale = scale*common;
+            vec = vecTemp;
+            scale = scale*common;
         };
-    }
+    };
+    
+    int max(){
+        return std::max(std::max(vec[0],vec[1]),vec[2]);
+    };
+    int min(){
+        return std::min(std::min(vec[0],vec[1]),vec[2]);
+    };
+    
     
 };
 
@@ -88,40 +96,10 @@ class ColorSpace {
     // The transform to the new color space is (Ti vec - 255 TMin)/TRange. 255 is the range of 8bit RGB and can be replaced directly with a different range for 16 and 32 bit RGB spaces. The division by TRange is the direct element wise division and can safely be rounded to recast in the required bit depth.
     
     
-    public: ColorSpace(Vec3i, Vec3i, Vec3i);
-    
-    static Matx33f Orthonormalise(Vec3i sp0, Vec3i sp1, Vec3i sp2){
-        
-        Matx33f test;
-        
-        Vec3f a1, a2, a3;
-        
-        Vec3i v1 = sp1 - sp0;
-        Vec3i v2 = sp2 - sp0;
-        
-        int v1Norm2 = (v1[0] * v1[0]) + (v1[1] * v1[1]) + (v1[2] * v1[2]);
-        int v2Norm2 = (v2[0] * v2[0]) + (v2[1] * v2[1]) + (v2[2] * v2[2]);
-        int v2DotV1 = v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
-        
-        Vec3i a1Vec = v1;
-        Vec3i a2Vec = v1Norm2 * v2 - v2DotV1 * v1;
-        Vec3i a3Vec ((v1[1] * v2[2]) - (v1[2] * v2[1]), (v1[2] * v2[0]) - (v1[0] * v2[2]), (v1[0] * v2[1]) - (v1[1] * v2[0]));
-        
-        float v1V2Sin = sqrtf((float)(v1Norm2 * v2Norm2 - v2DotV1 * v2DotV1));
-        
-        float a1Scale = 1 / v1Norm2;
-        float a2Scale = 1 / (v1Norm2 * v1V2Sin);
-        float a3Scale = 1 / v1Norm2 * v2Norm2 - v2DotV1;
-        
-        
-        
-        return test;
-    }
-    
+    public: ColorSpace(Vec3i, Vec3i, Vec3i);    
 
     
 };
-
 
 
  ColorSpace::ColorSpace(Vec3i sp0, Vec3i sp1, Vec3i sp2){
@@ -137,9 +115,14 @@ class ColorSpace {
      float v1V2Sin = sqrtf((float)(v1Norm2 * v2Norm2 - v2DotV1 * v2DotV1));
     
      Vec3fi a1(1.0 / sqrtf((float)v1Norm2), v1.vec);
-     Vec3fi a2(1.0 / (v1Norm2 * v1V2Sin),v1Norm2 * v2.vec - v2DotV1 * v1.vec);
+     Vec3fi a2(1.0 / (v1Norm2 * v1V2Sin),   v1Norm2 * v2.vec - v2DotV1 * v1.vec);
      Vec3fi a3 = v1.cross(v2);
      a3.scale = 1.0/v1V2Sin;
-    
-    
-    }
+     // Setup internal data
+     Ti = Matx33i(a1.vec[0],a1.vec[1],a1.vec[2],a2.vec[0],a2.vec[1],a2.vec[2],a3.vec[0],a3.vec[1],a3.vec[2]);
+     scale = Vec3f(a1.scale,a2.scale,a3.scale);
+     
+     TMin = Vec3i(a1.min(), a2.min(),a3.min());
+     Vec3i TMax(a1.max(),a2.max(),a3.max());
+     TRange = TMax-TMin;
+         }
