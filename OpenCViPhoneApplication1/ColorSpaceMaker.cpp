@@ -129,7 +129,32 @@ class ColorSpace {
      a3.factor();
      // Reorder as a rigt handed coordinate system with a1 in RGB. If a1 is in RGB the all components are positive.
      if (a1.vec[0] > 0 && a1.vec[1] > 0 && a1.vec[2] > 0) {
-         // in RGB
+         // Then a1.vec is in RGB. Do nothing.
+         if (a1.scale < 0.0) {
+             // a1 is pointing in the wrong direction flip the sign and correct the product a1 x a2 = a3.
+             a1.scale = a1.scale * -1.0;
+             a3.vec = -1 * a3.vec;
+         }
+         
+     }else if (a2.vec[0] > 0 && a2.vec[1] > 0 && a2.vec[2] > 0){
+         // Then a2.vec is in RGB. Make a2 -> a1, a1 -> a2 and flip sign of a3 to preserve a1 x a2 = a3.
+         if (a2.scale < 0.0) {
+             // a2 is pointing in the wrong direction flip the sign and correct the product a1 x a2 = a3.
+             a2.scale = a2.scale * -1.0;
+             a3.vec = -1 * a3.vec;
+         }
+         std::swap(a1, a2);    // Make a2 -> a1, a1 -> a2.
+         a3.vec = -1 * a3.vec; // Flip sign of a3 to preserve a1 x a2 = a3.
+     }else if (a3.vec[0] > 0 && a3.vec[1] > 0 && a3.vec[2] > 0){
+         // Then a3.vec is in RGB. Perform cyclic permutation of the vectors. a3 -> a1, a1 -> a2, a2 -> a3.
+         if (a3.scale < 0.0) {
+             // a1 is pointing in the wrong direction flip the sign and correct the product a1 x a2 = a3.
+             a3.scale = a3.scale * -1.0;
+             a2.vec = -1 * a2.vec; // a2 chosen arbitarily for sign reversal.
+         }
+         std::swap(a1, a3);    // Now : a3,a2,a1
+         std::swap(a2, a3);    // Now : a3,a1,a2 As desired.
+
      }
      // Setup internal data
      Ti = Matx33i(a1.vec[0],a1.vec[1],a1.vec[2],a2.vec[0],a2.vec[1],a2.vec[2],a3.vec[0],a3.vec[1],a3.vec[2]);
