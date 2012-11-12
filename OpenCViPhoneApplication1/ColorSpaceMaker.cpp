@@ -65,6 +65,11 @@ struct Vec3fi{
     };
 
     void factor(){
+        // Test for all negative.
+        if (vec[0]<0 && vec[1]<0 && vec[2] < 0) {
+            vec   = -1   * vec;
+            scale = -1.0 * scale;
+        }
         int common = gcd(this->vec[0],this->vec[1],this->vec[2]);
         if (common>1){
             Vec3i vecTemp(this->vec[0]/common,this->vec[1]/common,this->vec[2]/common);
@@ -118,6 +123,14 @@ class ColorSpace {
      Vec3fi a2(1.0 / (v1Norm2 * v1V2Sin),   v1Norm2 * v2.vec - v2DotV1 * v1.vec);
      Vec3fi a3 = v1.cross(v2);
      a3.scale = 1.0/v1V2Sin;
+     // Remove common factors
+     a1.factor();
+     a2.factor();
+     a3.factor();
+     // Reorder as a rigt handed coordinate system with a1 in RGB. If a1 is in RGB the all components are positive.
+     if (a1.vec[0] > 0 && a1.vec[1] > 0 && a1.vec[2] > 0) {
+         // in RGB
+     }
      // Setup internal data
      Ti = Matx33i(a1.vec[0],a1.vec[1],a1.vec[2],a2.vec[0],a2.vec[1],a2.vec[2],a3.vec[0],a3.vec[1],a3.vec[2]);
      scale = Vec3f(a1.scale,a2.scale,a3.scale);
