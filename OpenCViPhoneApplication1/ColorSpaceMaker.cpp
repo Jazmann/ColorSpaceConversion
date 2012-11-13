@@ -32,7 +32,9 @@ int gcd(int u, int v) {
 struct Vec3fi{
     float scale;
     Vec3i vec;
+    
     Vec3fi(float scaleInit, Vec3i vecInit) : scale(scaleInit), vec(vecInit){};
+    
     Vec3fi operator* (float a){
         return Vec3fi(a * scale, vec);
     };
@@ -129,6 +131,7 @@ class ColorSpace {
      a3.factor();
      // Reorder as a rigt handed coordinate system with a1 in RGB. If a1 is in RGB the all components are positive.
      if (a1.vec[0] > 0 && a1.vec[1] > 0 && a1.vec[2] > 0) {
+         
          // Then a1.vec is in RGB. Do nothing.
          if (a1.scale < 0.0) {
              // a1 is pointing in the wrong direction flip the sign and correct the product a1 x a2 = a3.
@@ -137,6 +140,7 @@ class ColorSpace {
          }
          
      }else if (a2.vec[0] > 0 && a2.vec[1] > 0 && a2.vec[2] > 0){
+         
          // Then a2.vec is in RGB. Make a2 -> a1, a1 -> a2 and flip sign of a3 to preserve a1 x a2 = a3.
          if (a2.scale < 0.0) {
              // a2 is pointing in the wrong direction flip the sign and correct the product a1 x a2 = a3.
@@ -145,10 +149,12 @@ class ColorSpace {
          }
          std::swap(a1, a2);    // Make a2 -> a1, a1 -> a2.
          a3.vec = -1 * a3.vec; // Flip sign of a3 to preserve a1 x a2 = a3.
+         
      }else if (a3.vec[0] > 0 && a3.vec[1] > 0 && a3.vec[2] > 0){
+         
          // Then a3.vec is in RGB. Perform cyclic permutation of the vectors. a3 -> a1, a1 -> a2, a2 -> a3.
          if (a3.scale < 0.0) {
-             // a1 is pointing in the wrong direction flip the sign and correct the product a1 x a2 = a3.
+             // a3 is pointing in the wrong direction flip the sign and correct the product a1 x a2 = a3.
              a3.scale = a3.scale * -1.0;
              a2.vec = -1 * a2.vec; // a2 chosen arbitarily for sign reversal.
          }
@@ -158,9 +164,23 @@ class ColorSpace {
      }
      // Setup internal data
      Ti = Matx33i(a1.vec[0],a1.vec[1],a1.vec[2],a2.vec[0],a2.vec[1],a2.vec[2],a3.vec[0],a3.vec[1],a3.vec[2]);
-     scale = Vec3f(a1.scale,a2.scale,a3.scale);
      
-     TMin = Vec3i(a1.min(), a2.min(),a3.min());
-     Vec3i TMax(a1.max(),a2.max(),a3.max());
-     TRange = TMax-TMin;
-         }
+     const int tempBox[] = {0, 1, 0, 0, 0, 1, 1, 1,
+                            0, 0, 1, 0, 1, 0, 1, 1,
+                            0, 0, 0, 1, 1, 1, 0, 1};
+     
+     Matx<int, 3, 8> RGBBox(tempBox);
+     
+     Matx<int, 3, 8> RGBBoxInNew = Ti * RGBBox;
+     
+     Matx<int, 3, 1> RGBCubeMax = cv::max(cv::max(cv::max(cv::max(cv::max(cv::max(cv::max(RGBBoxInNew.col(0), RGBBoxInNew.col(1)), RGBBoxInNew.col(2)), RGBBoxInNew.col(3)), RGBBoxInNew.col(4)), RGBBoxInNew.col(5)), RGBBoxInNew.col(6)), RGBBoxInNew.col(7));
+     
+     Matx<int, 3, 1> RGBCubeMin = cv::min(cv::min(cv::min(cv::min(cv::min(cv::min(cv::min(RGBBoxInNew.col(0), RGBBoxInNew.col(1)), RGBBoxInNew.col(2)), RGBBoxInNew.col(3)), RGBBoxInNew.col(4)), RGBBoxInNew.col(5)), RGBBoxInNew.col(6)), RGBBoxInNew.col(7));
+     
+     Matx<int, 3, 1> RGBCubeRange = RGBCubeMax - RGBCubeMin;
+     
+     TMin[0]   = RGBCubeMin(0,0);   TMin[1]   = RGBCubeMin(1,0);   TMin[2]   = RGBCubeMin(2,0);
+     TRange[0] = RGBCubeRange(0,0); TRange[1] = RGBCubeRange(1,0); TRange[2] = RGBCubeRange(2,0);
+     
+    
+ }
