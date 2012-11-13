@@ -104,10 +104,28 @@ class ColorSpace {
     
     
     public: ColorSpace(Vec3i, Vec3i, Vec3i);    
+    
+    void MaxInRow(InputArray _src, OutputArray _dst){
+        // get Mat headers for input arrays. This is O(1) operation,
+        // unless _src and/or _m are matrix expressions.
+        Mat src = _src.getMat();
+        // CV_Assert( src.type() == CV_32FC2 && m.type() == CV_32F && m.size() == Size(3, 2) );
+        
+        // [re]create the output array so that it has the proper size and type.
+        // In case of Mat it calls Mat::create, in case of STL vector it calls vector::resize.
+        _dst.create(src.rows, 1, src.type());
+        Mat dst = _dst.getMat();
+        dst = src.col(0);
+        
+        for( int i = 0; i < src.rows; i++ )
+            for( int j = 1; j < src.cols; j++ )
+            {
+                dst.at<Point2f>(i,0) = std::max(dst.at<Point2f>(i,0),src.at<Point2f>(i,j));            }
+    }
 
     
-};
-
+};                       
+                
 
  ColorSpace::ColorSpace(Vec3i sp0, Vec3i sp1, Vec3i sp2){
             
