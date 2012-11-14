@@ -103,13 +103,13 @@ class ColorSpace {
     // The transform to the new color space is (Ti vec - 255 TMin)/TRange. 255 is the range of 8bit RGB and can be replaced directly with a different range for 16 and 32 bit RGB spaces. The division by TRange is the direct element wise division and can safely be rounded to recast in the required bit depth.
     
     
-    public: ColorSpace(Vec3i, Vec3i, Vec3i);    
+    public: ColorSpace(Vec3i, Vec3i, Vec3i);
     
-    void MaxInRow(InputArray _src, OutputArray _dst){
-        // get Mat headers for input arrays. This is O(1) operation,
-        // unless _src and/or _m are matrix expressions.
+    
+    template <typename T> void MaxInRow(InputArray _src, OutputArray _dst){
+        // get Mat headers for input array. This is O(1) operation, unless _src is a matrix expressions.
         Mat src = _src.getMat();
-        // CV_Assert( src.type() == CV_32FC2 && m.type() == CV_32F && m.size() == Size(3, 2) );
+        // CV_Assert( src.type() == T);
         
         // [re]create the output array so that it has the proper size and type.
         // In case of Mat it calls Mat::create, in case of STL vector it calls vector::resize.
@@ -117,10 +117,35 @@ class ColorSpace {
         Mat dst = _dst.getMat();
         dst = src.col(0);
         
-        for( int i = 0; i < src.rows; i++ )
+        for( int i = 0; i < src.rows; i++ ){
+            const T* srcRow = src.ptr<T>(i);
             for( int j = 1; j < src.cols; j++ )
             {
-                dst.at<Point2f>(i,0) = std::max(dst.at<Point2f>(i,0),src.at<Point2f>(i,j));            }
+                dst.at<T>(i,0) = std::max(dst.at<T>(i,0),srcRow[j]);
+            }
+        }
+
+    }
+    
+    template <typename T> void MinInRow(InputArray _src, OutputArray _dst){
+        // get Mat headers for input array. This is O(1) operation, unless _src is a matrix expressions.
+        Mat src = _src.getMat();
+        // CV_Assert( src.type() == T);
+        
+        // [re]create the output array so that it has the proper size and type.
+        // In case of Mat it calls Mat::create, in case of STL vector it calls vector::resize.
+        _dst.create(src.rows, 1, src.type());
+        Mat dst = _dst.getMat();
+        dst = src.col(0);
+        
+        for( int i = 0; i < src.rows; i++ ){
+            const T* srcRow = src.ptr<T>(i);
+            for( int j = 1; j < src.cols; j++ )
+            {
+                dst.at<T>(i,0) = std::min(dst.at<T>(i,0),srcRow[j]);
+            }
+        }
+        
     }
 
     
@@ -190,6 +215,11 @@ class ColorSpace {
      Matx<int, 3, 8> RGBBox(tempBox);
      
      Matx<int, 3, 8> RGBBoxInNew = Ti * RGBBox;
+     
+     Mat RGBCubeMax, RGBCubeMin;
+     
+     MaxInRow<int>(RGBBoxInNew, RGBCubeMax);
+     MinInRow<int>(RGBBoxInNew, RGBCubeMin);
      
      Matx<int, 3, 1> RGBCubeMax = cv::max(cv::max(cv::max(cv::max(cv::max(cv::max(cv::max(RGBBoxInNew.col(0), RGBBoxInNew.col(1)), RGBBoxInNew.col(2)), RGBBoxInNew.col(3)), RGBBoxInNew.col(4)), RGBBoxInNew.col(5)), RGBBoxInNew.col(6)), RGBBoxInNew.col(7));
      
