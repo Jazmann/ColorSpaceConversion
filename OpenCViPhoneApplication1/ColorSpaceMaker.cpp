@@ -221,14 +221,10 @@ class ColorSpace {
      MaxInRow<int>(RGBBoxInNew, RGBCubeMax);
      MinInRow<int>(RGBBoxInNew, RGBCubeMin);
      
-     Matx<int, 3, 1> RGBCubeMax = cv::max(cv::max(cv::max(cv::max(cv::max(cv::max(cv::max(RGBBoxInNew.col(0), RGBBoxInNew.col(1)), RGBBoxInNew.col(2)), RGBBoxInNew.col(3)), RGBBoxInNew.col(4)), RGBBoxInNew.col(5)), RGBBoxInNew.col(6)), RGBBoxInNew.col(7));
+     Mat RGBCubeRange = RGBCubeMax - RGBCubeMin;
      
-     Matx<int, 3, 1> RGBCubeMin = cv::min(cv::min(cv::min(cv::min(cv::min(cv::min(cv::min(RGBBoxInNew.col(0), RGBBoxInNew.col(1)), RGBBoxInNew.col(2)), RGBBoxInNew.col(3)), RGBBoxInNew.col(4)), RGBBoxInNew.col(5)), RGBBoxInNew.col(6)), RGBBoxInNew.col(7));
-     
-     Matx<int, 3, 1> RGBCubeRange = RGBCubeMax - RGBCubeMin;
-     
-     TMin[0]   = RGBCubeMin(0,0);   TMin[1]   = RGBCubeMin(1,0);   TMin[2]   = RGBCubeMin(2,0);
-     TRange[0] = RGBCubeRange(0,0); TRange[1] = RGBCubeRange(1,0); TRange[2] = RGBCubeRange(2,0);
+     TMin[0]   = RGBCubeMin.at<int>(0,0);   TMin[1]   = RGBCubeMin.at<int>(1,0);   TMin[2]   = RGBCubeMin.at<int>(2,0);
+     TRange[0] = RGBCubeRange.at<int>(0,0); TRange[1] = RGBCubeRange.at<int>(1,0); TRange[2] = RGBCubeRange.at<int>(2,0);
      
     
  }
