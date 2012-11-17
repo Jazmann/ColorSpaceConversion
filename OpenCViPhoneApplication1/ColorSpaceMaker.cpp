@@ -226,5 +226,4 @@ class ColorSpace {
      TMin[0]   = RGBCubeMin.at<int>(0,0);   TMin[1]   = RGBCubeMin.at<int>(1,0);   TMin[2]   = RGBCubeMin.at<int>(2,0);
      TRange[0] = RGBCubeRange.at<int>(0,0); TRange[1] = RGBCubeRange.at<int>(1,0); TRange[2] = RGBCubeRange.at<int>(2,0);
      
-    
  }
