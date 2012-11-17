@@ -107,12 +107,7 @@ class ColorSpace {
     
     
     template <typename T> void MaxInRow(InputArray _src, OutputArray _dst){
-        // get Mat headers for input array. This is O(1) operation, unless _src is a matrix expressions.
         Mat src = _src.getMat();
-        // CV_Assert( src.type() == T);
-        
-        // [re]create the output array so that it has the proper size and type.
-        // In case of Mat it calls Mat::create, in case of STL vector it calls vector::resize.
         _dst.create(src.rows, 1, src.type());
         Mat dst = _dst.getMat();
         dst = src.col(0);
@@ -128,12 +123,7 @@ class ColorSpace {
     }
     
     template <typename T> void MinInRow(InputArray _src, OutputArray _dst){
-        // get Mat headers for input array. This is O(1) operation, unless _src is a matrix expressions.
         Mat src = _src.getMat();
-        // CV_Assert( src.type() == T);
-        
-        // [re]create the output array so that it has the proper size and type.
-        // In case of Mat it calls Mat::create, in case of STL vector it calls vector::resize.
         _dst.create(src.rows, 1, src.type());
         Mat dst = _dst.getMat();
         dst = src.col(0);

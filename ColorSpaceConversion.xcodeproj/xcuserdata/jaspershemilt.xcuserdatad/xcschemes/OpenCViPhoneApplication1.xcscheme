@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B553DE7D1581157500855F6F"
-               BuildableName = "OpenCViPhoneApplication1.app"
-               BlueprintName = "ColorSpaceConversionSample"
-               ReferencedContainer = "container:ColorSpaceConversionSample.xcodeproj">
+               BuildableName = "ColorSpaceConversion.app"
+               BlueprintName = "ColorSpaceConversion"
+               ReferencedContainer = "container:ColorSpaceConversion.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B553DE7D1581157500855F6F"
-            BuildableName = "OpenCViPhoneApplication1.app"
-            BlueprintName = "ColorSpaceConversionSample"
-            ReferencedContainer = "container:ColorSpaceConversionSample.xcodeproj">
+            BuildableName = "ColorSpaceConversion.app"
+            BlueprintName = "ColorSpaceConversion"
+            ReferencedContainer = "container:ColorSpaceConversion.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B553DE7D1581157500855F6F"
-            BuildableName = "OpenCViPhoneApplication1.app"
-            BlueprintName = "ColorSpaceConversionSample"
-            ReferencedContainer = "container:ColorSpaceConversionSample.xcodeproj">
+            BuildableName = "ColorSpaceConversion.app"
+            BlueprintName = "ColorSpaceConversion"
+            ReferencedContainer = "container:ColorSpaceConversion.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B553DE7D1581157500855F6F"
-            BuildableName = "OpenCViPhoneApplication1.app"
-            BlueprintName = "ColorSpaceConversionSample"
-            ReferencedContainer = "container:ColorSpaceConversionSample.xcodeproj">
+            BuildableName = "ColorSpaceConversion.app"
+            BlueprintName = "ColorSpaceConversion"
+            ReferencedContainer = "container:ColorSpaceConversion.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
