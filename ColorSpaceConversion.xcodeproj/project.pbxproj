@@ -7,43 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090D285A1657F896002ECE01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 090D28441657F896002ECE01 /* AppDelegate.m */; };
+		090D285B1657F896002ECE01 /* ColorSpaceConversion-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 090D28451657F896002ECE01 /* ColorSpaceConversion-Info.plist */; };
+		090D285C1657F896002ECE01 /* ColorSpaceMaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D28471657F896002ECE01 /* ColorSpaceMaker.cpp */; };
+		090D285D1657F896002ECE01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 090D284A1657F896002ECE01 /* InfoPlist.strings */; };
+		090D285E1657F896002ECE01 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 090D284C1657F896002ECE01 /* MainStoryboard.storyboard */; };
+		090D285F1657F896002ECE01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 090D284E1657F896002ECE01 /* InfoPlist.strings */; };
+		090D28601657F896002ECE01 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 090D28501657F896002ECE01 /* MainStoryboard.storyboard */; };
+		090D28611657F896002ECE01 /* fruits.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 090D28521657F896002ECE01 /* fruits.jpg */; };
+		090D28621657F896002ECE01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 090D28531657F896002ECE01 /* main.m */; };
+		090D28631657F896002ECE01 /* opencv-logo57.png in Resources */ = {isa = PBXBuildFile; fileRef = 090D28541657F896002ECE01 /* opencv-logo57.png */; };
+		090D28641657F896002ECE01 /* opencv-logo114.png in Resources */ = {isa = PBXBuildFile; fileRef = 090D28551657F896002ECE01 /* opencv-logo114.png */; };
+		090D28651657F896002ECE01 /* UIImageCVMatConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */; };
+		090D28661657F896002ECE01 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28591657F896002ECE01 /* ViewController.mm */; };
+		090D286F1657FB0C002ECE01 /* convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D28681657FB0C002ECE01 /* convert.cpp */; };
+		090D28701657FB0C002ECE01 /* datastructs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D28691657FB0C002ECE01 /* datastructs.cpp */; };
+		090D28711657FB0C002ECE01 /* gpumat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D286A1657FB0C002ECE01 /* gpumat.cpp */; };
+		090D28721657FB0C002ECE01 /* lapack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D286B1657FB0C002ECE01 /* lapack.cpp */; };
+		090D28731657FB0C002ECE01 /* matmul.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D286C1657FB0C002ECE01 /* matmul.cpp */; };
+		090D28741657FB0C002ECE01 /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D286D1657FB0C002ECE01 /* matrix.cpp */; };
+		090D28771657FECA002ECE01 /* color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D28761657FECA002ECE01 /* color.cpp */; };
+		090D28791657FF3F002ECE01 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090D28781657FF3F002ECE01 /* opencv2.framework */; };
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
-		09FD06211635A334007D4C7A /* ColorSpaceMaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09FD061F1635A334007D4C7A /* ColorSpaceMaker.cpp */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
 		B553DE851581157500855F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE841581157500855F6F /* Foundation.framework */; };
 		B553DE871581157500855F6F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE861581157500855F6F /* CoreGraphics.framework */; };
-		B553DE8D1581157500855F6F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B553DE8B1581157500855F6F /* InfoPlist.strings */; };
-		B553DE8F1581157500855F6F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B553DE8E1581157500855F6F /* main.m */; };
-		B553DE931581157500855F6F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B553DE921581157500855F6F /* AppDelegate.m */; };
-		B553DE961581157500855F6F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B553DE941581157500855F6F /* MainStoryboard.storyboard */; };
-		B553DE991581157500855F6F /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B553DE981581157500855F6F /* ViewController.mm */; };
-		B553DEAB15811B1900855F6F /* fruits.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B553DEAA15811B1900855F6F /* fruits.jpg */; };
-		B5627A7F1581326600FA156A /* opencv-logo57.png in Resources */ = {isa = PBXBuildFile; fileRef = B5627A7D1581326600FA156A /* opencv-logo57.png */; };
-		B5627A801581326600FA156A /* opencv-logo114.png in Resources */ = {isa = PBXBuildFile; fileRef = B5627A7E1581326600FA156A /* opencv-logo114.png */; };
-		B56421E41585A1FD0006F3B0 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56421E31585A1FD0006F3B0 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		090D28431657F896002ECE01 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ColorSpaceConversion/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		090D28441657F896002ECE01 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ColorSpaceConversion/AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		090D28451657F896002ECE01 /* ColorSpaceConversion-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ColorSpaceConversion-Info.plist"; path = "ColorSpaceConversion/ColorSpaceConversion-Info.plist"; sourceTree = SOURCE_ROOT; };
+		090D28461657F896002ECE01 /* ColorSpaceConversion-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ColorSpaceConversion-Prefix.pch"; path = "ColorSpaceConversion/ColorSpaceConversion-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		090D28471657F896002ECE01 /* ColorSpaceMaker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorSpaceMaker.cpp; path = ColorSpaceConversion/ColorSpaceMaker.cpp; sourceTree = SOURCE_ROOT; };
+		090D28481657F896002ECE01 /* ColorSpaceMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorSpaceMaker.h; path = ColorSpaceConversion/ColorSpaceMaker.h; sourceTree = SOURCE_ROOT; };
+		090D284B1657F896002ECE01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		090D284D1657F896002ECE01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		090D284F1657F896002ECE01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ColorSpaceConversion/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		090D28511657F896002ECE01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = ColorSpaceConversion/en.lproj/MainStoryboard.storyboard; sourceTree = SOURCE_ROOT; };
+		090D28521657F896002ECE01 /* fruits.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fruits.jpg; path = ColorSpaceConversion/fruits.jpg; sourceTree = SOURCE_ROOT; };
+		090D28531657F896002ECE01 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ColorSpaceConversion/main.m; sourceTree = SOURCE_ROOT; };
+		090D28541657F896002ECE01 /* opencv-logo57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "opencv-logo57.png"; path = "ColorSpaceConversion/opencv-logo57.png"; sourceTree = SOURCE_ROOT; };
+		090D28551657F896002ECE01 /* opencv-logo114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "opencv-logo114.png"; path = "ColorSpaceConversion/opencv-logo114.png"; sourceTree = SOURCE_ROOT; };
+		090D28561657F896002ECE01 /* UIImageCVMatConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageCVMatConverter.h; path = ColorSpaceConversion/UIImageCVMatConverter.h; sourceTree = SOURCE_ROOT; };
+		090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UIImageCVMatConverter.mm; path = ColorSpaceConversion/UIImageCVMatConverter.mm; sourceTree = SOURCE_ROOT; };
+		090D28581657F896002ECE01 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ColorSpaceConversion/ViewController.h; sourceTree = SOURCE_ROOT; };
+		090D28591657F896002ECE01 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = ColorSpaceConversion/ViewController.mm; sourceTree = SOURCE_ROOT; };
+		090D28681657FB0C002ECE01 /* convert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convert.cpp; path = ../../openCV_Dev/opencv/modules/core/src/convert.cpp; sourceTree = "<group>"; };
+		090D28691657FB0C002ECE01 /* datastructs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = datastructs.cpp; path = ../../openCV_Dev/opencv/modules/core/src/datastructs.cpp; sourceTree = "<group>"; };
+		090D286A1657FB0C002ECE01 /* gpumat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gpumat.cpp; path = ../../openCV_Dev/opencv/modules/core/src/gpumat.cpp; sourceTree = "<group>"; };
+		090D286B1657FB0C002ECE01 /* lapack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lapack.cpp; path = ../../openCV_Dev/opencv/modules/core/src/lapack.cpp; sourceTree = "<group>"; };
+		090D286C1657FB0C002ECE01 /* matmul.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = matmul.cpp; path = ../../openCV_Dev/opencv/modules/core/src/matmul.cpp; sourceTree = "<group>"; };
+		090D286D1657FB0C002ECE01 /* matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = matrix.cpp; path = ../../openCV_Dev/opencv/modules/core/src/matrix.cpp; sourceTree = "<group>"; };
+		090D28761657FECA002ECE01 /* color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = color.cpp; path = ../../openCV_Dev/opencv/modules/imgproc/src/color.cpp; sourceTree = "<group>"; };
+		090D28781657FF3F002ECE01 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../openCV_Dev/ios/opencv2.framework; sourceTree = "<group>"; };
 		099AC32E1624580D00E12E63 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		09FD061F1635A334007D4C7A /* ColorSpaceMaker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorSpaceMaker.cpp; sourceTree = "<group>"; };
-		09FD06201635A334007D4C7A /* ColorSpaceMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSpaceMaker.h; sourceTree = "<group>"; };
 		B553DE7E1581157500855F6F /* ColorSpaceConversion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorSpaceConversion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B553DE821581157500855F6F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B553DE841581157500855F6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B553DE861581157500855F6F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		B553DE8A1581157500855F6F /* ColorSpaceConversion-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ColorSpaceConversion-Info.plist"; sourceTree = "<group>"; };
-		B553DE8C1581157500855F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B553DE8E1581157500855F6F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B553DE901581157500855F6F /* ColorSpaceConversion-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColorSpaceConversion-Prefix.pch"; sourceTree = "<group>"; };
-		B553DE911581157500855F6F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B553DE921581157500855F6F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B553DE951581157500855F6F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		B553DE971581157500855F6F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B553DE981581157500855F6F /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
-		B553DEAA15811B1900855F6F /* fruits.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fruits.jpg; sourceTree = "<group>"; };
-		B5627A7D1581326600FA156A /* opencv-logo57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opencv-logo57.png"; sourceTree = "<group>"; };
-		B5627A7E1581326600FA156A /* opencv-logo114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opencv-logo114.png"; sourceTree = "<group>"; };
-		B56421E31585A1FD0006F3B0 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../openCV_Dev/ios/opencv2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B56421E41585A1FD0006F3B0 /* opencv2.framework in Frameworks */,
+				090D28791657FF3F002ECE01 /* opencv2.framework in Frameworks */,
 				B553DE831581157500855F6F /* UIKit.framework in Frameworks */,
 				B553DE851581157500855F6F /* Foundation.framework in Frameworks */,
 				B553DE871581157500855F6F /* CoreGraphics.framework in Frameworks */,
@@ -61,13 +83,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		090D28491657F896002ECE01 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				090D284A1657F896002ECE01 /* InfoPlist.strings */,
+				090D284C1657F896002ECE01 /* MainStoryboard.storyboard */,
+			);
+			name = en.lproj;
+			path = ColorSpaceConversion/en.lproj;
+			sourceTree = SOURCE_ROOT;
+		};
+		090D28671657FA37002ECE01 /* OpenCV */ = {
+			isa = PBXGroup;
+			children = (
+				090D28681657FB0C002ECE01 /* convert.cpp */,
+				090D28761657FECA002ECE01 /* color.cpp */,
+				090D28691657FB0C002ECE01 /* datastructs.cpp */,
+				090D286A1657FB0C002ECE01 /* gpumat.cpp */,
+				090D286B1657FB0C002ECE01 /* lapack.cpp */,
+				090D286C1657FB0C002ECE01 /* matmul.cpp */,
+				090D286D1657FB0C002ECE01 /* matrix.cpp */,
+			);
+			name = OpenCV;
+			path = OpenCViPhoneApplication1;
+			sourceTree = "<group>";
+		};
 		B553DE731581157400855F6F = {
 			isa = PBXGroup;
 			children = (
 				099AC32E1624580D00E12E63 /* Default-568h@2x.png */,
-				B553DE881581157500855F6F /* OpenCViPhoneApplication1 */,
+				B553DE881581157500855F6F /* ColorSpaceConversion */,
 				B553DE811581157500855F6F /* Frameworks */,
 				B553DE7F1581157500855F6F /* Products */,
+				090D28671657FA37002ECE01 /* OpenCV */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,7 +130,7 @@
 		B553DE811581157500855F6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B56421E31585A1FD0006F3B0 /* opencv2.framework */,
+				090D28781657FF3F002ECE01 /* opencv2.framework */,
 				B553DE821581157500855F6F /* UIKit.framework */,
 				B553DE841581157500855F6F /* Foundation.framework */,
 				B553DE861581157500855F6F /* CoreGraphics.framework */,
@@ -90,31 +138,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B553DE881581157500855F6F /* OpenCViPhoneApplication1 */ = {
+		B553DE881581157500855F6F /* ColorSpaceConversion */ = {
 			isa = PBXGroup;
 			children = (
-				B553DE911581157500855F6F /* AppDelegate.h */,
-				B553DE921581157500855F6F /* AppDelegate.m */,
-				B553DE971581157500855F6F /* ViewController.h */,
-				B553DE981581157500855F6F /* ViewController.mm */,
+				090D28431657F896002ECE01 /* AppDelegate.h */,
+				090D28441657F896002ECE01 /* AppDelegate.m */,
+				090D28491657F896002ECE01 /* en.lproj */,
+				090D28561657F896002ECE01 /* UIImageCVMatConverter.h */,
+				090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */,
+				090D28581657F896002ECE01 /* ViewController.h */,
+				090D28591657F896002ECE01 /* ViewController.mm */,
 				B553DE891581157500855F6F /* Supporting Files */,
 			);
+			name = ColorSpaceConversion;
 			path = OpenCViPhoneApplication1;
 			sourceTree = "<group>";
 		};
 		B553DE891581157500855F6F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B553DE8A1581157500855F6F /* ColorSpaceConversion-Info.plist */,
-				09FD061F1635A334007D4C7A /* ColorSpaceMaker.cpp */,
-				09FD06201635A334007D4C7A /* ColorSpaceMaker.h */,
-				B5627A7D1581326600FA156A /* opencv-logo57.png */,
-				B5627A7E1581326600FA156A /* opencv-logo114.png */,
-				B553DE941581157500855F6F /* MainStoryboard.storyboard */,
-				B553DE8B1581157500855F6F /* InfoPlist.strings */,
-				B553DEAA15811B1900855F6F /* fruits.jpg */,
-				B553DE8E1581157500855F6F /* main.m */,
-				B553DE901581157500855F6F /* ColorSpaceConversion-Prefix.pch */,
+				090D284E1657F896002ECE01 /* InfoPlist.strings */,
+				090D28501657F896002ECE01 /* MainStoryboard.storyboard */,
+				090D28521657F896002ECE01 /* fruits.jpg */,
+				090D28531657F896002ECE01 /* main.m */,
+				090D28541657F896002ECE01 /* opencv-logo57.png */,
+				090D28551657F896002ECE01 /* opencv-logo114.png */,
+				090D28451657F896002ECE01 /* ColorSpaceConversion-Info.plist */,
+				090D28461657F896002ECE01 /* ColorSpaceConversion-Prefix.pch */,
+				090D28471657F896002ECE01 /* ColorSpaceMaker.cpp */,
+				090D28481657F896002ECE01 /* ColorSpaceMaker.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -170,12 +222,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B553DE8D1581157500855F6F /* InfoPlist.strings in Resources */,
-				B553DE961581157500855F6F /* MainStoryboard.storyboard in Resources */,
-				B553DEAB15811B1900855F6F /* fruits.jpg in Resources */,
-				B5627A7F1581326600FA156A /* opencv-logo57.png in Resources */,
-				B5627A801581326600FA156A /* opencv-logo114.png in Resources */,
 				099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */,
+				090D285B1657F896002ECE01 /* ColorSpaceConversion-Info.plist in Resources */,
+				090D285D1657F896002ECE01 /* InfoPlist.strings in Resources */,
+				090D285E1657F896002ECE01 /* MainStoryboard.storyboard in Resources */,
+				090D285F1657F896002ECE01 /* InfoPlist.strings in Resources */,
+				090D28601657F896002ECE01 /* MainStoryboard.storyboard in Resources */,
+				090D28611657F896002ECE01 /* fruits.jpg in Resources */,
+				090D28631657F896002ECE01 /* opencv-logo57.png in Resources */,
+				090D28641657F896002ECE01 /* opencv-logo114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,28 +241,52 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B553DE8F1581157500855F6F /* main.m in Sources */,
-				B553DE931581157500855F6F /* AppDelegate.m in Sources */,
-				B553DE991581157500855F6F /* ViewController.mm in Sources */,
-				09FD06211635A334007D4C7A /* ColorSpaceMaker.cpp in Sources */,
+				090D285A1657F896002ECE01 /* AppDelegate.m in Sources */,
+				090D285C1657F896002ECE01 /* ColorSpaceMaker.cpp in Sources */,
+				090D28621657F896002ECE01 /* main.m in Sources */,
+				090D28651657F896002ECE01 /* UIImageCVMatConverter.mm in Sources */,
+				090D28661657F896002ECE01 /* ViewController.mm in Sources */,
+				090D286F1657FB0C002ECE01 /* convert.cpp in Sources */,
+				090D28701657FB0C002ECE01 /* datastructs.cpp in Sources */,
+				090D28711657FB0C002ECE01 /* gpumat.cpp in Sources */,
+				090D28721657FB0C002ECE01 /* lapack.cpp in Sources */,
+				090D28731657FB0C002ECE01 /* matmul.cpp in Sources */,
+				090D28741657FB0C002ECE01 /* matrix.cpp in Sources */,
+				090D28771657FECA002ECE01 /* color.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B553DE8B1581157500855F6F /* InfoPlist.strings */ = {
+		090D284A1657F896002ECE01 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B553DE8C1581157500855F6F /* en */,
+				090D284B1657F896002ECE01 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		B553DE941581157500855F6F /* MainStoryboard.storyboard */ = {
+		090D284C1657F896002ECE01 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B553DE951581157500855F6F /* en */,
+				090D284D1657F896002ECE01 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		090D284E1657F896002ECE01 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				090D284F1657F896002ECE01 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		090D28501657F896002ECE01 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				090D28511657F896002ECE01 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -266,6 +345,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../openCV_Dev/ios\"",
+					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenCViPhoneApplication1/ColorSpaceConversion-Prefix.pch";
@@ -284,6 +364,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../openCV_Dev/ios\"",
+					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OpenCViPhoneApplication1/ColorSpaceConversion-Prefix.pch";
