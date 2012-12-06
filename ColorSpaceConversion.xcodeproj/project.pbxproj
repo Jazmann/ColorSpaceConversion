@@ -28,6 +28,7 @@
 		090D28741657FB0C002ECE01 /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D286D1657FB0C002ECE01 /* matrix.cpp */; };
 		090D28771657FECA002ECE01 /* color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D28761657FECA002ECE01 /* color.cpp */; };
 		090D28791657FF3F002ECE01 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090D28781657FF3F002ECE01 /* opencv2.framework */; };
+		095DB3021671228500182855 /* matop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 095DB3011671228500182855 /* matop.cpp */; };
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
 		B553DE851581157500855F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE841581157500855F6F /* Foundation.framework */; };
@@ -61,6 +62,7 @@
 		090D286D1657FB0C002ECE01 /* matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = matrix.cpp; path = ../../openCV_Dev/opencv/modules/core/src/matrix.cpp; sourceTree = "<group>"; };
 		090D28761657FECA002ECE01 /* color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = color.cpp; path = ../../openCV_Dev/opencv/modules/imgproc/src/color.cpp; sourceTree = "<group>"; };
 		090D28781657FF3F002ECE01 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../openCV_Dev/ios/opencv2.framework; sourceTree = "<group>"; };
+		095DB3011671228500182855 /* matop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = matop.cpp; path = ../../openCV_Dev/opencv/modules/core/src/matop.cpp; sourceTree = "<group>"; };
 		099AC32E1624580D00E12E63 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B553DE7E1581157500855F6F /* ColorSpaceConversion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorSpaceConversion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B553DE821581157500855F6F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -96,6 +98,7 @@
 		090D28671657FA37002ECE01 /* OpenCV */ = {
 			isa = PBXGroup;
 			children = (
+				095DB3011671228500182855 /* matop.cpp */,
 				090D28681657FB0C002ECE01 /* convert.cpp */,
 				090D28761657FECA002ECE01 /* color.cpp */,
 				090D28691657FB0C002ECE01 /* datastructs.cpp */,
@@ -253,6 +256,7 @@
 				090D28731657FB0C002ECE01 /* matmul.cpp in Sources */,
 				090D28741657FB0C002ECE01 /* matrix.cpp in Sources */,
 				090D28771657FECA002ECE01 /* color.cpp in Sources */,
+				095DB3021671228500182855 /* matop.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
