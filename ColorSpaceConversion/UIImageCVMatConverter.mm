@@ -45,7 +45,7 @@
 }
 + (cv::Mat)cvMatFromUIImage:(UIImage *)image
 {
-    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
+    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage); // image.CGImage may be null is UIImage is initialized with CIImage. Test for null to make robust.
     CGFloat cols = image.size.width;
     CGFloat rows = image.size.height;
     
@@ -68,7 +68,8 @@
 }
 + (cv::Mat)cvMatGrayFromUIImage:(UIImage *)image
 {
-    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
+    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage); // image.CGImage may be null is UIImage is initialized with CIImage. Test for null to make robust.
+
     CGFloat cols = image.size.width;
     CGFloat rows = image.size.height;
     
