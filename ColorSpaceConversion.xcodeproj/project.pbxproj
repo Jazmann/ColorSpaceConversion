@@ -21,6 +21,7 @@
 		090D28651657F896002ECE01 /* UIImageCVMatConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */; };
 		090D28661657F896002ECE01 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28591657F896002ECE01 /* ViewController.mm */; };
 		090D28791657FF3F002ECE01 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090D28781657FF3F002ECE01 /* opencv2.framework */; };
+		095707531675325500D49F7B /* imgProc in Sources */ = {isa = PBXBuildFile; fileRef = 095707521675325500D49F7B /* imgProc */; };
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
 		B553DE851581157500855F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE841581157500855F6F /* Foundation.framework */; };
@@ -47,6 +48,7 @@
 		090D28581657F896002ECE01 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ColorSpaceConversion/ViewController.h; sourceTree = SOURCE_ROOT; };
 		090D28591657F896002ECE01 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = ColorSpaceConversion/ViewController.mm; sourceTree = SOURCE_ROOT; };
 		090D28781657FF3F002ECE01 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../openCV_Dev/ios/opencv2.framework; sourceTree = "<group>"; };
+		095707521675325500D49F7B /* imgProc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = imgProc; path = ../../openCV_Dev/opencv/modules/imgproc/imgProc; sourceTree = "<group>"; };
 		0982BE391673B35600620938 /* core */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = core; path = ../../openCV_Dev/opencv/modules/core/include/opencv2/core; sourceTree = "<group>"; };
 		0982BE3A1673B35600620938 /* src */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = src; path = ../../openCV_Dev/opencv/modules/core/src; sourceTree = "<group>"; };
 		099AC32E1624580D00E12E63 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		090D28671657FA37002ECE01 /* OpenCV */ = {
 			isa = PBXGroup;
 			children = (
+				095707521675325500D49F7B /* imgProc */,
 				0982BE391673B35600620938 /* core */,
 				0982BE3A1673B35600620938 /* src */,
 			);
@@ -229,6 +232,7 @@
 				090D28621657F896002ECE01 /* main.m in Sources */,
 				090D28651657F896002ECE01 /* UIImageCVMatConverter.mm in Sources */,
 				090D28661657F896002ECE01 /* ViewController.mm in Sources */,
+				095707531675325500D49F7B /* imgProc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,14 +322,21 @@
 		B553DE9D1581157500855F6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
 				);
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ColorSpaceConversion/ColorSpaceConversion-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
+<<<<<<< HEAD
 				INFOPLIST_FILE = "ColorSpaceConversion/ColorSpaceConversion-info.plist";
+=======
+				INFOPLIST_FILE = "ColorSpaceConversion/ColorSpaceConversion-Info.plist";
+>>>>>>> imgProc folder files added.
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = ColorSpaceConversion;
@@ -336,14 +347,21 @@
 		B553DE9E1581157500855F6F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
 				);
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ColorSpaceConversion/ColorSpaceConversion-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
+<<<<<<< HEAD
 				INFOPLIST_FILE = "ColorSpaceConversion/ColorSpaceConversion-info.plist";
+=======
+				INFOPLIST_FILE = "ColorSpaceConversion/ColorSpaceConversion-Info.plist";
+>>>>>>> imgProc folder files added.
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = ColorSpaceConversion;
