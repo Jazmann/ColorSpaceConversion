@@ -324,9 +324,9 @@
 					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OpenCViPhoneApplication1/ColorSpaceConversion-Prefix.pch";
+				GCC_PREFIX_HEADER = "ColorSpaceConversion/ColorSpaceConversion/ColorSpaceConversion-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "OpenCViPhoneApplication1/ColorSpaceConversion-Info.plist";
+				INFOPLIST_FILE = "ColorSpaceConversion/ColorSpaceConversion/ColorSpaceConversion-info.plist";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = ColorSpaceConversion;
@@ -343,9 +343,9 @@
 					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OpenCViPhoneApplication1/ColorSpaceConversion-Prefix.pch";
+				GCC_PREFIX_HEADER = "ColorSpaceConversion/ColorSpaceConversion/ColorSpaceConversion-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "OpenCViPhoneApplication1/ColorSpaceConversion-Info.plist";
+				INFOPLIST_FILE = "ColorSpaceConversion/ColorSpaceConversion/ColorSpaceConversion-info.plist";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = ColorSpaceConversion;
