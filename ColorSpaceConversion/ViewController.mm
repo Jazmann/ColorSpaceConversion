@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  OpenCViPhoneApplication1
+//  ColorSpaceConersion
 //
 
 

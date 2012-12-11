@@ -1,6 +1,6 @@
 //
 // ColorSpaceMaker.cpp
-// OpenCViPhoneApplication1
+// ColorSpaceConersion
 //
 // Created by NBTB on 10/22/12.
 //

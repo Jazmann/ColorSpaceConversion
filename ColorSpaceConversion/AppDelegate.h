@@ -1,6 +1,6 @@
 //
 //  AppDelegate.h
-//  OpenCViPhoneApplication1
+//  ColorSpaceConersion
 //
 
 

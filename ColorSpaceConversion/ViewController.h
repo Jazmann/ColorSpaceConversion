@@ -1,6 +1,6 @@
 //
 //  ViewController.h
-//  OpenCViPhoneApplication1
+//  ColorSpaceConersion
 //
 
 #include <opencv2/core/mat.hpp>

@@ -1,6 +1,6 @@
 //
 //  main.m
-//  OpenCViPhoneApplication1
+//  ColorSpaceConersion
 //
 
 // A trivial change
