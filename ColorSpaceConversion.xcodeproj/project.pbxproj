@@ -101,9 +101,6 @@
 		B553DE731581157400855F6F = {
 			isa = PBXGroup;
 			children = (
-				09DD3347167B6E7D0006C37B /* libc++.1.dylib */,
-				09DD3348167B6E7D0006C37B /* libc++.dylib */,
-				09DD3349167B6E7D0006C37B /* libc++abi.dylib */,
 				099AC32E1624580D00E12E63 /* Default-568h@2x.png */,
 				B553DE881581157500855F6F /* ColorSpaceConversion */,
 				B553DE811581157500855F6F /* Frameworks */,
@@ -123,6 +120,9 @@
 		B553DE811581157500855F6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09DD3347167B6E7D0006C37B /* libc++.1.dylib */,
+				09DD3348167B6E7D0006C37B /* libc++.dylib */,
+				09DD3349167B6E7D0006C37B /* libc++abi.dylib */,
 				09CEE8641678EFD500C02194 /* opencv2.framework */,
 				B553DE821581157500855F6F /* UIKit.framework */,
 				B553DE841581157500855F6F /* Foundation.framework */,
@@ -330,11 +330,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
 				);
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ColorSpaceConversion/ColorSpaceConversion-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -352,11 +355,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
 				);
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ColorSpaceConversion/ColorSpaceConversion-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(inherited)";
