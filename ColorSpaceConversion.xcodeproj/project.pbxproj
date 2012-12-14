@@ -20,8 +20,11 @@
 		090D28641657F896002ECE01 /* opencv-logo114.png in Resources */ = {isa = PBXBuildFile; fileRef = 090D28551657F896002ECE01 /* opencv-logo114.png */; };
 		090D28651657F896002ECE01 /* UIImageCVMatConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */; };
 		090D28661657F896002ECE01 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28591657F896002ECE01 /* ViewController.mm */; };
-		097384E21677BE7A00860F80 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090D28781657FF3F002ECE01 /* opencv2.framework */; };
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
+		09CEE8661678F03E00C02194 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09CEE8641678EFD500C02194 /* opencv2.framework */; };
+		09DD334A167B6E7E0006C37B /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09DD3347167B6E7D0006C37B /* libc++.1.dylib */; };
+		09DD334B167B6E7E0006C37B /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09DD3348167B6E7D0006C37B /* libc++.dylib */; };
+		09DD334C167B6E7E0006C37B /* libc++abi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09DD3349167B6E7D0006C37B /* libc++abi.dylib */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
 		B553DE851581157500855F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE841581157500855F6F /* Foundation.framework */; };
 		B553DE871581157500855F6F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE861581157500855F6F /* CoreGraphics.framework */; };
@@ -46,9 +49,12 @@
 		090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UIImageCVMatConverter.mm; path = ColorSpaceConversion/UIImageCVMatConverter.mm; sourceTree = SOURCE_ROOT; };
 		090D28581657F896002ECE01 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ColorSpaceConversion/ViewController.h; sourceTree = SOURCE_ROOT; };
 		090D28591657F896002ECE01 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = ColorSpaceConversion/ViewController.mm; sourceTree = SOURCE_ROOT; };
-		090D28781657FF3F002ECE01 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../openCV_Dev/ios/opencv2.framework; sourceTree = "<group>"; };
 		0982BE3A1673B35600620938 /* modules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; name = modules; path = ../../openCV_Dev/opencv/modules; sourceTree = "<group>"; };
 		099AC32E1624580D00E12E63 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		09CEE8641678EFD500C02194 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../openCV_Dev/ios/opencv2.framework; sourceTree = "<group>"; };
+		09DD3347167B6E7D0006C37B /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
+		09DD3348167B6E7D0006C37B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		09DD3349167B6E7D0006C37B /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
 		B553DE7E1581157500855F6F /* ColorSpaceConversion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorSpaceConversion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B553DE821581157500855F6F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B553DE841581157500855F6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -60,7 +66,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				097384E21677BE7A00860F80 /* opencv2.framework in Frameworks */,
+				09DD334A167B6E7E0006C37B /* libc++.1.dylib in Frameworks */,
+				09DD334B167B6E7E0006C37B /* libc++.dylib in Frameworks */,
+				09DD334C167B6E7E0006C37B /* libc++abi.dylib in Frameworks */,
+				09CEE8661678F03E00C02194 /* opencv2.framework in Frameworks */,
 				B553DE831581157500855F6F /* UIKit.framework in Frameworks */,
 				B553DE851581157500855F6F /* Foundation.framework in Frameworks */,
 				B553DE871581157500855F6F /* CoreGraphics.framework in Frameworks */,
@@ -92,6 +101,9 @@
 		B553DE731581157400855F6F = {
 			isa = PBXGroup;
 			children = (
+				09DD3347167B6E7D0006C37B /* libc++.1.dylib */,
+				09DD3348167B6E7D0006C37B /* libc++.dylib */,
+				09DD3349167B6E7D0006C37B /* libc++abi.dylib */,
 				099AC32E1624580D00E12E63 /* Default-568h@2x.png */,
 				B553DE881581157500855F6F /* ColorSpaceConversion */,
 				B553DE811581157500855F6F /* Frameworks */,
@@ -111,7 +123,7 @@
 		B553DE811581157500855F6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				090D28781657FF3F002ECE01 /* opencv2.framework */,
+				09CEE8641678EFD500C02194 /* opencv2.framework */,
 				B553DE821581157500855F6F /* UIKit.framework */,
 				B553DE841581157500855F6F /* Foundation.framework */,
 				B553DE861581157500855F6F /* CoreGraphics.framework */,
@@ -275,6 +287,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -300,6 +313,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -320,11 +334,14 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
 				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ColorSpaceConversion/ColorSpaceConversion-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				INFOPLIST_FILE = "ColorSpaceConversion/ColorSpaceConversion-info.plist";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = ColorSpaceConversion;
 				WRAPPER_EXTENSION = app;
@@ -339,11 +356,14 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
 				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ColorSpaceConversion/ColorSpaceConversion-Prefix.pch";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				INFOPLIST_FILE = "ColorSpaceConversion/ColorSpaceConversion-info.plist";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = ColorSpaceConversion;
 				WRAPPER_EXTENSION = app;
