@@ -22,9 +22,6 @@
 		090D28661657F896002ECE01 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28591657F896002ECE01 /* ViewController.mm */; };
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
 		09CEE8661678F03E00C02194 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09CEE8641678EFD500C02194 /* opencv2.framework */; };
-		09DD334A167B6E7E0006C37B /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09DD3347167B6E7D0006C37B /* libc++.1.dylib */; };
-		09DD334B167B6E7E0006C37B /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09DD3348167B6E7D0006C37B /* libc++.dylib */; };
-		09DD334C167B6E7E0006C37B /* libc++abi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09DD3349167B6E7D0006C37B /* libc++abi.dylib */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
 		B553DE851581157500855F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE841581157500855F6F /* Foundation.framework */; };
 		B553DE871581157500855F6F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE861581157500855F6F /* CoreGraphics.framework */; };
@@ -66,9 +63,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09DD334A167B6E7E0006C37B /* libc++.1.dylib in Frameworks */,
-				09DD334B167B6E7E0006C37B /* libc++.dylib in Frameworks */,
-				09DD334C167B6E7E0006C37B /* libc++abi.dylib in Frameworks */,
 				09CEE8661678F03E00C02194 /* opencv2.framework in Frameworks */,
 				B553DE831581157500855F6F /* UIKit.framework in Frameworks */,
 				B553DE851581157500855F6F /* Foundation.framework in Frameworks */,
@@ -290,7 +284,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -318,7 +312,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
