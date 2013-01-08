@@ -46,7 +46,6 @@
 		090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UIImageCVMatConverter.mm; path = ColorSpaceConversion/UIImageCVMatConverter.mm; sourceTree = SOURCE_ROOT; };
 		090D28581657F896002ECE01 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ColorSpaceConversion/ViewController.h; sourceTree = SOURCE_ROOT; };
 		090D28591657F896002ECE01 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = ColorSpaceConversion/ViewController.mm; sourceTree = SOURCE_ROOT; };
-		0982BE3A1673B35600620938 /* modules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; name = modules; path = ../../../openCV_Dev/opencv/modules; sourceTree = "<group>"; };
 		099AC32E1624580D00E12E63 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		09CEE8641678EFD500C02194 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../openCV_Dev/ios/opencv2.framework; sourceTree = "<group>"; };
 		09DD3347167B6E7D0006C37B /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
@@ -83,15 +82,6 @@
 			path = ColorSpaceConversion/en.lproj;
 			sourceTree = SOURCE_ROOT;
 		};
-		090D28671657FA37002ECE01 /* OpenCV */ = {
-			isa = PBXGroup;
-			children = (
-				0982BE3A1673B35600620938 /* modules */,
-			);
-			name = OpenCV;
-			path = ColorSpaceConversion;
-			sourceTree = "<group>";
-		};
 		B553DE731581157400855F6F = {
 			isa = PBXGroup;
 			children = (
@@ -99,7 +89,6 @@
 				B553DE881581157500855F6F /* ColorSpaceConversion */,
 				B553DE811581157500855F6F /* Frameworks */,
 				B553DE7F1581157500855F6F /* Products */,
-				090D28671657FA37002ECE01 /* OpenCV */,
 			);
 			sourceTree = "<group>";
 		};
@@ -297,7 +286,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
@@ -319,7 +308,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				SDKROOT = iphoneos;
+				SDKROOT = macosx10.7;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

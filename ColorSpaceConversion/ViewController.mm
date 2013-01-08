@@ -8,6 +8,8 @@
 
 #include <list>
 
+typedef unsigned char uchar;
+
 //olive dispenser fork
 
 @interface ViewController ()
@@ -56,6 +58,7 @@
 #pragma mark - 
 #pragma mark button action
 
+/*
 -(IBAction)hsvImageAction:(id)sender
 {
     thresholdSlider.hidden = YES;
@@ -66,6 +69,23 @@
     hsvImage.release();
     
 }
+*/
+
+-(IBAction)hsvImageAction:(id)sender
+{
+    thresholdSlider.hidden = YES;
+    cv::Mat hsvImage;
+    cv::Matx<int, 3, 3> M(0,1,0,1,0,0,0,0,1);
+    cv::Vec<int, 3>  TRange(255,255,255);
+    cv::Vec<int,3>   TMin(0,0,0);
+    cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
+    // convert cvMat to UIImage
+    imageView.image = [self UIImageFromCVMat:hsvImage];
+    hsvImage.release();
+    
+}
+
+
 -(IBAction)grayImageAction:(id)sender
 {
     thresholdSlider.hidden = YES;
