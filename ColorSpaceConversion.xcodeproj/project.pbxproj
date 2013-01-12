@@ -20,8 +20,8 @@
 		090D28641657F896002ECE01 /* opencv-logo114.png in Resources */ = {isa = PBXBuildFile; fileRef = 090D28551657F896002ECE01 /* opencv-logo114.png */; };
 		090D28651657F896002ECE01 /* UIImageCVMatConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */; };
 		090D28661657F896002ECE01 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28591657F896002ECE01 /* ViewController.mm */; };
+		098BAE86169CE30B006EDF5A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 098BAE85169CE30B006EDF5A /* opencv2.framework */; };
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
-		09CEE8661678F03E00C02194 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09CEE8641678EFD500C02194 /* opencv2.framework */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
 		B553DE851581157500855F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE841581157500855F6F /* Foundation.framework */; };
 		B553DE871581157500855F6F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE861581157500855F6F /* CoreGraphics.framework */; };
@@ -46,8 +46,8 @@
 		090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UIImageCVMatConverter.mm; path = ColorSpaceConversion/UIImageCVMatConverter.mm; sourceTree = SOURCE_ROOT; };
 		090D28581657F896002ECE01 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ColorSpaceConversion/ViewController.h; sourceTree = SOURCE_ROOT; };
 		090D28591657F896002ECE01 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = ColorSpaceConversion/ViewController.mm; sourceTree = SOURCE_ROOT; };
+		098BAE85169CE30B006EDF5A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../openCV_Dev/ios/opencv2.framework; sourceTree = "<group>"; };
 		099AC32E1624580D00E12E63 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		09CEE8641678EFD500C02194 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../openCV_Dev/ios/opencv2.framework; sourceTree = "<group>"; };
 		09DD3347167B6E7D0006C37B /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
 		09DD3348167B6E7D0006C37B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		09DD3349167B6E7D0006C37B /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
@@ -62,10 +62,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09CEE8661678F03E00C02194 /* opencv2.framework in Frameworks */,
 				B553DE831581157500855F6F /* UIKit.framework in Frameworks */,
 				B553DE851581157500855F6F /* Foundation.framework in Frameworks */,
 				B553DE871581157500855F6F /* CoreGraphics.framework in Frameworks */,
+				098BAE86169CE30B006EDF5A /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,9 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				09DD3347167B6E7D0006C37B /* libc++.1.dylib */,
+				098BAE85169CE30B006EDF5A /* opencv2.framework */,
 				09DD3348167B6E7D0006C37B /* libc++.dylib */,
 				09DD3349167B6E7D0006C37B /* libc++abi.dylib */,
-				09CEE8641678EFD500C02194 /* opencv2.framework */,
 				B553DE821581157500855F6F /* UIKit.framework */,
 				B553DE841581157500855F6F /* Foundation.framework */,
 				B553DE861581157500855F6F /* CoreGraphics.framework */,
@@ -285,8 +285,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				SDKROOT = macosx10.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos6.0;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Debug;
 		};
@@ -306,9 +307,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				SDKROOT = macosx10.7;
+				SDKROOT = iphoneos6.0;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -322,6 +324,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
+					"\"$(SRCROOT)/../../openCV_Dev\"",
 				);
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
@@ -347,6 +350,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../openCV_Dev/ios\"",
+					"\"$(SRCROOT)/../../openCV_Dev\"",
 				);
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";

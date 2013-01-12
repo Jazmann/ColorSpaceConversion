@@ -78,7 +78,17 @@ typedef unsigned char uchar;
     cv::Matx<int, 3, 3> M(0,1,0,1,0,0,0,0,1);
     cv::Vec<int, 3>  TRange(255,255,255);
     cv::Vec<int,3>   TMin(0,0,0);
-    cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
+    cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
+    printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
+    printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
+    printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
+    printf("Mat : inputMat :  elemSize1() = %lu  \n", inputMat.elemSize1());
+    printf("Mat : inputMat :  type() = %d  \n", inputMat.type());
+    printf("Mat : inputMat :  depth() = %d  \n", inputMat.depth());
+    printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
+    printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
+    
+  //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
     // convert cvMat to UIImage
     imageView.image = [self UIImageFromCVMat:hsvImage];
     hsvImage.release();
@@ -92,7 +102,15 @@ typedef unsigned char uchar;
     cv::Mat greyMat;
     cv::cvtColor(inputMat, greyMat, CV_BGR2GRAY);
     // convert cvMat to UIImage
+    
+    NSLog(@"Convert cvMat to UIImage");
+    
+  //  self.imageView.image = [self UIImageFromCVMat:inputMat];
+    [self UIImageFromCVMat:greyMat];
+    NSLog(@"Convert cvMat to UIImage");
+    
     self.imageView.image = [self UIImageFromCVMat:greyMat];
+    NSLog(@"Converted cvMat to UIImage");
     greyMat.release();
 }
 -(IBAction)binaryImageAction:(id)sender
