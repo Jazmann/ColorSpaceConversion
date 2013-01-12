@@ -9,14 +9,17 @@
 
 @implementation UIImageCVMatConverter
 +(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat{
+    NSLog(@"UIImageFromCVMat : in");
     NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize()*cvMat.total()];
     CGColorSpaceRef colorSpace;
-    
+    NSLog(@"UIImageFromCVMat : cvMat.elemSize()");
     if (cvMat.elemSize() == 1) {
         colorSpace = CGColorSpaceCreateDeviceGray();
     } else {
         colorSpace = CGColorSpaceCreateDeviceRGB();
     }
+    NSLog(@"UIImageFromCVMat : Out");
+
     
     CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
     
@@ -45,6 +48,7 @@
 }
 + (cv::Mat)cvMatFromUIImage:(UIImage *)image
 {
+    NSLog(@"cvMatFromUIImage : in");
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage); // image.CGImage may be null is UIImage is initialized with CIImage. Test for null to make robust.
     CGFloat cols = image.size.width;
     CGFloat rows = image.size.height;
@@ -68,6 +72,7 @@
 }
 + (cv::Mat)cvMatGrayFromUIImage:(UIImage *)image
 {
+    NSLog(@"cvMatGrayFromUIImage : in");
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage); // image.CGImage may be null is UIImage is initialized with CIImage. Test for null to make robust.
 
     CGFloat cols = image.size.width;

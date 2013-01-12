@@ -93,7 +93,15 @@ typedef unsigned char uchar;
     cv::Mat greyMat;
     cv::cvtColor(inputMat, greyMat, CV_BGR2GRAY);
     // convert cvMat to UIImage
+    
+    NSLog(@"Convert cvMat to UIImage");
+    
+  //  self.imageView.image = [self UIImageFromCVMat:inputMat];
+    [self UIImageFromCVMat:greyMat];
+    NSLog(@"Convert cvMat to UIImage");
+    
     self.imageView.image = [self UIImageFromCVMat:greyMat];
+    NSLog(@"Converted cvMat to UIImage");
     greyMat.release();
 }
 -(IBAction)binaryImageAction:(id)sender
