@@ -74,15 +74,24 @@ typedef unsigned char uchar;
 -(IBAction)hsvImageAction:(id)sender
 {
     thresholdSlider.hidden = YES;
-   // cv::Mat hsvImage;
+    cv::Mat hsvImage;
     cv::Matx<int, 3, 3> M(0,1,0,1,0,0,0,0,1);
     cv::Vec<int, 3>  TRange(255,255,255);
     cv::Vec<int,3>   TMin(0,0,0);
- //   cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
+    cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
+    printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
+    printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
+    printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
+    printf("Mat : inputMat :  elemSize1() = %lu  \n", inputMat.elemSize1());
+    printf("Mat : inputMat :  type() = %d  \n", inputMat.type());
+    printf("Mat : inputMat :  depth() = %d  \n", inputMat.depth());
+    printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
+    printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
+    
+  //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
     // convert cvMat to UIImage
-    //imageView.image = [self UIImageFromCVMat:hsvImage];
-    imageView.image = [self UIImageFromCVMat:inputMat];
-  //  hsvImage.release();
+    imageView.image = [self UIImageFromCVMat:hsvImage];
+    hsvImage.release();
     
 }
 
