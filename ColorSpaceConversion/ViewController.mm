@@ -78,7 +78,7 @@ typedef unsigned char uchar;
     cv::Matx<int, 3, 3> M(0,1,0,1,0,0,0,0,1);
     cv::Vec<int, 3>  TRange(255,255,255);
     cv::Vec<int,3>   TMin(0,0,0);
-    cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
+ //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
     printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
     printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
     printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
@@ -88,7 +88,7 @@ typedef unsigned char uchar;
     printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
     printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
     
-  //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
+    cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
     // convert cvMat to UIImage
     imageView.image = [self UIImageFromCVMat:hsvImage];
     hsvImage.release();
