@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		090D285A1657F896002ECE01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 090D28441657F896002ECE01 /* AppDelegate.m */; };
 		090D285B1657F896002ECE01 /* ColorSpaceConversion-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 090D28451657F896002ECE01 /* ColorSpaceConversion-Info.plist */; };
-		090D285C1657F896002ECE01 /* ColorSpaceMaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 090D28471657F896002ECE01 /* ColorSpaceMaker.cpp */; };
 		090D285D1657F896002ECE01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 090D284A1657F896002ECE01 /* InfoPlist.strings */; };
 		090D285E1657F896002ECE01 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 090D284C1657F896002ECE01 /* MainStoryboard.storyboard */; };
 		090D285F1657F896002ECE01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 090D284E1657F896002ECE01 /* InfoPlist.strings */; };
@@ -32,8 +31,6 @@
 		090D28441657F896002ECE01 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ColorSpaceConversion/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		090D28451657F896002ECE01 /* ColorSpaceConversion-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ColorSpaceConversion-Info.plist"; path = "ColorSpaceConversion/ColorSpaceConversion-Info.plist"; sourceTree = SOURCE_ROOT; };
 		090D28461657F896002ECE01 /* ColorSpaceConversion-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ColorSpaceConversion-Prefix.pch"; path = "ColorSpaceConversion/ColorSpaceConversion-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		090D28471657F896002ECE01 /* ColorSpaceMaker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorSpaceMaker.cpp; path = ColorSpaceConversion/ColorSpaceMaker.cpp; sourceTree = SOURCE_ROOT; };
-		090D28481657F896002ECE01 /* ColorSpaceMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorSpaceMaker.h; path = ColorSpaceConversion/ColorSpaceMaker.h; sourceTree = SOURCE_ROOT; };
 		090D284B1657F896002ECE01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		090D284D1657F896002ECE01 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		090D284F1657F896002ECE01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ColorSpaceConversion/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
@@ -140,8 +137,6 @@
 				090D28551657F896002ECE01 /* opencv-logo114.png */,
 				090D28451657F896002ECE01 /* ColorSpaceConversion-Info.plist */,
 				090D28461657F896002ECE01 /* ColorSpaceConversion-Prefix.pch */,
-				090D28471657F896002ECE01 /* ColorSpaceMaker.cpp */,
-				090D28481657F896002ECE01 /* ColorSpaceMaker.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -217,7 +212,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				090D285A1657F896002ECE01 /* AppDelegate.m in Sources */,
-				090D285C1657F896002ECE01 /* ColorSpaceMaker.cpp in Sources */,
 				090D28621657F896002ECE01 /* main.m in Sources */,
 				090D28651657F896002ECE01 /* UIImageCVMatConverter.mm in Sources */,
 				090D28661657F896002ECE01 /* ViewController.mm in Sources */,

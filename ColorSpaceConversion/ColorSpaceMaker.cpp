@@ -106,39 +106,6 @@ class ColorSpace {
     public: ColorSpace(Vec3i, Vec3i, Vec3i);
     
     
-    template <typename T> void MaxInRow(InputArray _src, OutputArray _dst){
-        Mat src = _src.getMat();
-        _dst.create(src.rows, 1, src.type());
-        Mat dst = _dst.getMat();
-        dst = src.col(0);
-        
-        for( int i = 0; i < src.rows; i++ ){
-            const T* srcRow = src.ptr<T>(i);
-            for( int j = 1; j < src.cols; j++ )
-            {
-                dst.at<T>(i,0) = std::max(dst.at<T>(i,0),srcRow[j]);
-            }
-        }
-
-    }
-    
-    template <typename T> void MinInRow(InputArray _src, OutputArray _dst){
-        Mat src = _src.getMat();
-        _dst.create(src.rows, 1, src.type());
-        Mat dst = _dst.getMat();
-        dst = src.col(0);
-        
-        for( int i = 0; i < src.rows; i++ ){
-            const T* srcRow = src.ptr<T>(i);
-            for( int j = 1; j < src.cols; j++ )
-            {
-                dst.at<T>(i,0) = std::min(dst.at<T>(i,0),srcRow[j]);
-            }
-        }
-        
-    }
-
-    
 };                       
                 
 
