@@ -92,8 +92,22 @@ typedef unsigned char uchar;
     printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
     printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
     
+    cv_Print_Data_Type(CV_2UC4);
+    cv::cv_Print_Data_Type(CV_4UC4);
+    cv::cv_Print_Data_Type(CV_8UC4);
+    cv::cv_Print_Data_Type(CV_8SC4);
+    cv::cv_Print_Data_Type(CV_16UC4);
+    cv::cv_Print_Data_Type(CV_16SC4);
+    cv::cv_Print_Data_Type(CV_32UC4);
+    cv::cv_Print_Data_Type(CV_32SC4);
+    cv::cv_Print_Data_Type(CV_64UC4);
+    cv::cv_Print_Data_Type(CV_64SC4);
+    cv::cv_Print_Data_Type(CV_32FC4);
+    cv::cv_Print_Data_Type(CV_64FC4);
+    
   //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
-    cv::cvtColor(inputMat, hsvImage, cv::RGB2Rot<CV_8UC4,CV_8UC3>( sp0, sp1, sp2))
+ //   cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2);
+ //   cv::cvtColor(inputMat, hsvImage, colSpace);
     // convert cvMat to UIImage
     imageView.image = [self UIImageFromCVMat:hsvImage];
     hsvImage.release();
