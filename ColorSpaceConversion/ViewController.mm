@@ -165,12 +165,17 @@ cv::Matx<int64_t, 3, 2> rational_decomposition(cv::Matx<float, 3, 1> vec, int64_
 
 template<typename _Tp, int m, int n> std::string toString(_Tp mat[m][n]){
     std::string output="";
+    std::string temp="";
     for (int i=0; i<m; i++) {
     output += "| ";
     for (int j=0; j<n-1; j++) {
-        output += std::to_string(mat[i][j]) + ", ";
+        temp = std::to_string(mat[i][j]);
+        temp.resize(8,' ');
+        output += temp + ", ";
     }
-    output += std::to_string(mat[i][n-1]) + " |\n";
+        temp = std::to_string(mat[i][n-1]);
+        temp.resize(8,' ');
+        output += temp + " |\n";
     }
     return output;
 }
