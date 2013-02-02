@@ -82,12 +82,19 @@ typedef unsigned char uchar;
 -(void)printDataInfo:(int)type{
     printf("CV_DEPTH_BITS_MAGIC = %llu \n",CV_DEPTH_BITS_MAGIC);
     printf("To get back the information put into CV_MAKETYPE( depth_Type, cn) use.\n");
-    printf("int depth_Type = %u\n", CV_MAT_DEPTH(type));
-    printf("int cn = %u\n", CV_MAT_CN(type));
+    printf("int depth_Type = CV_MAT_DEPTH(type) = %u\n", CV_MAT_DEPTH(type));
+    printf("int CV_ELEM_SIZE(type) = %u\n", CV_ELEM_SIZE(type));
+    printf("int cn = CV_MAT_CN(type) = %u\n", CV_MAT_CN(type));
     printf("To get info on the type itself use:\n");
-    printf("int bit_Depth  = %u \n",   CV_MAT_DEPTH_BITS(type));
-    printf("int byte_Depth = %u \n", CV_MAT_DEPTH_BYTES(type));
-    printf("int channels = %u \n",  CV_MAT_CN(type));
+    printf("int bit_Depth  = CV_MAT_DEPTH_BITS(type) = %u \n",   CV_MAT_DEPTH_BITS(type));
+    printf("int byte_Depth = CV_MAT_DEPTH_BYTES(type) = %u \n", CV_MAT_DEPTH_BYTES(type));
+    printf("int channels = CV_MAT_CN(type) = %u \n",  CV_MAT_CN(type));
+    printf("The internals:\n");
+    printf("In case the channels are packed into fewer than one byte each we calculate : bits_used = channels * bits_per_channel\n");
+    printf("CV_ELEM_SIZE_BITS(type) [= %u]  ( CV_MAT_CN(type) [= %u] * CV_DEPTH_BITS(type) [= %u] )\n", CV_ELEM_SIZE_BITS(type), CV_MAT_CN(type), CV_DEPTH_BITS(type));
+    printf("then bytes = Ceiling( bits_used / 8)\n");
+    printf("CV_ELEM_SIZE_BYTES(type) [= %u] ((CV_ELEM_SIZE_BITS(type) >> 3) [= %u] + ( (CV_ELEM_SIZE_BITS(type) & 7) ? 1 : 0 ) [= %u])\n", CV_ELEM_SIZE_BYTES(type), (CV_ELEM_SIZE_BITS(type) >> 3), ((CV_ELEM_SIZE_BITS(type) & 7) ? 1 : 0 ));
+    printf("CV_ELEM_SIZE CV_ELEM_SIZE_BYTES\n");
 }
 
 
@@ -156,6 +163,19 @@ cv::Matx<int64_t, 3, 2> rational_decomposition(cv::Matx<float, 3, 1> vec, int64_
 }
 
 
+template<typename _Tp, int m, int n> std::string toString(_Tp mat[m][n]){
+    std::string output="";
+    for (int i=0; i<m; i++) {
+    output += "| ";
+    for (int j=0; j<n-1; j++) {
+        output += std::to_string(mat[i][j]) + ", ";
+    }
+    output += std::to_string(mat[i][n-1]) + " |\n";
+    }
+    return output;
+}
+
+
 template<typename _Tp, int cn> std::string toString(cv::sVec<_Tp, cn> vec){
      std::string output = std::to_string(vec.scale) + "  / " + std::to_string(vec[0]) + " \\  / " + std::to_string(vec(0)) + " \\ \n";
      for (int i=1; i<cn-1; i++) {
@@ -212,6 +232,35 @@ template<typename _Tp, int cn> inline cv::sVec<_Tp, cn> sVecRat(const cv::Matx<f
     return output;
 }
 
+
+template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MaxInRow(cv::Matx<_Tp, m, n> src){
+    cv::Matx<_Tp, m, 1> dst;
+    for( int i = 0; i < m; i++ ){
+        dst(i,0) = src(i,0);
+        for( int j = 1; j < n; j++ )
+        {
+            if (dst(i,0) < src(i,j)) {
+                dst(i,0) = src(i,j);
+            }
+        }
+    }
+    return dst;
+}
+
+
+template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Matx<_Tp, m, n> src){
+    cv::Matx<_Tp, m, 1> dst;
+    for( int i = 0; i < m; i++ ){
+        dst(i,0) = src(i,0);
+        for( int j = 1; j < n; j++ )
+        {
+            if (dst(i,0) > src(i,j)) {
+                dst(i,0) = src(i,j);
+            }
+        }
+    }
+    return dst;
+}
 
 -(void)sVecTest{
     cv::sVec<uint8_t, 3> a{1.5,3,6,9};
@@ -281,13 +330,11 @@ template<typename _Tp, int cn> inline cv::sVec<_Tp, cn> sVecRat(const cv::Matx<f
  //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
     printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
     printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
-    printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
     printf("Mat : inputMat :  elemSize1() = %lu  \n", inputMat.elemSize1());
     printf("Mat : inputMat :  type() = %d  \n", inputMat.type());
     printf("Mat : inputMat :  depth() = %d  \n", inputMat.depth());
     printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
     printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
-    
     printf("------ CV_2UC4 --------\n");
     [self printDataInfo:CV_2UC4 ];
     printf("\n ------ CV_4UC4 --------\n");
@@ -315,13 +362,30 @@ template<typename _Tp, int cn> inline cv::sVec<_Tp, cn> sVecRat(const cv::Matx<f
     
     [self sVecTest];
 
-    
+  //  RGB2RotTest(sp0, sp1, sp2);
   //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
     cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2);
-  //  cv::cvtColor(inputMat, hsvImage, colSpace);
+    
+    printf("constexpr static int src_Bit_Depth  = %i \n", colSpace.src_Bit_Depth);
+    printf("constexpr static int src_Byte_Depth = %i \n", colSpace.src_Byte_Depth);
+    printf("constexpr static int src_Channels   = %i \n", colSpace.src_Channels);
+    printf("constexpr static int dst_Bit_Depth  = %i \n", colSpace.dst_Bit_Depth);
+    printf("constexpr static int dst_Byte_Depth = %i \n", colSpace.dst_Byte_Depth);
+    printf("constexpr static int dst_Channels   = %i \n", colSpace.dst_Channels);
+    printf("using src_channel_type     = %u\n", cv::DataType<cv::RGB2Rot<CV_8UC4,CV_8UC3>::src_channel_type>::type);
+    printf("using dst_channel_type     = %u\n", cv::DataType<cv::RGB2Rot<CV_8UC4,CV_8UC3>::dst_channel_type>::type);
+    printf("const uint64_t targetScale = %llu \n", colSpace.targetScale);
+    printf("int M[dst_Channels][src_Channels]\n");
+    std::cout << toString<int,cv::RGB2Rot<CV_8UC4,CV_8UC3>::dst_Channels, cv::RGB2Rot<CV_8UC4,CV_8UC3>::src_Channels>(colSpace.M);
+ //   printf("int TRange[dst_Channels], TMin[dst_Channels]\n", colSpace.);
+    printf("int redScale   :  %i \n", colSpace.redScale);
+    printf("int greenScale :  %i \n", colSpace.greenScale);
+    printf("int blueScale  :  %i \n", colSpace.blueScale);
+    
+    cv::cvtColor(inputMat, hsvImage, colSpace);
     // convert cvMat to UIImage
-  //  imageView.image = [self UIImageFromCVMat:hsvImage];
-  //  hsvImage.release();
+    imageView.image = [self UIImageFromCVMat:hsvImage];
+    hsvImage.release();
     
 }
 
@@ -329,19 +393,19 @@ template<typename _Tp, int cn> inline cv::sVec<_Tp, cn> sVecRat(const cv::Matx<f
 -(IBAction)grayImageAction:(id)sender
 {
     thresholdSlider.hidden = YES;
-    cv::Mat greyMat;
-    cv::cvtColor(inputMat, greyMat, CV_BGR2GRAY);
+ //   cv::Mat greyMat;
+ //   cv::cvtColor(inputMat, greyMat, CV_BGR2GRAY);
     // convert cvMat to UIImage
     
     NSLog(@"Convert cvMat to UIImage");
     
-  //  self.imageView.image = [self UIImageFromCVMat:inputMat];
-    [self UIImageFromCVMat:greyMat];
-    NSLog(@"Convert cvMat to UIImage");
+    self.imageView.image = [self UIImageFromCVMat:inputMat];
+  //  [self UIImageFromCVMat:greyMat];
+ //   NSLog(@"Convert cvMat to UIImage");
     
-    self.imageView.image = [self UIImageFromCVMat:greyMat];
-    NSLog(@"Converted cvMat to UIImage");
-    greyMat.release();
+ //   self.imageView.image = [self UIImageFromCVMat:greyMat];
+ //   NSLog(@"Converted cvMat to UIImage");
+ //   greyMat.release();
 }
 -(IBAction)binaryImageAction:(id)sender
 {
