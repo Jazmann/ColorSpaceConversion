@@ -336,8 +336,8 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     cv::Vec<int, 3>  TRange(255,255,255);
     cv::Vec<int, 3>  TMin(0,0,0);
     cv::Vec<int, 3> sp0(0,0,0);
-    cv::Vec<int, 3> sp1(0,255,0);
-    cv::Vec<int, 3> sp2(0,0,255);
+    cv::Vec<int, 3> sp1(20,25,0);
+    cv::Vec<int, 3> sp2(0,20,25);
 
  //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
     printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
@@ -379,6 +379,8 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
   //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
     cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2);
     
+    
+   /*
     printf("constexpr static int src_Bit_Depth  = %i \n", colSpace.src_Bit_Depth);
     printf("constexpr static int src_Byte_Depth = %i \n", colSpace.src_Byte_Depth);
     printf("constexpr static int src_Channels   = %i \n", colSpace.src_Channels);
@@ -387,7 +389,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("constexpr static int dst_Channels   = %i \n", colSpace.dst_Channels);
     printf("using src_channel_type     = %u\n", cv::DataType<cv::RGB2Rot<CV_8UC4,CV_8UC3>::src_channel_type>::type);
     printf("using dst_channel_type     = %u\n", cv::DataType<cv::RGB2Rot<CV_8UC4,CV_8UC3>::dst_channel_type>::type);
-    printf("const uint64_t targetScale = %llu \n", colSpace.targetScale);
+    printf("const uint64_t targetScale = %u \n", colSpace.targetScale);
     printf("int M[dst_Channels][src_Channels]\n");
     std::cout << toString<int,cv::RGB2Rot<CV_8UC4,CV_8UC3>::dst_Channels, cv::RGB2Rot<CV_8UC4,CV_8UC3>::src_Channels>(colSpace.M);
     printf("int TRange[dst_Channels]\n");
@@ -398,17 +400,17 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("int redScale   :  %i \n", colSpace.redScale);
     printf("int greenScale :  %i \n", colSpace.greenScale);
     printf("int blueScale  :  %i \n", colSpace.blueScale);
+    */
+    cv::convertColor<CV_8UC4,CV_8UC3>(inputMat, hsvImage, colSpace);
     
-    cv::cvtColor(inputMat, hsvImage, colSpace);
-    
-    printf("Mat : inputMat :  rows = %d, cols = %d \n", hsvImage.rows, hsvImage.rows);
-    printf("Mat : inputMat :  elemSize = %lu     \n", hsvImage.elemSize());
-    printf("Mat : inputMat :  elemSize1() = %lu  \n", hsvImage.elemSize1());
-    printf("Mat : inputMat :  type() = %d  \n", hsvImage.type());
-    printf("Mat : inputMat :  depth() = %d  \n", hsvImage.depth());
-    printf("Mat : inputMat :  channels() = %d  \n", hsvImage.channels());
-    printf("Mat : inputMat :  step1(0) = %lu  \n", hsvImage.step1(0));
-    printf("Mat : inputMat :  step[0] = %lu  \n", hsvImage.step[0]);
+    printf("Mat : hsvImage :  rows = %d, cols = %d \n", hsvImage.rows, hsvImage.rows);
+    printf("Mat : hsvImage :  elemSize = %lu     \n", hsvImage.elemSize());
+    printf("Mat : hsvImage :  elemSize1() = %lu  \n", hsvImage.elemSize1());
+    printf("Mat : hsvImage :  type() = %d  \n", hsvImage.type());
+    printf("Mat : hsvImage :  depth() = %d  \n", hsvImage.depth());
+    printf("Mat : hsvImage :  channels() = %d  \n", hsvImage.channels());
+    printf("Mat : hsvImage :  step1(0) = %lu  \n", hsvImage.step1(0));
+    printf("Mat : hsvImage :  step[0] = %lu  \n", hsvImage.step[0]);
     // convert cvMat to UIImage
     imageView.image = [self UIImageFromCVMat:hsvImage];
     hsvImage.release();
