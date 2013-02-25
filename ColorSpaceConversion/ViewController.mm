@@ -432,6 +432,22 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : inputMat :  channels() = %d  \n", greyMat.channels());
     printf("Mat : inputMat :  step1(0) = %lu  \n", greyMat.step1(0));
     printf("Mat : inputMat :  step[0] = %lu  \n", greyMat.step[0]);
+    
+    cv::SimpleBlobDetector::Params params;
+    params.minDistBetweenBlobs = 50.0f;
+    params.filterByInertia = false;
+    params.filterByConvexity = false;
+    params.filterByColor = false;
+    params.filterByCircularity = false;
+    params.filterByArea = true;
+    params.minArea = 20.0f;
+    params.maxArea = 500.0f;
+    
+    cv::Ptr<cv::FeatureDetector> blob_detector = new cv::SimpleBlobDetector(params);
+    blob_detector->create("SimpleBlob");
+    
+    cv::vector<cv::KeyPoint> keypoints;
+    blob_detector->detect(greyMat, keypoints);
 
     // convert cvMat to UIImage
     
