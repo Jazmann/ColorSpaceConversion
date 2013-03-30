@@ -332,12 +332,9 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 {
     thresholdSlider.hidden = YES;
     cv::Mat hsvImage;
-    cv::Matx<int, 3, 3> M(0,1,0,1,0,0,0,0,1);
-    cv::Vec<int, 3>  TRange(255,255,255);
-    cv::Vec<int, 3>  TMin(0,0,0);
     cv::Vec<int, 3> sp0(0,0,0);
-    cv::Vec<int, 3> sp1(20,25,0);
-    cv::Vec<int, 3> sp2(0,20,25);
+    cv::Vec<int, 3> sp1(255,255,255);
+    cv::Vec<int, 3> sp2(239, 208, 207);
 
  //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
     printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
@@ -377,7 +374,9 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 
   //  RGB2RotTest(sp0, sp1, sp2);
   //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
-    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2);
+    double g = 4.0;
+    uint8_t c =128;
+    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
     
     
    /*
@@ -401,9 +400,22 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("int greenScale :  %i \n", colSpace.greenScale);
     printf("int blueScale  :  %i \n", colSpace.blueScale);
     */
+    const int ro = 121;
+    const int co = 23;
+    
+    printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.cols);
+    printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
+    printf("Mat : inputMat :  elemSize1() = %lu  \n", inputMat.elemSize1());
+    printf("Mat : inputMat :  type() = %d  \n", inputMat.type());
+    printf("Mat : inputMat :  depth() = %d  \n", inputMat.depth());
+    printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
+    printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
+    printf("Mat : inputMat :  step[0] = %lu  \n", inputMat.step[0]);
+    printf("Mat : hsvImage :  point = ( %u ) ( %u ) ( %u ) \n", inputMat.at<cv::Vec3i>(ro,co)[0], inputMat.at<cv::Vec3i>(ro,co)[1], inputMat.at<cv::Vec3i>(ro,co)[2]);
+    
     cv::convertColor<CV_8UC4,CV_8UC3>(inputMat, hsvImage, colSpace);
     
-    printf("Mat : hsvImage :  rows = %d, cols = %d \n", hsvImage.rows, hsvImage.rows);
+    printf("Mat : hsvImage :  rows = %d, cols = %d \n", hsvImage.rows, hsvImage.cols);
     printf("Mat : hsvImage :  elemSize = %lu     \n", hsvImage.elemSize());
     printf("Mat : hsvImage :  elemSize1() = %lu  \n", hsvImage.elemSize1());
     printf("Mat : hsvImage :  type() = %d  \n", hsvImage.type());
@@ -411,6 +423,9 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : hsvImage :  channels() = %d  \n", hsvImage.channels());
     printf("Mat : hsvImage :  step1(0) = %lu  \n", hsvImage.step1(0));
     printf("Mat : hsvImage :  step[0] = %lu  \n", hsvImage.step[0]);
+    printf("Mat : hsvImage :  point = ( %u ) ( %u ) ( %u ) \n", hsvImage.at<cv::Vec3i>(ro,co)[0], hsvImage.at<cv::Vec3i>(ro,co)[1], hsvImage.at<cv::Vec3i>(ro,co)[2]);
+    
+    
     // convert cvMat to UIImage
     imageView.image = [self UIImageFromCVMat:hsvImage];
     hsvImage.release();
@@ -422,9 +437,20 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 {
     thresholdSlider.hidden = YES;
     cv::Mat greyMat;
-    cv::cvtColor(inputMat, greyMat, CV_BGR2GRAY);
     
-    printf("Mat : inputMat :  rows = %d, cols = %d \n", greyMat.rows, greyMat.rows);
+    
+    printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.cols);
+    printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
+    printf("Mat : inputMat :  elemSize1() = %lu  \n", inputMat.elemSize1());
+    printf("Mat : inputMat :  type() = %d  \n", inputMat.type());
+    printf("Mat : inputMat :  depth() = %d  \n", inputMat.depth());
+    printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
+    printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
+    printf("Mat : inputMat :  step[0] = %lu  \n", inputMat.step[0]);
+    
+    cv::cvtColor(inputMat, greyMat, CV_BGR2GRAY);
+        
+    printf("Mat : inputMat :  rows = %d, cols = %d \n", greyMat.rows, greyMat.cols);
     printf("Mat : inputMat :  elemSize = %lu     \n", greyMat.elemSize());
     printf("Mat : inputMat :  elemSize1() = %lu  \n", greyMat.elemSize1());
     printf("Mat : inputMat :  type() = %d  \n", greyMat.type());
