@@ -336,8 +336,8 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     cv::Vec<int, 3>  TRange(255,255,255);
     cv::Vec<int, 3>  TMin(0,0,0);
     cv::Vec<int, 3> sp0(0,0,0);
-    cv::Vec<int, 3> sp1(20,25,0);
-    cv::Vec<int, 3> sp2(0,20,25);
+    cv::Vec<int, 3> sp1(255,255,255);
+    cv::Vec<int, 3> sp2(209,208,207);
 
  //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
     printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
@@ -412,6 +412,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : hsvImage :  step1(0) = %lu  \n", hsvImage.step1(0));
     printf("Mat : hsvImage :  step[0] = %lu  \n", hsvImage.step[0]);
     // convert cvMat to UIImage
+    
     imageView.image = [self UIImageFromCVMat:hsvImage];
     hsvImage.release();
     
@@ -432,7 +433,6 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : inputMat :  channels() = %d  \n", greyMat.channels());
     printf("Mat : inputMat :  step1(0) = %lu  \n", greyMat.step1(0));
     printf("Mat : inputMat :  step[0] = %lu  \n", greyMat.step[0]);
-    
     cv::SimpleBlobDetector::Params params;
     params.minDistBetweenBlobs = 50.0f;
     params.filterByInertia = false;
@@ -448,6 +448,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     
     cv::vector<cv::KeyPoint> keypoints;
     blob_detector->detect(greyMat, keypoints);
+    
 
     // convert cvMat to UIImage
     
