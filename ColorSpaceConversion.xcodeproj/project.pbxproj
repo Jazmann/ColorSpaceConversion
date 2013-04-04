@@ -19,6 +19,7 @@
 		090D28641657F896002ECE01 /* opencv-logo114.png in Resources */ = {isa = PBXBuildFile; fileRef = 090D28551657F896002ECE01 /* opencv-logo114.png */; };
 		090D28651657F896002ECE01 /* UIImageCVMatConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */; };
 		090D28661657F896002ECE01 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28591657F896002ECE01 /* ViewController.mm */; };
+		091FDEEC17073C2E0080E763 /* hand.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 091FDEEB17073C2E0080E763 /* hand.jpg */; };
 		098BAE86169CE30B006EDF5A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 098BAE85169CE30B006EDF5A /* opencv2.framework */; };
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
@@ -43,6 +44,7 @@
 		090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UIImageCVMatConverter.mm; path = ColorSpaceConversion/UIImageCVMatConverter.mm; sourceTree = SOURCE_ROOT; };
 		090D28581657F896002ECE01 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ColorSpaceConversion/ViewController.h; sourceTree = SOURCE_ROOT; };
 		090D28591657F896002ECE01 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = ColorSpaceConversion/ViewController.mm; sourceTree = SOURCE_ROOT; };
+		091FDEEB17073C2E0080E763 /* hand.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hand.jpg; sourceTree = "<group>"; };
 		098BAE85169CE30B006EDF5A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../openCV_Dev/ios/opencv2.framework; sourceTree = "<group>"; };
 		099AC32E1624580D00E12E63 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		09DD3347167B6E7D0006C37B /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
@@ -129,6 +131,7 @@
 		B553DE891581157500855F6F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				091FDEEB17073C2E0080E763 /* hand.jpg */,
 				090D284E1657F896002ECE01 /* InfoPlist.strings */,
 				090D28501657F896002ECE01 /* MainStoryboard.storyboard */,
 				090D28521657F896002ECE01 /* fruits.jpg */,
@@ -201,6 +204,7 @@
 				090D28611657F896002ECE01 /* fruits.jpg in Resources */,
 				090D28631657F896002ECE01 /* opencv-logo57.png in Resources */,
 				090D28641657F896002ECE01 /* opencv-logo114.png in Resources */,
+				091FDEEC17073C2E0080E763 /* hand.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
