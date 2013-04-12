@@ -32,7 +32,9 @@ typedef unsigned char uchar;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand" ofType:@"jpg"];
+    NSString *imageName = [[NSBundle mainBundle] pathForResource:@"RGB_Cube" ofType:@"jpg"];
+    // NSString *imageName = [[NSBundle mainBundle] pathForResource:@"rottest" ofType:@"jpg"];
+    // NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand" ofType:@"jpg"];
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
     inputMat =[self cvMatFromUIImage:imageView.image];
     thresholdSlider.hidden = YES;
@@ -332,9 +334,10 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 {
     thresholdSlider.hidden = YES;
     cv::Mat hsvImage;
-    cv::Vec<int, 3> sp0(0,0,0);
-    cv::Vec<int, 3> sp1(255,255,255);
-    cv::Vec<int, 3> sp2(239, 208, 207);
+    // R:239, G:208, B:207
+    cv::Vec<int, 3> sp0(0, 0, 0);
+    cv::Vec<int, 3> sp1(255, 0, 0);
+    cv::Vec<int, 3> sp2(0, 255, 0);
 
  //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
     printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
@@ -374,8 +377,9 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 
   //  RGB2RotTest(sp0, sp1, sp2);
     //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
-    cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(239, 208, 207);
-    cv::Vec<double, 3> g(19, 19, 19);
+    // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(239, 208, 207);
+    cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(0, 0, 0);
+    cv::Vec<double, 3> g(3, 3, 3);
     cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
     
     
@@ -424,7 +428,6 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : hsvImage :  step1(0) = %lu  \n", hsvImage.step1(0));
     printf("Mat : hsvImage :  step[0] = %lu  \n", hsvImage.step[0]);
     printf("Mat : hsvImage :  point = ( %u ) ( %u ) ( %u ) \n", hsvImage.at<cv::Vec3i>(ro,co)[0], hsvImage.at<cv::Vec3i>(ro,co)[1], hsvImage.at<cv::Vec3i>(ro,co)[2]);
-    
     
     // convert cvMat to UIImage
     imageView.image = [self UIImageFromCVMat:hsvImage];
