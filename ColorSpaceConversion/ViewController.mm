@@ -32,7 +32,7 @@ typedef unsigned char uchar;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand" ofType:@"jpg"];
+    NSString *imageName = [[NSBundle mainBundle] pathForResource:@"rottest" ofType:@"jpg"];
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
     inputMat =[self cvMatFromUIImage:imageView.image];
     thresholdSlider.hidden = YES;
@@ -333,8 +333,8 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     thresholdSlider.hidden = YES;
     cv::Mat hsvImage;
     cv::Vec<int, 3> sp0(0,0,0);
-    cv::Vec<int, 3> sp1(255,255,255);
-    cv::Vec<int, 3> sp2(239, 208, 207);
+    cv::Vec<int, 3> sp1(255,0,0);
+    cv::Vec<int, 3> sp2(255, 255, 255);
 
  //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
     printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
@@ -374,8 +374,8 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 
   //  RGB2RotTest(sp0, sp1, sp2);
     //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
-    cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(239, 208, 207);
-    cv::Vec<double, 3> g(19, 19, 19);
+    cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(128, 128, 128);
+    cv::Vec<double, 3> g(1, 1, 1);
     cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
     
     
