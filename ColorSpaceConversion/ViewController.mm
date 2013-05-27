@@ -26,6 +26,8 @@ typedef unsigned char uchar;
 @synthesize grayButton;
 @synthesize binaryButton;
 @synthesize inputMat;
+@synthesize hsvImage;
+
 
 #pragma mark - 
 #pragma mark Managing Views
@@ -36,6 +38,8 @@ typedef unsigned char uchar;
     NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand_skin_test_3_back_1" ofType:@"jpg"];
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
     inputMat =[self cvMatFromUIImage:imageView.image];
+    cv::Mat hsvImage;
+
     thresholdSlider.hidden = YES;
     gSlider.hidden = YES;
 
@@ -351,6 +355,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
     printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
     printf("Mat : inputMat :  step[0] = %lu  \n", inputMat.step[0]);
+    /*
     printf("------ CV_2UC4 --------\n");
     [self printDataInfo:CV_2UC4 ];
     printf("\n ------ CV_4UC4 --------\n");
@@ -377,6 +382,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     [self printDataInfo:(CV_64FC4)];
     
     [self sVecTest];
+     */
 
   //  RGB2RotTest(sp0, sp1, sp2);
     //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
@@ -417,7 +423,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
     printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
     printf("Mat : inputMat :  step[0] = %lu  \n", inputMat.step[0]);
-    printf("Mat : hsvImage :  point = ( %u ) ( %u ) ( %u ) \n", inputMat.at<cv::Vec3i>(ro,co)[0], inputMat.at<cv::Vec3i>(ro,co)[1], inputMat.at<cv::Vec3i>(ro,co)[2]);
+    printf("Mat : hsvImage :  point = ( %" PRIu8 " ) ( %" PRIu8 " ) ( %" PRIu8 " ) \n", inputMat.at<cv::Vec3b>(ro,co)[0], inputMat.at<cv::Vec3b>(ro,co)[1], inputMat.at<cv::Vec3b>(ro,co)[2]);
     
     cv::convertColor<CV_8UC4,CV_8UC3>(inputMat, hsvImage, colSpace);
     
@@ -429,13 +435,10 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : hsvImage :  channels() = %d  \n", hsvImage.channels());
     printf("Mat : hsvImage :  step1(0) = %lu  \n", hsvImage.step1(0));
     printf("Mat : hsvImage :  step[0] = %lu  \n", hsvImage.step[0]);
-    printf("Mat : hsvImage :  point = ( %u ) ( %u ) ( %u ) \n", hsvImage.at<cv::Vec3i>(ro,co)[0], hsvImage.at<cv::Vec3i>(ro,co)[1], hsvImage.at<cv::Vec3i>(ro,co)[2]);
-    
+    printf("Mat : hsvImage :  point = ( %" PRIu8 " ) ( %" PRIu8 " ) ( %" PRIu8 " ) \n", hsvImage.at<cv::Vec3b>(ro,co)[0], hsvImage.at<cv::Vec3b>(ro,co)[1], hsvImage.at<cv::Vec3b>(ro,co)[2]);
     
     // convert cvMat to UIImage
-    imageView.image = [self UIImageFromCVMat:hsvImage];
-    hsvImage.release();
-    
+    imageView.image = [self UIImageFromCVMat:hsvImage];    
 }
 
 
@@ -464,7 +467,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : inputMat :  channels() = %d  \n", greyMat.channels());
     printf("Mat : inputMat :  step1(0) = %lu  \n", greyMat.step1(0));
     printf("Mat : inputMat :  step[0] = %lu  \n", greyMat.step[0]);
-    cv::SimpleBlobDetector::Params params;
+  /*  cv::SimpleBlobDetector::Params params;
     params.minDistBetweenBlobs = 50.0f;
     params.filterByInertia = false;
     params.filterByConvexity = false;
@@ -479,17 +482,18 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     
     cv::vector<cv::KeyPoint> keypoints;
     blob_detector->detect(greyMat, keypoints);
+    */
     
 
     // convert cvMat to UIImage
     
     NSLog(@"Convert cvMat to UIImage");
     
-  //  self.imageView.image = [self UIImageFromCVMat:inputMat];
+    self.imageView.image = [self UIImageFromCVMat:inputMat];
   //  [self UIImageFromCVMat:greyMat];
  //   NSLog(@"Convert cvMat to UIImage");
     
-    self.imageView.image = [self UIImageFromCVMat:greyMat];
+ //   self.imageView.image = [self UIImageFromCVMat:greyMat];
  //   NSLog(@"Converted cvMat to UIImage");
     greyMat.release();
 }
@@ -499,7 +503,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     thresholdSlider.hidden = NO;
     thresholdSlider.continuous = YES;
     float threshold = thresholdSlider.value;
-    cv::cvtColor(inputMat, greyMat, CV_BGR2GRAY);
+    cv::cvtColor(hsvImage, greyMat, CV_BGR2GRAY);
     cv::threshold(greyMat,binaryMat,threshold,255,cv::THRESH_BINARY);
     greyMat.release();
     // convert cvMat to UIImage
