@@ -33,7 +33,7 @@ typedef unsigned char uchar;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSString *imageName = [[NSBundle mainBundle] pathForResource:@"rottest" ofType:@"jpg"];
+    NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand_skin_test_3_back_1" ofType:@"jpg"];
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
     inputMat =[self cvMatFromUIImage:imageView.image];
     thresholdSlider.hidden = YES;

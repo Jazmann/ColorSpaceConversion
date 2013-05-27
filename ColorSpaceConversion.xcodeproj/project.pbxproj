@@ -21,7 +21,7 @@
 		090D28661657F896002ECE01 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28591657F896002ECE01 /* ViewController.mm */; };
 		098BAE86169CE30B006EDF5A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 098BAE85169CE30B006EDF5A /* opencv2.framework */; };
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
-		873082AE1754082500B271D4 /* hand_skin_test_3_back_1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 873082AD1754082500B271D4 /* hand_skin_test_3_back_1.JPG */; };
+		873082AE1754082500B271D4 /* hand_skin_test_3_back_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */; };
 		87A1FBD8170F503C004FEEF0 /* rottest.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87A1FBD7170F503C004FEEF0 /* rottest.jpg */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
 		B553DE851581157500855F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE841581157500855F6F /* Foundation.framework */; };
@@ -50,7 +50,7 @@
 		09DD3347167B6E7D0006C37B /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
 		09DD3348167B6E7D0006C37B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		09DD3349167B6E7D0006C37B /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
-		873082AD1754082500B271D4 /* hand_skin_test_3_back_1.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hand_skin_test_3_back_1.JPG; sourceTree = "<group>"; };
+		873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hand_skin_test_3_back_1.jpg; sourceTree = "<group>"; };
 		87A1FBD7170F503C004FEEF0 /* rottest.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rottest.jpg; sourceTree = "<group>"; };
 		B553DE7E1581157500855F6F /* ColorSpaceConversion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorSpaceConversion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B553DE821581157500855F6F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -135,7 +135,7 @@
 			children = (
 				090D284E1657F896002ECE01 /* InfoPlist.strings */,
 				87A1FBD7170F503C004FEEF0 /* rottest.jpg */,
-				873082AD1754082500B271D4 /* hand_skin_test_3_back_1.JPG */,
+				873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */,
 				090D28501657F896002ECE01 /* MainStoryboard.storyboard */,
 				090D28521657F896002ECE01 /* fruits.jpg */,
 				090D28531657F896002ECE01 /* main.m */,
@@ -208,7 +208,7 @@
 				090D28631657F896002ECE01 /* opencv-logo57.png in Resources */,
 				090D28641657F896002ECE01 /* opencv-logo114.png in Resources */,
 				87A1FBD8170F503C004FEEF0 /* rottest.jpg in Resources */,
-				873082AE1754082500B271D4 /* hand_skin_test_3_back_1.JPG in Resources */,
+				873082AE1754082500B271D4 /* hand_skin_test_3_back_1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
