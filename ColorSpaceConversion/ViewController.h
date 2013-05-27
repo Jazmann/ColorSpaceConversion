@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *grayButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *binaryButton;
 @property (weak, nonatomic) IBOutlet UISlider *thresholdSlider;
+@property (weak, nonatomic) IBOutlet UISlider *gSlider;
 
 #ifdef __cplusplus
 @property (readonly, nonatomic) cv::Mat inputMat;

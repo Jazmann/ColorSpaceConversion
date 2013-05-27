@@ -20,6 +20,7 @@ typedef unsigned char uchar;
 #pragma mark - 
 #pragma mark Properties
 @synthesize thresholdSlider;
+@synthesize gSlider;
 @synthesize imageView;
 @synthesize hsvButton;
 @synthesize grayButton;
@@ -36,6 +37,7 @@ typedef unsigned char uchar;
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
     inputMat =[self cvMatFromUIImage:imageView.image];
     thresholdSlider.hidden = YES;
+    gSlider.hidden = YES;
 
 }
 
@@ -46,6 +48,7 @@ typedef unsigned char uchar;
     [self setGrayButton:nil];
     [self setBinaryButton:nil];
     [self setThresholdSlider:nil];
+    [self setGSlider:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -61,7 +64,7 @@ typedef unsigned char uchar;
 /*
 -(IBAction)hsvImageAction:(id)sender
 {
-    thresholdSlider.hidden = YES;
+    threshol.hidden = YES;
     cv::Mat hsvImage;
     cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV); 
     // convert cvMat to UIImage
@@ -331,10 +334,13 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 -(IBAction)hsvImageAction:(id)sender
 {
     thresholdSlider.hidden = YES;
+    gSlider.hidden = NO;
+    gSlider.continuous = YES;
     cv::Mat hsvImage;
     cv::Vec<int, 3> sp0(0,0,0);
     cv::Vec<int, 3> sp1(255,0,0);
     cv::Vec<int, 3> sp2(255, 255, 255);
+    sp2[2] = gSlider.value;
 
  //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
     printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
