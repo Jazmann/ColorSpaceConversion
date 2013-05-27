@@ -16,6 +16,7 @@
 
 #ifdef __cplusplus
 @property (readonly, nonatomic) cv::Mat inputMat;
+@property (readwrite,nonatomic) cv::Mat hsvImage;
 #endif 
 
 - (UIImage *)UIImageFromCVMat:(cv::Mat)cvMat;
