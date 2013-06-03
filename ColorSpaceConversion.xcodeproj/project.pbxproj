@@ -125,8 +125,6 @@
 				090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */,
 				090D28581657F896002ECE01 /* ViewController.h */,
 				090D28591657F896002ECE01 /* ViewController.mm */,
-				0948FAC71719B82B0070B938 /* Red.jpg */,
-				0948FAC517185DB30070B938 /* RGB_Cube.jpg */,
 				B553DE891581157500855F6F /* Supporting Files */,
 			);
 			path = ColorSpaceConversion;
