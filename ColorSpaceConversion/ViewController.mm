@@ -399,9 +399,9 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 
   //  RGB2RotTest(sp0, sp1, sp2);
     //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
-    cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(128, 128, 128);
-    cv::Vec<double, 3> g(1, 1, 1);
-    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
+    //cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(128, 128, 128);
+    //cv::Vec<double, 3> g(1, 1, 1);
+    //cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
     
     
    /*
