@@ -335,10 +335,29 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 -(IBAction)hsvImageAction:(id)sender
 {
     thresholdSlider.hidden = YES;
-    cv::Mat hsvImage;
-    cv::Vec<int, 3> sp0(0,0,0);
-    cv::Vec<int, 3> sp1(255,0,0);
-    cv::Vec<int, 3> sp2(255, 255, 255);
+    // R:239, G:208, B:207
+   // cv::Vec<int, 3> sp0(0, 0, 0);
+   // cv::Vec<int, 3> sp1(255, 0, 0);
+   // cv::Vec<int, 3> sp2(0, 255, 0);
+    
+    
+   // cv::Vec<int, 3> sp0(0, 0, 0);
+   // cv::Vec<int, 3> sp1(1, 0, 0);
+   // cv::Vec<int, 3> sp2(0, 1, 0);
+    
+   // cv::Vec<int, 3> sp0(0, 0, 0);
+   // cv::Vec<int, 3> sp1(0, 1, 0);
+   // cv::Vec<int, 3> sp2(1, 0, 0);
+    
+     cv::Vec<int, 3> sp0(0, 0, 0);
+     cv::Vec<int, 3> sp1(255, 255, 255);
+     cv::Vec<int, 3> sp2(149,120,112);
+    
+    // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(240, 128, 128);
+    cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(149,120,112);
+    // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(180, 50, 128);
+    cv::Vec<double, 3> g(1, 92, 27);
+    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
 
  //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
     printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
