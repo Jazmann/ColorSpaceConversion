@@ -5,8 +5,9 @@
 
 #include <opencv2/core/mat.hpp>
 #import <UIKit/UIKit.h>
+#import "SettingsViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <SettingsViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *hsvButton;

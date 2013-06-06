@@ -607,5 +607,25 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     return cvMat;
 }
 
+#pragma mark - SettingsViewControllerDelegate
+- (void)settingsViewControllerDidCancel:(SettingsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)settingsViewControllerDidSave:(SettingsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Settings"])
+    {
+        UINavigationController *navigationController =
+        segue.destinationViewController;
+        SettingsViewController *settingsViewController = [[navigationController viewControllers] objectAtIndex:0];
+        settingsViewController.delegate = self;
+    }
+}
 
 @end

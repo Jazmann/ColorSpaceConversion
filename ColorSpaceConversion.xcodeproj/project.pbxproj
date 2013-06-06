@@ -23,6 +23,7 @@
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
 		873082AE1754082500B271D4 /* hand_skin_test_3_back_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */; };
 		87A1FBD8170F503C004FEEF0 /* rottest.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87A1FBD7170F503C004FEEF0 /* rottest.jpg */; };
+		87C91F12176133D000F05C9D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C91F11176133D000F05C9D /* SettingsViewController.m */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
 		B553DE851581157500855F6F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE841581157500855F6F /* Foundation.framework */; };
 		B553DE871581157500855F6F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE861581157500855F6F /* CoreGraphics.framework */; };
@@ -52,6 +53,8 @@
 		09DD3349167B6E7D0006C37B /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
 		873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hand_skin_test_3_back_1.jpg; sourceTree = "<group>"; };
 		87A1FBD7170F503C004FEEF0 /* rottest.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rottest.jpg; sourceTree = "<group>"; };
+		87C91F10176133D000F05C9D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		87C91F11176133D000F05C9D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		B553DE7E1581157500855F6F /* ColorSpaceConversion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorSpaceConversion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B553DE821581157500855F6F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B553DE841581157500855F6F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -124,6 +127,8 @@
 				090D28561657F896002ECE01 /* UIImageCVMatConverter.h */,
 				090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */,
 				090D28581657F896002ECE01 /* ViewController.h */,
+				87C91F10176133D000F05C9D /* SettingsViewController.h */,
+				87C91F11176133D000F05C9D /* SettingsViewController.m */,
 				090D28591657F896002ECE01 /* ViewController.mm */,
 				B553DE891581157500855F6F /* Supporting Files */,
 			);
@@ -223,6 +228,7 @@
 				090D28621657F896002ECE01 /* main.m in Sources */,
 				090D28651657F896002ECE01 /* UIImageCVMatConverter.mm in Sources */,
 				090D28661657F896002ECE01 /* ViewController.mm in Sources */,
+				87C91F12176133D000F05C9D /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
