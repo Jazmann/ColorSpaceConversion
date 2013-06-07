@@ -73,6 +73,21 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     //Set image containers for each stage
+    switch (row) {
+        case 0:
+            //command for skin space conversion
+            break;
+        case 1:
+            //command for skin detection
+            break;
+        case 2:
+            //command for blob detection
+            break;
+        case 3:
+            //command for fingertip detection
+            break;
+    }
+    
 }
 
 @end
