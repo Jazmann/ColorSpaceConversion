@@ -77,7 +77,7 @@
             </objects>
             <point key="canvasLocation" x="-495" y="723"/>
         </scene>
-        <!--Settings View Controller - Versions-->
+        <!--Settings View Controller - Settings-->
         <scene sceneID="FUp-Lr-S31">
             <objects>
                 <viewController id="U3X-2c-Svq" customClass="SettingsViewController" sceneMemberID="viewController">
@@ -97,7 +97,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="Mhh-jG-56J"/>
-                    <navigationItem key="navigationItem" title="Versions" id="2jy-aP-mvn">
+                    <navigationItem key="navigationItem" title="Settings" id="2jy-aP-mvn">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="aCP-aO-fhm">
                             <connections>
                                 <action selector="cancel:" destination="U3X-2c-Svq" id="9zN-N2-Gd8"/>
