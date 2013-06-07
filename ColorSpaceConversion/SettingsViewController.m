@@ -70,4 +70,9 @@
     return [_stages objectAtIndex:row];
 }
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    //Set image containers for each stage
+}
+
 @end
