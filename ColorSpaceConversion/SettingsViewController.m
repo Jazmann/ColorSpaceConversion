@@ -25,12 +25,17 @@
 }
 
 @synthesize delegate;
+@synthesize settingsPickerView;
+@synthesize stages = _stages;
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    //Look up list of finger recognition steps
+    _stages = [[NSArray alloc] initWithObjects:@"Skin Space", @"Probability Image", @"Blob Image", @"Finger Detection",nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +51,23 @@
 - (IBAction)done:(id)sender
 {
 	[self.delegate settingsViewControllerDidSave:self];
+}
+
+#pragma mark - SettingsPickerView Methods
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return _stages.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [_stages objectAtIndex:row];
 }
 
 @end

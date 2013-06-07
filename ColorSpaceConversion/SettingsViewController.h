@@ -17,9 +17,11 @@
 (SettingsViewController *)controller;
 @end
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
+@property (strong, nonatomic) IBOutlet UIPickerView *settingsPickerView;
 @property (nonatomic, weak) id <SettingsViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSArray * stages;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;
