@@ -354,9 +354,9 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
      cv::Vec<int, 3> sp2(149,120,112);
     
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(240, 128, 128);
-    cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(149,120,112);
+    cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(148, 119, 111);
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(180, 50, 128);
-    cv::Vec<double, 3> g(1, 92, 27);
+    cv::Vec<double, 3> g(1, 125, 35);
     cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
 
  //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
@@ -517,7 +517,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     thresholdSlider.continuous = YES;
     float threshold = thresholdSlider.value;
     cv::cvtColor(hsvImage, greyMat, CV_BGR2GRAY);
-    cv::threshold(greyMat,binaryMat,threshold,255,cv::THRESH_BINARY);
+    cv::threshold(greyMat,binaryMat,threshold,255-threshold,cv::THRESH_BINARY);
     greyMat.release();
     // convert cvMat to UIImage
     imageView.image = [self UIImageFromCVMat:binaryMat];
