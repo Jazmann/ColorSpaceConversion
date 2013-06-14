@@ -31,7 +31,7 @@ int currentImageIndex = 0;
 int nextImageIndex = (currentImageIndex - 1) % 10;
 int previousImageIndex = (10 + currentImageIndex - 1) % 10;
 
-
+NSArray *imageHistory = [[NSArray alloc]init];
 
 #pragma mark - 
 #pragma mark Managing Views
