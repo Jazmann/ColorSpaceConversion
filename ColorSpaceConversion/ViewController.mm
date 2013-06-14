@@ -27,6 +27,11 @@ typedef unsigned char uchar;
 @synthesize inputMat;
 @synthesize hsvImage;
 
+int currentImageIndex = 0;
+int nextImageIndex = (currentImageIndex - 1) % 10;
+int previousImageIndex = (10 + currentImageIndex - 1) % 10;
+
+
 
 #pragma mark - 
 #pragma mark Managing Views
