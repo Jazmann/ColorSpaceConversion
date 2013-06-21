@@ -3,7 +3,7 @@
 //  ColorSpaceConversion
 //
 //  Created by NBTB on 6/6/13.
-//  Copyright (c) 2013 University of Houston - Main Campus. All rights reserved.
+//  
 //
 
 #import "SettingsViewController.h"
