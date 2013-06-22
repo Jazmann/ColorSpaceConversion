@@ -18,6 +18,7 @@
 #ifdef __cplusplus
 @property (readonly, nonatomic) cv::Mat inputMat;
 @property (readwrite,nonatomic) cv::Mat hsvImage;
+@property (readwrite,nonatomic) NSArray * imageHistory;
 #endif 
 
 - (UIImage *)UIImageFromCVMat:(cv::Mat)cvMat;

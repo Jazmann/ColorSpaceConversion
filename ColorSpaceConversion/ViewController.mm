@@ -26,12 +26,13 @@ typedef unsigned char uchar;
 @synthesize binaryButton;
 @synthesize inputMat;
 @synthesize hsvImage;
+@synthesize imageHistory;
 
 int currentImageIndex = 0;
 int nextImageIndex = (currentImageIndex - 1) % 10;
 int previousImageIndex = (10 + currentImageIndex - 1) % 10;
 
-NSArray *imageHistory = [[NSArray alloc]init];
+NSArray * imageHistory = [[NSArray alloc]initWithObjects:inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat];
 
 #pragma mark - 
 #pragma mark Managing Views
