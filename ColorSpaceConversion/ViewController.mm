@@ -32,7 +32,6 @@ int currentImageIndex = 0;
 int nextImageIndex = (currentImageIndex - 1) % 10;
 int previousImageIndex = (10 + currentImageIndex - 1) % 10;
 
-NSArray * imageHistory = [[NSArray alloc]initWithObjects:inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat];
 
 #pragma mark - 
 #pragma mark Managing Views
@@ -44,6 +43,8 @@ NSArray * imageHistory = [[NSArray alloc]initWithObjects:inputMat,inputMat,input
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
     inputMat =[self cvMatFromUIImage:imageView.image];
     cv::Mat hsvImage;
+    
+    NSArray * imageHistory = [[NSArray alloc]initWithObjects:inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat];
 
     thresholdSlider.hidden = YES;
 
