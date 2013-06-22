@@ -32,6 +32,10 @@ int currentImageIndex = 0;
 int nextImageIndex = (currentImageIndex - 1) % 10;
 int previousImageIndex = (10 + currentImageIndex - 1) % 10;
 
+cv::Mat** imageHist = new cv::Mat*[10];
+
+
+//NSArray * imageHistory = [[NSArray alloc]initWithObjects:inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat];
 
 #pragma mark - 
 #pragma mark Managing Views
@@ -42,9 +46,10 @@ int previousImageIndex = (10 + currentImageIndex - 1) % 10;
     NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand_skin_test_3_back_1" ofType:@"jpg"];
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
     inputMat =[self cvMatFromUIImage:imageView.image];
+    for (int i = 0; i < 10; i++) {
+        imageHist[i] = &(inputMat);
+    }
     cv::Mat hsvImage;
-    
-    NSArray * imageHistory = [[NSArray alloc]initWithObjects:inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat];
 
     thresholdSlider.hidden = YES;
 
