@@ -84,19 +84,6 @@ cv::Mat imageHistory[10];
 #pragma mark - 
 #pragma mark button action
 
-/*
--(IBAction)hsvImageAction:(id)sender
-{   
-    threshol.hidden = YES;
-    cv::Mat hsvImage;
-    cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV); 
-    // convert cvMat to UIImage
-    imageView.image = [self UIImageFromCVMat:hsvImage];
-    hsvImage.release();
-}
- 
- std::string f_str = std::to_string(f);
-*/
 -(void)sVecPrint:(cv::sVec<uint8_t, 3>)vec{
     printf("Test sVec \n");
     printf("    / %u \\  / %f \\ \n", vec[0],    vec(0));
@@ -122,55 +109,6 @@ cv::Mat imageHistory[10];
 }
 
 
-/* f : number to convert.
- * num, denom: returned parts of the rational.
- * max_denom: max denominator value.  Note that machine floating point number
- *     has a finite resolution (10e-16 ish for 64 bit double), so specifying
- *     a "best match with minimal error" is often wrong, because one can
- *     always just retrieve the significand and return that divided by
- *     2**52, which is in a sense accurate, but generally not very useful:
- *     1.0/7.0 would be "2573485501354569/18014398509481984", for example.
- */
-
-/*
-void rat_approx(double f, int64_t max_denom, int64_t *num, int64_t *denom)
-{
-	//  a: continued fraction coefficients.
-
-	int64_t a, h[3] = { 0, 1, 0 }, k[3] = { 1, 0, 0 };
-	int64_t x, d, n = 1;
-	int i, neg = 0;
-    
-	if (max_denom <= 1) { *denom = 1; *num = (int64_t) f; return; }
-    
-	if (f < 0) { neg = 1; f = -f; }
-    
-	while (f != floor(f)) { n <<= 1; f *= 2; }
-	d = f;
-    
-	// continued fraction and check denominator each step 
-	for (i = 0; i < 64; i++) {
-		a = n ? d / n : 0;
-		if (i && !a) break;
-        
-		x = d; d = n; n = x % n;
-        
-		x = a;
-		if (k[1] * a + k[0] >= max_denom) {
-			x = (max_denom - k[0]) / k[1];
-			if (x * 2 >= a || k[1] >= max_denom)
-				i = 65;
-			else
-				break;
-		}
-        
-		h[2] = x * h[1] + h[0]; h[0] = h[1]; h[1] = h[2];
-		k[2] = x * k[1] + k[0]; k[0] = k[1]; k[1] = k[2];
-	}
-	*denom = k[1];
-	*num = neg ? -h[1] : h[1];
-}
-*/
 
 
 cv::Matx<int64_t, 3, 2> rational_decomposition(cv::Matx<float, 3, 1> vec, int64_t max_denom){
@@ -347,8 +285,6 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     cv::sVec<uint8_t, 3> fVc(fMc);
     printf("fVc\n");
     [self sVecPrint:fVc];
-
-
     
 }
 
@@ -378,166 +314,20 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(180, 50, 128);
     cv::Vec<double, 3> g(1, 125, 35);
     cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
-
- //   cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV);
-    printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.rows);
-    printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
-    printf("Mat : inputMat :  elemSize1() = %lu  \n", inputMat.elemSize1());
-    printf("Mat : inputMat :  type() = %d  \n", inputMat.type());
-    printf("Mat : inputMat :  depth() = %d  \n", inputMat.depth());
-    printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
-    printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
-    printf("Mat : inputMat :  step[0] = %lu  \n", inputMat.step[0]);
-    /*
-    printf("------ CV_2UC4 --------\n");
-    [self printDataInfo:CV_2UC4 ];
-    printf("\n ------ CV_4UC4 --------\n");
-    [self printDataInfo:(CV_4UC4)];
-    printf("\n ------ CV_8UC4 --------\n");
-     [self printDataInfo:(CV_8UC4)];
-    printf("\n ------ CV_8SC4 --------\n");
-    [self printDataInfo:(CV_8SC4)];
-    printf("\n ------ CV_16UC4 --------\n");
-    [self printDataInfo:(CV_16UC4)];
-    printf("\n ------ CV_16SC4 --------\n");
-    [self printDataInfo:(CV_16SC4)];
-    printf("\n ------ CV_32UC4 --------\n");
-    [self printDataInfo:(CV_32UC4)];
-    printf("\n ------ CV_32SC4 --------\n");
-    [self printDataInfo:(CV_32SC4)];
-    printf("\n ------ CV_64UC4 --------\n");
-    [self printDataInfo:(CV_64UC4)];
-    printf("\n ------ CV_64SC4 --------\n");
-    [self printDataInfo:(CV_64SC4)];
-    printf("\n ------ CV_32FC4 --------\n");
-    [self printDataInfo:(CV_32FC4)];
-    printf("\n ------ CV_64FC4 --------\n");
-    [self printDataInfo:(CV_64FC4)];
-    
-    [self sVecTest];
-     */
-
-  //  RGB2RotTest(sp0, sp1, sp2);
-    //  cv::cvtColor(inputMat, hsvImage, CV_RGB2Rot);
-    //cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(128, 128, 128);
-    //cv::Vec<double, 3> g(1, 1, 1);
-    //cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
-    
-    
-   /*
-    printf("constexpr static int src_Bit_Depth  = %i \n", colSpace.src_Bit_Depth);
-    printf("constexpr static int src_Byte_Depth = %i \n", colSpace.src_Byte_Depth);
-    printf("constexpr static int src_Channels   = %i \n", colSpace.src_Channels);
-    printf("constexpr static int dst_Bit_Depth  = %i \n", colSpace.dst_Bit_Depth);
-    printf("constexpr static int dst_Byte_Depth = %i \n", colSpace.dst_Byte_Depth);
-    printf("constexpr static int dst_Channels   = %i \n", colSpace.dst_Channels);
-    printf("using src_channel_type     = %u\n", cv::DataType<cv::RGB2Rot<CV_8UC4,CV_8UC3>::src_channel_type>::type);
-    printf("using dst_channel_type     = %u\n", cv::DataType<cv::RGB2Rot<CV_8UC4,CV_8UC3>::dst_channel_type>::type);
-    printf("const uint64_t targetScale = %u \n", colSpace.targetScale);
-    printf("int M[dst_Channels][src_Channels]\n");
-    std::cout << toString<int,cv::RGB2Rot<CV_8UC4,CV_8UC3>::dst_Channels, cv::RGB2Rot<CV_8UC4,CV_8UC3>::src_Channels>(colSpace.M);
-    printf("int TRange[dst_Channels]\n");
-    std::cout << toString<int,cv::RGB2Rot<CV_8UC4,CV_8UC3>::dst_Channels>(colSpace.TRange);
-    printf("int TMin[dst_Channels]\n");
-    std::cout << toString<int,cv::RGB2Rot<CV_8UC4,CV_8UC3>::dst_Channels>(colSpace.TMin);
- //   printf("int TRange[dst_Channels], TMin[dst_Channels]\n", colSpace.);
-    printf("int redScale   :  %i \n", colSpace.redScale);
-    printf("int greenScale :  %i \n", colSpace.greenScale);
-    printf("int blueScale  :  %i \n", colSpace.blueScale);
-    */
-    const int ro = 121;
-    const int co = 23;
-    
-    printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.cols);
-    printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
-    printf("Mat : inputMat :  elemSize1() = %lu  \n", inputMat.elemSize1());
-    printf("Mat : inputMat :  type() = %d  \n", inputMat.type());
-    printf("Mat : inputMat :  depth() = %d  \n", inputMat.depth());
-    printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
-    printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
-    printf("Mat : inputMat :  step[0] = %lu  \n", inputMat.step[0]);
-    printf("Mat : hsvImage :  point = ( %" PRIu8 " ) ( %" PRIu8 " ) ( %" PRIu8 " ) \n", inputMat.at<cv::Vec3b>(ro,co)[0], inputMat.at<cv::Vec3b>(ro,co)[1], inputMat.at<cv::Vec3b>(ro,co)[2]);
-    
-    
-   // cv::convertColor<CV_8UC4,CV_8UC3>(* imageHist[currentImageIndex], * imageHist[nextImageIndex], colSpace);
-    // cv::convertColor<CV_8UC4,CV_8UC3>(inputMat, hsvImage, colSpace);
-    // hsvImage.copyTo(tempMat);
-    // imageHistory[nextImageIndex] = hsvImage;
-    
-    cv::convertColor<CV_8UC4,CV_8UC3>(inputMat, imageHistory[nextImageIndex], colSpace);
+            
+    cv::convertColor<CV_8UC4,CV_8UC3>(imageHistory[currentImageIndex], imageHistory[nextImageIndex], colSpace);
     hsvImage = imageHistory[nextImageIndex];
-    
-    printf("Mat : hsvImage :  rows = %d, cols = %d \n", hsvImage.rows, hsvImage.cols);
-    printf("Mat : hsvImage :  elemSize = %lu     \n", hsvImage.elemSize());
-    printf("Mat : hsvImage :  elemSize1() = %lu  \n", hsvImage.elemSize1());
-    printf("Mat : hsvImage :  type() = %d  \n", hsvImage.type());
-    printf("Mat : hsvImage :  depth() = %d  \n", hsvImage.depth());
-    printf("Mat : hsvImage :  channels() = %d  \n", hsvImage.channels());
-    printf("Mat : hsvImage :  step1(0) = %lu  \n", hsvImage.step1(0));
-    printf("Mat : hsvImage :  step[0] = %lu  \n", hsvImage.step[0]);
-    printf("Mat : hsvImage :  point = ( %" PRIu8 " ) ( %" PRIu8 " ) ( %" PRIu8 " ) \n", hsvImage.at<cv::Vec3b>(ro,co)[0], hsvImage.at<cv::Vec3b>(ro,co)[1], hsvImage.at<cv::Vec3b>(ro,co)[2]);
     
     // Update Current Image Index and put up on screen.
     // convert cvMat to UIImage
     [self forward];
-    // imageView.image = [self UIImageFromCVMat:hsvImage];
 }
 
 
 -(IBAction)grayImageAction:(id)sender
 {
     thresholdSlider.hidden = YES;
-    cv::Mat greyMat;
-    
-    
-    printf("Mat : inputMat :  rows = %d, cols = %d \n", inputMat.rows, inputMat.cols);
-    printf("Mat : inputMat :  elemSize = %lu     \n", inputMat.elemSize());
-    printf("Mat : inputMat :  elemSize1() = %lu  \n", inputMat.elemSize1());
-    printf("Mat : inputMat :  type() = %d  \n", inputMat.type());
-    printf("Mat : inputMat :  depth() = %d  \n", inputMat.depth());
-    printf("Mat : inputMat :  channels() = %d  \n", inputMat.channels());
-    printf("Mat : inputMat :  step1(0) = %lu  \n", inputMat.step1(0));
-    printf("Mat : inputMat :  step[0] = %lu  \n", inputMat.step[0]);
-    
-    cv::cvtColor(inputMat, greyMat, CV_BGR2GRAY);
-        
-    printf("Mat : inputMat :  rows = %d, cols = %d \n", greyMat.rows, greyMat.cols);
-    printf("Mat : inputMat :  elemSize = %lu     \n", greyMat.elemSize());
-    printf("Mat : inputMat :  elemSize1() = %lu  \n", greyMat.elemSize1());
-    printf("Mat : inputMat :  type() = %d  \n", greyMat.type());
-    printf("Mat : inputMat :  depth() = %d  \n", greyMat.depth());
-    printf("Mat : inputMat :  channels() = %d  \n", greyMat.channels());
-    printf("Mat : inputMat :  step1(0) = %lu  \n", greyMat.step1(0));
-    printf("Mat : inputMat :  step[0] = %lu  \n", greyMat.step[0]);
-  /*  cv::SimpleBlobDetector::Params params;
-    params.minDistBetweenBlobs = 50.0f;
-    params.filterByInertia = false;
-    params.filterByConvexity = false;
-    params.filterByColor = false;
-    params.filterByCircularity = false;
-    params.filterByArea = true;
-    params.minArea = 20.0f;
-    params.maxArea = 500.0f;
-    
-    cv::Ptr<cv::FeatureDetector> blob_detector = new cv::SimpleBlobDetector(params);
-    blob_detector->create("SimpleBlob");
-    
-    cv::vector<cv::KeyPoint> keypoints;
-    blob_detector->detect(greyMat, keypoints);
-    */
-    
-
-    // convert cvMat to UIImage
-    
-    NSLog(@"Convert cvMat to UIImage");
-    
-    self.imageView.image = [self UIImageFromCVMat:inputMat];
-  //  [self UIImageFromCVMat:greyMat];
- //   NSLog(@"Convert cvMat to UIImage");
-    
- //   self.imageView.image = [self UIImageFromCVMat:greyMat];
- //   NSLog(@"Converted cvMat to UIImage");
-    greyMat.release();
+    [self backward];
 }
 -(IBAction)binaryImageAction:(id)sender
 {
@@ -545,14 +335,13 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     thresholdSlider.hidden = NO;
     thresholdSlider.continuous = YES;
     float threshold = thresholdSlider.value;
-    cv::cvtColor(hsvImage, greyMat, CV_BGR2GRAY);
+    cv::cvtColor(imageHistory[currentImageIndex], greyMat, CV_BGR2GRAY);
     cv::threshold(greyMat,binaryMatL,threshold,0,cv::THRESH_TOZERO);
     cv::threshold(binaryMatL,binaryMatU,255-threshold,0,cv::THRESH_TOZERO_INV);
-    greyMat.release();
-    binaryMatL.release();
-    // convert cvMat to UIImage
-    imageView.image = [self UIImageFromCVMat:binaryMatU];
-    binaryMatU.release();
+    imageHistory[nextImageIndex] = binaryMatU;
+    [self forward];
+    // Garbage collect.
+    greyMat.release(); binaryMatL.release(); binaryMatU.release();
 }
 
 -(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
