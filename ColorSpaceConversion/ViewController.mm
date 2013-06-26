@@ -344,6 +344,22 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     greyMat.release(); binaryMatL.release(); binaryMatU.release();
 }
 
+-(IBAction)binarySliderAction:(id)sender
+{
+    cv::Mat binaryMatU, binaryMatL, greyMat;
+    thresholdSlider.hidden = NO;
+    thresholdSlider.continuous = YES;
+    float threshold = thresholdSlider.value;
+    cv::cvtColor(imageHistory[previousImageIndex], greyMat, CV_BGR2GRAY);
+    cv::threshold(greyMat,binaryMatL,threshold,0,cv::THRESH_TOZERO);
+    cv::threshold(binaryMatL,binaryMatU,255-threshold,0,cv::THRESH_TOZERO_INV);
+    imageHistory[currentImageIndex] = binaryMatU;
+    imageView.image = [self UIImageFromCVMat:imageHistory[currentImageIndex]];
+    // Garbage collect.
+    greyMat.release(); binaryMatL.release(); binaryMatU.release();
+}
+
+
 -(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
 {
     NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize()*cvMat.total()];
