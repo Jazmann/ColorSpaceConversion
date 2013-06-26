@@ -3,7 +3,6 @@
 //  ColorSpaceConersion
 //
 
-
 #import "ViewController.h"
 
 #include <list>
@@ -26,16 +25,29 @@ typedef unsigned char uchar;
 @synthesize binaryButton;
 @synthesize inputMat;
 @synthesize hsvImage;
-@synthesize imageHistory;
+// @synthesize imageHistory;
 
-int currentImageIndex = 0;
-int nextImageIndex = (currentImageIndex - 1) % 10;
+int currentImageIndex = 1;
+int nextImageIndex = (currentImageIndex + 1) % 10;
 int previousImageIndex = (10 + currentImageIndex - 1) % 10;
 
-cv::Mat** imageHist = new cv::Mat*[10];
+cv::Mat imageHistory[10];
 
+-(void) forward
+{
+    currentImageIndex = nextImageIndex;
+    nextImageIndex = (currentImageIndex + 1) % 10;
+    previousImageIndex = (10 + currentImageIndex - 1) % 10;
+    imageView.image = [self UIImageFromCVMat:(imageHistory[currentImageIndex])];
+}
 
-//NSArray * imageHistory = [[NSArray alloc]initWithObjects:inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat,inputMat];
+-(void) backward
+{
+    nextImageIndex = currentImageIndex;
+    currentImageIndex = previousImageIndex;
+    previousImageIndex = (10 + currentImageIndex - 1) % 10;
+    imageView.image = [self UIImageFromCVMat:imageHistory[currentImageIndex]];
+}
 
 #pragma mark - 
 #pragma mark Managing Views
@@ -46,9 +58,7 @@ cv::Mat** imageHist = new cv::Mat*[10];
     NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand_skin_test_3_back_1" ofType:@"jpg"];
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
     inputMat =[self cvMatFromUIImage:imageView.image];
-    for (int i = 0; i < 10; i++) {
-        imageHist[i] = &(inputMat);
-    }
+    imageHistory[currentImageIndex] = inputMat;
     cv::Mat hsvImage;
 
     thresholdSlider.hidden = YES;
@@ -76,16 +86,14 @@ cv::Mat** imageHist = new cv::Mat*[10];
 
 /*
 -(IBAction)hsvImageAction:(id)sender
-{
+{   
     threshol.hidden = YES;
     cv::Mat hsvImage;
     cv::cvtColor (inputMat, hsvImage, CV_BGR2HSV); 
     // convert cvMat to UIImage
     imageView.image = [self UIImageFromCVMat:hsvImage];
     hsvImage.release();
-    
 }
- 
  
  std::string f_str = std::to_string(f);
 */
@@ -450,7 +458,14 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : inputMat :  step[0] = %lu  \n", inputMat.step[0]);
     printf("Mat : hsvImage :  point = ( %" PRIu8 " ) ( %" PRIu8 " ) ( %" PRIu8 " ) \n", inputMat.at<cv::Vec3b>(ro,co)[0], inputMat.at<cv::Vec3b>(ro,co)[1], inputMat.at<cv::Vec3b>(ro,co)[2]);
     
-    cv::convertColor<CV_8UC4,CV_8UC3>(inputMat, hsvImage, colSpace);
+    
+   // cv::convertColor<CV_8UC4,CV_8UC3>(* imageHist[currentImageIndex], * imageHist[nextImageIndex], colSpace);
+    // cv::convertColor<CV_8UC4,CV_8UC3>(inputMat, hsvImage, colSpace);
+    // hsvImage.copyTo(tempMat);
+    // imageHistory[nextImageIndex] = hsvImage;
+    
+    cv::convertColor<CV_8UC4,CV_8UC3>(inputMat, imageHistory[nextImageIndex], colSpace);
+    hsvImage = imageHistory[nextImageIndex];
     
     printf("Mat : hsvImage :  rows = %d, cols = %d \n", hsvImage.rows, hsvImage.cols);
     printf("Mat : hsvImage :  elemSize = %lu     \n", hsvImage.elemSize());
@@ -462,8 +477,10 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     printf("Mat : hsvImage :  step[0] = %lu  \n", hsvImage.step[0]);
     printf("Mat : hsvImage :  point = ( %" PRIu8 " ) ( %" PRIu8 " ) ( %" PRIu8 " ) \n", hsvImage.at<cv::Vec3b>(ro,co)[0], hsvImage.at<cv::Vec3b>(ro,co)[1], hsvImage.at<cv::Vec3b>(ro,co)[2]);
     
+    // Update Current Image Index and put up on screen.
     // convert cvMat to UIImage
-    imageView.image = [self UIImageFromCVMat:hsvImage];    
+    [self forward];
+    // imageView.image = [self UIImageFromCVMat:hsvImage];
 }
 
 
