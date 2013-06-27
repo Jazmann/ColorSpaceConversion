@@ -28,4 +28,5 @@
 -(IBAction)hsvImageAction:(id)sender;
 -(IBAction)grayImageAction:(id)sender;
 -(IBAction)binaryImageAction:(id)sender;
+-(IBAction)binarySliderAction:(id)sender;
 @end
