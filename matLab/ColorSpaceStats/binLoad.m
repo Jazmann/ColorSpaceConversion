@@ -5,7 +5,7 @@ MdataSize = 256; % Size of nxn data matrix
 % [X,Y] = meshgrid(xMin:(xMax-xMin)/(MdataSize-1):xMax,yMin:(yMax-yMin)/(MdataSize-1):yMax);
 
 % New values for YCbCr space.
-Kb = 0.114;  Kr = 0.299; theta = -0.778; %0.279;
+Kb = 0.114;  Kr = 0.299; theta = -0.778; % 0.279;
 yScale = 255; yMin = 0; yMax = 255;
 bScale = 255; bMin = 0; bMax = 255;
 rScale = 255; rMin = 0; rMax = 255;
