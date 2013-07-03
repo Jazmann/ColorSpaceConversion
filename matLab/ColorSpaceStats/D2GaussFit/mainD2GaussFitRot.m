@@ -58,12 +58,12 @@ rMid = (rMax+rMin)/2 ;
 %   x0 = [Amp,x0,wx,y0,wy,fi]: Inital guess parameters
 %   x = [Amp,x0,wx,y0,wy,fi]: simulated centroid parameters
 % parameters are: [Amplitude, x0, sigmax, y0, sigmay, angel(in rad)]
-x0 = [1,c2A,20.5,c3A,20.5,pi/4]; %Inital guess parameters
+x0 = [1,c2A,20.5,c3A,20.5,-pi/8] % pi/4]; %Inital guess parameters
 x = x0; %centroid parameters
 xin = x;
 noise = 10; % noise in % of centroid peak value (x(1))
 InterpolationMethod = 'spline'; % 'nearest','linear','spline','cubic'
-FitForOrientation = 0; % 0: fit for orientation. 1: do not fit for orientation
+FitForOrientation = 1; % 0: fit for orientation. 1: do not fit for orientation
 
 %% ---Generate centroid to be fitted--------------------------------------
 [X,Y] = meshgrid(bMin:(bMax-bMin)/(MdataSize-1):bMax,rMin:(rMax-rMin)/(MdataSize-1):rMax);
@@ -89,14 +89,14 @@ Z(NaNLoc) = 0;
 if FitForOrientation == 0
     % define lower and upper bounds [Amp,xo,wx,yo,wy,fi]
     lb = [0,bMin,0,rMin,0,-pi/4];
-    ub = [realmax('double'),bMax,(1)^2,rMax,(1)^2,pi/4];
+    ub = [realmax('double'),bMax,50,rMax,50,pi/4];
     [x,resnorm,residual,exitflag] = lsqcurvefit(@D2GaussFunctionRot,x0,xdata,Z,lb,ub);
 else
     x0 =x0(1:5);
     xin(6) = 0; 
     x =x(1:5);
     lb = [0,bMin,0,rMin,0];
-    ub = [realmax('double'),bMax,(1)^2,rMax,(1)^2];
+    ub = [realmax('double'),bMax,50,rMax,(1)^2];
     [x,resnorm,residual,exitflag] = lsqcurvefit(@D2GaussFunction,x0,xdata,Z,lb,ub);
     x(6) = 0;
 end
@@ -127,9 +127,6 @@ string3 = ['Fit      ',num2str(x(1), '% 100.3f'),'             ',num2str(x(2), '
 text(bMin,+rMax+3,string1,'Color','red')
 text(bMin,+rMax+9,string2,'Color','red')
 text(bMin,+rMax+15,string3,'Color','red')
-
-%x(3) = 2;
-%x(5) = 6;
 
 %% -----Calculate cross sections-------------
 % generate points along horizontal axis
