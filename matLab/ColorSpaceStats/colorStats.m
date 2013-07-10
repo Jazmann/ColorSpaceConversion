@@ -1,9 +1,8 @@
 % colorStats( 0.114, 0.299, pi/2 -0.778, 0, 255, 256, 0, 255, 256, 0, 255, 256)
-function [ binOut ] = colorStats( Kb, Kr, theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins)
+function [ Yv, Bv, Rv, binOut ] = colorStats( Kb, Kr, theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
-MdataSize = 256; % Size of nxn data matrix
 % xMin = 16/255; xMax = 240/255;
 % yMin = 16/255; yMax = 240/255;
 % [X,Y] = meshgrid(xMin:(xMax-xMin)/(MdataSize-1):xMax,yMin:(yMax-yMin)/(MdataSize-1):yMax);
@@ -13,7 +12,10 @@ MdataSize = 256; % Size of nxn data matrix
 yScale = yMax - yMin;
 bScale = bMax - bMin;
 rScale = rMax - rMin;
-[Y, B, R] = meshgrid(yMin:(yMax-yMin)/(yBins-1):yMax, bMin:(bMax-bMin)/(bBins-1):bMax, rMin:(rMax-rMin)/(rBins-1):rMax);
+Yv = yMin:(yMax-yMin)/(yBins-1):yMax;
+Bv = bMin:(bMax-bMin)/(bBins-1):bMax;
+Rv = rMin:(rMax-rMin)/(rBins-1):rMax;
+[Y, B, R] = meshgrid(Yv, Bv,Rv);
 % Bin map : input chan value - chan min +1 (1:chanScale+1) : Output bin
 % number (1:chanBins).
 yBin = floor((0:yScale).*(yBins)./(yScale+1))+1;
@@ -56,10 +58,6 @@ end
 
 cA = cT/cN;
 
-data = zeros(size(Y,1),size(B,2),size(R,3),channels);
-data(:,:,:,1) = Y;
-data(:,:,:,2) = B;
-data(:,:,:,3) = R;
 
 %--- Normalised Histogram data ---------------------
 % we remove zeros from the input bin data as some are due to the color
@@ -68,8 +66,14 @@ loc = find(bin>0);
 ZGood = bin(loc)/max(max(max(bin)));
 
 binOut = griddata(Y(loc),B(loc),R(loc),ZGood,Y,B,R);
-NaNLoc = find(isnan(binOut)==1);
+NaNLoc = isnan(binOut)==1;
 binOut(NaNLoc) = 0;
+
+data = zeros(size(Y,1),size(B,2),size(R,3), 4);
+data(:,:,:,1) = Y;
+data(:,:,:,2) = B;
+data(:,:,:,3) = R;
+data(:,:,:,4) = binOut;
 
 imagesc(squeeze(sum(binOut,1)));
 imagesc(squeeze(sum(binOut,2)));
