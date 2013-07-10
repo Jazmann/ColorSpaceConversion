@@ -35,8 +35,9 @@ xin = x;
 
 %% ---Generate centroid to be fitted--------------------------------------
 %[X,Y] = meshgrid(X(1):(X(end)-X(1))/(MdataSize-1):X(end),Y(1):(Y(end)-Y(1))/(MdataSize-1):Y(end));
-xdata = zeros(length(X),length(Y),2);
-[xdata(:,:,1), xdata(:,:,2)] =  meshgrid(X,Y);
+xdata = zeros(size(X,1),size(Y,2),2);
+xdata(:,:,1) = X;
+xdata(:,:,2) = Y;
 
 %% --- Fit---------------------
 if FitForOrientation == 0
@@ -60,7 +61,7 @@ C = del2(Z);
 mesh(X,Y,Z,C) %plot data
 hold on
 surface(X,Y,D2GaussFunctionRot(x,xdata),'EdgeColor','none') %Xhr,Yhr,D2GaussFunctionRot(x,xdatahr),'EdgeColor','none') %plot fit
-axis([X(1) X(end) Y(1) Y(end) min(min(Z)) max(max(Z))])
+axis([X(1) X(end) Y(1) Y(end) min(Z) max(Z)])
 alpha(0.2)  
 hold off
 
@@ -105,7 +106,7 @@ vPoints = interp2(X,Y,Z,xvv,yvv,InterpolationMethod);
 
 hold on % Indicate major and minor axis on plot
 
- % plot points 
+ % plot pints 
   plot(xvh,yvh,'r.') 
   plot(xvv,yvv,'g.')
 
@@ -123,7 +124,7 @@ plot([xvv(1) xvv(size(xvv))],[yvv(1) yvv(size(yvv))],'g')
 % ycbcrPoints = [yMid,yMid,yMid,yMid,yMid  ;
 %     xvv(ceil(length(xvv) * sphereL / sphereN)), xvv(floor(length(xvv) * sphereH / sphereN)), xvh(ceil(length(xvh) * sphereL / sphereN)), xvh(floor(length(xvh) * sphereH / sphereN)), XMid + (XMid - X(1)) * cos(x(6)) ;
 %     yvv(ceil(length(yvv) * sphereL / sphereN)), yvv(floor(length(yvv) * sphereH / sphereN)), yvh(ceil(length(xvv) * sphereL / sphereN)), yvh(floor(length(yvh) * sphereH / sphereN)), YMid + (YMid - Y(1)) * sin(x(6)) ];
-yMid = 128;
+
 ycbcrPoints = [yMid,yMid,yMid,yMid,yMid  ;
     xvv(1), xvv(length(xvv)), xvh(1), xvh(length(xvh)), XMid + (XMid - X(1)) * cos(x(6)) ;
     yvv(1), yvv(length(yvv)), yvh(1), yvh(length(yvh)), YMid + (YMid - Y(1)) * sin(x(6)) ];
@@ -136,15 +137,16 @@ hold off
 axis([X(1) X(end) Y(1) Y(end)])
 %%
 
-hdatafit = x(1)*exp(-(X-x(2)).^2/(2*x(3)^2));
-vdatafit = x(1)*exp(-(X-x(4)).^2/(2*x(5)^2));
+xdatafit = linspace(X(1),X(end),MdataSize);
+hdatafit = x(1)*exp(-(xdatafit-x(2)).^2/(2*x(3)^2));
+vdatafit = x(1)*exp(-(xdatafit-x(4)).^2/(2*x(5)^2));
 subplot(4,4, [1:3])
 xposh = (xvh-x(2))/cos(x(6))+x(2);% correct for the longer diagonal if fi~=0
-plot(xposh,hPoints,'r.',X,hdatafit,'black')
+plot(xposh,hPoints,'r.',xdatafit,hdatafit,'black')
 axis([X(1) X(end) 0 1])
 subplot(4,4,[8,12,16])
 xposv = (yvv-x(4))/cos(x(6))+x(4);% correct for the longer diagonal if fi~=0
-plot(vPoints,xposv,'g.',vdatafit,X,'black')
+plot(vPoints,xposv,'g.',vdatafit,xdatafit,'black')
 axis([0 1 Y(1)*1.1 Y(end)*1.1])
 set(gca,'YDir','reverse')
 figure(gcf) % bring current figure to front
@@ -212,8 +214,8 @@ a1 = (rgbPoints(2,:) - rgbPoints(1,:) ) * 255 ;
 a2 = rgbPoints(4,:) - rgbPoints(3,:) * 255 ;
 
 % Scale sigma along the axis and fit to 0:255 scaled axis.
-hdatafit = x(1)*exp(-(X-x(2)).^2/(2*x(3)^2));
-vdatafit = x(1)*exp(-(X-x(4)).^2/(2*x(5)^2));
+hdatafit = x(1)*exp(-(xdatafit-x(2)).^2/(2*x(3)^2));
+vdatafit = x(1)*exp(-(xdatafit-x(4)).^2/(2*x(5)^2));
 hMu = (x(2) - X(1))/((X(end)-X(1))*cos(x(6)));
 hVar = x(3).^2/cos(x(6))
 % hG = (xMax-xMin)/(2*cos(x(6))*x(3)^2);

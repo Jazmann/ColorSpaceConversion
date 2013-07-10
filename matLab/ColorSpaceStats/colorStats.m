@@ -1,5 +1,5 @@
 % colorStats( 0.114, 0.299, pi/2 -0.778, 0, 255, 256, 0, 255, 256, 0, 255, 256)
-function [ Yv, Bv, Rv, binOut ] = colorStats( Kb, Kr, theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins)
+function [ Yv, Bv, Rv, binOut, cA ] = colorStats( Kb, Kr, theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -69,11 +69,11 @@ binOut = griddata(Y(loc),B(loc),R(loc),ZGood,Y,B,R);
 NaNLoc = isnan(binOut)==1;
 binOut(NaNLoc) = 0;
 
-data = zeros(size(Y,1),size(B,2),size(R,3), 4);
-data(:,:,:,1) = Y;
-data(:,:,:,2) = B;
-data(:,:,:,3) = R;
-data(:,:,:,4) = binOut;
+% data = zeros(size(Y,1),size(B,2),size(R,3), 4);
+% data(:,:,:,1) = Y;
+% data(:,:,:,2) = B;
+% data(:,:,:,3) = R;
+% data(:,:,:,4) = binOut;
 
 imagesc(squeeze(sum(binOut,1)));
 imagesc(squeeze(sum(binOut,2)));
