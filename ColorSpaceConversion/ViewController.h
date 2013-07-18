@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *hsvButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *grayButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *binaryButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem * backButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem * forwardButton;
 @property (weak, nonatomic) IBOutlet UISlider *thresholdSlider;
 
 #ifdef __cplusplus
@@ -29,4 +31,6 @@
 -(IBAction)grayImageAction:(id)sender;
 -(IBAction)binaryImageAction:(id)sender;
 -(IBAction)binarySliderAction:(id)sender;
+-(IBAction)backward:(id)sender;
+-(IBAction)forward:(id)sender;
 @end
