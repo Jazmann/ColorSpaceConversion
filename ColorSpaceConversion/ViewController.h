@@ -7,7 +7,10 @@
 #import <UIKit/UIKit.h>
 #import "SettingsViewController.h"
 
-@interface ViewController : UIViewController <SettingsViewControllerDelegate>
+@interface ViewController : UIViewController <SettingsViewControllerDelegate, UIActionSheetDelegate>
+{
+    UIActionSheet* actionSheetImageOperations;
+}
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *hsvButton;
@@ -16,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * backButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * forwardButton;
 @property (weak, nonatomic) IBOutlet UISlider *thresholdSlider;
+@property (nonatomic, retain) IBOutlet UIActionSheet * actionSheetImageOperations;
+
 
 #ifdef __cplusplus
 @property (readonly, nonatomic) cv::Mat inputMat;
@@ -33,4 +38,6 @@
 -(IBAction)binarySliderAction:(id)sender;
 -(IBAction)backward:(id)sender;
 -(IBAction)forward:(id)sender;
+-(IBAction)showImageOperations:(id)sender;
+
 @end

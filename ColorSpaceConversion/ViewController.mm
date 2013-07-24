@@ -11,6 +11,9 @@ typedef unsigned char uchar;
 
 //olive dispenser fork
 
+NSString* actionSheetImageOpTitles[] = {@"Skin Detection", @"Probability Map", @"Blob Detection", @"Edge Detection", @"Feature Extraction"};
+
+
 @interface ViewController ()
 @end
 
@@ -25,6 +28,8 @@ typedef unsigned char uchar;
 @synthesize binaryButton;
 @synthesize inputMat;
 @synthesize hsvImage;
+@synthesize actionSheetImageOperations;
+
 // @synthesize imageHistory;
 
 int currentImageIndex = 1;
@@ -60,6 +65,10 @@ cv::Mat imageHistory[10];
     inputMat =[self cvMatFromUIImage:imageView.image];
     imageHistory[currentImageIndex] = inputMat;
     cv::Mat hsvImage;
+    self.actionSheetImageOperations = [[UIActionSheet alloc] initWithTitle:@"Select an Operation" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil];
+	for (int i=0; i<5; i++) {
+		[self.actionSheetImageOperations addButtonWithTitle:actionSheetImageOpTitles[i]];
+	}
 
     thresholdSlider.hidden = YES;
 
@@ -462,6 +471,21 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
         SettingsViewController *settingsViewController = [[navigationController viewControllers] objectAtIndex:0];
         settingsViewController.delegate = self;
     }
+}
+
+- (IBAction)showImageOperations:(id)sender;
+{
+	[self.actionSheetImageOperations showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+	if (actionSheet.cancelButtonIndex == buttonIndex) {
+		return;
+	}
+	if (actionSheet == self.actionSheetImageOperations) {
+		return;
+	}
 }
 
 @end

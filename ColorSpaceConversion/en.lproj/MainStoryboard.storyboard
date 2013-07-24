@@ -33,14 +33,14 @@
                                             <action selector="hsvImageAction:" destination="2" id="mtp-Dv-QGV"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="RESET" id="Xh1-Qz-GAe">
+                                    <barButtonItem title="Reset" id="Xh1-Qz-GAe">
                                         <connections>
                                             <action selector="grayImageAction:" destination="2" id="7pf-MM-UL5"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="BINARY" id="iX5-ua-1PH">
+                                    <barButtonItem title="Actions" id="iX5-ua-1PH">
                                         <connections>
-                                            <action selector="binaryImageAction:" destination="2" id="4UK-QW-s88"/>
+                                            <action selector="showImageOperations:" destination="2" id="bB5-2F-IZx"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -162,6 +162,8 @@
                 <relationship kind="action" name="forward:"/>
                 <relationship kind="action" name="grayImageAction:"/>
                 <relationship kind="action" name="hsvImageAction:"/>
+                <relationship kind="action" name="showImageOperations:"/>
+                <relationship kind="outlet" name="actionSheetImageOperations" candidateClass="UIActionSheet"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="binaryButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="forwardButton" candidateClass="UIBarButtonItem"/>
