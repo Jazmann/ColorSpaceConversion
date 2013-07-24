@@ -32,6 +32,7 @@ NSString* actionSheetImageOpTitles[] = {@"Skin Detection", @"Probability Map", @
 @synthesize grayButton;
 @synthesize binaryButton;
 @synthesize inputMat;
+@synthesize forwardButton;
 @synthesize hsvImage;
 @synthesize actionSheetImageOperations;
 
@@ -343,6 +344,21 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     thresholdSlider.hidden = YES;
     [self backward];
 }
+
+-(IBAction)forwardImageAction:(id)sender
+{
+    thresholdSlider.hidden = YES;
+    [self forward];
+}
+
+-(IBAction)resetImage:(id)sender
+{
+    thresholdSlider.hidden = YES;
+    NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand_skin_test_3_back_1" ofType:@"jpg"];
+    imageView.image = [UIImage imageWithContentsOfFile:imageName];
+    inputMat =[self cvMatFromUIImage:imageView.image];
+}
+
 -(IBAction)binaryImageAction:(id)sender
 {
     cv::Mat binaryMatU, binaryMatL, greyMat;
@@ -491,9 +507,10 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 		return;
 	}
 	if ([choice isEqualToString:SKIN_DETECTION]) {
-        [self hsvImageAction:nill];
+        [self hsvImageAction:nil];
 		NSLog(@"Skin detection");
 	} else if ([choice isEqualToString:PROBABILITY_MAP]) {
+        [self binaryImageAction:nil];
 		NSLog(@"Probability map");
     } else if ([choice isEqualToString:BLOB_DETECTION]) {
 		NSLog(@"Blob detection");
