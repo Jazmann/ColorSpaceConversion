@@ -13,6 +13,11 @@ typedef unsigned char uchar;
 
 NSString* actionSheetImageOpTitles[] = {@"Skin Detection", @"Probability Map", @"Blob Detection", @"Edge Detection", @"Feature Extraction"};
 
+#define SKIN_DETECTION @"Skin Detection"
+#define PROBABILITY_MAP @"Probability Map"
+#define BLOB_DETECTION @"Blob Detection"
+#define EDGE_DETECTION @"Edge Detection"
+#define FEATURE_EXTRACTION @"Feature Extraction"
 
 @interface ViewController ()
 @end
@@ -480,12 +485,23 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
+    NSString *choice = [actionSheet buttonTitleAtIndex:buttonIndex];
 	if (actionSheet.cancelButtonIndex == buttonIndex) {
+         NSLog(@"Cancelled");
 		return;
 	}
-	if (actionSheet == self.actionSheetImageOperations) {
-		return;
-	}
+	if ([choice isEqualToString:SKIN_DETECTION]) {
+        //[self ViewController hsvImageAction];
+		NSLog(@"Skin detection");
+	} else if ([choice isEqualToString:PROBABILITY_MAP]) {
+		NSLog(@"Probability map");
+    } else if ([choice isEqualToString:BLOB_DETECTION]) {
+		NSLog(@"Blob detection");
+    } else if ([choice isEqualToString:EDGE_DETECTION]) {
+		NSLog(@"Edge detection");
+    } else if ([choice isEqualToString:FEATURE_EXTRACTION]) {
+		NSLog(@"Feature extraction");
+    }
 }
 
 @end
