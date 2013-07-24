@@ -40,5 +40,6 @@
 -(IBAction)forward:(id)sender;
 -(IBAction)forwardImageAction:(id)sender;
 -(IBAction)showImageOperations:(id)sender;
+-(IBAction)resetImage:(id)sender;
 
 @end

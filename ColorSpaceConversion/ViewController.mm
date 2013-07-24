@@ -351,6 +351,14 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     [self forward];
 }
 
+-(IBAction)resetImage:(id)sender
+{
+    thresholdSlider.hidden = YES;
+    NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand_skin_test_3_back_1" ofType:@"jpg"];
+    imageView.image = [UIImage imageWithContentsOfFile:imageName];
+    inputMat =[self cvMatFromUIImage:imageView.image];
+}
+
 -(IBAction)binaryImageAction:(id)sender
 {
     cv::Mat binaryMatU, binaryMatL, greyMat;
