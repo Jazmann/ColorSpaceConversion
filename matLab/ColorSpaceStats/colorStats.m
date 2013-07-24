@@ -1,4 +1,4 @@
-% colorStats( 0.114, 0.299, pi/2 -0.778, 0, 255, 256, 0, 255, 256, 0, 255, 256)
+% [Y B R bin A] = colorStats( 0.114, 0.299, pi/2 -0.778, 0, 255, 256, 0, 255, 256, 0, 255, 256)
 function [ Yv, Bv, Rv, binOut, cA ] = colorStats( Kb, Kr, theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
