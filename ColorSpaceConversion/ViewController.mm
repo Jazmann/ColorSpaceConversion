@@ -123,20 +123,20 @@ cv::Mat imageHistory[10];
 }
 
 
-
-
-cv::Matx<int64_t, 3, 2> rational_decomposition(cv::Matx<float, 3, 1> vec, int64_t max_denom){
-    cv::Matx<int64_t, 3, 2> output;
-    int64_t out_num, out_denom;
-    double float_in;
-    for (int i=0; i<3; i++) {
-        float_in = (double) vec(i);
-        cv::rat_approx(float_in, max_denom, &out_num, &out_denom );
-        output(i,0) = out_num;
-        output(i,1) = out_denom;
-    }
-    return output;
-}
+//
+//
+//cv::Matx<int64_t, 3, 2> rational_decomposition(cv::Matx<float, 3, 1> vec, int64_t max_denom){
+//    cv::Matx<int64_t, 3, 2> output;
+//    int64_t out_num, out_denom;
+//    double float_in;
+//    for (int i=0; i<3; i++) {
+//        float_in = (double) vec(i);
+//        cv::rat_approx(float_in, max_denom, &out_num, &out_denom );
+//        output(i,0) = out_num;
+//        output(i,1) = out_denom;
+//    }
+//    return output;
+//}
 
 
 template<typename _Tp, int m, int n> std::string toString(_Tp mat[m][n]){
@@ -174,52 +174,52 @@ template<typename _Tp, int cn> std::string toString(cv::sVec<_Tp, cn> vec){
 }
 
 
-template<typename _Tp, int cn> inline cv::sVec<_Tp, cn> sVecRat(const cv::Matx<float, cn, 1>& vec, int64_t max_denom)
-{
-    cv::sVec<_Tp, cn> output;
-    cv::sVec<int64_t, cn> output_num; output_num.scale = 1.0;
-    cv::sVec<int64_t, cn> output_den; output_den.scale = 1.0;
-    int64_t out_num, out_den;
-    double float_in;
-    for (int i=0; i<cn; i++) {
-        float_in = (double) vec(i);
-        cv::rat_approx(float_in, max_denom, &out_num, &out_den );
-        output_num[i] = out_num;
-        output_den[i] = out_den;
-    }
-    printf("output_num\n");
-    std::cout << toString<int64_t, cn>(output_num);
-    printf("output_den\n");
-    std::cout << toString<int64_t, cn>(output_den);
-
-    output_num.factor();
-    output_den.factor();
-    printf("output_num\n");
-    std::cout << toString<int64_t, cn>(output_num);
-    printf("output_den\n");
-    std::cout << toString<int64_t, cn>(output_den);
-    int64_t den_prod = output_den[0];
-    for(int i=1;i<cn;i++){
-        den_prod *= output_den[i];
-    }
-    
-    printf("den_prod = %lli\n",den_prod);
-
-    for(int i=0;i<cn;i++){
-        output_num[i] *= den_prod/output_den[i];
-    }
-    output_num.scale *= 1.0/(output_den.scale * den_prod);
-    output_num.factor();
-    
-    const uint64_t saturateType = (((1 << ((sizeof(_Tp) << 3)-1)) -1 ) << 1) + 1;
-    int exposure = (int) (output_num.max() / saturateType);
-    output.scale = output_num.scale * (exposure + 1);
-    for(int i=0;i<cn;i++){
-        output.val[i] = (_Tp) (output_num[i]/(exposure + 1)) ;
-    }
-    return output;
-}
-
+//template<typename _Tp, int cn> inline cv::sVec<_Tp, cn> sVecRat(const cv::Matx<float, cn, 1>& vec, int64_t max_denom)
+//{
+//    cv::sVec<_Tp, cn> output;
+//    cv::sVec<int64_t, cn> output_num; output_num.scale = 1.0;
+//    cv::sVec<int64_t, cn> output_den; output_den.scale = 1.0;
+//    int64_t out_num, out_den;
+//    double float_in;
+//    for (int i=0; i<cn; i++) {
+//        float_in = (double) vec(i);
+//        cv::rat_approx(float_in, max_denom, &out_num, &out_den );
+//        output_num[i] = out_num;
+//        output_den[i] = out_den;
+//    }
+//    printf("output_num\n");
+//    std::cout << toString<int64_t, cn>(output_num);
+//    printf("output_den\n");
+//    std::cout << toString<int64_t, cn>(output_den);
+//
+//    output_num.factor();
+//    output_den.factor();
+//    printf("output_num\n");
+//    std::cout << toString<int64_t, cn>(output_num);
+//    printf("output_den\n");
+//    std::cout << toString<int64_t, cn>(output_den);
+//    int64_t den_prod = output_den[0];
+//    for(int i=1;i<cn;i++){
+//        den_prod *= output_den[i];
+//    }
+//    
+//    printf("den_prod = %lli\n",den_prod);
+//
+//    for(int i=0;i<cn;i++){
+//        output_num[i] *= den_prod/output_den[i];
+//    }
+//    output_num.scale *= 1.0/(output_den.scale * den_prod);
+//    output_num.factor();
+//    
+//    const uint64_t saturateType = (((1 << ((sizeof(_Tp) << 3)-1)) -1 ) << 1) + 1;
+//    int exposure = (int) (output_num.max() / saturateType);
+//    output.scale = output_num.scale * (exposure + 1);
+//    for(int i=0;i<cn;i++){
+//        output.val[i] = (_Tp) (output_num[i]/(exposure + 1)) ;
+//    }
+//    return output;
+//}
+//
 
 template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MaxInRow(cv::Matx<_Tp, m, n> src){
     cv::Matx<_Tp, m, 1> dst;
@@ -250,57 +250,57 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     return dst;
 }
 
--(void)sVecTest{
-    cv::sVec<uint8_t, 3> a{1.5,3,6,9};
-    cv::sVec<uint8_t, 3> b{1.5,15,20,10};
-    [self sVecPrint:a];
-    [self sVecPrint:b];
-    a.factor();b.factor();
-    [self sVecPrint:a];
-    [self sVecPrint:b];
-    cv::sVec<uint8_t, 1> ab = a * b ;
-    cv::sVec<uint8_t, 1> ba = b * a;
-    printf("a . b = %f %u = %f \n", ab.scale, ab[0], ab(0));
-    printf("a . b = %f %u = %f \n", ba.scale, ba[0], ab(0));
-    cv::Matx<float, 3, 1> mx{1.2, 2.2, 3.2};
-    printf("Matx{ %f %f %f }\n", mx(0), mx(1), mx(2));
-    cv::sVec<uint8_t, 3> aM(mx);
-    [self sVecPrint:aM];
-    
-    cv::sVec<uint8_t, 3> aV = sVecRat<uint8_t, 3>(mx, 255);
-    [self sVecPrint:aV];
-
-    
-    const unsigned long long int saturateType = (1 << (sizeof(uint8_t) << 3))-1;
-    float maxVal = mx(0,0);
-    for (int i=1; i<3; i++) { if (mx(i,0) > maxVal) maxVal = mx(i,0);}
-    float scale = maxVal/saturateType;
-    printf("saturateType %llu maxVal %f scale %f \n", saturateType, maxVal, scale);
-    cv::Matx<uint8_t,3,1> vm(mx, saturateType/maxVal, cv::Matx_ScaleOp());
-    printf("Matx{ %u %u %u }\n", vm(0), vm(1), vm(2));
-    cv::Matx<int64_t, 3, 2> rdMat = rational_decomposition(mx, 255);
-    printf("rdMat{ %lli %lli %lli }\n", rdMat(0,0), rdMat(1,0), rdMat(2,0));
-    printf("rdMat{ %lli %lli %lli }\n", rdMat(0,1), rdMat(1,1), rdMat(2,1));
-
-    
-    cv::Matx<float, 3, 1> fMa{1.2, 2.2, 3.2};
-    cv::sVec<uint8_t, 3> fVa(fMa);
-    printf("fVa\n");
-    [self sVecPrint:fVa];
-
- //   std::string disp = fVa.toString();
- //   std::cout << disp;
-    cv::Matx<float, 3, 1> fMb{2.2, 2.2, 1.1};
-    cv::sVec<uint8_t, 3> fVb(fMb);
-    printf("fVb\n");
-    [self sVecPrint:fVb];
-
-    cv::Matx<float, 3, 1> fMc{1.2, 2.3, 3.7};
-    cv::sVec<uint8_t, 3> fVc(fMc);
-    printf("fVc\n");
-    [self sVecPrint:fVc];
-    
-}
+//-(void)sVecTest{
+//    cv::sVec<uint8_t, 3> a{1.5,3,6,9};
+//    cv::sVec<uint8_t, 3> b{1.5,15,20,10};
+//    [self sVecPrint:a];
+//    [self sVecPrint:b];
+//    a.factor();b.factor();
+//    [self sVecPrint:a];
+//    [self sVecPrint:b];
+//    cv::sVec<uint8_t, 1> ab = a * b ;
+//    cv::sVec<uint8_t, 1> ba = b * a;
+//    printf("a . b = %f %u = %f \n", ab.scale, ab[0], ab(0));
+//    printf("a . b = %f %u = %f \n", ba.scale, ba[0], ab(0));
+//    cv::Matx<float, 3, 1> mx{1.2, 2.2, 3.2};
+//    printf("Matx{ %f %f %f }\n", mx(0), mx(1), mx(2));
+//    cv::sVec<uint8_t, 3> aM(mx);
+//    [self sVecPrint:aM];
+//    
+//    cv::sVec<uint8_t, 3> aV = sVecRat<uint8_t, 3>(mx, 255);
+//    [self sVecPrint:aV];
+//
+//    
+//    const unsigned long long int saturateType = (1 << (sizeof(uint8_t) << 3))-1;
+//    float maxVal = mx(0,0);
+//    for (int i=1; i<3; i++) { if (mx(i,0) > maxVal) maxVal = mx(i,0);}
+//    float scale = maxVal/saturateType;
+//    printf("saturateType %llu maxVal %f scale %f \n", saturateType, maxVal, scale);
+//    cv::Matx<uint8_t,3,1> vm(mx, saturateType/maxVal, cv::Matx_ScaleOp());
+//    printf("Matx{ %u %u %u }\n", vm(0), vm(1), vm(2));
+//    cv::Matx<int64_t, 3, 2> rdMat = rational_decomposition(mx, 255);
+//    printf("rdMat{ %lli %lli %lli }\n", rdMat(0,0), rdMat(1,0), rdMat(2,0));
+//    printf("rdMat{ %lli %lli %lli }\n", rdMat(0,1), rdMat(1,1), rdMat(2,1));
+//
+//    
+//    cv::Matx<float, 3, 1> fMa{1.2, 2.2, 3.2};
+//    cv::sVec<uint8_t, 3> fVa(fMa);
+//    printf("fVa\n");
+//    [self sVecPrint:fVa];
+//
+// //   std::string disp = fVa.toString();
+// //   std::cout << disp;
+//    cv::Matx<float, 3, 1> fMb{2.2, 2.2, 1.1};
+//    cv::sVec<uint8_t, 3> fVb(fMb);
+//    printf("fVb\n");
+//    [self sVecPrint:fVb];
+//
+//    cv::Matx<float, 3, 1> fMc{1.2, 2.3, 3.7};
+//    cv::sVec<uint8_t, 3> fVc(fMc);
+//    printf("fVc\n");
+//    [self sVecPrint:fVc];
+//    
+//}
 
 -(IBAction)hsvImageAction:(id)sender
 {
@@ -491,7 +491,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 		return;
 	}
 	if ([choice isEqualToString:SKIN_DETECTION]) {
-        //[self ViewController hsvImageAction];
+        [self hsvImageAction:nill];
 		NSLog(@"Skin detection");
 	} else if ([choice isEqualToString:PROBABILITY_MAP]) {
 		NSLog(@"Probability map");
