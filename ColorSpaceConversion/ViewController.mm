@@ -32,6 +32,7 @@ NSString* actionSheetImageOpTitles[] = {@"Skin Detection", @"Probability Map", @
 @synthesize grayButton;
 @synthesize binaryButton;
 @synthesize inputMat;
+@synthesize forwardButton;
 @synthesize hsvImage;
 @synthesize actionSheetImageOperations;
 
@@ -343,6 +344,13 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     thresholdSlider.hidden = YES;
     [self backward];
 }
+
+-(IBAction)forwardImageAction:(id)sender
+{
+    thresholdSlider.hidden = YES;
+    [self forward];
+}
+
 -(IBAction)binaryImageAction:(id)sender
 {
     cv::Mat binaryMatU, binaryMatL, greyMat;
