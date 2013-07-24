@@ -28,19 +28,14 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="5Ha-By-FzS"/>
-                                    <barButtonItem title="SKIN" id="FOJ-KA-GdT">
+                                    <barButtonItem title="Actions" id="iX5-ua-1PH">
                                         <connections>
-                                            <action selector="hsvImageAction:" destination="2" id="mtp-Dv-QGV"/>
+                                            <action selector="showImageOperations:" destination="2" id="bB5-2F-IZx"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title="Reset" id="Xh1-Qz-GAe">
                                         <connections>
                                             <action selector="grayImageAction:" destination="2" id="7pf-MM-UL5"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Actions" id="iX5-ua-1PH">
-                                        <connections>
-                                            <action selector="showImageOperations:" destination="2" id="bB5-2F-IZx"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -79,7 +74,6 @@
                         <outlet property="binaryButton" destination="iX5-ua-1PH" id="OTk-cP-wbF"/>
                         <outlet property="forwardButton" destination="5on-ow-yPC" id="ScQ-bc-5lD"/>
                         <outlet property="grayButton" destination="Xh1-Qz-GAe" id="i1O-Mt-E9f"/>
-                        <outlet property="hsvButton" destination="FOJ-KA-GdT" id="6N9-Hs-nYo"/>
                         <outlet property="imageView" destination="n52-Hz-zxj" id="Ij3-WI-a1A"/>
                         <outlet property="thresholdSlider" destination="h56-Ay-xtc" id="7rA-JQ-89A"/>
                     </connections>

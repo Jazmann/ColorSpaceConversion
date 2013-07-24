@@ -491,9 +491,10 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 		return;
 	}
 	if ([choice isEqualToString:SKIN_DETECTION]) {
-        //[self ViewController hsvImageAction];
+        [self hsvImageAction:nil];
 		NSLog(@"Skin detection");
 	} else if ([choice isEqualToString:PROBABILITY_MAP]) {
+        [self binaryImageAction:nil];
 		NSLog(@"Probability map");
     } else if ([choice isEqualToString:BLOB_DETECTION]) {
 		NSLog(@"Blob detection");
