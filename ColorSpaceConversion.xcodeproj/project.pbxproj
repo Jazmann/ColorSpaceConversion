@@ -30,6 +30,7 @@
 		872F1C4817C7E03300637BEF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C4717C7E03300637BEF /* QuartzCore.framework */; };
 		872F1C4B17C7E05900637BEF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C4917C7E05900637BEF /* Accelerate.framework */; };
 		872F1C4C17C7E05900637BEF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C4A17C7E05900637BEF /* AssetsLibrary.framework */; };
+		872F1C4E17C7E8B000637BEF /* camera_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 872F1C4D17C7E8B000637BEF /* camera_switch.png */; };
 		873082AE1754082500B271D4 /* hand_skin_test_3_back_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */; };
 		87A1FBD8170F503C004FEEF0 /* rottest.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87A1FBD7170F503C004FEEF0 /* rottest.jpg */; };
 		87C91F12176133D000F05C9D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C91F11176133D000F05C9D /* SettingsViewController.m */; };
@@ -70,6 +71,7 @@
 		872F1C4717C7E03300637BEF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		872F1C4917C7E05900637BEF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		872F1C4A17C7E05900637BEF /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		872F1C4D17C7E8B000637BEF /* camera_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_switch.png; path = ../../../example/openCV_iOS/shared/Images/camera_switch.png; sourceTree = "<group>"; };
 		873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hand_skin_test_3_back_1.jpg; sourceTree = "<group>"; };
 		87A1FBD7170F503C004FEEF0 /* rottest.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rottest.jpg; sourceTree = "<group>"; };
 		87C91F10176133D000F05C9D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				87A1FBD7170F503C004FEEF0 /* rottest.jpg */,
 				873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */,
 				090D28501657F896002ECE01 /* MainStoryboard.storyboard */,
+				872F1C4D17C7E8B000637BEF /* camera_switch.png */,
 				090D28521657F896002ECE01 /* fruits.jpg */,
 				090D28531657F896002ECE01 /* main.m */,
 				090D28541657F896002ECE01 /* opencv-logo57.png */,
@@ -251,6 +254,7 @@
 				090D28641657F896002ECE01 /* opencv-logo114.png in Resources */,
 				87A1FBD8170F503C004FEEF0 /* rottest.jpg in Resources */,
 				873082AE1754082500B271D4 /* hand_skin_test_3_back_1.jpg in Resources */,
+				872F1C4E17C7E8B000637BEF /* camera_switch.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
