@@ -5,11 +5,19 @@
 
 #include <opencv2/core/mat.hpp>
 #import <UIKit/UIKit.h>
+#import <opencv2/highgui/cap_ios.h>
 #import "SettingsViewController.h"
+#import "ImagePickerController.h"
 
-@interface ViewController : UIViewController <SettingsViewControllerDelegate, UIActionSheetDelegate>
+@interface ViewController : UIViewController <SettingsViewControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,CvVideoCameraDelegate>
 {
     UIActionSheet* actionSheetImageOperations;
+    
+    ImagePickerController* imagePicker;
+    
+    BOOL enableProcessing;
+	
+	CvVideoCamera* videoCamera;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -20,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * forwardButton;
 @property (weak, nonatomic) IBOutlet UISlider *thresholdSlider;
 @property (nonatomic, retain) IBOutlet UIActionSheet * actionSheetImageOperations;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *libraryButton;
+
 
 
 #ifdef __cplusplus
@@ -32,6 +42,9 @@
 - (cv::Mat)cvMatFromUIImage:(UIImage *)image;
 - (cv::Mat)cvMatGrayFromUIImage:(UIImage *)image;
 
+@property (nonatomic, retain) CvVideoCamera* videoCamera;
+@property (nonatomic, retain) ImagePickerController* imagePicker;
+
 -(IBAction)hsvImageAction:(id)sender;
 -(IBAction)grayImageAction:(id)sender;
 -(IBAction)binaryImageAction:(id)sender;
@@ -41,5 +54,10 @@
 -(IBAction)forwardImageAction:(id)sender;
 -(IBAction)showImageOperations:(id)sender;
 -(IBAction)resetImage:(id)sender;
+-(IBAction)showPhotoLibrary:(id)sender;
+-(IBAction)switchCamera:(id)sender;
+-(IBAction)switchProcessingOnOff:(id)sender;
+
+
 
 @end
