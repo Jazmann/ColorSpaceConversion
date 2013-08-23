@@ -26,6 +26,8 @@ NSString* actionSheetImageOpTitles[] = {@"Skin Detection", @"Probability Map", @
 
 #pragma mark - 
 #pragma mark Properties
+@synthesize imagePicker;
+@synthesize videoCamera;
 @synthesize thresholdSlider;
 @synthesize imageView;
 @synthesize hsvButton;
@@ -62,10 +64,38 @@ cv::Mat imageHistory[10];
 
 #pragma mark - 
 #pragma mark Managing Views
+
+- (void)viewDidAppear:(BOOL)animated;
+{
+	[super viewDidAppear:animated];
+	if (enableProcessing) {
+		[self.videoCamera start];
+	} else {
+		[self.videoCamera stop];
+	}
+}
+
+- (void)viewWillDisappear:(BOOL)animated;
+{
+	[super viewWillDisappear:animated];
+	
+	[self.videoCamera stop];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.videoCamera = [[CvVideoCamera alloc] initWithParentView:self.imageView];
+	self.videoCamera.delegate = self;
+	self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+	self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
+	self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
+	self.videoCamera.defaultFPS = 30;
+    
+    enableProcessing = NO;
+    
     NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand_skin_test_3_back_1" ofType:@"jpg"];
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
     inputMat =[self cvMatFromUIImage:imageView.image];
@@ -391,6 +421,54 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     imageView.image = [self UIImageFromCVMat:imageHistory[currentImageIndex]];
     // Garbage collect.
     greyMat.release(); binaryMatL.release(); binaryMatU.release();
+}
+
+- (IBAction)switchProcessingOnOff:(id)sender;
+{
+	enableProcessing = !enableProcessing;
+	if (enableProcessing) {
+		[self.videoCamera start];
+	} else {
+		[self.videoCamera stop];
+	}
+}
+
+
+
+- (IBAction)switchCamera:(id)sender;
+{
+	[self.videoCamera switchCameras];
+}
+
+- (IBAction)showPhotoLibrary:(id)sender;
+{
+	NSLog(@"show photo library");
+	
+	self.imagePicker = [[ImagePickerController alloc] initAsPhotoLibrary];
+	self.imagePicker.delegate = self;
+	[self.imagePicker showPicker:self];
+}
+
+#pragma mark - Protocol UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
+{
+    UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    cv::Mat m_image = [self cvMatFromUIImage:image];
+    [self processImage:m_image];
+    image = [self UIImageFromCVMat:m_image];
+    self.imageView.image = image;
+    
+    UIImageWriteToSavedPhotosAlbum(self.imageView.image, nil, nil, nil);
+    
+    [self.imagePicker hidePicker:self];
+}
+
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
+{
+    [self.imagePicker hidePicker:self];
 }
 
 

@@ -21,6 +21,15 @@
 		090D28661657F896002ECE01 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090D28591657F896002ECE01 /* ViewController.mm */; };
 		09750D991775D77900223095 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09750D981775D77900223095 /* opencv2.framework */; };
 		099AC32F1624580D00E12E63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 099AC32E1624580D00E12E63 /* Default-568h@2x.png */; };
+		872F1C3B17C7C4F700637BEF /* ImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 872F1C3A17C7C4F700637BEF /* ImagePickerController.m */; };
+		872F1C3E17C7DF0300637BEF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C3D17C7DF0300637BEF /* AVFoundation.framework */; };
+		872F1C4017C7DFA300637BEF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C3F17C7DFA300637BEF /* CoreImage.framework */; };
+		872F1C4417C7DFE100637BEF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C4117C7DFE100637BEF /* CoreMedia.framework */; };
+		872F1C4517C7DFE100637BEF /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C4217C7DFE100637BEF /* CoreVideo.framework */; };
+		872F1C4617C7DFE100637BEF /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C4317C7DFE100637BEF /* MediaPlayer.framework */; };
+		872F1C4817C7E03300637BEF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C4717C7E03300637BEF /* QuartzCore.framework */; };
+		872F1C4B17C7E05900637BEF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C4917C7E05900637BEF /* Accelerate.framework */; };
+		872F1C4C17C7E05900637BEF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C4A17C7E05900637BEF /* AssetsLibrary.framework */; };
 		873082AE1754082500B271D4 /* hand_skin_test_3_back_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */; };
 		87A1FBD8170F503C004FEEF0 /* rottest.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87A1FBD7170F503C004FEEF0 /* rottest.jpg */; };
 		87C91F12176133D000F05C9D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C91F11176133D000F05C9D /* SettingsViewController.m */; };
@@ -51,6 +60,16 @@
 		09DD3347167B6E7D0006C37B /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
 		09DD3348167B6E7D0006C37B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		09DD3349167B6E7D0006C37B /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
+		872F1C3917C7C4CC00637BEF /* ImagePickerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagePickerController.h; sourceTree = "<group>"; };
+		872F1C3A17C7C4F700637BEF /* ImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerController.m; sourceTree = "<group>"; };
+		872F1C3D17C7DF0300637BEF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		872F1C3F17C7DFA300637BEF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		872F1C4117C7DFE100637BEF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		872F1C4217C7DFE100637BEF /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		872F1C4317C7DFE100637BEF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		872F1C4717C7E03300637BEF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		872F1C4917C7E05900637BEF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		872F1C4A17C7E05900637BEF /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hand_skin_test_3_back_1.jpg; sourceTree = "<group>"; };
 		87A1FBD7170F503C004FEEF0 /* rottest.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rottest.jpg; sourceTree = "<group>"; };
 		87C91F10176133D000F05C9D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -66,6 +85,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				872F1C4B17C7E05900637BEF /* Accelerate.framework in Frameworks */,
+				872F1C4C17C7E05900637BEF /* AssetsLibrary.framework in Frameworks */,
+				872F1C4817C7E03300637BEF /* QuartzCore.framework in Frameworks */,
+				872F1C4417C7DFE100637BEF /* CoreMedia.framework in Frameworks */,
+				872F1C4517C7DFE100637BEF /* CoreVideo.framework in Frameworks */,
+				872F1C4617C7DFE100637BEF /* MediaPlayer.framework in Frameworks */,
+				872F1C4017C7DFA300637BEF /* CoreImage.framework in Frameworks */,
+				872F1C3E17C7DF0300637BEF /* AVFoundation.framework in Frameworks */,
 				B553DE831581157500855F6F /* UIKit.framework in Frameworks */,
 				B553DE851581157500855F6F /* Foundation.framework in Frameworks */,
 				B553DE871581157500855F6F /* CoreGraphics.framework in Frameworks */,
@@ -110,6 +137,14 @@
 				09DD3347167B6E7D0006C37B /* libc++.1.dylib */,
 				09DD3348167B6E7D0006C37B /* libc++.dylib */,
 				09DD3349167B6E7D0006C37B /* libc++abi.dylib */,
+				872F1C4A17C7E05900637BEF /* AssetsLibrary.framework */,
+				872F1C4917C7E05900637BEF /* Accelerate.framework */,
+				872F1C4717C7E03300637BEF /* QuartzCore.framework */,
+				872F1C4117C7DFE100637BEF /* CoreMedia.framework */,
+				872F1C4217C7DFE100637BEF /* CoreVideo.framework */,
+				872F1C4317C7DFE100637BEF /* MediaPlayer.framework */,
+				872F1C3F17C7DFA300637BEF /* CoreImage.framework */,
+				872F1C3D17C7DF0300637BEF /* AVFoundation.framework */,
 				09750D981775D77900223095 /* opencv2.framework */,
 				B553DE821581157500855F6F /* UIKit.framework */,
 				B553DE841581157500855F6F /* Foundation.framework */,
@@ -127,6 +162,8 @@
 				090D28561657F896002ECE01 /* UIImageCVMatConverter.h */,
 				090D28571657F896002ECE01 /* UIImageCVMatConverter.mm */,
 				090D28581657F896002ECE01 /* ViewController.h */,
+				872F1C3917C7C4CC00637BEF /* ImagePickerController.h */,
+				872F1C3A17C7C4F700637BEF /* ImagePickerController.m */,
 				87C91F10176133D000F05C9D /* SettingsViewController.h */,
 				87C91F11176133D000F05C9D /* SettingsViewController.m */,
 				090D28591657F896002ECE01 /* ViewController.mm */,
@@ -227,6 +264,7 @@
 				090D285A1657F896002ECE01 /* AppDelegate.m in Sources */,
 				090D28621657F896002ECE01 /* main.m in Sources */,
 				090D28651657F896002ECE01 /* UIImageCVMatConverter.mm in Sources */,
+				872F1C3B17C7C4F700637BEF /* ImagePickerController.m in Sources */,
 				090D28661657F896002ECE01 /* ViewController.mm in Sources */,
 				87C91F12176133D000F05C9D /* SettingsViewController.m in Sources */,
 			);
