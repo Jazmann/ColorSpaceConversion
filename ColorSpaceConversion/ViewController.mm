@@ -28,6 +28,7 @@ NSString* actionSheetImageOpTitles[] = {@"Skin Detection", @"Probability Map", @
 #pragma mark Properties
 @synthesize imagePicker;
 @synthesize videoCamera;
+@synthesize camSwitch;
 @synthesize thresholdSlider;
 @synthesize imageView;
 @synthesize hsvButton;
@@ -93,6 +94,8 @@ cv::Mat imageHistory[10];
 	self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
 	self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
 	self.videoCamera.defaultFPS = 30;
+    
+    [camSwitch setOn:NO];
     
     enableProcessing = NO;
     
