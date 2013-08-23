@@ -34,7 +34,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="5Ha-By-FzS"/>
                                     <barButtonItem style="plain" id="CwD-ak-NYw">
-                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="HgM-w9-bXC">
+                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="HgM-w9-bXC">
                                             <rect key="frame" x="229" y="9" width="79" height="27"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <connections>
@@ -80,6 +80,7 @@
                     </view>
                     <connections>
                         <outlet property="binaryButton" destination="iX5-ua-1PH" id="OTk-cP-wbF"/>
+                        <outlet property="camSwitch" destination="HgM-w9-bXC" id="Tcg-z3-huy"/>
                         <outlet property="forwardButton" destination="5on-ow-yPC" id="ScQ-bc-5lD"/>
                         <outlet property="grayButton" destination="Xh1-Qz-GAe" id="i1O-Mt-E9f"/>
                         <outlet property="imageView" destination="n52-Hz-zxj" id="Ij3-WI-a1A"/>
@@ -174,6 +175,7 @@
                 <relationship kind="outlet" name="actionSheetImageOperations" candidateClass="UIActionSheet"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="binaryButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="camSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="forwardButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="grayButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="hsvButton" candidateClass="UIBarButtonItem"/>

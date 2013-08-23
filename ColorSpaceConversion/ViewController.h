@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *thresholdSlider;
 @property (nonatomic, retain) IBOutlet UIActionSheet * actionSheetImageOperations;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *libraryButton;
+@property(retain, nonatomic) IBOutlet UISwitch *camSwitch;
 
 
 
