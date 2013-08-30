@@ -32,6 +32,7 @@
 		872F1C4C17C7E05900637BEF /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872F1C4A17C7E05900637BEF /* AssetsLibrary.framework */; };
 		872F1C4E17C7E8B000637BEF /* camera_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 872F1C4D17C7E8B000637BEF /* camera_switch.png */; };
 		873082AE1754082500B271D4 /* hand_skin_test_3_back_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */; };
+		87345ACB17D0149700F893EA /* ImageFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 87345ACA17D0149700F893EA /* ImageFilter.mm */; };
 		87A1FBD8170F503C004FEEF0 /* rottest.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87A1FBD7170F503C004FEEF0 /* rottest.jpg */; };
 		87C91F12176133D000F05C9D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C91F11176133D000F05C9D /* SettingsViewController.m */; };
 		B553DE831581157500855F6F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B553DE821581157500855F6F /* UIKit.framework */; };
@@ -73,6 +74,8 @@
 		872F1C4A17C7E05900637BEF /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		872F1C4D17C7E8B000637BEF /* camera_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera_switch.png; path = ../../../example/openCV_iOS/shared/Images/camera_switch.png; sourceTree = "<group>"; };
 		873082AD1754082500B271D4 /* hand_skin_test_3_back_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hand_skin_test_3_back_1.jpg; sourceTree = "<group>"; };
+		87345AC917D0143300F893EA /* ImageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFilter.h; sourceTree = "<group>"; };
+		87345ACA17D0149700F893EA /* ImageFilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageFilter.mm; sourceTree = "<group>"; };
 		87A1FBD7170F503C004FEEF0 /* rottest.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rottest.jpg; sourceTree = "<group>"; };
 		87C91F10176133D000F05C9D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		87C91F11176133D000F05C9D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				87C91F10176133D000F05C9D /* SettingsViewController.h */,
 				87C91F11176133D000F05C9D /* SettingsViewController.m */,
 				090D28591657F896002ECE01 /* ViewController.mm */,
+				87345AC917D0143300F893EA /* ImageFilter.h */,
+				87345ACA17D0149700F893EA /* ImageFilter.mm */,
 				B553DE891581157500855F6F /* Supporting Files */,
 			);
 			path = ColorSpaceConversion;
@@ -271,6 +276,7 @@
 				872F1C3B17C7C4F700637BEF /* ImagePickerController.m in Sources */,
 				090D28661657F896002ECE01 /* ViewController.mm in Sources */,
 				87C91F12176133D000F05C9D /* SettingsViewController.m in Sources */,
+				87345ACB17D0149700F893EA /* ImageFilter.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
