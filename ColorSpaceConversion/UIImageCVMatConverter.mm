@@ -96,5 +96,34 @@
     return cvMat;
 }
 
++ (void)filterCanny:(Mat)image withKernelSize:(int)kernel_size andLowThreshold:(int)lowThreshold;
+{
+	int ratio = 3;
+	
+	
+	const int& width = image.cols;
+	const int& height = image.rows;
+	const int& bytesPerRow = image.step[0];
+	
+	// we need to copy because src.data != dst.data must hold with bilateral filter
+	unsigned char* data_copy = new unsigned char[max(width,bytesPerRow)*height];
+	memcpy(data_copy, image.data, max(width,bytesPerRow)*height);
+	
+	Mat src(height, width, CV_8UC1, data_copy, bytesPerRow);
+	
+	Mat detected_edges;
+	
+	/// Reduce noise with a kernel 3x3
+	blur( src, detected_edges, cv::Size(3,3) );
+	
+	/// Canny detector
+	Canny( detected_edges, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size );
+	
+	/// Using Canny's output as a mask, we display our result
+	image = Scalar::all(0);
+	
+	src.copyTo( image, detected_edges);
+}
+
 
 @end
