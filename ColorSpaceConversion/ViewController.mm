@@ -6,6 +6,14 @@
 #import "ViewController.h"
 
 #include <list>
+#import "UIImageCVMatConverter.h"
+
+#ifdef __cplusplus
+#include <opencv2/imgproc.hpp>
+#include <opencv2/core.hpp>
+using namespace cv;
+
+#endif
 
 typedef unsigned char uchar;
 
@@ -98,6 +106,7 @@ cv::Mat imageHistory[10];
     [camSwitch setOn:NO];
     
     enableProcessing = NO;
+    enableCanny = NO;
     
     NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand_skin_test_3_back_1" ofType:@"jpg"];
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
@@ -580,6 +589,25 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 	[self.actionSheetImageOperations showInView:self.view];
 }
 
+- (IBAction)actionCanny:(id)sender;
+{
+    enableCanny = !enableCanny;
+}
+
+- (void)processImage:(cv::Mat&)image;
+{
+    cv::Mat result;
+    
+    if (enableCanny) {
+        std::vector<cv::Mat> planes;
+        split(image, planes);
+        
+        [UIImageCVMatConverter filterCanny:planes.at(0) withKernelSize:3 andLowThreshold:15];
+        
+        merge(planes, image);
+    }
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
     NSString *choice = [actionSheet buttonTitleAtIndex:buttonIndex];
@@ -597,6 +625,8 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 		NSLog(@"Blob detection");
     } else if ([choice isEqualToString:EDGE_DETECTION]) {
 		NSLog(@"Edge detection");
+        [self actionCanny:nil];
+        [self processImage:nil];
     } else if ([choice isEqualToString:FEATURE_EXTRACTION]) {
 		NSLog(@"Feature extraction");
     }

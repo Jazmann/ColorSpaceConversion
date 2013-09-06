@@ -16,6 +16,7 @@
     ImagePickerController* imagePicker;
     
     BOOL enableProcessing;
+    BOOL enableCanny;
 	
 	CvVideoCamera* videoCamera;
 }
@@ -58,6 +59,7 @@
 -(IBAction)showPhotoLibrary:(id)sender;
 -(IBAction)switchCamera:(id)sender;
 -(IBAction)switchProcessingOnOff:(id)sender;
+-(IBAction)actionCanny:(id)sender;
 
 
 
