@@ -7,6 +7,7 @@
 
 #include <list>
 #import "UIImageCVMatConverter.h"
+#import "CvFilterController.h"
 
 #ifdef __cplusplus
 #include <opencv2/imgproc.hpp>
@@ -596,6 +597,16 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 - (IBAction)actionCanny:(id)sender;
 {
     enableCanny = !enableCanny;
+    vector<Mat> planes;
+    split(imageHistory[currentImageIndex], planes);
+    if (enableCanny) {
+        [CvFilterController filterCanny:planes.at(0) withKernelSize:3 andLowThreshold:15];
+        [UIImageCVMatConverter filterCanny:planes.at(1) withKernelSize:3 andLowThreshold:15];
+        [UIImageCVMatConverter filterCanny:planes.at(2) withKernelSize:3 andLowThreshold:15];
+    }
+    
+    merge(planes, imageHistory[nextImageIndex]);
+    [self forward];
 }
 
 - (void)processImage:(cv::Mat&)image;
@@ -606,7 +617,9 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
         std::vector<cv::Mat> planes;
         split(image, planes);
         
-        [UIImageCVMatConverter filterCanny:planes.at(0) withKernelSize:3 andLowThreshold:15];
+        [UIImageCVMatConverter filterCanny:planes.at(0) withKernelSize:12 andLowThreshold:35];
+        [UIImageCVMatConverter filterCanny:planes.at(1) withKernelSize:12 andLowThreshold:35];
+        [UIImageCVMatConverter filterCanny:planes.at(2) withKernelSize:12 andLowThreshold:35];
         
         merge(planes, image);
     }
@@ -630,7 +643,6 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     } else if ([choice isEqualToString:EDGE_DETECTION]) {
 		NSLog(@"Edge detection");
         [self actionCanny:nil];
-        [self processImage:nil];
     } else if ([choice isEqualToString:FEATURE_EXTRACTION]) {
 		NSLog(@"Feature extraction");
     }
