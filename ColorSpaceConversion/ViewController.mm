@@ -643,8 +643,6 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 		NSLog(@"Blob detection");
     } else if ([choice isEqualToString:EDGE_DETECTION]) {
 		NSLog(@"Edge detection");
-        Mat m_image;
-        cvtColor(imageHistory[currentImageIndex], m_image, COLOR_BGR2GRAY);
         [self actionCanny:nil];
     } else if ([choice isEqualToString:FEATURE_EXTRACTION]) {
 		NSLog(@"Feature extraction");
