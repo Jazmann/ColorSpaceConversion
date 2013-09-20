@@ -619,9 +619,10 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     vector<Mat> planes;
     split(imageHistory[currentImageIndex], planes);
     if (enableCanny) {
-        [CvFilterController filterCanny:planes.at(0) withKernelSize:3 andLowThreshold:15];
-        [UIImageCVMatConverter filterCanny:planes.at(1) withKernelSize:3 andLowThreshold:15];
-        [UIImageCVMatConverter filterCanny:planes.at(2) withKernelSize:3 andLowThreshold:15];
+        for (int i=0; i<=planes.size(); i++) {
+            [UIImageCVMatConverter filterCanny:planes.at(i) withKernelSize:12 andLowThreshold:35];
+        }
+
     }
     
     merge(planes, imageHistory[nextImageIndex]);
@@ -634,13 +635,11 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     
     if (enableCanny) {
         std::vector<cv::Mat> planes;
-        split(image, planes);
-        
-        [UIImageCVMatConverter filterCanny:planes.at(0) withKernelSize:12 andLowThreshold:35];
-        [UIImageCVMatConverter filterCanny:planes.at(1) withKernelSize:12 andLowThreshold:35];
-        [UIImageCVMatConverter filterCanny:planes.at(2) withKernelSize:12 andLowThreshold:35];
-        
-        merge(planes, image);
+            split(image, planes);
+        for (int i=0; i<=planes.size(); i++) {
+            [UIImageCVMatConverter filterCanny:planes.at(i) withKernelSize:12 andLowThreshold:35];
+        }
+            merge(planes, image);
     }
 }
 
@@ -661,8 +660,6 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 		NSLog(@"Blob detection");
     } else if ([choice isEqualToString:EDGE_DETECTION]) {
 		NSLog(@"Edge detection");
-        Mat m_image;
-        cvtColor(imageHistory[currentImageIndex], m_image, COLOR_BGR2GRAY);
         [self actionCanny:nil];
     } else if ([choice isEqualToString:FEATURE_EXTRACTION]) {
 		NSLog(@"Feature extraction");
