@@ -496,6 +496,15 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     } else {
         colorSpace = CGColorSpaceCreateDeviceRGB();
     }
+    printf("UIImageFromCVMat: cols : %i \n",cvMat.cols);
+    printf("UIImageFromCVMat: rows : %i \n",cvMat.rows);
+    
+    printf("UIImageFromCVMat: cvMat.size(0) : %i \n",cvMat.size[0]);
+    printf("UIImageFromCVMat: cvMat.size(1) : %i \n",cvMat.size[1]);
+    printf("UIImageFromCVMat: cvMat.step(0) : %lu \n",cvMat.step[0]);
+    printf("UIImageFromCVMat: cvMat.elemSize() : %lu \n",cvMat.elemSize());
+    printf("UIImageFromCVMat: cvMat.elemSize1() : %lu \n",cvMat.elemSize1());
+    printf("UIImageFromCVMat: cvMat.total() : %lu \n",cvMat.total());
     
     CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
     
@@ -527,8 +536,17 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
     CGFloat cols = image.size.width;
     CGFloat rows = image.size.height;
-    
+    printf("cols : %f",cols);
+    printf("rows : %f",rows);
+
     cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels
+    printf("cvMat.size(0) : %i \n",cvMat.size[0]);
+    printf("cvMat.size(1) : %i \n",cvMat.size[1]);
+    printf("cvMat.step(0) : %lu \n",cvMat.step[0]);
+    printf("cvMat.elemSize() : %lu \n",cvMat.elemSize());
+    printf("cvMat.elemSize1() : %lu \n",cvMat.elemSize1());
+    printf("cvMat.total() : %lu \n",cvMat.total());
+
     
     CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
                                                     cols,                       // Width of bitmap
