@@ -619,8 +619,8 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     vector<Mat> planes;
     split(imageHistory[currentImageIndex], planes);
     if (enableCanny) {
-        for (int i=0; i<=planes.size(); i++) {
-            [UIImageCVMatConverter filterCanny:planes.at(i) withKernelSize:12 andLowThreshold:35];
+        for (int i=0; i<planes.size(); i++) {
+            [UIImageCVMatConverter filterCanny:planes.at(i) withKernelSize:3 andLowThreshold:15];
         }
 
     }
