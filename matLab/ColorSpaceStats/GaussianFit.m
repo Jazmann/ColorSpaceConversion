@@ -1,4 +1,4 @@
-% x = GaussianFit( B, R, squeeze(sum(Z,1)), [1,cA(2),20.5,cA(3),20.5,-pi/8], 'spline', 1)
+% x = GaussianFit( B, R, squeeze(sum(bin,2)), [1,A(3),20.5,A(2),20.5,-pi/8], 'spline', 0)
 function [ x ] = GaussianFit( X, Y, Z, x0, InterpolationMethod, FitForOrientation)
 %% Fit a 2D gaussian function to data
 %% PURPOSE:  Fit a 2D gaussian 
