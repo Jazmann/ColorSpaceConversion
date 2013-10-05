@@ -8,3 +8,7 @@ for i=1:n
     angle(i+1) = angle(i) + x(1,6);
 end
  T =  int8(transformationMatrix(0.114, 0.299, angle(n+1),255,255,255))
+ 
+ img = rgbToSkin(imread(strcat('..\..\ColorSpaceConversion\hand_skin_test_3_back_1.jpg')), 255, 255, 255);
+  figure(12);
+   image(img)
