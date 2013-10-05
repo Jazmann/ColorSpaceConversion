@@ -373,6 +373,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(180, 50, 128);
     cv::Vec<double, 3> g(1, 125, 35);
     printf("here \n");
+    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace(2, 2, cv::Matx<int, 3, 3>& T, cv::Vec<double, 3> _g, cv::Vec<int, 3> _c);
     cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
     printf("here \n");
             
@@ -618,13 +619,11 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     enableCanny = !enableCanny;
     vector<Mat> planes;
     split(imageHistory[currentImageIndex], planes);
-    if (enableCanny) {
-        for (int i=0; i<=planes.size(); i++) {
-            [UIImageCVMatConverter filterCanny:planes.at(i) withKernelSize:12 andLowThreshold:35];
-        }
-
-    }
-    
+    printf("filterCanny:planes.size() : %lu\n",planes.size());
+    for (int i=0; i<planes.size(); i++) {
+        printf("filterCanny:planes.at(%i)\n",i);
+            [UIImageCVMatConverter filterCanny:planes.at(i) withKernelSize:3 andLowThreshold:15];
+        }    
     merge(planes, imageHistory[nextImageIndex]);
     [self forward];
 }
