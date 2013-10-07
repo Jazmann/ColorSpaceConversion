@@ -369,12 +369,13 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
      cv::Vec<int, 3> sp2(118, 131, 139);
     
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(240, 128, 128);
-    cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(148, 119, 111);
+    cv::Vec<int, 3> c(128, 128, 128);
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(180, 50, 128);
-    cv::Vec<double, 3> g(1, 125, 35);
+    cv::Vec<double, 3> g(1, 1, 1);
     printf("here \n");
-    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace(2, 2, cv::Matx<int, 3, 3>& T, cv::Vec<double, 3> _g, cv::Vec<int, 3> _c);
-    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
+    cv::Matx<int, 3, 3> T(76,-128,41,127,36,-128,29,92,90);
+    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace(2, 2, T, g, c);
+   // cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
     printf("here \n");
             
     cv::convertColor<CV_8UC4,CV_8UC3>(imageHistory[currentImageIndex], imageHistory[nextImageIndex], colSpace);
