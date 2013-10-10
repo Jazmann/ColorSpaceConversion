@@ -369,17 +369,16 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
      cv::Vec<int, 3> sp2(118, 131, 139);
     
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(240, 128, 128);
-    cv::Vec<int, 3> c(128, 128, 128);
+    cv::Vec<int, 3> c(128, 128, 189);
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(180, 50, 128);
-    cv::Vec<double, 3> g(1, 1, 1);
+    cv::Vec<double, 3> g(1, 2.5722, 391.3);
     printf("here \n");
-    cv::Matx<int, 3, 3> T(76,-128,41,127,36,-128,29,92,90);
-    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace(2, 2, T, g, c);
+    cv::Matx<int, 3, 3> T(76,-43,127, 127,-84,-107, 29,-127,21);
+    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace(0, 0, T, g, c);
    // cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
     printf("here \n");
             
     cv::convertColor<CV_8UC4,CV_8UC3>(imageHistory[currentImageIndex], imageHistory[nextImageIndex], colSpace);
-    printf("here \n");
     hsvImage = imageHistory[nextImageIndex];
     printf("here \n");
     
@@ -415,13 +414,26 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     thresholdSlider.hidden = NO;
     thresholdSlider.continuous = YES;
     float threshold = thresholdSlider.value;
-    cv::cvtColor(imageHistory[currentImageIndex], greyMat, CV_BGR2GRAY);
-    cv::threshold(greyMat,binaryMatL,threshold,0,cv::THRESH_TOZERO);
-    cv::threshold(binaryMatL,binaryMatU,255-threshold,0,cv::THRESH_TOZERO_INV);
-    imageHistory[nextImageIndex] = binaryMatU;
+    
+    cv::Vec<int, 3> c(128, 128, 128);
+    cv::Matx<int, 3, 3> T(0, 1, 1, 0, 1, 1, 0, 1, 1);
+
+    
+    cv::ABC2Metric<CV_8UC3,CV_8UC3> skinColorSpace(T, c);
+    cv::convertColor<CV_8UC3,CV_8UC3>(imageHistory[currentImageIndex], imageHistory[nextImageIndex], skinColorSpace);
+    
+    // Update Current Image Index and put up on screen.
+    // convert cvMat to UIImage
     [self forward];
-    // Garbage collect.
-    greyMat.release(); binaryMatL.release(); binaryMatU.release();
+
+    
+//    cv::cvtColor(imageHistory[currentImageIndex], greyMat, CV_BGR2GRAY);
+//    cv::threshold(greyMat,binaryMatL,threshold,0,cv::THRESH_TOZERO);
+//    cv::threshold(binaryMatL,binaryMatU,255-threshold,0,cv::THRESH_TOZERO_INV);
+//    imageHistory[nextImageIndex] = binaryMatU;
+//    [self forward];
+//    // Garbage collect.
+//    greyMat.release(); binaryMatL.release(); binaryMatU.release();
 }
 
 -(IBAction)binarySliderAction:(id)sender
