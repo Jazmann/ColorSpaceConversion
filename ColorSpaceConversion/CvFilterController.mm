@@ -149,11 +149,13 @@
 	blur( src, detected_edges, cv::Size(3,3) );
 	
 	/// Canny detector
+	printf("filterCanny: Canny");
 	Canny( detected_edges, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size );
 	
 	/// Using Canny's output as a mask, we display our result
+	printf("filterCanny: image = Scalar::all(0)");
 	image = Scalar::all(0);
-	
+	printf("filterCanny: src.copyTo");
 	src.copyTo( image, detected_edges);
 }
 
