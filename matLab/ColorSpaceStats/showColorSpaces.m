@@ -1,0 +1,30 @@
+function [ img2, img3] = showColorSpaces(img, theta, g, c, fig)
+ img2 = rgbToSkin(img, 255 .* transformationMatrixLAB(theta), 255, 255, 255);
+ img3 = rgbToSkinScaled(img2, g, c, 0, 255, 0, 255);
+figure(fig);
+subplot(4,3,1)
+image(img)
+subplot(4,3,2)
+image(img2)
+subplot(4,3,3)
+image(img3)
+subplot(4,3,4)
+image(rgbToMono(img,1))
+subplot(4,3,5)
+image(rgbToMono(img2,1))
+subplot(4,3,6)
+image(rgbToMono(img3,1))
+subplot(4,3,7)
+image(rgbToMono(img,2))
+subplot(4,3,8)
+image(rgbToMono(img2,2))
+subplot(4,3,9)
+image(rgbToMono(img3,2))
+subplot(4,3,10)
+image(rgbToMono(img,3))
+subplot(4,3,11)
+image(rgbToMono(img2,3))
+subplot(4,3,12)
+image(rgbToMono(img3,3))
+
+end % function

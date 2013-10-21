@@ -36,7 +36,7 @@ xin = x;
 %% ---Generate centroid to be fitted--------------------------------------
 %[X,Y] = meshgrid(X(1):(X(end)-X(1))/(MdataSize-1):X(end),Y(1):(Y(end)-Y(1))/(MdataSize-1):Y(end));
 xdata = zeros(length(X),length(Y),2);
-[xdata(:,:,1), xdata(:,:,2)] =  meshgrid(X,Y);
+[ xdata(:,:,1), xdata(:,:,2)] =  meshgrid(X,Y);
 
 %% --- Fit---------------------
 if FitForOrientation == 0
@@ -142,10 +142,12 @@ subplot(4,4, [1:3])
 xposh = (xvh-x(2))/cos(x(6))+x(2);% correct for the longer diagonal if fi~=0
 plot(xposh,hPoints,'r.',X,hdatafit,'black')
 axis([X(1) X(end) 0 1])
+axis 'auto y';
 subplot(4,4,[8,12,16])
 xposv = (yvv-x(4))/cos(x(6))+x(4);% correct for the longer diagonal if fi~=0
 plot(vPoints,xposv,'g.',vdatafit,X,'black')
 axis([0 1 Y(1)*1.1 Y(end)*1.1])
+axis 'auto x';
 set(gca,'YDir','reverse')
 figure(gcf) % bring current figure to front
 
