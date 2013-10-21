@@ -1,5 +1,5 @@
 % [Y B R bin A] = colorStats( 0.114, 0.299, pi/2 -0.778, 0, 255, 256, 0, 255, 256, 0, 255, 256)
-function [ Yv, Bv, Rv, binOut, cA ] = colorStats( Kb, Kr, theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins)
+function [ Yv, Bv, Rv, binOut, cA ] = colorStats( theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -15,30 +15,31 @@ rScale = rMax - rMin;
 Yv = yMin:(yMax-yMin)/(yBins-1):yMax;
 Bv = bMin:(bMax-bMin)/(bBins-1):bMax;
 Rv = rMin:(rMax-rMin)/(rBins-1):rMax;
-[Y, B, R] = meshgrid(Yv, Bv,Rv);
+[B, Y, R] = meshgrid(Yv, Bv,Rv);
 % Bin map : input chan value - chan min +1 (1:chanScale+1) : Output bin
 % number (1:chanBins).
 yBin = floor((0:yScale).*(yBins)./(yScale+1))+1;
 bBin = floor((0:bScale).*(bBins)./(bScale+1))+1;
 rBin = floor((0:rScale).*(rBins)./(rScale+1))+1;
 
-bin(yBins,bBins,rBins) = 0;
-c = [0 0 0];
+bin = zeros(yBins,bBins,rBins);
+chanVals = [0 0 0];
 cT = [0 0 0];
 cA = [0 0 0];
 cN = 0;
 
 
-D = dir('Skin Samples/*.jpg');
+D = dir('SkinSamples/*.jpg');
 imcell = cell(1,numel(D));
 for k = 1:numel(D)
   % imcell{k} = rgb2ycbcr(imread(strcat('Skin Samples/',D(k).name)));
-  imcell{k} = rgbToYcbcr(imread(strcat('Skin Samples/',D(k).name)), Kb, Kr, theta, yScale, bScale, rScale);
+  % imcell{k} = rgbToYcbcr(imread(strcat('Skin Samples/',D(k).name)), Kb, Kr, theta, yScale, bScale, rScale);
+  imcell{k} = rgb2Rot(imread(strcat('SkinSamples/',D(k).name)),theta, yScale, bScale, rScale);
 [rows, cols, channels] = size(imcell{k});
 for i = 1:rows
     for j = 1:cols
-        c = squeeze(imcell{k}(i,j,:)) - uint8([yMin; bMin; rMin]) + 1;
-        bin(yBin(c(1)),bBin(c(2)),rBin(c(3))) = bin(yBin(c(1)),bBin(c(2)),rBin(c(3))) + 1;
+        chanVals = squeeze(imcell{k}(i,j,:)) - uint8([yMin; bMin; rMin]) + 1;
+        bin(yBin(chanVals(1)),bBin(chanVals(2)),rBin(chanVals(3))) = bin(yBin(chanVals(1)),bBin(chanVals(2)),rBin(chanVals(3))) + 1;
     end
 end
 
@@ -74,9 +75,12 @@ binOut(NaNLoc) = 0;
 % data(:,:,:,2) = B;
 % data(:,:,:,3) = R;
 % data(:,:,:,4) = binOut;
-
+figure('Name','Bins','NumberTitle','off');
+subplot(1,3,1)
 imagesc(squeeze(sum(binOut,1)));
+subplot(1,3,2)
 imagesc(squeeze(sum(binOut,2)));
+subplot(1,3,3)
 imagesc(squeeze(sum(binOut,3)));
 
 %[X, Y, Z] = meshgrid(0:1:254);
