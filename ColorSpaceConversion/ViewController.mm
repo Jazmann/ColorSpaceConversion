@@ -369,18 +369,16 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
      cv::Vec<int, 3> sp2(118, 131, 139);
     
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(240, 128, 128);
-    cv::Vec<int, 3> c(128, 128, 189);
+    cv::Vec<double, 3> c(0.5, 125/255, 107/255);
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(180, 50, 128);
-    cv::Vec<double, 3> g(1, 2.5722, 391.3);
+    cv::Vec<double, 3> g(1, 18, 2.8);
     printf("here \n");
     cv::Matx<int, 3, 3> T(76,-43,127, 127,-84,-107, 29,-127,21);
-    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace(0, 0, T, g, c);
+    cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace(2, 2, -0.1537, g, c);
    // cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
-    printf("here \n");
-            
+    
     cv::convertColor<CV_8UC4,CV_8UC3>(imageHistory[currentImageIndex], imageHistory[nextImageIndex], colSpace);
     hsvImage = imageHistory[nextImageIndex];
-    printf("here \n");
     
     // Update Current Image Index and put up on screen.
     // convert cvMat to UIImage
