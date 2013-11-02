@@ -21,18 +21,19 @@
                                             <action selector="showImageOperations:" destination="2" id="bB5-2F-IZx"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="sea-Hv-kSC"/>
                                     <barButtonItem title="&lt;" id="Xh1-Qz-GAe">
                                         <connections>
                                             <action selector="grayImageAction:" destination="2" id="7pf-MM-UL5"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="sea-Hv-kSC"/>
+                                    <barButtonItem title="Save" id="DLS-sz-DyV"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="5Ha-By-FzS"/>
                                     <barButtonItem title=">" id="5on-ow-yPC">
                                         <connections>
                                             <action selector="forwardImageAction:" destination="2" id="bat-TL-j39"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="5Ha-By-FzS"/>
                                     <barButtonItem style="plain" id="CwD-ak-NYw">
                                         <switch key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="HgM-w9-bXC">
                                             <rect key="frame" x="229" y="9" width="79" height="27"/>
