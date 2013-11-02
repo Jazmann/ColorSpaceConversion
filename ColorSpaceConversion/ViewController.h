@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * backButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * forwardButton;
 @property (weak, nonatomic) IBOutlet UISlider *thresholdSlider;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (nonatomic, retain) IBOutlet UIActionSheet * actionSheetImageOperations;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *libraryButton;
 @property(retain, nonatomic) IBOutlet UISwitch *camSwitch;
@@ -60,6 +61,7 @@
 -(IBAction)switchCamera:(id)sender;
 -(IBAction)switchProcessingOnOff:(id)sender;
 -(IBAction)actionCanny:(id)sender;
+-(IBAction)saveImage:(id)sender;
 
 
 
