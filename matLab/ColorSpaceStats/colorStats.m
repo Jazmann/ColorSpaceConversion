@@ -1,5 +1,5 @@
 % [Y B R bin A] = colorStats( 0.114, 0.299, pi/2 -0.778, 0, 255, 256, 0, 255, 256, 0, 255, 256)
-function [ Yv, Bv, Rv, binOut, cA ] = colorStats( theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins)
+function [ Yv, Bv, Rv, binOut, cA ] = colorStats(dirName, theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -28,13 +28,13 @@ cT = [0 0 0];
 cA = [0 0 0];
 cN = 0;
 
-
-D = dir('SkinSamples/*.jpg');
+D = dir(strcat(dirName,'/*.jpg'));
+% D = dir('SkinSamples/*.jpg');
 imcell = cell(1,numel(D));
 for k = 1:numel(D)
   % imcell{k} = rgb2ycbcr(imread(strcat('Skin Samples/',D(k).name)));
   % imcell{k} = rgbToYcbcr(imread(strcat('Skin Samples/',D(k).name)), Kb, Kr, theta, yScale, bScale, rScale);
-  imcell{k} = rgb2Rot(imread(strcat('SkinSamples/',D(k).name)),theta, yScale, bScale, rScale);
+  imcell{k} = rgb2Rot(imread(strcat(dirName,'/',D(k).name)),theta, yScale, bScale, rScale);
 [rows, cols, channels] = size(imcell{k});
 for i = 1:rows
     for j = 1:cols
