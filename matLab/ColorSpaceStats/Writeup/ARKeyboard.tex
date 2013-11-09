@@ -1,0 +1,141 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[numbers, sort&compress]{natbib}
+\usepackage{graphicx}
+\author{Nayef Al-Saud}
+\title{AR Keyboard}
+\begin{document}
+\newcommand{\fig}{fig. }
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+
+\section{Introduction}\label{sec:Introduction}
+
+
+\subsection{Overview of Color Spaces}\label{sec:OverviewOfColorSpaces}
+
+
+\subsection{LAB}\label{sec:LAB}
+
+
+\subsection{RGB}\label{sec:RGB}
+
+\subsection{HSV}\label{sec:HSV}
+
+\subsection{YCbCr}\label{sec:YCbCr}
+
+
+
+\section{Camera}\label{sec:Camera}
+
+
+
+
+\subsection{Camera RGB}\label{sec:CameraRGB}
+
+Due to the hardware being locked down at the application level, we do not have access to the raw camera feed. We do, however, have access to the compressed, post-processing 8-bit RGB image data. The processing involves evening up the color channel senors' sensitivity by way of multiplying each channel by an appropriate correction factor. This is partly why cameras likely have a 10 or 12 bit/channel capture rate, but after accounting for differences in sensitivity, it only outputs in 8-bit color depth.
+
+The three-color RGB channel sensors commonly found in CCD cameras are based on how the human eye perceives colors. But in physical reality, light is actually hitting the camera as a continuous spectrum. Since it's impossible to map an infinite set of gaussians to it, we instead use some function which, for any frequency, will give the intensity of the light hitting the point at that frequency. This function is expanded in the basis set of three gaussians with mean values centered on the RGB frequencies. This model is used in cameras because the main purpose of cameras -- until recent times -- has been to capture images for human viewing. And while the RGB gaussian basis model is perfectly suited for capturing all the scene information which humans can perceive, it is not a complete representation.
+
+Because we're searching for particular points in the real color space -- which, being a continuous function, is infinite dimensional -- there is a possibility in the future that larger multi-channel color spaces will be much more common, such as the 8-channel color spaces currently in development. Though most such cameras are primarily designed for post-production editing for still pictures and film (e.g. changing the lighting independent of the scene), as well as visual effects, the possibilities for computer vision are exciting. However, computer vision tasks are computationally intensive, and more often than not require operation in real time, so there is a natural inclination to shy away from large data sets in practical computer vision applications; many tasks are done in grayscale or single channel processing to expedite the process.
+
+As such, there is a need to develop techniques which keep the relevant information while quickly and efficiently discarding the irrelevant information. This is true for the RGB space at the moment, and the aim of this first part of the work.
+
+
+\subsection{Rotation Matrix}\label{sec:RotationMatrix}
+
+Any rotation about an axis can be represented by a matrix. Such rotations can be expressed as a 3x3 square matrix in a 3D space. Since they are generally invertible, they're guaranteed to be non-singular. For this application, we require rotation about three different axes, which can be expressed thus:
+
+
+\begin{alignat}{1}
+R_x(\theta) &= \begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos \theta &  -\sin \theta \\[3pt]
+0 & \sin \theta  &  \cos \theta \\[3pt]
+\end{bmatrix} \\[6pt]
+R_y(\theta) &= \begin{bmatrix}
+\cos \theta & 0 & \sin \theta \\[3pt]
+0 & 1 & 0 \\[3pt]
+-\sin \theta & 0 & \cos \theta \\
+\end{bmatrix} \\[6pt]
+R_z(\theta) &= \begin{bmatrix}
+\cos \theta &  -\sin \theta & 0 \\[3pt]
+\sin \theta & \cos \theta & 0\\[3pt]
+0 & 0 & 1\\
+\end{bmatrix}
+\end{alignat}
+
+
+It should be noted that the solutions are not unique; there are many ways in which to rotate an object from one position to another, or use a combination of different rotations to get to same point, so they aren't necessarily unique, but this has no bearing on this project.
+
+Here we assume we're looking for the axis pertaining to the luminosity (e.g. the grayscale luminosity axis, the third channel in HSV, etc.), which gives us one rotational degree of freedom; we always rotate the space to be vertical, so we always have one rotational degree of freedom left, which is now a rotation about the luminosity axis.
+
+Because the absolute values of the axes in the color space have no meaning, we're only interested in the position along the axis relative to its start and end, equivalent to talking about the position in the axis relative to 0 to 1, compared to about 0-255 in unsigned, 8-bit integers. The upside is that if we're rotating the cube about its corner, we're interested in the minimum and maximum values possible along the new axis direction, which will correspond to a corner of the RGB cube.
+
+The rotational value $\theta$ for our free axis was found mathematically, as follows:
+
+(Insert Maths)
+
+With the value for $\theta$ found, it's easy to re-scale the axis to -0.5 to 0.5, and then shift it to 0 to 1.
+
+
+\subsection{Normalization for Discrete Range}\label{sec:NormalizationForDiscreteRange}
+
+Using the standard rotation matrices, we get a luminosity axis from 0 to $\sqrt(3)$. However, the length of the two remaining axes are dependent on the value of $\theta$ used. This is a problem because, ultimately, we want the axes to fit in a range of an appropriate data type. It would be more useful to have a matrix which provided the specified rotation and scaled the axis to known lengths. In the case of the luminosity, this is straightforward; simply divide by $\sqrt(3)$. In the case of the other two axes, we need an explicit form for the lengths of the axis resulting from the rotation.
+
+(insert maths here)
+
+\section{Skin Statistics}\label{sec:SkinStatistics}
+
+In order to identify the range of values for the skin space, a large number of skin samples were taken from photographs from the Humane project by Angelica Dass, an ongoing "chromatic inventory" art project which aims to compile every possible human skin color, categorized by the PANTONE guide color classification system. The skin colors catalogued thus far are independent of race or ethnicity, so the samples are something-or-other.
+
+
+\section{Preservation of Color Information}\label{sec:PreservationOfColorInformation}
+
+The goal of C++ and matlab code that's written to do this is to take a value a theta (free rotational parameter) and give the new color space in which each axis fits in the scale 0 to 1. Describe routines and how they function.
+
+Knowing the range at which it's going to come out allows us to deal with underflow and overflow; convert to any data type we want. (No point in converting to ). Axes are longer, the worst being the luminosity channel, which equates to $\sqrt(3)$. We're effectively squashing that into a range from 0 to 1. We'll lose some of its information as a result. If we wanted to keep it, we could, by putting it into a larger data type, i.e. 8uint, put axis in 16uint. Or we could truncate values, redistribute values by some function. And that's what the ERF is.
+
+None of the axes have lengths less that 0 to 1. For this reason we've written redistribute functions which does the type conversion where the info loss occurs and also so they keep the information in a controlled way, so we can keep the info where it's needed and discard it where it's irrelevant. So although this is strictly beyond the normal meaning of a color space conversion, it is addressing a connected issue and belongs in the conversion. And it's the only place this can be done without ruining things, keeping the details of colors of duck's feathers as hues and tones of human skin, for example.
+
+\subsection{ERF (Gaussian Error Function)}\label{sec:ERF}
+
+
+\subsection{Linear}\label{sec:Linear}
+
+
+\subsection{Partition}\label{sec:Partition}
+
+
+\section{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
+
+
+\section{Skin Detection}\label{sec:SkinDetection}
+
+\section{Putting it All Together}\label{sec:PuttingItAllTogether}
+
+\section{Physiology Study}\label{sec:PhysiologyStudy}
+
+\subsection{Pigment vs. Blood}\label{sec:PigmentVs.Blood}
+
+\subsection{Blood Flow}\label{sec:BloodFlow}
+
+\subsection{Apply the Effect}\label{sec:ApplyTheEffect}
+
+\section{Conclusion}
+
+
+
+\section{Future Work}
+
+
+\bibliographystyle{unsrtnat}
+\bibliography{ARKeyboard}
+
+
+\end{document}

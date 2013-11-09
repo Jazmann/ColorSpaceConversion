@@ -1,4 +1,4 @@
-n=14;
+n=2;
 ang = zeros(n+1);
 x = zeros(n+1,6);
 ang(1) = 0;
@@ -14,7 +14,7 @@ end
  % Plot angle convergence
  angIterFig = figure('Name','Convergence of the skin space chromatic angle with itteration.','NumberTitle','off');
  plot(ang(:,1)); xlabel({'Iteration'}); ylabel({'Angle'}); title({'Convergence of the skin space chromatic angle with itteration.'});
- theta = sum(ang(6:15,1))/10;
+ theta = -0.1537;
  T =  int8(255 .* transformationMatrixLAB(theta));
  sigma = [255/sqrt(2), x(n+1,5), x(n+1,3)];
  g = [ 1, 255/(sqrt(2) .* sigma(2)), 255/(sqrt(2) .* sigma(3))];

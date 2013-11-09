@@ -112,38 +112,6 @@
     <resources>
         <image name="camera_switch.png" width="222" height="147"/>
     </resources>
-    <classes>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="actionCanny:"/>
-                <relationship kind="action" name="backward:"/>
-                <relationship kind="action" name="binaryImageAction:"/>
-                <relationship kind="action" name="binarySliderAction:"/>
-                <relationship kind="action" name="forward:"/>
-                <relationship kind="action" name="forwardImageAction:"/>
-                <relationship kind="action" name="grayImageAction:"/>
-                <relationship kind="action" name="hsvImageAction:"/>
-                <relationship kind="action" name="resetImage:"/>
-                <relationship kind="action" name="saveImage:"/>
-                <relationship kind="action" name="showImageOperations:"/>
-                <relationship kind="action" name="showPhotoLibrary:"/>
-                <relationship kind="action" name="switchCamera:"/>
-                <relationship kind="action" name="switchProcessingOnOff:"/>
-                <relationship kind="outlet" name="actionSheetImageOperations" candidateClass="UIActionSheet"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="binaryButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="camSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="forwardButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="grayButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="hsvButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="libraryButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="saveButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="thresholdSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
