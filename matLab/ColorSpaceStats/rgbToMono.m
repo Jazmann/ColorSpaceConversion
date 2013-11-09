@@ -1,12 +1,11 @@
-function channelImage = rgbToMono(rgbImage,chan)
-%# First convert the RGB image to double precision, scale its values to the
-%#   range 0 to 1, reshape it to an N-by-3 matrix, and multiply by A:
-thinImage = reshape(double(rgbImage),[],3);
+function channelImage = rgbToMono(img,chan)
+
+[rows, cols, chans] = size(img);
 %# Shift each color plane (stored in each column of the N-by-3 matrix):
-channelImage = zeros(size(thinImage));
-channelImage(:,chan) = thinImage(:,chan);
+channelImage = zeros(rows, cols, 3);
+channelImage(:,:,mod(chan - 1,3)+1) = img(:,:,chan);
 
 %# Convert back to type uint8 and reshape to its original size:
-channelImage = reshape(uint8(channelImage),size(rgbImage));
+channelImage = uint8(channelImage);
 
 end % function
