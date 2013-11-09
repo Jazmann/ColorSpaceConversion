@@ -103,14 +103,20 @@ Knowing the range at which it's going to come out allows us to deal with underfl
 
 None of the axes have lengths less that 0 to 1. For this reason we've written redistribute functions which does the type conversion where the info loss occurs and also so they keep the information in a controlled way, so we can keep the info where it's needed and discard it where it's irrelevant. So although this is strictly beyond the normal meaning of a color space conversion, it is addressing a connected issue and belongs in the conversion. And it's the only place this can be done without ruining things, keeping the details of colors of duck's feathers as hues and tones of human skin, for example.
 
-\subsection{ERF (Gaussian Error Function)}\label{sec:ERF}
+We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the gaussian, and then progressively discard the information as it falls into the tails of the gaussian. So, it provides a non-linear distribution of the information. The gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
 
+\subsection{ERF (Gaussian Error Function)}\label{sec:ERF}
+We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the gaussian, and then progressively discard the information as it falls into the tails of the gaussian. So, it provides a non-linear distribution of the information. The gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
 
 \subsection{Linear}\label{sec:Linear}
-
+The next type is more simply to use a linear redistribution. We center it on the point of maximum interest, assuming there is some gaussian type interest in the information, then use the straight line equation, and the gradient of that line will be the gradient of the error function at that point, which is the mean value of the gaussian. But of course, this does not redistribute data away from the center point in the same manner of a selective gaussian, but it is much faster and simpler to implement than the ERF. However, certain values which cross the maximum and minimum of the target range are effectively lost.
 
 \subsection{Partition}\label{sec:Partition}
+The third manner of redistribution is assuming a a unit gradient, assuming that the source and destination are the same. This method discards any information in the axis outside a certain range.
 
+We will likely partition for the white/black axis, apply the linear redistribution for the distribution function on the axis which has the very low value of standard deviation, and the ERF for the axis which contains most of the variation for skin color.
+
+(Insert graphs and data here)
 
 \section{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 
