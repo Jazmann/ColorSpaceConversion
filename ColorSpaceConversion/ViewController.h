@@ -17,6 +17,7 @@
     
     BOOL enableProcessing;
     BOOL enableCanny;
+    BOOL enableColorSpace;
 	
 	CvVideoCamera* videoCamera;
 }
@@ -32,6 +33,8 @@
 @property (nonatomic, retain) IBOutlet UIActionSheet * actionSheetImageOperations;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *libraryButton;
 @property(retain, nonatomic) IBOutlet UISwitch *camSwitch;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *startButton;
+@property (nonatomic, retain) CvVideoCamera* videoCamera;
 
 
 
@@ -45,7 +48,6 @@
 - (cv::Mat)cvMatFromUIImage:(UIImage *)image;
 - (cv::Mat)cvMatGrayFromUIImage:(UIImage *)image;
 
-@property (nonatomic, retain) CvVideoCamera* videoCamera;
 @property (nonatomic, retain) ImagePickerController* imagePicker;
 
 -(IBAction)hsvImageAction:(id)sender;
@@ -62,6 +64,8 @@
 -(IBAction)switchProcessingOnOff:(id)sender;
 -(IBAction)actionCanny:(id)sender;
 -(IBAction)saveImage:(id)sender;
+-(IBAction)actionStart:(id)sender;
+-(IBAction)actionColorSpace:(id)sender;
 
 
 

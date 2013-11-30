@@ -5,6 +5,7 @@
 
 #import "ViewController.h"
 #import "ImageFilter.h"
+#import <opencv2/highgui/cap_ios.h>
 
 #include <list>
 #import "UIImageCVMatConverter.h"
@@ -29,7 +30,7 @@ NSString* actionSheetImageOpTitles[] = {@"Skin Detection", @"Probability Map", @
 #define EDGE_DETECTION @"Edge Detection"
 #define FEATURE_EXTRACTION @"Feature Extraction"
 
-@interface ViewController ()
+@interface ViewController()
 @end
 
 @implementation ViewController
@@ -110,6 +111,7 @@ cv::Mat imageHistory[10];
     
     enableProcessing = NO;
     enableCanny = NO;
+    enableColorSpace = NO;
     
     NSString *imageName = [[NSBundle mainBundle] pathForResource:@"hand_skin_test_3_back_1" ofType:@"jpg"];
     imageView.image = [UIImage imageWithContentsOfFile:imageName];
@@ -647,18 +649,37 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     [self forward];
 }
 
+- (IBAction)actionColorSpace:(id)sender;
+{
+    enableColorSpace = !enableColorSpace;
+    cv::Mat image = imageHistory[currentImageIndex];
+    if (enableColorSpace) {
+        [self hsvImageAction:nil];
+    }
+    
+    [self forward];
+}
+
 - (void)processImage:(cv::Mat&)image;
 {
+    const int& width = image.cols;
+	const int& height = image.rows;
+	const int& bytesPerRow = image.step;
     cv::Mat result;
     
     if (enableCanny) {
         std::vector<cv::Mat> planes;
-            split(image, planes);
+            split(imageHistory[currentImageIndex], planes);
         for (int i=0; i<=planes.size(); i++) {
             [UIImageCVMatConverter filterCanny:planes.at(i) withKernelSize:12 andLowThreshold:35];
         }
-            merge(planes, image);
+            merge(planes, imageHistory[nextImageIndex]);
     }
+    if (enableColorSpace){
+        //result = [self.imageHistory[currentImageIndex] hsvImageAction:nil];
+    }
+    
+    [self forward];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
@@ -669,7 +690,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 		return;
 	}
 	if ([choice isEqualToString:SKIN_DETECTION]) {
-        [self hsvImageAction:nil];
+        [self actionColorSpace:nil];
 		NSLog(@"Skin detection");
 	} else if ([choice isEqualToString:PROBABILITY_MAP]) {
         [self binaryImageAction:nil];
