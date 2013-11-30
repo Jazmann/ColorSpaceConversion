@@ -19,6 +19,9 @@
 
 \subsection{Overview of Color Spaces}\label{sec:OverviewOfColorSpaces}
 
+No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.)
+
+
 
 \subsection{LAB}\label{sec:LAB}
 
@@ -73,7 +76,7 @@ R_z(\theta) &= \begin{bmatrix}
 
 It should be noted that the solutions are not unique; there are many ways in which to rotate an object from one position to another, or use a combination of different rotations to get to same point, so they aren't necessarily unique, but this has no bearing on this project.
 
-Here we assume we're looking for the axis pertaining to the luminosity (e.g. the grayscale luminosity axis, the third channel in HSV, etc.), which gives us one rotational degree of freedom; we always rotate the space to be vertical, so we always have one rotational degree of freedom left, which is now a rotation about the luminosity axis.
+Here we assume we're looking for the axis pertaining to the luminosity (e.g. the grayscale luminosity axis, the 'Value' channel in HSV, etc.), which gives us one rotational degree of freedom; we always rotate the space to be vertical, so we always have one rotational degree of freedom left, which is now a rotation about the luminosity axis.
 
 Because the absolute values of the axes in the color space have no meaning, we're only interested in the position along the axis relative to its start and end, equivalent to talking about the position in the axis relative to 0 to 1, compared to about 0-255 in unsigned, 8-bit integers. The upside is that if we're rotating the cube about its corner, we're interested in the minimum and maximum values possible along the new axis direction, which will correspond to a corner of the RGB cube.
 
@@ -103,16 +106,30 @@ Knowing the range at which it's going to come out allows us to deal with underfl
 
 None of the axes have lengths less that 0 to 1. For this reason we've written redistribute functions which does the type conversion where the info loss occurs and also so they keep the information in a controlled way, so we can keep the info where it's needed and discard it where it's irrelevant. So although this is strictly beyond the normal meaning of a color space conversion, it is addressing a connected issue and belongs in the conversion. And it's the only place this can be done without ruining things, keeping the details of colors of duck's feathers as hues and tones of human skin, for example.
 
-\subsection{ERF (Gaussian Error Function)}\label{sec:ERF}
+We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the gaussian, and then progressively discard the information as it falls into the tails of the gaussian. So, it provides a non-linear distribution of the information. The gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
 
+\subsection{ERF (Gaussian Error Function)}\label{sec:ERF}
+We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the gaussian, and then progressively discard the information as it falls into the tails of the gaussian. So, it provides a non-linear distribution of the information. The gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
 
 \subsection{Linear}\label{sec:Linear}
-
+The next type is more simply to use a linear redistribution. We center it on the point of maximum interest, assuming there is some gaussian type interest in the information, then use the straight line equation, and the gradient of that line will be the gradient of the error function at that point, which is the mean value of the gaussian. But of course, this does not redistribute data away from the center point in the same manner of a selective gaussian, but it is much faster and simpler to implement than the ERF. However, certain values which cross the maximum and minimum of the target range are effectively lost.
 
 \subsection{Partition}\label{sec:Partition}
+The third manner of redistribution is assuming a a unit gradient, assuming that the source and destination are the same. This method discards any information in the axis outside a certain range.
 
+We will likely partition for the white/black axis, apply the linear redistribution for the distribution function on the axis which has the very low value of standard deviation, and the ERF for the axis which contains most of the variation for skin color.
+
+(Insert graphs and data here)
 
 \section{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
+We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
+
+Another method of dealing with that is set the max grad in the ERF. Don't use piecewise, just use ERF and scale the destination so it fits. By dividing the max value by the max gradient of ERF (The ERF evaluated at center point.), it becomes more horizontal, until it has a grad of 1. Advantage is not dealing with piecewise function, mathematically consistent, disadvantage is that also squash out a lot of the ERF behavior and a lot of the info we wanted to keep on either side of that value. The only place it keeps info is bang in the center; everywhere else is losing info. 
+
+Finally we could compromise by finding the closest datatype which fits the amount of info into the retained range. It's not actually the amount of information that is retained, so it's accepting a bit of looseness in the data packing of that type, even if we found a perfect fit. For the datatype closest to info we want to retain, we then scale as in the second method. 
+
+The reason we're talking about bit depth and not byte depth (fitting into the closest power of 2) is that it allows us to easily combine with the bits in a second channel; fitting both channels into one data type. It's difficult to predict what it will look like, since we're combining two channels into one, but it's the most efficient way of combining the two, turning it into a one-channel problem. However, now two colors that were once close to each other will end up separated. Seeing as all the information is there, though, this may not matter. The question is if all the data is usable in this form.
+
 
 
 \section{Skin Detection}\label{sec:SkinDetection}
