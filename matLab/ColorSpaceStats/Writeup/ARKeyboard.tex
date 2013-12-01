@@ -16,7 +16,7 @@
 
 \section{Introduction}\label{sec:Introduction}
 
-
+\chapter{Color-spaces and information storage for computer vision processing}
 \subsection{Overview of Color Spaces}\label{sec:OverviewOfColorSpaces}
 
 No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.)
@@ -124,9 +124,9 @@ We will likely partition for the white/black axis, apply the linear redistributi
 \section{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
 
-Another method of dealing with that is set the max grad in the ERF. Don't use piecewise, just use ERF and scale the destination so it fits. By dividing the max value by the max gradient of ERF (The ERF evaluated at center point.), it becomes more horizontal, until it has a grad of 1. Advantage is not dealing with piecewise function, mathematically consistent, disadvantage is that also squash out a lot of the ERF behavior and a lot of the info we wanted to keep on either side of that value. The only place it keeps info is bang in the center; everywhere else is losing info. 
+Another method of dealing with that is set the max grad in the ERF. Don't use piecewise, just use ERF and scale the destination so it fits. By dividing the max value by the max gradient of ERF (The ERF evaluated at center point.), it becomes more horizontal, until it has a grad of 1. Advantage is not dealing with piecewise function, mathematically consistent, disadvantage is that also squash out a lot of the ERF behavior and a lot of the info we wanted to keep on either side of that value. The only place it keeps info is bang in the center; everywhere else is losing info.
 
-Finally we could compromise by finding the closest datatype which fits the amount of info into the retained range. It's not actually the amount of information that is retained, so it's accepting a bit of looseness in the data packing of that type, even if we found a perfect fit. For the datatype closest to info we want to retain, we then scale as in the second method. 
+Finally we could compromise by finding the closest datatype which fits the amount of info into the retained range. It's not actually the amount of information that is retained, so it's accepting a bit of looseness in the data packing of that type, even if we found a perfect fit. For the datatype closest to info we want to retain, we then scale as in the second method.
 
 The reason we're talking about bit depth and not byte depth (fitting into the closest power of 2) is that it allows us to easily combine with the bits in a second channel; fitting both channels into one data type. It's difficult to predict what it will look like, since we're combining two channels into one, but it's the most efficient way of combining the two, turning it into a one-channel problem. However, now two colors that were once close to each other will end up separated. Seeing as all the information is there, though, this may not matter. The question is if all the data is usable in this form.
 
@@ -146,9 +146,37 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 
 \section{Conclusion}
 
+\chapter{Pattern recognition}
+\section{Constant patterns under mechanical stresses in the hand}
+\section{Dynamic patterns under mechanical stresses in the hand}
+\subsection{Finger pad pressure}
+\subsection{Fingernail pressure} 
+\section{Pattern recognition techniques in opencv}
+\section{Implementation of pattern recognition using opencv on an iPhone}
+
+\section{Refining the target area for search}
+\subsection{Blob detection}
+\subsection{Hand posture prediction}
+\subsection{Dynamic tracking}
+\chapter{The fingertip mechanical stress detection app}
+\section{Opencv integration with  iOS}
+\subsection{C++11 and opencv}
+\subsection{Integrating C++11,openCV and iOS data types}
+\subsection{Using parallel processing in openCV and iOS}
+\subsection{Implementing working data types efficiently in openCV}
+\section{Dynamic vs. Static statistics}
+\subsection{Color-space dynamically updated statistics}
+\subsection{Updating the pattern recognition model for specific individuals}
+\subsection{Updating the mechanical stress models to account for environment}
+\section{Balancing the processor load}
+\subsection{Frame-rate capture vs. frame processing rate}
+\subsection{Background processes}
+\subsection{Updating the hand posture model}
+\subsection{Updating the color-space model}
+\subsection{Updating the scene background model}
 
 
-\section{Future Work}
+\chapter{Future Work and discussion}
 
 
 \bibliographystyle{unsrtnat}
