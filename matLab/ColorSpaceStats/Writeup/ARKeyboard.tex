@@ -14,32 +14,35 @@
 
 \end{abstract}
 
+\tableofcontents
+
 \section{Introduction}\label{sec:Introduction}
 
-\chapter{Color-spaces and information storage for computer vision processing}
-\subsection{Overview of Color Spaces}\label{sec:OverviewOfColorSpaces}
+\section{Color-spaces and information storage for computer vision processing}\label{sec:ColorSpacesAndInfoStorageForComputerVisionProcessing}
+
+\subsection{Overview of ColorSpaces}\label{sec:OverviewOfColorSpaces}
 
 No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.)
 
 
 
-\subsection{LAB}\label{sec:LAB}
+\subsubsection{LAB}\label{sec:LAB}
 
 
-\subsection{RGB}\label{sec:RGB}
+\subsubsection{RGB}\label{sec:RGB}
 
-\subsection{HSV}\label{sec:HSV}
+\subsubsection{HSV}\label{sec:HSV}
 
-\subsection{YCbCr}\label{sec:YCbCr}
-
-
-
-\section{Camera}\label{sec:Camera}
+\subsubsection{YCbCr}\label{sec:YCbCr}
 
 
 
+\subsection{Camera}\label{sec:Camera}
 
-\subsection{Camera RGB}\label{sec:CameraRGB}
+
+
+
+\subsubsection{Camera RGB}\label{sec:CameraRGB}
 
 Due to the hardware being locked down at the application level, we do not have access to the raw camera feed. We do, however, have access to the compressed, post-processing 8-bit RGB image data. The processing involves evening up the color channel senors' sensitivity by way of multiplying each channel by an appropriate correction factor. This is partly why cameras likely have a 10 or 12 bit/channel capture rate, but after accounting for differences in sensitivity, it only outputs in 8-bit color depth.
 
@@ -50,7 +53,7 @@ Because we're searching for particular points in the real color space -- which, 
 As such, there is a need to develop techniques which keep the relevant information while quickly and efficiently discarding the irrelevant information. This is true for the RGB space at the moment, and the aim of this first part of the work.
 
 
-\subsection{Rotation Matrix}\label{sec:RotationMatrix}
+\subsubsection{Rotation Matrix}\label{sec:RotationMatrix}
 
 Any rotation about an axis can be represented by a matrix. Such rotations can be expressed as a 3x3 square matrix in a 3D space. Since they are generally invertible, they're guaranteed to be non-singular. For this application, we require rotation about three different axes, which can be expressed thus:
 
@@ -87,18 +90,18 @@ The rotational value $\theta$ for our free axis was found mathematically, as fol
 With the value for $\theta$ found, it's easy to re-scale the axis to -0.5 to 0.5, and then shift it to 0 to 1.
 
 
-\subsection{Normalization for Discrete Range}\label{sec:NormalizationForDiscreteRange}
+\subsubsection{Normalization for Discrete Range}\label{sec:NormalizationForDiscreteRange}
 
 Using the standard rotation matrices, we get a luminosity axis from 0 to $\sqrt(3)$. However, the length of the two remaining axes are dependent on the value of $\theta$ used. This is a problem because, ultimately, we want the axes to fit in a range of an appropriate data type. It would be more useful to have a matrix which provided the specified rotation and scaled the axis to known lengths. In the case of the luminosity, this is straightforward; simply divide by $\sqrt(3)$. In the case of the other two axes, we need an explicit form for the lengths of the axis resulting from the rotation.
 
 (insert maths here)
 
-\section{Skin Statistics}\label{sec:SkinStatistics}
+\subsection{Skin Statistics}\label{sec:SkinStatistics}
 
 In order to identify the range of values for the skin space, a large number of skin samples were taken from photographs from the Humane project by Angelica Dass, an ongoing "chromatic inventory" art project which aims to compile every possible human skin color, categorized by the PANTONE guide color classification system. The skin colors catalogued thus far are independent of race or ethnicity, so the samples are something-or-other.
 
 
-\section{Preservation of Color Information}\label{sec:PreservationOfColorInformation}
+\subsection{Preservation of Color Information}\label{sec:PreservationOfColorInformation}
 
 The goal of C++ and matlab code that's written to do this is to take a value a theta (free rotational parameter) and give the new color space in which each axis fits in the scale 0 to 1. Describe routines and how they function.
 
@@ -108,20 +111,20 @@ None of the axes have lengths less that 0 to 1. For this reason we've written re
 
 We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the gaussian, and then progressively discard the information as it falls into the tails of the gaussian. So, it provides a non-linear distribution of the information. The gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
 
-\subsection{ERF (Gaussian Error Function)}\label{sec:ERF}
+\subsubsection{ERF (Gaussian Error Function)}\label{sec:ERF}
 We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the gaussian, and then progressively discard the information as it falls into the tails of the gaussian. So, it provides a non-linear distribution of the information. The gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
 
-\subsection{Linear}\label{sec:Linear}
+\subsubsection{Linear}\label{sec:Linear}
 The next type is more simply to use a linear redistribution. We center it on the point of maximum interest, assuming there is some gaussian type interest in the information, then use the straight line equation, and the gradient of that line will be the gradient of the error function at that point, which is the mean value of the gaussian. But of course, this does not redistribute data away from the center point in the same manner of a selective gaussian, but it is much faster and simpler to implement than the ERF. However, certain values which cross the maximum and minimum of the target range are effectively lost.
 
-\subsection{Partition}\label{sec:Partition}
+\subsubsection{Partition}\label{sec:Partition}
 The third manner of redistribution is assuming a a unit gradient, assuming that the source and destination are the same. This method discards any information in the axis outside a certain range.
 
 We will likely partition for the white/black axis, apply the linear redistribution for the distribution function on the axis which has the very low value of standard deviation, and the ERF for the axis which contains most of the variation for skin color.
 
 (Insert graphs and data here)
 
-\section{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
+\subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
 
 Another method of dealing with that is set the max grad in the ERF. Don't use piecewise, just use ERF and scale the destination so it fits. By dividing the max value by the max gradient of ERF (The ERF evaluated at center point.), it becomes more horizontal, until it has a grad of 1. Advantage is not dealing with piecewise function, mathematically consistent, disadvantage is that also squash out a lot of the ERF behavior and a lot of the info we wanted to keep on either side of that value. The only place it keeps info is bang in the center; everywhere else is losing info.
@@ -132,52 +135,50 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 
 
 
-\section{Skin Detection}\label{sec:SkinDetection}
+\subsection{Skin Detection}\label{sec:SkinDetection}
 
-\section{Putting it All Together}\label{sec:PuttingItAllTogether}
+\subsection{Putting it All Together}\label{sec:PuttingItAllTogether}
 
-\section{Physiology Study}\label{sec:PhysiologyStudy}
+\subsection{Physiology Study}\label{sec:PhysiologyStudy}
 
-\subsection{Pigment vs. Blood}\label{sec:PigmentVs.Blood}
+\subsubsection{Pigment vs. Blood}\label{sec:PigmentVs.Blood}
 
-\subsection{Blood Flow}\label{sec:BloodFlow}
+\subsubsection{Blood Flow}\label{sec:BloodFlow}
 
-\subsection{Apply the Effect}\label{sec:ApplyTheEffect}
-
-\section{Conclusion}
-
-\tableofcontents
-\chapter{Pattern recognition}\label{sec:PatternRecognition}
-\section{Constant patterns under mechanical stresses in the hand}\label{sec:ConstantPatterns}
-\section{Dynamic patterns under mechanical stresses in the hand}\label{sec:DynamicPatterns}
-\subsection{Finger pad pressure}\label{sec:FingerPadPressure}
-\subsection{Fingernail pressure}\label{sec:FingernailPressure}
-\section{Pattern recognition techniques in opencv}\label{sec:PaternRecognitionOpenCV}
-\section{Implementation of pattern recognition using opencv on an iPhone}\label{sec:ImplementationOnIPhone}
-
-\section{Refining the target area for search}\label{sec:RefiningTargetAreaForSearch}
-\subsection{Blob detection}\label{sec:BlobDetection}
-\subsection{Hand posture prediction}\label{sec:HandPosturePrediction}
-\subsection{Dynamic tracking}\label{sec:DynamicTracking}
-\chapter{The fingertip mechanical stress detection app}\label{sec:FingertipMechanicalStressDetectionApp}
-\section{Opencv integration with  iOS}\label{sec:OpenCVIntegrationWithIOS}
-\subsection{C++11 and opencv}\label{sec:C++11AndOpenCV}
-\subsection{Integrating C++11,openCV and iOS data types}\label{sec:IntegratingC++11AndIOSDataTypes}
-\subsection{Using parallel processing in openCV and iOS}\label{sec:ParallelProcessingInOpenCVAndIOS}
-\subsection{Implementing working data types efficiently in openCV}\label{sec:ImplementingDataTypesEfficientlyOpenCV}
-\section{Dynamic vs. Static statistics}\label{sec:DynamicVsStaticStatistics}
-\subsection{Color-space dynamically updated statistics}\label{sec:ColorSpaceDynamicallyUpdatedStatistics}
-\subsection{Updating the pattern recognition model for specific individuals}\label{sec:UpdatingPatternRecognitionModelForSpecificIndividuals}
-\subsection{Updating the mechanical stress models to account for environment}\label{sec:UpdatingMechanicalStressModelsToAccountForEnvironment}
-\section{Balancing the processor load}\label{sec:BalancingTheProcessorLoad}
-\subsection{Frame-rate capture vs. frame processing rate}\label{sec:FrameRateCaptureVsFrameProcessingRate}
-\subsection{Background processes}\label{sec:BackgroundProcesses}
-\subsection{Updating the hand posture model}\label{sec:UpdatingTheHandPostureModel}
-\subsection{Updating the color-space model}\label{sec:UpdatingTheColorSpaceModel}
-\subsection{Updating the scene background model}\label{sec:UpdatingTheSceneBackgroundModel}
+\subsubsection{Apply the Effect}\label{sec:ApplyTheEffect}
 
 
-\chapter{Future Work and discussion}\label{sec:FutureWorkAndDiscussion}
+\section{Pattern Recognition}\label{sec:PatternRecognition}
+\subsection{Constant Patterns under Mechanical Stresses in the Hand}\label{sec:ConstantPatterns}
+\subsection{Dynamic Patterns under Mechanical Stresses in the Hand}\label{sec:DynamicPatterns}
+\subsubsection{Finger Pad Pressure}\label{sec:FingerPadPressure}
+\subsubsection{Fingernail Pressure}\label{sec:FingernailPressure}
+\subsection{Pattern Recognition Techniques in OpenCV}\label{sec:PaternRecognitionOpenCV}
+\subsection{Implementation of Pattern Recognition using OpenCV on an iPhone}\label{sec:ImplementationOnIPhone}
+
+\subsection{Refining the Target Area for Search}\label{sec:RefiningTargetAreaForSearch}
+\subsubsection{Blob Detection}\label{sec:BlobDetection}
+\subsubsection{Hand Posture Prediction}\label{sec:HandPosturePrediction}
+\subsubsection{Dynamic Tracking}\label{sec:DynamicTracking}
+\section{The Fingertip Mechanical Stress Detection App}\label{sec:FingertipMechanicalStressDetectionApp}
+\subsection{OpenCV Integration with iOS}\label{sec:OpenCVIntegrationWithIOS}
+\subsubsection{C++11 and OpenCV}\label{sec:C++11AndOpenCV}
+\subsubsection{Integrating C++11, OpenCV and iOS Data Types}\label{sec:IntegratingC++11AndIOSDataTypes}
+\subsubsection{Using Parallel Processing in OpenCV and iOS}\label{sec:ParallelProcessingInOpenCVAndIOS}
+\subsubsection{Implementing Working Data Types Efficiently in OpenCV}\label{sec:ImplementingDataTypesEfficientlyOpenCV}
+\subsection{Dynamic vs. Static Statistics}\label{sec:DynamicVsStaticStatistics}
+\subsubsection{Color Space Dynamically Updated Statistics}\label{sec:ColorSpaceDynamicallyUpdatedStatistics}
+\subsubsection{Updating the Pattern Recognition Model for Specific Individuals}\label{sec:UpdatingPatternRecognitionModelForSpecificIndividuals}
+\subsubsection{Updating the Mechanical Stress Models to Account for Environment}\label{sec:UpdatingMechanicalStressModelsToAccountForEnvironment}
+\subsection{Balancing the processor load}\label{sec:BalancingTheProcessorLoad}
+\subsubsection{Frame Rate Capture vs. Frame Processing Rate}\label{sec:FrameRateCaptureVsFrameProcessingRate}
+\subsubsection{Background Processes}\label{sec:BackgroundProcesses}
+\subsubsection{Updating the Hand Posture Model}\label{sec:UpdatingTheHandPostureModel}
+\subsubsection{Updating the Color Space Model}\label{sec:UpdatingTheColorSpaceModel}
+\subsubsection{Updating the Scene Background Model}\label{sec:UpdatingTheSceneBackgroundModel}
+
+
+\section{Future Work and Discussion}\label{sec:FutureWorkAndDiscussion}
 
 
 \bibliographystyle{unsrtnat}
