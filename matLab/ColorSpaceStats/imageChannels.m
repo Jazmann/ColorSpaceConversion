@@ -1,14 +1,15 @@
 function [ ] = imageChannels( img, fig )
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
+[rows, cols, chans] = size(img);
+n = ceil(sqrt(chans+1));
+
 figure(fig);
-subplot(2,2,1)
-image(img)
-subplot(2,2,2)
-image(rgbToMono(img,1))
-subplot(2,2,3)
-image(rgbToMono(img,2))
-subplot(2,2,4)
-image(rgbToMono(img,3))
+subplot(n,n,1)
+image(img(:,:,1:3))
+for c=1:chans
+   subplot(n,n,c+1)
+   image(rgbToMono(img,c))
+end
 end
 
