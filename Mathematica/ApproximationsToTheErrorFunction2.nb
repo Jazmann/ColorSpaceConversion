@@ -3,10 +3,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[    215653,       4436]
-NotebookOptionsPosition[    212055,       4314]
-NotebookOutlinePosition[    212525,       4332]
-CellTagsIndexPosition[    212482,       4329]
+NotebookDataLength[    217744,       4498]
+NotebookOptionsPosition[    213987,       4371]
+NotebookOutlinePosition[    214457,       4389]
+CellTagsIndexPosition[    214414,       4386]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -3099,9 +3099,9 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"Clear", "[", 
       RowBox[{
-      "dRange", ",", "sRange", ",", " ", "ErfA", ",", "ErfB", ",", " ", 
-       "grad", ",", "con", ",", "ErfA", ",", "ErfB", ",", "iErf"}], "]"}], 
-     ";", "\[IndentingNewLine]", 
+      "shift", ",", "scale", ",", "dRange", ",", "sRange", ",", " ", "ErfA", 
+       ",", "ErfB", ",", " ", "grad", ",", "con", ",", "ErfA", ",", "ErfB", 
+       ",", "iErf"}], "]"}], ";", "\[IndentingNewLine]", 
      RowBox[{"grad", "=", " ", "g"}], ";", "\[IndentingNewLine]", 
      RowBox[{"con", " ", "=", " ", "c"}], ";", "\[IndentingNewLine]", 
      RowBox[{"dRange", " ", "=", " ", 
@@ -3137,6 +3137,14 @@ Cell[BoxData[{
       "     ", 
      RowBox[{"scale", "=", 
       RowBox[{"dRange", "/", "ErfB"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"maxStep", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"2", "  ", "grad", " ", "scale"}], ")"}], "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Sqrt", "[", "\[Pi]", "]"}], " ", "sRange"}], ")"}]}]}], ";",
+      "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{"iErf", "[", "x_", "]"}], ":=", 
       RowBox[{"Evaluate", "[", " ", 
@@ -3187,7 +3195,8 @@ Cell[BoxData[{
    3.575265475261079*^9}, {3.575265549405407*^9, 3.575265554948784*^9}, {
    3.575265610289527*^9, 3.5752656131560373`*^9}, {3.575364398850857*^9, 
    3.5753644307218637`*^9}, 3.5753647015743647`*^9, {3.5792551944390297`*^9, 
-   3.579255224781765*^9}}],
+   3.579255224781765*^9}, {3.5928154093400483`*^9, 3.592815412296217*^9}, {
+   3.592826375134256*^9, 3.5928264234780207`*^9}}],
 
 Cell[CellGroupData[{
 
@@ -3434,6 +3443,54 @@ Cell[BoxData["99.88268741221042`"], "Output",
 
 Cell[CellGroupData[{
 
+Cell[BoxData[{
+ RowBox[{"Clear", "[", " ", 
+  RowBox[{"g", ",", "c", ",", "sMin", ",", "sMax", ",", "dMin", ",", "dMax"}],
+   "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Clear", "[", 
+  RowBox[{
+  "dRange", ",", "sRange", ",", " ", "ErfA", ",", "ErfB", ",", " ", "grad", 
+   ",", "con", ",", "ErfA", ",", "ErfB", ",", "iErf"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"D", "[", " ", 
+  RowBox[{
+   RowBox[{"shift", " ", "+", 
+    RowBox[{"scale", "  ", 
+     RowBox[{"Erf", "[", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"grad", "*", 
+          RowBox[{"(", 
+           RowBox[{"x", "-", "con"}], ")"}]}], ")"}], "/", "sRange"}], ")"}], 
+      "]"}]}]}], ",", "x"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.592815235295992*^9, 3.5928153027710867`*^9}, {
+  3.5928153704461813`*^9, 3.5928153716761827`*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"2", " ", 
+   SuperscriptBox["\[ExponentialE]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["grad", "2"], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "con"}], "+", "x"}], ")"}], "2"]}], 
+      SuperscriptBox["sRange", "2"]]}]], " ", "grad", " ", "scale"}], 
+  RowBox[{
+   SqrtBox["\[Pi]"], " ", "sRange"}]]], "Output",
+ CellChangeTimes->{3.5928152749990473`*^9, 3.5928153735171857`*^9, 
+  3.5928174492127223`*^9}]
+}, Open  ]],
+
+Cell[BoxData["nf4Tn12Bb5"], "Input",
+ CellChangeTimes->{{3.592827694498719*^9, 3.5928276945047197`*^9}}],
+
+Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
   RowBox[{
@@ -3603,7 +3660,7 @@ $CellContext`sMin$$, $CellContext`sMax$$}, PlotStyle -> {Blue}, AxesLabel ->
           SlotSequence[1]]& }, {{$CellContext`g$$, 1.4138}, 1, 
          10, $CellContext`ValueThumbSlider[
           SlotSequence[1]]& }}, "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{411., {269., 274.}},
+     ImageSizeCache->{411., {191., 196.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -4410,26 +4467,31 @@ Cell[CellGroupData[{
 Cell[146491, 2982, 220, 5, 31, "Input"],
 Cell[146714, 2989, 3292, 92, 78, "Output"]
 }, Open  ]],
-Cell[150021, 3084, 4585, 105, 312, "Input"],
+Cell[150021, 3084, 5002, 114, 332, "Input"],
 Cell[CellGroupData[{
-Cell[154631, 3193, 635, 12, 92, "Input"],
-Cell[155269, 3207, 2158, 68, 70, "Output"],
-Cell[157430, 3277, 1556, 51, 64, "Output"]
+Cell[155048, 3202, 635, 12, 92, "Input"],
+Cell[155686, 3216, 2158, 68, 70, "Output"],
+Cell[157847, 3286, 1556, 51, 64, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[159023, 3333, 962, 24, 92, "Input"],
-Cell[159988, 3359, 1689, 33, 57, "Output"],
-Cell[161680, 3394, 1142, 21, 31, "Output"],
-Cell[162825, 3417, 956, 14, 31, "Output"]
+Cell[159440, 3342, 962, 24, 92, "Input"],
+Cell[160405, 3368, 1689, 33, 57, "Output"],
+Cell[162097, 3403, 1142, 21, 31, "Output"],
+Cell[163242, 3426, 956, 14, 31, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[163818, 3436, 3546, 95, 152, "Input"],
-Cell[167367, 3533, 4648, 90, 560, "Output"]
+Cell[164235, 3445, 839, 22, 72, "Input"],
+Cell[165077, 3469, 529, 16, 72, "Output"]
+}, Open  ]],
+Cell[165621, 3488, 104, 1, 31, "Input"],
+Cell[CellGroupData[{
+Cell[165750, 3493, 3546, 95, 152, "Input"],
+Cell[169299, 3590, 4648, 90, 404, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[172064, 3629, 2318, 57, 172, "Input"],
-Cell[174385, 3688, 37654, 623, 243, "Output"]
+Cell[173996, 3686, 2318, 57, 172, "Input"],
+Cell[176317, 3745, 37654, 623, 243, "Output"]
 }, Open  ]]
 }
 ]
