@@ -35,6 +35,7 @@
 @property(retain, nonatomic) IBOutlet UISwitch *camSwitch;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *startButton;
 @property (nonatomic, retain) CvVideoCamera* videoCamera;
+@property (nonatomic, copy) NSArray *mediaTypes;
 
 
 
