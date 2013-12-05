@@ -8,7 +8,7 @@ classdef colorSpace
         dMin; dMax; dRange;
         ErfA; ErfB; ErfAB;
         shift; scale; sUnitGrad; sLowHigh; dUnitGrad;
-        linearConstant; shiftednErfConstant; dMaxShifted;
+        linearConstant; shiftedErfConstant; dMaxShifted;
         cubeSkin;
     end
     
@@ -56,15 +56,15 @@ classdef colorSpace
                 ceil(obj.c + (obj.sRange .* sqrt(log((2*obj.dRange .* obj.g)./(obj.ErfAB .* sqrt(pi) .* obj.sRange))))./obj.g)];
             ull = 1/obj.dRange;
             uul = (obj.dRange - 1)./obj.dRange;
-            obj.sLowHigh = [obj.c + obj.sRange .* erfinv(ull*obj.ErfB-uul*obj.ErfA)./obj.g; ...
-                obj.c - obj.sRange .* erfinv(ull*obj.ErfA-uul*obj.ErfB)./obj.g];
+            obj.sLowHigh = [floor(obj.c + obj.sRange .* erfinv(ull*obj.ErfB-uul*obj.ErfA)./obj.g); ...
+                ceil(obj.c - obj.sRange .* erfinv(ull*obj.ErfA-uul*obj.ErfB)./obj.g)];
             
-            obj.dUnitGrad(1,:) = obj.shift(:) + obj.scale(:) .* erf( obj.g(:) .* (obj.sUnitGrad(1,:)' - obj.c(:)) ./ obj.sRange);
-            obj.dUnitGrad(2,:) = obj.shift(:) + obj.scale(:) .* erf( obj.g(:) .* (obj.sUnitGrad(2,:)' - obj.c(:)) ./ obj.sRange);
+            obj.dUnitGrad(1,:) = floor(obj.shift(:) + obj.scale(:) .* erf( obj.g(:) .* (obj.sUnitGrad(1,:)' - obj.c(:)) ./ obj.sRange));
+            obj.dUnitGrad(2,:) = floor(obj.shift(:) + obj.scale(:) .* erf( obj.g(:) .* (obj.sUnitGrad(2,:)' - obj.c(:)) ./ obj.sRange));
             
             obj.linearConstant = obj.dUnitGrad(1,:) - obj.sUnitGrad(1,:);
-            obj.shiftednErfConstant = obj.sUnitGrad(2,:) + obj.dUnitGrad(1,:) - obj.sUnitGrad(1,:) - obj.dUnitGrad(2,:);
-            obj.dMaxShifted = (obj.dMax + obj.shiftednErfConstant')';
+            obj.shiftedErfConstant = obj.sUnitGrad(2,:) + obj.dUnitGrad(1,:) - obj.sUnitGrad(1,:) - obj.dUnitGrad(2,:);
+            obj.dMaxShifted = (obj.dMax + obj.shiftedErfConstant')';
             
         end % function
         
@@ -210,23 +210,25 @@ classdef colorSpace
             for i=1:length(point)
                 if point(i) < obj.sLowHigh(1,i)
                     pixelOut(i) = obj.dMin;
-                elseif obj.sLowHigh(1,i) < point(i) <= obj.dUnitGrad(1,i)
-                    pixelOut(i) = obj.scaledPoint(point(i));
-                elseif obj.dUnitGrad(1,i) < point(i) <= obj.dUnitGrad(2,i)
-                    pixelOut(i) = pixelOut(i) + obj.linearConstant;
-                elseif obj.dUnitGrad(2,i) < point(i) <= obj.sLowHigh(2,i)
-                    pixelOut(i) = obj.scaledPoint(point(i)) + obj.shiftednErfConstant;
+                elseif obj.sLowHigh(1,i) < point(i) && point(i) <= obj.sUnitGrad(1,i)
+                    pixelOut(i) = obj.shift(i) + obj.scale(i) .* erf( obj.g(i) .* (point(i) - obj.c(i)) ./ obj.sRange );
+                elseif obj.sUnitGrad(1,i) < point(i) && point(i) <= obj.sUnitGrad(2,i)
+                    pixelOut(i) = point(i) + obj.linearConstant(i);
+                elseif obj.sUnitGrad(2,i) < point(i) && point(i) <= obj.sLowHigh(2,i)
+                    pixelOut(i) = obj.shift(i) + obj.scale(i) .* erf( obj.g(i) .* (point(i) - obj.c(i)) ./ obj.sRange ) + obj.shiftedErfConstant(i);
                 elseif obj.sLowHigh(2,i) < point(i)
-                    pixelOut(i) = obj.dMaxShifted;
+                    pixelOut(i) = obj.dMaxShifted(i);
                 end
             end
         end % function
         
+        
         function pixelOut = scaledPoint(obj, point)
-            pixelOut = zeros(size(point));
-            for i=1:length(point)
-                pixelOut(i) = obj.shift(i) + obj.scale(i) * erf( obj.g(i) * (point(i) - obj.c(i)) ./ obj.sRange );
-            end
+                pixelOut = obj.shift(:) + obj.scale(:) .* erf( obj.g(:) .* (point(:) - obj.c(:)) ./ obj.sRange );
+%             pixelOut = zeros(size(point));
+%             for i=1:length(point)
+%                 pixelOut(i) = obj.shift(i) + obj.scale(i) * erf( obj.g(i) * (point(i) - obj.c(i)) ./ obj.sRange );
+%             end
         end % function
         
         function unit = srcToUnit(obj, point)

@@ -123,6 +123,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
                 <relationship kind="action" name="actionCanny:"/>
+                <relationship kind="action" name="actionColorSpace:"/>
                 <relationship kind="action" name="actionStart:"/>
                 <relationship kind="action" name="backward:"/>
                 <relationship kind="action" name="binaryImageAction:"/>
