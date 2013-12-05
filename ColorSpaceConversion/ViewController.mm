@@ -50,6 +50,7 @@ NSString* actionSheetImageOpTitles[] = {@"Skin Detection", @"Probability Map", @
 @synthesize hsvImage;
 @synthesize saveButton;
 @synthesize actionSheetImageOperations;
+@synthesize mediaTypes;
 
 // @synthesize imageHistory;
 
@@ -478,8 +479,12 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 {
 	NSLog(@"show photo library");
 	
-	self.imagePicker = [[ImagePickerController alloc] initAsPhotoLibrary];
+	self.imagePicker = [[ImagePickerController alloc] init];
 	self.imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.mediaTypes =
+    [UIImagePickerController availableMediaTypesForSourceType:
+     UIImagePickerControllerSourceTypeCamera];
 	[self.imagePicker showPicker:self];
 }
 
@@ -487,6 +492,8 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 {
+    
+    
     UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
     cv::Mat m_image = [self cvMatFromUIImage:image];
     [self processImage:m_image];

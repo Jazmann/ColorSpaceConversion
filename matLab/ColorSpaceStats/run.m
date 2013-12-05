@@ -3,12 +3,12 @@ ang = zeros(n+1);
 x = zeros(n+1,6);
 ang(1) = 0;
 for i=1:n
-    [Y, B, R, bin, A] = colorStats('SkinSamples', ang(i), 0, 255, 256, 0, 255, 256, 0, 255, 256);
+    [Y, B, R, bin, A] = colorStats('SelfSkinSamples', ang(i), 0, 255, 256, 0, 255, 256, 0, 255, 256);
     %   x = [Amp,x0,wx,y0,wy,fi]: simulated centroid parameters
     x(i,:) = GaussianFit( B, R, squeeze(sum(bin,1)), [1,A(3),20.5,A(2),20.5,0], 'spline', 0);
     ang(i+1) = ang(i) + x(i,6);
 end
- [Y, B, R, bin, A] = colorStats('SkinSamples', ang(i+1), 0, 255, 256, 0, 255, 256, 0, 255, 256);
+ [Y, B, R, bin, A] = colorStats('SelfSkinSamples', ang(i+1), 0, 255, 256, 0, 255, 256, 0, 255, 256);
  %   x = [Amp,x0,wx,y0,wy,fi]: simulated centroid parameters
  x(n+1,:) = GaussianFit( B, R, squeeze(sum(bin,1)), [1,A(3),20.5,A(2),20.5,0], 'spline', 1);
  % Plot angle convergence
