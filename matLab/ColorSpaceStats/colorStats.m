@@ -28,7 +28,7 @@ cT = [0 0 0];
 cA = [0 0 0];
 cN = 0;
 
-D = dir(strcat(dirName,'/*.jpg'));
+D = [dir(strcat(dirName,'/*.jpg')),dir(strcat(dirName,'/*.JPG'))];
 % D = dir('SkinSamples/*.jpg');
 imcell = cell(1,numel(D));
 for k = 1:numel(D)
