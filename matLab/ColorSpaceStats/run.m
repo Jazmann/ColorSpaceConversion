@@ -1,4 +1,4 @@
-n=2;
+n=10;
 ang = zeros(n+1);
 x = zeros(n+1,6);
 ang(1) = 0;
@@ -20,7 +20,7 @@ end
  g = [ 1, 255/(sqrt(2) .* sigma(2)), 255/(sqrt(2) .* sigma(3))];
  c = [128, x(n+1,4), x(n+1,2)];
  % Example
- img = imread(strcat('..\..\ColorSpaceConversion\hand_skin_test_3_back_1.jpg'));
+ img = imread(strcat('FingerPressure/IMG_0112.jpg'));
  rgbFig = figure('Name','RGB','NumberTitle','off');
  imageChannels(img,rgbFig);
  allFig = figure('Name','spaces','NumberTitle','off');
