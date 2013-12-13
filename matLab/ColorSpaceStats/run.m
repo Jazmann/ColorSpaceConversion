@@ -7,7 +7,7 @@ ang = zeros(nMax+1,1);
 c = zeros(nMax+1,3);
 sigma = zeros(nMax+1,3);
 x = zeros(nMax+1,6);
-sigma(1,:) = [20.5,20.5];
+sigma(1,:) = [20, 20.5,20.5];
 for i=1:nMax
  [YOut, BOut, ROut, binOut, AOut] = colorStats(dirName, ang(i), 0, 255, 256, 0, 255, 256, 0, 255, 256);
  binOutBR=squeeze(sum(binOut,1));
@@ -33,7 +33,19 @@ skin = colorSpace(theta, c(i+1,:), sigma(i+1,:), [3,3,3], 0, 255, 0, 255, 1, 0);
  img = imread('hand_skin_test_3_back_1.jpg');
  rgbFig = figure('Name','RGB','NumberTitle','off');
  imageChannels(img,rgbFig);
- allFig = figure('Name','spaces','NumberTitle','off');
+ 
+ rotFig = figure('Name','Rotated','NumberTitle','off');
+ img2 = skin.toRot(img);
+ imageChannels(img2,rotFig);
+ 
+ rotScaledFig = figure('Name','Rotated Scaled','NumberTitle','off');
+ img3 = skin.toRotScaled(img);
+ imageChannels(img3,rotScaledFig);
+ 
+ rotCompactScaledFig = figure('Name','Rotated Compact Scaled','NumberTitle','off');
+ img4 = skin.toRotCompactScaled(img);
+ imageChannels(img4,rotCompactScaledFig);
+ 
  [ img2, img3] = showColorSpaces(img, theta, g, c, allFig);
  yabFig = figure('Name','Skin color space','NumberTitle','off');
  img2 = rgbToSkin(img, double(T), 255, 255, 255);
