@@ -37,12 +37,18 @@ No need for full probabilistic treatment; we're just looking for skin color, no 
 
 
 
-\subsection{Camera}\label{sec:Camera}
+\subsection{Constructing a New Color Space}\label{sec:ConstructingANewColorSpace}
 
+In order to construct a new color space, we need to consider the coordinate system of the new color space, the orientation of the new color space, and the fidelity of the discrete representation of the axes.
 
+The first consideration is most easily decided; because there's little obvious advantage otherwise, we choose a Cartesean coordinate system as this allows for a straightforward transformation involving only rotation, translation and scaling. Because we're interested in the color information in the image, it's useful to design the color space so there is a luminosity axis. This choice determines two of three rotational degrees of freedom, as will be discussed below. 
+
+As for the discrete representation of the axes, it's desired that all the information captured pertaining to a hand should be preserved; all other information is irrelevant. However, here we'll consider only the effect of a rotation and scaling on the discrete representation.
 
 
 \subsubsection{Camera RGB}\label{sec:CameraRGB}
+
+
 
 Due to the hardware being locked down at the application level, we do not have access to the raw camera feed. We do, however, have access to the compressed, post-processing 8-bit RGB image data. The processing involves evening up the color channel senors' sensitivity by way of multiplying each channel by an appropriate correction factor. This is partly why cameras likely have a 10 or 12 bit/channel capture rate, but after accounting for differences in sensitivity, it only outputs in 8-bit color depth.
 
@@ -77,13 +83,29 @@ R_z(\theta) &= \begin{bmatrix}
 \end{alignat}
 
 
-It should be noted that the solutions are not unique; there are many ways in which to rotate an object from one position to another, or use a combination of different rotations to get to same point, so they aren't necessarily unique, but this has no bearing on this project.
+It should be noted that the solutions are not unique; there are many ways in which to rotate an object from one position to another, or use a combination of different rotations to get to the same point, so they aren't necessarily unique, but this has no bearing on this project. So any rotation which orients the RGB color space such that one of the new axes lies along the luminosity direction is sufficient. To achieve this end using rotations about the RGB color space axes requires a rotation in only two of those axes.
 
-Here we assume we're looking for the axis pertaining to the luminosity (e.g. the grayscale luminosity axis, the 'Value' channel in HSV, etc.), which gives us one rotational degree of freedom; we always rotate the space to be vertical, so we always have one rotational degree of freedom left, which is now a rotation about the luminosity axis.
+A rotation which aligns the X axis along the luminosity direction is produced by a rotation of $\frac{\pi}4$ about the Y axis, followed by a rotation of $\arctan{\frac{1}{\sqrt{2}}}$ about the Z axis. This leaves one free rotational degree of freedom about the X axis. The resulting rotation matrix is given by:
 
-Because the absolute values of the axes in the color space have no meaning, we're only interested in the position along the axis relative to its start and end, equivalent to talking about the position in the axis relative to 0 to 1, compared to about 0-255 in unsigned, 8-bit integers. The upside is that if we're rotating the cube about its corner, we're interested in the minimum and maximum values possible along the new axis direction, which will correspond to a corner of the RGB cube.
 
-The rotational value $\theta$ for our free axis was found mathematically, as follows:
+$\left(
+\begin{array}{ccc}
+ \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
+ -\frac{\cos (\theta )}{2}-\frac{1}{2} \sqrt{3} \sin (\theta ) & \cos (\theta ) & \frac{1}{2} \sqrt{3} \sin (\theta )-\frac{\cos (\theta )}{2} \\
+ \frac{\sin (\theta )}{2}-\frac{1}{2} \sqrt{3} \cos (\theta ) & -\sin (\theta ) & \frac{1}{2} \sqrt{3} \cos (\theta )+\frac{\sin (\theta )}{2} \\
+\end{array}
+\right)$
+
+
+Where $\theta$ is the remaining free rotational degree of freedom.
+
+Because the absolute values of the axes in the color space have no meaning, we're only interested in the position along the axis relative to its start and end, equivalent to talking about the position in the axis relative to 0 to 1, compared to about 0-255 in unsigned, 8-bit integers. The upside is that if we're rotating the cube about its corner, we're interested in the minimum and maximum values possible along the new axis direction, which will correspond to a corner of the RGB cube. With the X axis aligned along the luminosity direction, the range of the X axis is 0 to $\sqrt{3}$. The Y and Z axes are symmetrical, spanning a range centered on 0. The range of their values is dependent upon the remaining degree of freedom.
+
+We need to know, in each of the axes, how far out each point is. Because we're effectively rotating a hexagon, whatever the answer is, we know the function is going to be periodic, repeating every $\frac{\pi}{6}$ radians, so we only have to solve it for that.
+
+
+
+The angle $\theta$ for our free axis was found mathematically, as follows:
 
 (Insert Maths)
 
@@ -149,6 +171,8 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 
 
 \section{Pattern Recognition}\label{sec:PatternRecognition}
+
+
 \subsection{Constant Patterns under Mechanical Stresses in the Hand}\label{sec:ConstantPatterns}
 \subsection{Dynamic Patterns under Mechanical Stresses in the Hand}\label{sec:DynamicPatterns}
 \subsubsection{Finger Pad Pressure}\label{sec:FingerPadPressure}
