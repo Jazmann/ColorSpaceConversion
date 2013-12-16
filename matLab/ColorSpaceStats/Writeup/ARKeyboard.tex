@@ -129,10 +129,21 @@ The extent of the new axis is found by taking the maximum and minimum values of 
  \max\left(\pm\frac{\sin (\theta )}{\sqrt{6}}\pm\frac{\cos (\theta )}{\sqrt{2}}, \pm\sqrt{\frac{2}{3}} \sin (\theta ) \right) \quad \text{Where} \quad 0\leq \theta \leq \frac{\pi}{3}
 \end{equation}
 
+Graphically, the problem appears as follows:
 
 \includegraphics{YABCubeEval.eps}
 
+In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the axis ranges are given by the following:
 
+\begin{multline}
+\text{YABAxisRanges}(\theta \_)\text{:=}\\ \left(
+\begin{array}{cc}
+ 0 & \sqrt{3} \\
+ \frac{\sin \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{6}}+\frac{\cos \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{2}} & -\frac{\sin \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{6}}-\frac{\cos \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{2}} \\
+ \frac{\sin \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{6}}+\frac{\cos \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{2}} & -\frac{\sin \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{6}}-\frac{\cos \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{2}} \\
+\end{array}
+\right)
+\end{multline}
 
 \subsubsection{Normalization for Discrete Range}\label{sec:NormalizationForDiscreteRange}
 
