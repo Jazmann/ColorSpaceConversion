@@ -135,15 +135,16 @@ Graphically, the problem appears as follows:
 
 In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the axis ranges are given by the following:
 
-\begin{multline}
-\text{YABAxisRanges}(\theta \_)\text{:=}\\ \left(
-\begin{array}{cc}
- 0 & \sqrt{3} \\
- \frac{\sin \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{6}}+\frac{\cos \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{2}} & -\frac{\sin \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{6}}-\frac{\cos \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{2}} \\
- \frac{\sin \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{6}}+\frac{\cos \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{2}} & -\frac{\sin \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{6}}-\frac{\cos \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{2}} \\
-\end{array}
-\right)
-\end{multline}
+\begin{tabular}{|c|c|c|}
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    & Min & Max \\ \hline
+  X & \(0\) & \(\sqrt{3}\) \\
+  Y & \(-\frac{\sin \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{6}}-\frac{\cos \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{2}}\) & \(\frac{\sin \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{6}}+\frac{\cos \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{2}}\) \\
+  Z & \(-\frac{\sin \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{6}}-\frac{\cos \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{2}} \) & \(\frac{\sin \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{6}}+\frac{\cos \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{2}}\) \\
+  \hline
+\end{tabular}
+
 
 \subsubsection{Normalization for Discrete Range}\label{sec:NormalizationForDiscreteRange}
 
