@@ -103,7 +103,7 @@ Where $\theta$ is the remaining free rotational degree of freedom.
 
 Because the absolute values of the axes in the color space have no meaning, we're only interested in the position along the axis relative to its start and end, equivalent to talking about the position in the axis relative to 0 to 1, compared to about 0-255 in unsigned, 8-bit integers. The upside is that if we're rotating the cube about its corner, we're interested in the minimum and maximum values possible along the new axis direction, which will correspond to a corner of the RGB cube. With the X axis aligned along the luminosity direction, the range of the X axis is 0 to $\sqrt{3}$. The Y and Z axes are symmetrical, spanning a range centered on 0. The range of their values is dependent upon the remaining degree of freedom.
 
-We need to know, in each of the axes, how far out each point is. Because we're effectively rotating a hexagon, whatever the answer is, we know the function is going to be periodic, repeating every $\frac{\pi}{6}$ radians, so we only have to solve it in the 0 to $\frac{\pi}{6}$ region and then generalize. First we take the cooordinates of the RGB cube and perform the rotation to find the values in the new colorspace.
+We need to know, in each of the axes, how far out each point is. Because we're effectively rotating a hexagon, whatever the answer is, we know the function is going to be periodic, repeating every $\frac{\pi}{3}$ radians, so we only have to solve it in the 0 to $\frac{\pi}{3}$ region and then generalize. First we take the cooordinates of the RGB cube and perform the rotation to find the values in the new colorspace.
 
 \begin{multline}\label{YabCube}
   R_{xyz}(\theta)\cdot\left(
@@ -122,9 +122,11 @@ We need to know, in each of the axes, how far out each point is. Because we're e
 \right)
 \end{multline}
 
-The extent of the new axis is found by taking the maximum and minimum values of each row, i.e. the extreme corner positions relative to each new axis.
+The extent of the new axis is found by taking the maximum and minimum values of each row i.e. the extreme corner positions relative to each new axis. An additional symmetry of the hexagonal projection of the RGB cube allows us to say that whatever functional form is taken by one of the $\theta$ dependant ranges the other can be found by a simple phase shift. So recognising that the minimum value is simply $-1$ times the maximum we have simplified the problem to solving
 
-
+\begin{equation}\label{AxisRangeMinMax}
+ \max\left(\pm\frac{\sin (\theta )}{\sqrt{6}}\pm\frac{\cos (\theta )}{\sqrt{2}}, \pm\sqrt{\frac{2}{3}} \sin (\theta ) \right) \quad \text{Where} \quad 0\leq \theta \leq \frac{\pi}{3}
+\end{equation}
 
 
 \subsubsection{Normalization for Discrete Range}\label{sec:NormalizationForDiscreteRange}
