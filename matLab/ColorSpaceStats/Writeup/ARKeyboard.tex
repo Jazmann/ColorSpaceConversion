@@ -165,13 +165,28 @@ R_{xyz}(\theta) = \left(
 
 In order to identify the range of values for the skin space, a large number of skin samples were taken from photographs from the Humane project by Angelica Dass, an ongoing "chromatic inventory" art project which aims to compile every possible human skin color, categorized by the PANTONE guide color classification system. The skin colors catalogued thus far are independent of race or ethnicity, so the samples are representative of human skin tones in general.
 
-We have a directory with all of the skin samples. All of the images show only skin. In accordance to our assumption that luminosity is not a significant factor in our skin model, we then perform the transformation initially with the value of $\theta$ equal to 0. The Matlab code collects frequency data for the rotated color space, incrementing the counts of a three-dimensional array of bins which span the color space.
+The image set consists of approximately 200 skin samples --- each of which shows only skin --- which are placed in a single directory in the file system. In accordance to our assumption that luminosity is not a significant factor in our skin model, we then perform the transformation initially with the value of $\theta$ equal to 0. The Matlab code collects frequency data for the rotated color space, incrementing the counts of a three-dimensional array of bins which span the color space. Viewing the frequency data along each of the three axes reveals that the skin image characteristics are spread widely in luminosity, but are quite confined in hue and saturation as illustrated below:
+
 
 \begin{figure}[h!]
-  \caption{Final bins.}
+  \caption{Initial set of bins.}
   \centering
     \includegraphics[width=\textwidth]{InitialBins.eps}
 \end{figure}
+
+
+Aside from differing lighting, this is consistent with the notion that skin has a distinct pigmentation and justifies our attempt to find an appropriate color space disregarding luminosity. In doing so, the distribution of the skin color characteristics neatly fit into a 2-dimensional Gaussian distribution. The Matlab code produces a fit with a 2-dimensional Gaussian distribution and provides an angle relative to the orientation of the Gaussian fit to the skin sample distribution in the current color space. 
+
+Given that we are free to choose the orientation of the color space about the luminosity axis, the Matlab code allows us to find an orientation of the color space about the luminosity axis in which the distribution can be expressed as a product of 1-dimensional Gaussians. The final resulting distribution is presented in Figure~\ref{fig:ColorSpaceOrientation}.
+
+\begin{figure}[h!]
+  \caption{Color space orientation.}
+  \label{fig:ColorSpaceOrientation}
+  \centering
+    \includegraphics[width=\textwidth]{crosshairFigureFinal.eps}
+\end{figure}
+
+
 
 \begin{figure}[h!]
   \caption{Convergence of the skin space.}
@@ -179,11 +194,6 @@ We have a directory with all of the skin samples. All of the images show only sk
     \includegraphics[width=\textwidth]{ConvergenceOfSkinSpaceFinal.eps}
 \end{figure}
 
-\begin{figure}[h!]
-  \caption{Color space orientation.}
-  \centering
-    \includegraphics[width=\textwidth]{crosshairFigureFinal.eps}
-\end{figure}
 
 \begin{figure}[h!]
   \caption{Rainbowman in a stunning three colors plus the other thing.}
