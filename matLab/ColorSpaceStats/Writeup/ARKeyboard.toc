@@ -10,41 +10,41 @@
 \contentsline {subsubsection}{\numberline {2.2.2}Rotation Matrix}{4}
 \contentsline {subsection}{\numberline {2.3}Skin Statistics}{6}
 \contentsline {subsection}{\numberline {2.4}Preservation of Color Information}{7}
-\contentsline {subsubsection}{\numberline {2.4.1}ERF (Gaussian Error Function)}{8}
-\contentsline {subsubsection}{\numberline {2.4.2}Linear}{10}
-\contentsline {subsubsection}{\numberline {2.4.3}Partition}{12}
-\contentsline {subsection}{\numberline {2.5}Setting up 2-Channel Representation}{12}
-\contentsline {subsection}{\numberline {2.6}Skin Detection}{14}
-\contentsline {subsection}{\numberline {2.7}Putting it All Together}{14}
-\contentsline {subsection}{\numberline {2.8}Physiology Study}{14}
-\contentsline {subsubsection}{\numberline {2.8.1}Pigment vs. Blood}{14}
-\contentsline {subsubsection}{\numberline {2.8.2}Blood Flow}{14}
-\contentsline {subsubsection}{\numberline {2.8.3}Apply the Effect}{14}
-\contentsline {section}{\numberline {3}Pattern Recognition}{14}
-\contentsline {subsection}{\numberline {3.1}Constant Patterns under Mechanical Stresses in the Hand}{14}
-\contentsline {subsection}{\numberline {3.2}Dynamic Patterns under Mechanical Stresses in the Hand}{14}
-\contentsline {subsubsection}{\numberline {3.2.1}Finger Pad Pressure}{14}
-\contentsline {subsubsection}{\numberline {3.2.2}Fingernail Pressure}{14}
-\contentsline {subsection}{\numberline {3.3}Pattern Recognition Techniques in OpenCV}{14}
-\contentsline {subsection}{\numberline {3.4}Implementation of Pattern Recognition using OpenCV on an iPhone}{14}
-\contentsline {subsection}{\numberline {3.5}Refining the Target Area for Search}{14}
-\contentsline {subsubsection}{\numberline {3.5.1}Blob Detection}{14}
-\contentsline {subsubsection}{\numberline {3.5.2}Hand Posture Prediction}{14}
-\contentsline {subsubsection}{\numberline {3.5.3}Dynamic Tracking}{14}
-\contentsline {section}{\numberline {4}The Fingertip Mechanical Stress Detection App}{14}
-\contentsline {subsection}{\numberline {4.1}OpenCV Integration with iOS}{14}
-\contentsline {subsubsection}{\numberline {4.1.1}C++11 and OpenCV}{14}
-\contentsline {subsubsection}{\numberline {4.1.2}Integrating C++11, OpenCV and iOS Data Types}{14}
-\contentsline {subsubsection}{\numberline {4.1.3}Using Parallel Processing in OpenCV and iOS}{14}
-\contentsline {subsubsection}{\numberline {4.1.4}Implementing Working Data Types Efficiently in OpenCV}{14}
-\contentsline {subsection}{\numberline {4.2}Dynamic vs. Static Statistics}{14}
-\contentsline {subsubsection}{\numberline {4.2.1}Color Space Dynamically Updated Statistics}{14}
-\contentsline {subsubsection}{\numberline {4.2.2}Updating the Pattern Recognition Model for Specific Individuals}{14}
-\contentsline {subsubsection}{\numberline {4.2.3}Updating the Mechanical Stress Models to Account for Environment}{14}
-\contentsline {subsection}{\numberline {4.3}Balancing the processor load}{14}
-\contentsline {subsubsection}{\numberline {4.3.1}Frame Rate Capture vs. Frame Processing Rate}{14}
-\contentsline {subsubsection}{\numberline {4.3.2}Background Processes}{14}
-\contentsline {subsubsection}{\numberline {4.3.3}Updating the Hand Posture Model}{14}
-\contentsline {subsubsection}{\numberline {4.3.4}Updating the Color Space Model}{14}
-\contentsline {subsubsection}{\numberline {4.3.5}Updating the Scene Background Model}{14}
-\contentsline {section}{\numberline {5}Future Work and Discussion}{14}
+\contentsline {subsubsection}{\numberline {2.4.1}ERF (Gaussian Error Function)}{10}
+\contentsline {subsubsection}{\numberline {2.4.2}Linear}{12}
+\contentsline {subsubsection}{\numberline {2.4.3}Partition}{13}
+\contentsline {subsection}{\numberline {2.5}Setting up 2-Channel Representation}{14}
+\contentsline {subsection}{\numberline {2.6}Skin Detection}{15}
+\contentsline {subsection}{\numberline {2.7}Putting it All Together}{15}
+\contentsline {subsection}{\numberline {2.8}Physiology Study}{15}
+\contentsline {subsubsection}{\numberline {2.8.1}Pigment vs. Blood}{15}
+\contentsline {subsubsection}{\numberline {2.8.2}Blood Flow}{15}
+\contentsline {subsubsection}{\numberline {2.8.3}Apply the Effect}{15}
+\contentsline {section}{\numberline {3}Pattern Recognition}{15}
+\contentsline {subsection}{\numberline {3.1}Constant Patterns under Mechanical Stresses in the Hand}{15}
+\contentsline {subsection}{\numberline {3.2}Dynamic Patterns under Mechanical Stresses in the Hand}{15}
+\contentsline {subsubsection}{\numberline {3.2.1}Finger Pad Pressure}{15}
+\contentsline {subsubsection}{\numberline {3.2.2}Fingernail Pressure}{15}
+\contentsline {subsection}{\numberline {3.3}Pattern Recognition Techniques in OpenCV}{15}
+\contentsline {subsection}{\numberline {3.4}Implementation of Pattern Recognition using OpenCV on an iPhone}{15}
+\contentsline {subsection}{\numberline {3.5}Refining the Target Area for Search}{15}
+\contentsline {subsubsection}{\numberline {3.5.1}Blob Detection}{15}
+\contentsline {subsubsection}{\numberline {3.5.2}Hand Posture Prediction}{15}
+\contentsline {subsubsection}{\numberline {3.5.3}Dynamic Tracking}{15}
+\contentsline {section}{\numberline {4}The Fingertip Mechanical Stress Detection App}{15}
+\contentsline {subsection}{\numberline {4.1}OpenCV Integration with iOS}{15}
+\contentsline {subsubsection}{\numberline {4.1.1}C++11 and OpenCV}{15}
+\contentsline {subsubsection}{\numberline {4.1.2}Integrating C++11, OpenCV and iOS Data Types}{15}
+\contentsline {subsubsection}{\numberline {4.1.3}Using Parallel Processing in OpenCV and iOS}{15}
+\contentsline {subsubsection}{\numberline {4.1.4}Implementing Working Data Types Efficiently in OpenCV}{15}
+\contentsline {subsection}{\numberline {4.2}Dynamic vs. Static Statistics}{15}
+\contentsline {subsubsection}{\numberline {4.2.1}Color Space Dynamically Updated Statistics}{15}
+\contentsline {subsubsection}{\numberline {4.2.2}Updating the Pattern Recognition Model for Specific Individuals}{15}
+\contentsline {subsubsection}{\numberline {4.2.3}Updating the Mechanical Stress Models to Account for Environment}{15}
+\contentsline {subsection}{\numberline {4.3}Balancing the processor load}{15}
+\contentsline {subsubsection}{\numberline {4.3.1}Frame Rate Capture vs. Frame Processing Rate}{15}
+\contentsline {subsubsection}{\numberline {4.3.2}Background Processes}{15}
+\contentsline {subsubsection}{\numberline {4.3.3}Updating the Hand Posture Model}{15}
+\contentsline {subsubsection}{\numberline {4.3.4}Updating the Color Space Model}{15}
+\contentsline {subsubsection}{\numberline {4.3.5}Updating the Scene Background Model}{15}
+\contentsline {section}{\numberline {5}Future Work and Discussion}{15}
