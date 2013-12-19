@@ -177,22 +177,29 @@ The image set consists of approximately 200 skin samples --- each of which shows
 
 Aside from differing lighting, this is consistent with the notion that skin has a distinct pigmentation and justifies our attempt to find an appropriate color space disregarding luminosity. In doing so, the distribution of the skin color characteristics neatly fit into a 2-dimensional Gaussian distribution. The Matlab code produces a fit with a 2-dimensional Gaussian distribution and provides an angle relative to the orientation of the Gaussian fit to the skin sample distribution in the current color space. 
 
-Given that we are free to choose the orientation of the color space about the luminosity axis, the Matlab code allows us to find an orientation of the color space about the luminosity axis in which the distribution can be expressed as a product of 1-dimensional Gaussians. The final resulting distribution is presented in Figure~\ref{fig:ColorSpaceOrientation}.
+Given that we are free to choose the orientation of the color space about the luminosity axis, the Matlab code allows us to find an orientation $\theta$ of the color space about the luminosity axis in which the distribution can be expressed as a product of 1-dimensional Gaussians along the axes. The final resulting distribution is presented in Figure~\ref{fig:DistributionAndGaussianFit}.
+
 
 \begin{figure}[h!]
-  \caption{Color space orientation.}
-  \label{fig:ColorSpaceOrientation}
+  \caption{Distribution and Gaussian fit to the chromatic pixel values in the new color space.}
+  \label{fig:DistributionAndGaussianFit}
   \centering
     \includegraphics[width=\textwidth]{crosshairFigureFinal.eps}
 \end{figure}
 
 
+For numerical reasons, the value for $\theta$ was found iteratively by performing the color space transformation and the statistical fit until the value for $\theta$ converged. (See Figure~\ref{fig:ConvergenceTheta}.)
+
 
 \begin{figure}[h!]
-  \caption{Convergence of the skin space.}
+  \caption{Convergence of color space orientation $\theta$.}
+  \label{fig:ConvergenceTheta}
   \centering
     \includegraphics[width=\textwidth]{ConvergenceOfSkinSpaceFinal.eps}
 \end{figure}
+
+
+
 
 
 \begin{figure}[h!]
@@ -228,16 +235,16 @@ Given that we are free to choose the orientation of the color space about the lu
 
 \subsection{Preservation of Color Information}\label{sec:PreservationOfColorInformation}
 
-The goal of C++ and matlab code that's written to do this is to take a value a theta (free rotational parameter) and give the new color space in which each axis fits in the scale 0 to 1. Describe routines and how they function.
+The goal of the algorithm is to preserve all the information captured by the camera which relates to skin whilst discarding as much of the irrelevant information as possible. Given that edges and features often present as shadows and highlights, all the information captured in terms of luminosity will be regarded as relevant information, at least as far as the manipulation of individual pixel values is concerned. Considering the chromatic information, the importance of the pixel value will be directly determined by the Gaussian distribution found previously.
 
 Knowing the range at which it's going to come out allows us to deal with underflow and overflow; convert to any data type we want. (No point in converting to ). Axes are longer, the worst being the luminosity channel, which equates to $\sqrt(3)$. We're effectively squashing that into a range from 0 to 1. We'll lose some of its information as a result. If we wanted to keep it, we could, by putting it into a larger data type, i.e. 8uint, put axis in 16uint. Or we could truncate values, redistribute values by some function. And that's what the ERF is.
 
-None of the axes have lengths less that 0 to 1. For this reason we've written redistribute functions which does the type conversion where the info loss occurs and also so they keep the information in a controlled way, so we can keep the info where it's needed and discard it where it's irrelevant. So although this is strictly beyond the normal meaning of a color space conversion, it is addressing a connected issue and belongs in the conversion. And it's the only place this can be done without ruining things, keeping the details of colors of duck's feathers as hues and tones of human skin, for example.
+None of the axes have lengths less than 0 to 1. For this reason we've written redistribute functions which does the type conversion where the info loss occurs and also so they keep the information in a controlled way, so we can keep the info where it's needed and discard it where it's irrelevant. So although this is strictly beyond the normal meaning of a color space conversion, it is addressing a connected issue and belongs in the conversion. And it's the only place this can be done without ruining things, keeping the details of colors of duck's feathers as hues and tones of human skin, for example.
 
-We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the gaussian, and then progressively discard the information as it falls into the tails of the gaussian. So, it provides a non-linear distribution of the information. The gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
+We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative Gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the Gaussian, and then progressively discard the information as it falls into the tails of the Gaussian. So, it provides a non-linear distribution of the information. The Gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
 
 \subsubsection{ERF (Gaussian Error Function)}\label{sec:ERF}
-We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the gaussian, and then progressively discard the information as it falls into the tails of the gaussian. So, it provides a non-linear distribution of the information. The gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
+We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative Gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the Gaussian, and then progressively discard the information as it falls into the tails of the Gaussian. So, it provides a non-linear distribution of the information. The Gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
 
 \subsubsection{Linear}\label{sec:Linear}
 The next type is more simply to use a linear redistribution. We center it on the point of maximum interest, assuming there is some gaussian type interest in the information, then use the straight line equation, and the gradient of that line will be the gradient of the error function at that point, which is the mean value of the gaussian. But of course, this does not redistribute data away from the center point in the same manner of a selective gaussian, but it is much faster and simpler to implement than the ERF. However, certain values which cross the maximum and minimum of the target range are effectively lost.
