@@ -292,7 +292,7 @@ Considering the preservation of information captured, mappings with a gradient g
 
 There are a variety of approximations to the error function. (Describe which one was chosen here.)
 
-To construct a distribution function, we first need to describe the relationship of the error function to the Gaussian fit, and then produce a function with the appropriate range and domain. For a Gaussian fit with an amplitude A, a mean of $\mu$, and a standard deviation of $\sigma$, where $\mu$ and x lie in a source range sMin to sMax. The cumulative distribution is found by integrating from sMin to the point x, as can be seen below:
+To construct a distribution function, we first need to describe the relationship of the error function to the Gaussian fit, and then produce a function with the appropriate range and domain. For a Gaussian fit with an amplitude A, a mean of $\mu$, and a standard deviation of $\sigma$, where $\mu$ and x lie in a source range sMin to sMax. The cumulative distribution is found by integrating from sMin to the point x, as can be seen in (\ref{ErfDefinition}):
 
 \begin{equation}\label{ErfDefinition}
   \int _{\text{sMin}}^{\text{x}} A \frac{e^{-\frac{(t-\mu )^2}{2 \sigma ^2}}}{\sqrt{2 \pi } \sigma }dt=\frac{1}{2} A \left(\text{erf}\left(\frac{\text{x}-\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\text{sMin}-\mu }{\sqrt{2} \sigma }\right)\right)
