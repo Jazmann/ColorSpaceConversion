@@ -1,0 +1,208 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[numbers, sort&compress]{natbib}
+\usepackage{graphicx}
+\author{Nayef Al-Saud}
+\title{AR Keyboard}
+\begin{document}
+\newcommand{\fig}{fig. }
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}\label{sec:Introduction}
+
+\section{Color-spaces and information storage for computer vision processing}\label{sec:ColorSpacesAndInfoStorageForComputerVisionProcessing}
+
+\subsection{Overview of ColorSpaces}\label{sec:OverviewOfColorSpaces}
+
+No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.)
+
+
+
+\subsubsection{LAB}\label{sec:LAB}
+
+
+\subsubsection{RGB}\label{sec:RGB}
+
+\subsubsection{HSV}\label{sec:HSV}
+
+\subsubsection{YCbCr}\label{sec:YCbCr}
+
+
+
+\subsection{Constructing a New Color Space}\label{sec:ConstructingANewColorSpace}
+
+In order to construct a new color space, we need to consider the coordinate system of the new color space, the orientation of the new color space, and the fidelity of the discrete representation of the axes.
+
+The first consideration is most easily decided; because there's little obvious advantage otherwise, we choose a Cartesean coordinate system as this allows for a straightforward transformation involving only rotation, translation and scaling. Because we're interested in the color information in the image, it's useful to design the color space so there is a luminosity axis. This choice determines two of three rotational degrees of freedom, as will be discussed below.
+
+As for the discrete representation of the axes, it's desired that all the information captured pertaining to a hand should be preserved; all other information is irrelevant. However, here we'll consider only the effect of a rotation and scaling on the discrete representation.
+
+
+\subsubsection{Camera RGB}\label{sec:CameraRGB}
+
+
+
+Due to the hardware being locked down at the application level, we do not have access to the raw camera feed. We do, however, have access to the compressed, post-processing 8-bit RGB image data. The processing involves evening up the color channel senors' sensitivity by way of multiplying each channel by an appropriate correction factor. This is partly why cameras likely have a 10 or 12 bit/channel capture rate, but after accounting for differences in sensitivity, it only outputs in 8-bit color depth.
+
+The three-color RGB channel sensors commonly found in CCD cameras are based on how the human eye perceives colors. But in physical reality, light is actually hitting the camera as a continuous spectrum. Since it's impossible to map an infinite set of gaussians to it, we instead use some function which, for any frequency, will give the intensity of the light hitting the point at that frequency. This function is expanded in the basis set of three gaussians with mean values centered on the RGB frequencies. This model is used in cameras because the main purpose of cameras -- until recent times -- has been to capture images for human viewing. And while the RGB gaussian basis model is perfectly suited for capturing all the scene information which humans can perceive, it is not a complete representation.
+
+Because we're searching for particular points in the real color space -- which, being a continuous function, is infinite dimensional -- there is a possibility in the future that larger multi-channel color spaces will be much more common, such as the 8-channel color spaces currently in development. Though most such cameras are primarily designed for post-production editing for still pictures and film (e.g. changing the lighting independent of the scene), as well as visual effects, the possibilities for computer vision are exciting. However, computer vision tasks are computationally intensive, and more often than not require operation in real time, so there is a natural inclination to shy away from large data sets in practical computer vision applications; many tasks are done in grayscale or single channel processing to expedite the process.
+
+As such, there is a need to develop techniques which keep the relevant information while quickly and efficiently discarding the irrelevant information. This is true for the RGB space at the moment, and the aim of this first part of the work.
+
+
+\subsubsection{Rotation Matrix}\label{sec:RotationMatrix}
+
+Any rotation about an axis can be represented by a matrix. Such rotations can be expressed as a 3x3 square matrix in a 3D space. Since they are generally invertible, they're guaranteed to be non-singular. For this application, we require rotation about three different axes, which can be expressed thus:
+
+
+\begin{alignat}{1}
+R_x(\theta) &= \begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos \theta &  -\sin \theta \\[3pt]
+0 & \sin \theta  &  \cos \theta \\[3pt]
+\end{bmatrix} \\[6pt]
+R_y(\theta) &= \begin{bmatrix}
+\cos \theta & 0 & \sin \theta \\[3pt]
+0 & 1 & 0 \\[3pt]
+-\sin \theta & 0 & \cos \theta \\
+\end{bmatrix} \\[6pt]
+R_z(\theta) &= \begin{bmatrix}
+\cos \theta &  -\sin \theta & 0 \\[3pt]
+\sin \theta & \cos \theta & 0\\[3pt]
+0 & 0 & 1\\
+\end{bmatrix}
+\end{alignat}
+
+
+It should be noted that the solutions are not unique; there are many ways in which to rotate an object from one position to another, or use a combination of different rotations to get to the same point, so they aren't necessarily unique, but this has no bearing on this project. So any rotation which orients the RGB color space such that one of the new axes lies along the luminosity direction is sufficient. To achieve this end using rotations about the RGB color space axes requires a rotation in only two of those axes.
+
+A rotation which aligns the X axis along the luminosity direction is produced by a rotation of $\frac{\pi}4$ about the Y axis, followed by a rotation of $\arctan{\frac{1}{\sqrt{2}}}$ about the Z axis. This leaves one free rotational degree of freedom about the X axis. The resulting rotation matrix is given by:
+
+\begin{equation}
+R_{xyz}(\theta) =
+\left(
+\begin{array}{ccc}
+ \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
+ -\frac{\cos (\theta )}{2}-\frac{1}{2} \sqrt{3} \sin (\theta ) & \cos (\theta ) & \frac{1}{2} \sqrt{3} \sin (\theta )-\frac{\cos (\theta )}{2} \\
+ \frac{\sin (\theta )}{2}-\frac{1}{2} \sqrt{3} \cos (\theta ) & -\sin (\theta ) & \frac{1}{2} \sqrt{3} \cos (\theta )+\frac{\sin (\theta )}{2} \\
+\end{array}
+\right)
+\end{equation}
+
+
+Where $\theta$ is the remaining free rotational degree of freedom.
+
+Because the absolute values of the axes in the color space have no meaning, we're only interested in the position along the axis relative to its start and end, equivalent to talking about the position in the axis relative to 0 to 1, compared to about 0-255 in unsigned, 8-bit integers. The upside is that if we're rotating the cube about its corner, we're interested in the minimum and maximum values possible along the new axis direction, which will correspond to a corner of the RGB cube. With the X axis aligned along the luminosity direction, the range of the X axis is 0 to $\sqrt{3}$. The Y and Z axes are symmetrical, spanning a range centered on 0. The range of their values is dependent upon the remaining degree of freedom.
+
+We need to know, in each of the axes, how far out each point is. Because we're effectively rotating a hexagon, whatever the answer is, we know the function is going to be periodic, repeating every $\frac{\pi}{6}$ radians, so we only have to solve it in the 0 to $\frac{\pi}{6}$ region and then generalize. 
+
+
+
+
+\subsubsection{Normalization for Discrete Range}\label{sec:NormalizationForDiscreteRange}
+
+Using the standard rotation matrices, we get a luminosity axis from 0 to $\sqrt(3)$. However, the length of the two remaining axes are dependent on the value of $\theta$ used. This is a problem because, ultimately, we want the axes to fit in a range of an appropriate data type. It would be more useful to have a matrix which provided the specified rotation and scaled the axis to known lengths. In the case of the luminosity, this is straightforward; simply divide by $\sqrt(3)$. In the case of the other two axes, we need an explicit form for the lengths of the axis resulting from the rotation.
+
+(insert maths here)
+
+\subsection{Skin Statistics}\label{sec:SkinStatistics}
+
+In order to identify the range of values for the skin space, a large number of skin samples were taken from photographs from the Humane project by Angelica Dass, an ongoing "chromatic inventory" art project which aims to compile every possible human skin color, categorized by the PANTONE guide color classification system. The skin colors catalogued thus far are independent of race or ethnicity, so the samples are something-or-other.
+
+
+\subsection{Preservation of Color Information}\label{sec:PreservationOfColorInformation}
+
+The goal of C++ and matlab code that's written to do this is to take a value a theta (free rotational parameter) and give the new color space in which each axis fits in the scale 0 to 1. Describe routines and how they function.
+
+Knowing the range at which it's going to come out allows us to deal with underflow and overflow; convert to any data type we want. (No point in converting to ). Axes are longer, the worst being the luminosity channel, which equates to $\sqrt(3)$. We're effectively squashing that into a range from 0 to 1. We'll lose some of its information as a result. If we wanted to keep it, we could, by putting it into a larger data type, i.e. 8uint, put axis in 16uint. Or we could truncate values, redistribute values by some function. And that's what the ERF is.
+
+None of the axes have lengths less that 0 to 1. For this reason we've written redistribute functions which does the type conversion where the info loss occurs and also so they keep the information in a controlled way, so we can keep the info where it's needed and discard it where it's irrelevant. So although this is strictly beyond the normal meaning of a color space conversion, it is addressing a connected issue and belongs in the conversion. And it's the only place this can be done without ruining things, keeping the details of colors of duck's feathers as hues and tones of human skin, for example.
+
+We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the gaussian, and then progressively discard the information as it falls into the tails of the gaussian. So, it provides a non-linear distribution of the information. The gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
+
+\subsubsection{ERF (Gaussian Error Function)}\label{sec:ERF}
+We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways we're going to implement as redistribution functions: one is to use the integral of the cumulative gaussian (i.e. Error Function). It allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis, which will serve the mean of the gaussian, and then progressively discard the information as it falls into the tails of the gaussian. So, it provides a non-linear distribution of the information. The gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply that the computational effort involved in generating the error function. There are a variety of approximations to the error function. (Describe which one was chosen here.)
+
+\subsubsection{Linear}\label{sec:Linear}
+The next type is more simply to use a linear redistribution. We center it on the point of maximum interest, assuming there is some gaussian type interest in the information, then use the straight line equation, and the gradient of that line will be the gradient of the error function at that point, which is the mean value of the gaussian. But of course, this does not redistribute data away from the center point in the same manner of a selective gaussian, but it is much faster and simpler to implement than the ERF. However, certain values which cross the maximum and minimum of the target range are effectively lost.
+
+\subsubsection{Partition}\label{sec:Partition}
+The third manner of redistribution is assuming a a unit gradient, assuming that the source and destination are the same. This method discards any information in the axis outside a certain range.
+
+We will likely partition for the white/black axis, apply the linear redistribution for the distribution function on the axis which has the very low value of standard deviation, and the ERF for the axis which contains most of the variation for skin color.
+
+(Insert graphs and data here)
+
+\subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
+We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
+
+Another method of dealing with that is set the max grad in the ERF. Don't use piecewise, just use ERF and scale the destination so it fits. By dividing the max value by the max gradient of ERF (The ERF evaluated at center point.), it becomes more horizontal, until it has a grad of 1. Advantage is not dealing with piecewise function, mathematically consistent, disadvantage is that also squash out a lot of the ERF behavior and a lot of the info we wanted to keep on either side of that value. The only place it keeps info is bang in the center; everywhere else is losing info.
+
+Finally we could compromise by finding the closest datatype which fits the amount of info into the retained range. It's not actually the amount of information that is retained, so it's accepting a bit of looseness in the data packing of that type, even if we found a perfect fit. For the datatype closest to info we want to retain, we then scale as in the second method.
+
+The reason we're talking about bit depth and not byte depth (fitting into the closest power of 2) is that it allows us to easily combine with the bits in a second channel; fitting both channels into one data type. It's difficult to predict what it will look like, since we're combining two channels into one, but it's the most efficient way of combining the two, turning it into a one-channel problem. However, now two colors that were once close to each other will end up separated. Seeing as all the information is there, though, this may not matter. The question is if all the data is usable in this form.
+
+
+
+\subsection{Skin Detection}\label{sec:SkinDetection}
+
+\subsection{Putting it All Together}\label{sec:PuttingItAllTogether}
+
+\subsection{Physiology Study}\label{sec:PhysiologyStudy}
+
+\subsubsection{Pigment vs. Blood}\label{sec:PigmentVs.Blood}
+
+\subsubsection{Blood Flow}\label{sec:BloodFlow}
+
+\subsubsection{Apply the Effect}\label{sec:ApplyTheEffect}
+
+
+\section{Pattern Recognition}\label{sec:PatternRecognition}
+
+
+\subsection{Constant Patterns under Mechanical Stresses in the Hand}\label{sec:ConstantPatterns}
+\subsection{Dynamic Patterns under Mechanical Stresses in the Hand}\label{sec:DynamicPatterns}
+\subsubsection{Finger Pad Pressure}\label{sec:FingerPadPressure}
+\subsubsection{Fingernail Pressure}\label{sec:FingernailPressure}
+\subsection{Pattern Recognition Techniques in OpenCV}\label{sec:PaternRecognitionOpenCV}
+\subsection{Implementation of Pattern Recognition using OpenCV on an iPhone}\label{sec:ImplementationOnIPhone}
+
+\subsection{Refining the Target Area for Search}\label{sec:RefiningTargetAreaForSearch}
+\subsubsection{Blob Detection}\label{sec:BlobDetection}
+\subsubsection{Hand Posture Prediction}\label{sec:HandPosturePrediction}
+\subsubsection{Dynamic Tracking}\label{sec:DynamicTracking}
+\section{The Fingertip Mechanical Stress Detection App}\label{sec:FingertipMechanicalStressDetectionApp}
+\subsection{OpenCV Integration with iOS}\label{sec:OpenCVIntegrationWithIOS}
+\subsubsection{C++11 and OpenCV}\label{sec:C++11AndOpenCV}
+\subsubsection{Integrating C++11, OpenCV and iOS Data Types}\label{sec:IntegratingC++11AndIOSDataTypes}
+\subsubsection{Using Parallel Processing in OpenCV and iOS}\label{sec:ParallelProcessingInOpenCVAndIOS}
+\subsubsection{Implementing Working Data Types Efficiently in OpenCV}\label{sec:ImplementingDataTypesEfficientlyOpenCV}
+\subsection{Dynamic vs. Static Statistics}\label{sec:DynamicVsStaticStatistics}
+\subsubsection{Color Space Dynamically Updated Statistics}\label{sec:ColorSpaceDynamicallyUpdatedStatistics}
+\subsubsection{Updating the Pattern Recognition Model for Specific Individuals}\label{sec:UpdatingPatternRecognitionModelForSpecificIndividuals}
+\subsubsection{Updating the Mechanical Stress Models to Account for Environment}\label{sec:UpdatingMechanicalStressModelsToAccountForEnvironment}
+\subsection{Balancing the processor load}\label{sec:BalancingTheProcessorLoad}
+\subsubsection{Frame Rate Capture vs. Frame Processing Rate}\label{sec:FrameRateCaptureVsFrameProcessingRate}
+\subsubsection{Background Processes}\label{sec:BackgroundProcesses}
+\subsubsection{Updating the Hand Posture Model}\label{sec:UpdatingTheHandPostureModel}
+\subsubsection{Updating the Color Space Model}\label{sec:UpdatingTheColorSpaceModel}
+\subsubsection{Updating the Scene Background Model}\label{sec:UpdatingTheSceneBackgroundModel}
+
+
+\section{Future Work and Discussion}\label{sec:FutureWorkAndDiscussion}
+
+
+\bibliographystyle{unsrtnat}
+\bibliography{ARKeyboard}
+
+
+\end{document}
