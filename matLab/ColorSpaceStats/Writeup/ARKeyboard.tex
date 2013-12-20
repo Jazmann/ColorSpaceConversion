@@ -313,9 +313,15 @@ First, we determine the maximum value taken in the domain. This is simply found 
   dis(x) = \frac{(\text{dMax}-\text{dMin}) \left(\text{erf}\left(\frac{x-\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\text{sMin}-\mu }{\sqrt{2} \sigma }\right)\right)}{\text{erf}\left(\frac{\text{sMax}-\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\text{sMin}-\mu }{\sqrt{2} \sigma }\right)}+\text{dMin}
 \end{equation}
 
-We will likely partition for the white/black axis, apply the linear redistribution for the distribution function on the axis which has the very low value of standard deviation, and the ERF for the axis which contains most of the variation for skin color.
+Mathematically, this distribution function~(\ref{eq:disFunction}) achieves all the stated objectives. However, on a device we are dealing with discrete numerics and limited processing power, so further analysis is required. Where we're using a discrete domain and range, the distribution is usefully divided into three characteristic behaviors:  where it is constant, where it preserves all the information, and where it selectively preserves information. Looking at the distribution, this divides the source domain into five regions: two where it is effectively constant, two where it is selective, and one region around the mean where it preserves all the information. In order to design an efficient algorithm, it is useful to identify the boundaries of these five regions.
 
-(Insert graphs and data here)
+\begin{equation}\label{eq:Boundaries}
+\frac{2 g e^{-g^2 (u-x)^2}}{\sqrt{\pi } (\text{erf}(u g)+\text{erf}(g-u g))}=\frac{\text{dRange}}{\text{sRange}}
+\end{equation}
+
+
+
+The next number we need is where one unit change in the source produces one unit change in the destination.
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
