@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    353528,      13714]
-NotebookOptionsPosition[    347162,      13526]
-NotebookOutlinePosition[    347638,      13545]
-CellTagsIndexPosition[    347595,      13542]
+NotebookDataLength[    353439,      13658]
+NotebookOptionsPosition[    346921,      13465]
+NotebookOutlinePosition[    347399,      13484]
+CellTagsIndexPosition[    347356,      13481]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -101,9 +101,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   StyleBox[
-   RowBox[{"Get", "::", "noopen"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Cannot open \[NoBreak]\\!\\(\\\"MathWorld`Platonic`\\\"\\)\
+   RowBox[{"Get", "::", "noopen"}], "MessageName"], ":", 
+  " ", "\<\"Cannot open \[NoBreak]\\!\\(\\\"MathWorld`Platonic`\\\"\\)\
 \[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
 ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/message/General/noopen\\\", ButtonNote -> \
@@ -127,50 +126,54 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"Graphics3D", "[", 
      RowBox[{
-      RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{"{", 
        RowBox[{
         RowBox[{
-         RowBox[{"Polyhedron", "[", "Cube", "]"}], "/.", 
+         RowBox[{"PolyhedronData", "[", "\"\<Cube\>\"", "]"}], "/.", 
+         "\[VeryThinSpace]", 
          RowBox[{
           RowBox[{"Polygon", "[", "x_", "]"}], "\[RuleDelayed]", 
           RowBox[{"Polygon", "[", 
            RowBox[{
-            RowBox[{
+            RowBox[{"(", 
              RowBox[{
-              RowBox[{"r", "[", "a", "]"}], ".", "#"}], "&"}], "/@", "x"}], 
-           "]"}]}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"r", "[", "a", "]"}], ".", "#1"}], "&"}], ")"}], "/@", 
+            "x"}], "]"}]}]}], ",", 
         RowBox[{"{", 
          RowBox[{"Red", ",", 
-          RowBox[{"Thickness", "[", ".02", "]"}], ",", 
+          RowBox[{"Thickness", "[", "0.02`", "]"}], ",", 
           RowBox[{
-           RowBox[{
-            RowBox[{"Line", "[", 
-             RowBox[{"{", 
-              RowBox[{
-               RowBox[{"{", 
-                RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", "#"}], "}"}], 
-             "]"}], "&"}], "/@", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Line", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", "#1"}], "}"}],
+               "]"}], "&"}], ")"}], "/@", 
            RowBox[{"IdentityMatrix", "[", "3", "]"}]}]}], "}"}], ",", 
-        "\[IndentingNewLine]", 
-        RowBox[{
+        RowBox[{"Apply", "[", 
          RowBox[{
-          RowBox[{"Text", "[", 
-           RowBox[{"#1", ",", 
-            RowBox[{"1.1", "#2"}], ",", 
-            RowBox[{"TextStyle", "\[Rule]", 
+          RowBox[{"Function", "[", 
+           RowBox[{
+            RowBox[{"Text", "[", 
+             RowBox[{"#1", ",", 
+              RowBox[{"1.1`", " ", "#2"}]}], "]"}], ",", 
+            RowBox[{"BaseStyle", "\[Rule]", 
              RowBox[{"{", 
               RowBox[{
-               RowBox[{"FontFamily", "->", "\"\<Times\>\""}], ",", 
-               RowBox[{"FontSlant", "->", "\"\<Italic\>\""}]}], "}"}]}]}], 
-           "]"}], "&"}], "@@@", 
-         RowBox[{"Transpose", "[", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"{", 
-             RowBox[{"\"\<x\>\"", ",", "\"\<y\>\"", ",", "\"\<z\>\""}], "}"}],
-             ",", 
-            RowBox[{"IdentityMatrix", "[", "3", "]"}]}], "}"}], "]"}]}]}], 
-       "\[IndentingNewLine]", "}"}], ",", "opts", ",", 
+               RowBox[{"FontFamily", "\[Rule]", "\"\<Times\>\""}], ",", 
+               RowBox[{"FontSlant", "\[Rule]", "\"\<Italic\>\""}]}], 
+              "}"}]}]}], "]"}], ",", 
+          RowBox[{"Transpose", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"\"\<x\>\"", ",", "\"\<y\>\"", ",", "\"\<z\>\""}], 
+              "}"}], ",", 
+             RowBox[{"IdentityMatrix", "[", "3", "]"}]}], "}"}], "]"}], ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}]}], "}"}], ",", "opts", ",", 
       RowBox[{"ViewPoint", "\[Rule]", 
        RowBox[{"{", 
         RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], ",", 
@@ -180,21 +183,22 @@ Cell[BoxData[
         RowBox[{
          RowBox[{"{", 
           RowBox[{
-           RowBox[{"-", ".7"}], ",", "1"}], "}"}], ",", 
+           RowBox[{"-", "0.7`"}], ",", "1"}], "}"}], ",", 
          RowBox[{"{", 
           RowBox[{
-           RowBox[{"-", ".7"}], ",", "1"}], "}"}], ",", 
+           RowBox[{"-", "0.7`"}], ",", "1"}], "}"}], ",", 
          RowBox[{"{", 
           RowBox[{
-           RowBox[{"-", ".7"}], ",", "1"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+           RowBox[{"-", "0.7`"}], ",", "1"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+    
     RowBox[{"{", 
      RowBox[{"a", ",", "0", ",", 
       RowBox[{
-       RowBox[{"Pi", "/", "2"}], "-", 
-       RowBox[{
-        RowBox[{"Pi", "/", "2"}], "/", "10"}]}], ",", 
-      RowBox[{
-       RowBox[{"Pi", "/", "2"}], "/", "10"}]}], "}"}]}], "]"}]}]], "Input",
+       FractionBox["\[Pi]", "2"], "-", 
+       FractionBox["\[Pi]", 
+        RowBox[{"2", " ", "10"}]]}], ",", 
+      FractionBox["\[Pi]", 
+       RowBox[{"2", " ", "10"}]]}], "}"}]}], "]"}]}]], "Input",
  InitializationCell->True]
 }, Open  ]],
 
@@ -226,22 +230,20 @@ Cell[BoxData[
  RowBox[{"Show", "[", 
   RowBox[{
    RowBox[{"Graphics", "[", 
-    RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{"{", 
      RowBox[{
       RowBox[{"Arrow", "[", 
        RowBox[{
         RowBox[{"{", 
          RowBox[{"0", ",", "0"}], "}"}], ",", 
         RowBox[{"{", 
-         RowBox[{"1", ",", "0"}], "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
-      
+         RowBox[{"1", ",", "0"}], "}"}]}], "]"}], ",", 
       RowBox[{"Arrow", "[", 
        RowBox[{
         RowBox[{"{", 
          RowBox[{"0", ",", "0"}], "}"}], ",", 
         RowBox[{"{", 
-         RowBox[{"0", ",", "1"}], "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
-      
+         RowBox[{"0", ",", "1"}], "}"}]}], "]"}], ",", 
       RowBox[{"{", 
        RowBox[{"Red", ",", 
         RowBox[{"Arrow", "[", 
@@ -249,92 +251,86 @@ Cell[BoxData[
           RowBox[{"{", 
            RowBox[{"0", ",", "0"}], "}"}], ",", 
           RowBox[{
-           RowBox[{"m", "[", ".4", "]"}], ".", 
+           RowBox[{"m", "[", "0.4`", "]"}], ".", 
            RowBox[{"{", 
-            RowBox[{".9", ",", "0"}], "}"}]}]}], "]"}]}], "}"}], ",", 
-      "\[IndentingNewLine]", 
+            RowBox[{"0.9`", ",", "0"}], "}"}]}]}], "]"}]}], "}"}], ",", 
       RowBox[{"{", 
        RowBox[{"Red", ",", 
         RowBox[{"Dashing", "[", 
-         RowBox[{"{", ".05", "}"}], "]"}], ",", 
+         RowBox[{"{", "0.05`", "}"}], "]"}], ",", 
         RowBox[{"Arrow", "[", 
          RowBox[{
           RowBox[{"{", 
            RowBox[{"0", ",", "0"}], "}"}], ",", 
           RowBox[{"{", 
-           RowBox[{".9", ",", "0"}], "}"}]}], "]"}]}], "}"}], ",", 
-      "\[IndentingNewLine]", 
+           RowBox[{"0.9`", ",", "0"}], "}"}]}], "]"}]}], "}"}], ",", 
       RowBox[{"{", 
-       RowBox[{"Blue", ",", "\[IndentingNewLine]", 
+       RowBox[{"Blue", ",", 
         RowBox[{"Arrow", "[", 
          RowBox[{
           RowBox[{"{", 
-           RowBox[{".232", ",", ".075"}], "}"}], ",", 
+           RowBox[{"0.232`", ",", "0.075`"}], "}"}], ",", 
           RowBox[{"{", 
-           RowBox[{".225", ",", ".095"}], "}"}]}], "]"}], ",", 
-        "\[IndentingNewLine]", 
+           RowBox[{"0.225`", ",", "0.095`"}], "}"}]}], "]"}], ",", 
         RowBox[{"Text", "[", 
          RowBox[{
           RowBox[{"TraditionalForm", "[", "\[Theta]", "]"}], ",", 
           RowBox[{"{", 
-           RowBox[{".3", ",", ".05"}], "}"}], ",", 
-          RowBox[{"TextStyle", "\[Rule]", 
-           RowBox[{"{", 
-            RowBox[{"FontSize", "\[Rule]", "14"}], "}"}]}]}], "]"}], ",", 
-        "\[IndentingNewLine]", 
+           RowBox[{"0.3`", ",", "0.05`"}], "}"}]}], "]"}], ",", 
         RowBox[{"Circle", "[", 
          RowBox[{
           RowBox[{"{", 
-           RowBox[{"0", ",", "0"}], "}"}], ",", ".25", ",", 
+           RowBox[{"0", ",", "0"}], "}"}], ",", "0.25`", ",", 
           RowBox[{"{", 
-           RowBox[{"0", ",", ".4"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
-       "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"0", ",", "0.4`"}], "}"}]}], "]"}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"FontSize", "\[Rule]", "14"}], "}"}]}]}], "}"}], ",", 
       RowBox[{"{", 
-       RowBox[{"Red", ",", "\[IndentingNewLine]", 
+       RowBox[{"Red", ",", 
         RowBox[{"Text", "[", 
          RowBox[{"\"\<v'\>\"", ",", 
           RowBox[{"{", 
-           RowBox[{".9", ",", ".36"}], "}"}], ",", 
-          RowBox[{"TextStyle", "\[Rule]", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
-             RowBox[{"\"\<FontFamily\>\"", "->", "\"\<Times\>\""}], ",", 
-             RowBox[{"FontWeight", "->", "\"\<Bold\>\""}]}], "}"}]}]}], "]"}],
-         ",", "\[IndentingNewLine]", 
+           RowBox[{"0.9`", ",", "0.36`"}], "}"}]}], "]"}], ",", 
         RowBox[{"Text", "[", 
-         RowBox[{"\"\<\!\(\*SubscriptBox[\(v\), \(0\)]\)\>\"", ",", 
+         RowBox[{"\"\<\\!\\(\\*SubscriptBox[\\(v\\), \\(0\\)]\\)\>\"", ",", 
           RowBox[{"{", 
-           RowBox[{".85", ",", ".08"}], "}"}], ",", 
-          RowBox[{"TextStyle", "\[Rule]", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
-             RowBox[{"\"\<FontFamily\>\"", "->", "\"\<Times\>\""}], ",", 
-             RowBox[{"FontWeight", "->", "\"\<Bold\>\""}]}], "}"}]}]}], 
-         "]"}]}], "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
-      RowBox[{"Text", "[", 
-       RowBox[{"\"\<\!\(\*OverscriptBox[\(x\), \(^\)]\)\>\"", ",", 
-        RowBox[{"{", 
-         RowBox[{"1.05", ",", ".0"}], "}"}], ",", 
-        RowBox[{"TextStyle", "\[Rule]", 
+           RowBox[{"0.85`", ",", "0.08`"}], "}"}]}], "]"}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", 
          RowBox[{"{", 
           RowBox[{
            RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
-           RowBox[{"\"\<FontFamily\>\"", "->", "\"\<Times\>\""}], ",", 
-           RowBox[{"FontWeight", "->", "\"\<Bold\>\""}]}], "}"}]}]}], "]"}], 
-      ",", "\[IndentingNewLine]", 
-      RowBox[{"Text", "[", 
-       RowBox[{"\"\<\!\(\*OverscriptBox[\(y\), \(^\)]\)\>\"", ",", 
-        RowBox[{"{", 
-         RowBox[{"0", ",", "1.05"}], "}"}], ",", 
-        RowBox[{"TextStyle", "\[Rule]", 
+           RowBox[{"\"\<FontFamily\>\"", "\[Rule]", "\"\<Times\>\""}], ",", 
+           RowBox[{"FontWeight", "\[Rule]", "\"\<Bold\>\""}]}], "}"}]}], ",", 
+        
+        RowBox[{"BaseStyle", "\[Rule]", 
          RowBox[{"{", 
           RowBox[{
            RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
-           RowBox[{"\"\<FontFamily\>\"", "->", "\"\<Times\>\""}], ",", 
-           RowBox[{"FontWeight", "->", "\"\<Bold\>\""}]}], "}"}]}]}], "]"}]}],
-      "\[IndentingNewLine]", "}"}], "\[IndentingNewLine]", "]"}], ",", 
+           RowBox[{"\"\<FontFamily\>\"", "\[Rule]", "\"\<Times\>\""}], ",", 
+           RowBox[{"FontWeight", "\[Rule]", "\"\<Bold\>\""}]}], "}"}]}]}], 
+       "}"}], ",", 
+      RowBox[{"Text", "[", 
+       RowBox[{"\"\<\\!\\(\\*OverscriptBox[\\(x\\), \\(^\\)]\\)\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{"1.05`", ",", "0.`"}], "}"}]}], "]"}], ",", 
+      RowBox[{"Text", "[", 
+       RowBox[{"\"\<\\!\\(\\*OverscriptBox[\\(y\\), \\(^\\)]\\)\>\"", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1.05`"}], "}"}]}], "]"}], ",", 
+      RowBox[{"BaseStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
+         RowBox[{"\"\<FontFamily\>\"", "\[Rule]", "\"\<Times\>\""}], ",", 
+         RowBox[{"FontWeight", "\[Rule]", "\"\<Bold\>\""}]}], "}"}]}], ",", 
+      RowBox[{"BaseStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
+         RowBox[{"\"\<FontFamily\>\"", "\[Rule]", "\"\<Times\>\""}], ",", 
+         RowBox[{"FontWeight", "\[Rule]", "\"\<Bold\>\""}]}], "}"}]}]}], 
+     "}"}], "]"}], ",", 
    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
 
@@ -798,8 +794,8 @@ MathPictureEnd
 \>"], "Graphics",
  ImageSize->{204, 204},
  ImageMargins->{{43, 0}, {0, 0}},
- ImageRegion->{{0, 1}, {0, 1}},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageRegion->{{0, 1}, {0, 
+  1}},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmW1LFFEUx6+7O6u7mw9JDwRiayVWGJGSRRCCLIqIIcIiG2Iti7aKYT4g
 UoggkkUPRBDam3rtV/BNpfTOr+BX8CtM95y589/Zdc6uZtGLZmBnztzzO/9z
 7r0zszt7B7ML+fGn2YXJXDbZN5d9lp/MzSd7Z+Z0U7hKKbVHn6Qi29am2e3Z
@@ -822,15 +818,36 @@ ca0y/vmPQZvF41lS8aW/ELiBspy3EyfO/TjnLXL4V59sF/8V/iNwBa7AFbgC
 V+AKXIErcP23Lv5zjpdSjtzAv3/pD1O1c9SGwupH2QZezdg9SXeKl6QiyPLT
 08BZlPPXopFwk1b7KO8czeWtPYq8UoOFEL/Fm+/HgAp9PLw2451BYcFkpxjx
 W/7wTqoqXrXY9Rt1VfULf1DzMg==\
-\>"],
- ImageRangeCache->{{{0, 203}, {203, 0}} -> {-0.047412, -0.047412, 0.00563953, \
-0.00563953}}],
+\>"],ImageRangeCache->{{{0, 203}, {203, 0}} -> {-0.047412, -0.047412, \
+0.00563953, 0.00563953}}],
 
 Cell[BoxData[
  TagBox[
   RowBox[{"\[SkeletonIndicator]", "Graphics", "\[SkeletonIndicator]"}],
   False,
   Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{3.595963232646253*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ArcTan", "[", 
+  RowBox[{"1", "/", 
+   RowBox[{"Sqrt", "[", "2", "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5959631559197903`*^9, 3.595963172547572*^9}, {
+  3.595963217097834*^9, 3.5959632314874163`*^9}, {3.59596332064788*^9, 
+  3.59596332254123*^9}, {3.595963384934716*^9, 3.595963419094482*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ArcTan", "[", 
+  FractionBox["1", 
+   SqrtBox["2"]], "]"}]], "Output",
+ CellChangeTimes->{
+  3.59596323956116*^9, 3.59596332487263*^9, {3.5959633879603777`*^9, 
+   3.59596342045713*^9}}]
 }, Open  ]]
 }, Open  ]],
 
@@ -859,26 +876,24 @@ Cell[BoxData[
  RowBox[{"Show", "[", 
   RowBox[{
    RowBox[{"Graphics", "[", 
-    RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{"{", 
      RowBox[{
       RowBox[{"Arrow", "[", 
        RowBox[{
         RowBox[{"{", 
          RowBox[{"0", ",", "0"}], "}"}], ",", 
         RowBox[{
-         RowBox[{"m", "[", ".4", "]"}], ".", 
+         RowBox[{"m", "[", "0.4`", "]"}], ".", 
          RowBox[{"{", 
           RowBox[{"1", ",", "0"}], "}"}]}]}], "]"}], ",", 
-      "\[IndentingNewLine]", 
       RowBox[{"Arrow", "[", 
        RowBox[{
         RowBox[{"{", 
          RowBox[{"0", ",", "0"}], "}"}], ",", 
         RowBox[{
-         RowBox[{"m", "[", ".4", "]"}], ".", 
+         RowBox[{"m", "[", "0.4`", "]"}], ".", 
          RowBox[{"{", 
           RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}], ",", 
-      "\[IndentingNewLine]", 
       RowBox[{"{", 
        RowBox[{"Red", ",", 
         RowBox[{"Arrow", "[", 
@@ -886,116 +901,107 @@ Cell[BoxData[
           RowBox[{"{", 
            RowBox[{"0", ",", "0"}], "}"}], ",", 
           RowBox[{"{", 
-           RowBox[{".9", ",", "0"}], "}"}]}], "]"}]}], "}"}], ",", 
-      "\[IndentingNewLine]", 
+           RowBox[{"0.9`", ",", "0"}], "}"}]}], "]"}]}], "}"}], ",", 
       RowBox[{"{", 
-       RowBox[{"Blue", ",", "\[IndentingNewLine]", 
+       RowBox[{"Blue", ",", 
         RowBox[{"Arrow", "[", 
          RowBox[{
           RowBox[{"{", 
-           RowBox[{".232", ",", ".075"}], "}"}], ",", 
+           RowBox[{"0.232`", ",", "0.075`"}], "}"}], ",", 
           RowBox[{"{", 
-           RowBox[{".225", ",", ".095"}], "}"}]}], "]"}], ",", 
-        "\[IndentingNewLine]", 
+           RowBox[{"0.225`", ",", "0.095`"}], "}"}]}], "]"}], ",", 
         RowBox[{"Text", "[", 
          RowBox[{
           RowBox[{"TraditionalForm", "[", "\[Theta]", "]"}], ",", 
           RowBox[{"{", 
-           RowBox[{".3", ",", ".05"}], "}"}], ",", 
-          RowBox[{"TextStyle", "\[Rule]", 
-           RowBox[{"{", 
-            RowBox[{"FontSize", "\[Rule]", "14"}], "}"}]}]}], "]"}], ",", 
-        "\[IndentingNewLine]", 
+           RowBox[{"0.3`", ",", "0.05`"}], "}"}]}], "]"}], ",", 
         RowBox[{"Circle", "[", 
          RowBox[{
           RowBox[{"{", 
-           RowBox[{"0", ",", "0"}], "}"}], ",", ".25", ",", 
+           RowBox[{"0", ",", "0"}], "}"}], ",", "0.25`", ",", 
           RowBox[{"{", 
-           RowBox[{"0", ",", ".4"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
-       "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"0", ",", "0.4`"}], "}"}]}], "]"}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"FontSize", "\[Rule]", "14"}], "}"}]}]}], "}"}], ",", 
       RowBox[{"{", 
-       RowBox[{"Red", ",", "\[IndentingNewLine]", 
+       RowBox[{"Red", ",", 
         RowBox[{"Text", "[", 
          RowBox[{"\"\<v\>\"", ",", 
           RowBox[{"{", 
-           RowBox[{".85", ",", ".08"}], "}"}], ",", 
-          RowBox[{"TextStyle", "\[Rule]", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
-             RowBox[{"\"\<FontFamily\>\"", "->", "\"\<Times\>\""}], ",", 
-             RowBox[{"FontWeight", "->", "\"\<Bold\>\""}]}], "}"}]}]}], 
-         "]"}]}], "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"0.85`", ",", "0.08`"}], "}"}]}], "]"}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
+           RowBox[{"\"\<FontFamily\>\"", "\[Rule]", "\"\<Times\>\""}], ",", 
+           RowBox[{"FontWeight", "\[Rule]", "\"\<Bold\>\""}]}], "}"}]}]}], 
+       "}"}], ",", 
       RowBox[{"{", 
        RowBox[{
         RowBox[{"Dashing", "[", 
-         RowBox[{"{", ".05", "}"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"{", "0.05`", "}"}], "]"}], ",", 
         RowBox[{"Arrow", "[", 
          RowBox[{
           RowBox[{"{", 
            RowBox[{"0", ",", "0"}], "}"}], ",", 
           RowBox[{"{", 
            RowBox[{"1", ",", "0"}], "}"}]}], "]"}], ",", 
-        "\[IndentingNewLine]", 
         RowBox[{"Arrow", "[", 
          RowBox[{
           RowBox[{"{", 
            RowBox[{"0", ",", "0"}], "}"}], ",", 
           RowBox[{"{", 
-           RowBox[{"0", ",", "1"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
-       "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"0", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
       RowBox[{"Text", "[", 
        RowBox[{
-       "\"\<\!\(\*SubscriptBox[OverscriptBox[\(x\), \(^\)], \(0\)]\)\>\"", 
-        ",", 
+       "\"\<\\!\\(\\*SubscriptBox[OverscriptBox[\\(x\\), \\(^\\)], \
+\\(0\\)]\\)\>\"", ",", 
         RowBox[{"{", 
-         RowBox[{"1.05", ",", ".0"}], "}"}], ",", 
-        RowBox[{"TextStyle", "\[Rule]", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
-           RowBox[{"\"\<FontFamily\>\"", "->", "\"\<Times\>\""}], ",", 
-           RowBox[{"FontWeight", "->", "\"\<Bold\>\""}]}], "}"}]}]}], "]"}], 
-      ",", "\[IndentingNewLine]", 
+         RowBox[{"1.05`", ",", "0.`"}], "}"}]}], "]"}], ",", 
       RowBox[{"Text", "[", 
        RowBox[{
-       "\"\<\!\(\*SubscriptBox[OverscriptBox[\(y\), \(^\)], \(0\)]\)\>\"", 
-        ",", 
+       "\"\<\\!\\(\\*SubscriptBox[OverscriptBox[\\(y\\), \\(^\\)], \
+\\(0\\)]\\)\>\"", ",", 
         RowBox[{"{", 
-         RowBox[{"0", ",", "1.05"}], "}"}], ",", 
-        RowBox[{"TextStyle", "\[Rule]", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
-           RowBox[{"\"\<FontFamily\>\"", "->", "\"\<Times\>\""}], ",", 
-           RowBox[{"FontWeight", "->", "\"\<Bold\>\""}]}], "}"}]}]}], "]"}], 
-      ",", "\[IndentingNewLine]", 
+         RowBox[{"0", ",", "1.05`"}], "}"}]}], "]"}], ",", 
       RowBox[{"Text", "[", 
-       RowBox[{"\"\<\!\(\*OverscriptBox[\(x\), \(^\)]\)'\>\"", ",", 
+       RowBox[{"\"\<\\!\\(\\*OverscriptBox[\\(x\\), \\(^\\)]\\)'\>\"", ",", 
         RowBox[{
-         RowBox[{"m", "[", ".4", "]"}], ".", 
+         RowBox[{"m", "[", "0.4`", "]"}], ".", 
          RowBox[{"{", 
-          RowBox[{"1.05", ",", ".0"}], "}"}]}], ",", 
-        RowBox[{"TextStyle", "\[Rule]", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
-           RowBox[{"\"\<FontFamily\>\"", "->", "\"\<Times\>\""}], ",", 
-           RowBox[{"FontWeight", "->", "\"\<Bold\>\""}]}], "}"}]}]}], "]"}], 
-      ",", "\[IndentingNewLine]", 
+          RowBox[{"1.05`", ",", "0.`"}], "}"}]}]}], "]"}], ",", 
       RowBox[{"Text", "[", 
-       RowBox[{"\"\<\!\(\*OverscriptBox[\(y\), \(^\)]\)'\>\"", ",", 
+       RowBox[{"\"\<\\!\\(\\*OverscriptBox[\\(y\\), \\(^\\)]\\)'\>\"", ",", 
         RowBox[{
-         RowBox[{"m", "[", ".4", "]"}], ".", 
+         RowBox[{"m", "[", "0.4`", "]"}], ".", 
          RowBox[{"{", 
-          RowBox[{"0", ",", "1.05"}], "}"}]}], ",", 
-        RowBox[{"TextStyle", "\[Rule]", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
-           RowBox[{"\"\<FontFamily\>\"", "->", "\"\<Times\>\""}], ",", 
-           RowBox[{"FontWeight", "->", "\"\<Bold\>\""}]}], "}"}]}]}], "]"}]}],
-      "\[IndentingNewLine]", "}"}], "\[IndentingNewLine]", "]"}], ",", 
+          RowBox[{"0", ",", "1.05`"}], "}"}]}]}], "]"}], ",", 
+      RowBox[{"BaseStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
+         RowBox[{"\"\<FontFamily\>\"", "\[Rule]", "\"\<Times\>\""}], ",", 
+         RowBox[{"FontWeight", "\[Rule]", "\"\<Bold\>\""}]}], "}"}]}], ",", 
+      RowBox[{"BaseStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
+         RowBox[{"\"\<FontFamily\>\"", "\[Rule]", "\"\<Times\>\""}], ",", 
+         RowBox[{"FontWeight", "\[Rule]", "\"\<Bold\>\""}]}], "}"}]}], ",", 
+      RowBox[{"BaseStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
+         RowBox[{"\"\<FontFamily\>\"", "\[Rule]", "\"\<Times\>\""}], ",", 
+         RowBox[{"FontWeight", "\[Rule]", "\"\<Bold\>\""}]}], "}"}]}], ",", 
+      RowBox[{"BaseStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"FontSize", "\[Rule]", "14"}], ",", 
+         RowBox[{"\"\<FontFamily\>\"", "\[Rule]", "\"\<Times\>\""}], ",", 
+         RowBox[{"FontWeight", "\[Rule]", "\"\<Bold\>\""}]}], "}"}]}]}], 
+     "}"}], "]"}], ",", 
    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
 
@@ -1558,8 +1564,8 @@ MathPictureEnd
 \>"], "Graphics",
  ImageSize->{218, 156.875},
  ImageMargins->{{43, 0}, {0, 0}},
- ImageRegion->{{0, 1}, {0, 1}},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageRegion->{{0, 1}, {0, 
+  1}},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJzFWetyFEUUbrKXZEHCAjGEi2QDuQhCjAsRMQENJGq0KMsqoEqNpQsSExVU
 wjvkn1qKy2L5AvzxF2gVpeAfvFThC1DFK+QV2u4+PWd6Z7+eSS8Ytmpnes73
 na9PnzOX7plTtSsLFy7Wriyer1Vev1z7cmHx/FLltS8uK1NunRDigfr/VBG6
@@ -1589,8 +1595,7 @@ bCjw2NDyrO7Qky/uid3qM8pD+oGoaBF9iAdRDyXFa7e8A8Xvqce5dS0T6mRB
 VNlqG3SDNpJZ9s+A0fK67lQtAaHFat0JLmDCnJQSwn7huNqst9pZ834ebfx9
 QzR/fPneKUhiEj2GfPTO+9HIiqH36P+LR1z3FGb8Hiv+onQ1Cf1Ihslm1UQ6
 rwWQJli6dfXZcHQ8Z8f1Zgoq+HVnDInK2dE0f9gU6/4Dn46uLg==\
-\>"],
- ImageRangeCache->{{{0, 217}, {155.875, 0}} -> {-0.497681, -0.0637153, \
+\>"],ImageRangeCache->{{{0, 217}, {155.875, 0}} -> {-0.497681, -0.0637153, \
 0.00757956, 0.00757956}}],
 
 Cell[BoxData[
@@ -1888,8 +1893,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNtO20AQhk3snCAHQsg5gYgCIVDU0hPikNJCOasPEaFKcFG1olz3DXpX
 8Vx9kr5Cmp3Z/DHpb5dccFMRKV5n959vZsf2rjMfuzeXnz53b64uus3j6+7X
 y6uLb82jL9f9LnfCcZzb/vdn0zHnvf6pPdz2+p/+4GNzj+bUNK5J3Jl2nEgT
@@ -1913,8 +1917,7 @@ EM2C9FpFb0CahigH0qaKtkDKQJQFaVtFOxClIBou27bw0YG7JESTcKfFGS3V
 iFUcogRItnS0D5IHURQkLW9pscveVQPRcJ+0BbfjoUjGzZlW9rSIJ73n/1+H
 rWqeY/q2ZHmCzI78kfcnZeQBtQXRMzJ0+s+hczLk9+X5grtHmdaZ+AMyEfVV
 \
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -2160,8 +2163,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmOtOE0EYhofdbWlLW1oKpbQgRYFyqI2EBEU5qAhykIsgxARijAa5FMNP
 r0zvxKTuzjf7dru8s7Txjz9ssjvbmfd7vsNuZ7ZzfnF79fHzxe315UXz/c3F
 16vry2/Noy83fpc7opS684/vTRVcd/1Lc7rr+h9/8H8zeHMUNG5Qv3PpONRN
@@ -2186,8 +2188,7 @@ RJtgViCaIEwj3wKzDHkJzG0RvQCzCFERItk/kUaLxiAqEMdGvgfHWcjHwJRt
 Jtn4cWXeCUVZiMy20AFIHkQZ4tjID8GUl6GgrxtxobBlddx7wiDyIDLbcifi
 vauUE2Eav7KX2S+KME1g90Rn/3iH2ag9Q+FPIgUzpZXUTBmOI6BY8qcydEqG
 Th4cOiNDUV9eJLgBdp7VyB8jgikR\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -2433,8 +2434,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNlOGzEUhk0yYZKQkIUlkBAIYQlhawEBFV0opWVVl1eIUCW4qFpRHqXi
 VXrbV+k79D61fZyDM/wezF0vipSZwf7PdxbPjD1+37m5/Pylc3N10WkcX3e+
 XV5dfG8cfb2WTckBIcSt/P1oCHXdlZfmcNuVf7Lz/8n/9FadEqp+n6wGkVQt
@@ -2459,8 +2459,7 @@ UmCHRJssGmVRGTCNfJsjLrO8BOS7JN9leoHlRSB/RvI9ludYfrfAog0h2rHS
 DVkW5QHTyPeZGbI8B+S0i0Ubjkmam3ryISCnfTPxjuWyX924XfNhlOGwaY/R
 bBf2fz2lAdjITynLrhBmMr+vPLivjATTm3QOo8qUHYzB3ROd/1sNZoP5nIf/
 1CpsL2tqoqxPLFAk1zPqOgNdpw92nYMu21dgBeexYy4G/gKVOjZU\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -2706,8 +2705,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmOtOE0EUx5d2t5TeoC2lpQUpSFvKzQooooCaGOQiGqMv0BAT+GA0yKMo
 L+Vb+M2nqLvnzJ5Ol//UUWP8YpPdWWb+53cuOzuz7Gn36vzd++7VxVm3/vyy
 +/H84uxT/eDDpd8VH3Ec59o/Pted4LrnX6rTdc//+YP/m99tngRNLKjmW63D
@@ -2732,8 +2730,7 @@ Avk9lu8IPSvyApDfZ/mu0NMizwP5Nsv3hZ4U+QSQP2D5U5F7Ih8Hcv405DyT
 YOIizwE5f/dyDoROyixQ8oc154jB/lUGiHajon6CEeXeTWUYsQfk+1G5JxFz
 hqFafRLVlPT/bgR3Q3TyTzvU590TKcERdxxqSXLgKslDDRRJTX3QPAZDRz8d
 OgFDui9XC87ie7Uz8gM3znPy\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -2988,8 +2985,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNtO20AQhhfHhiQQQsIhhEAJEAgBwrGlQFtVSBXlIKSqUtXrCFWCi6oV
 5VEqHo6bPkpqz2zGG/Nv2KiVetNI8To7/3w7M16vN75s3V1/+dq6u7lqVd/f
 tr5f31z9qJ58uw27UgNKqfvw+7OqovN2eKoP9+3wExr/N3+neRM1XlTbz0aH
@@ -3011,8 +3007,7 @@ R1zk8RuLrMgngXyP5W9Fnhb5BJA/Z/mxBBOIfBzIX7D8ndBTLvIToZOyCJT7
 rDxjcFvxnjwhepkUUQijQHnwWNkJIQvkh0l50F2+p+RDIkf/Do+S8owEw/Xr
 qPV7JkM5Qh3duEeii3/aod+oXUgJzrjj1EiSA9dJnhqgRGrnbDoHprMnTRfA
 ZI7lG8E5vCJUA78BfkcgeA==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -3304,8 +3299,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztWFtPE0EUHrZbC4UC5dIAW6BgtwXK/SJK1MQYlYs++OCDjw0xgQejQX6K
 4Uf5F3z3b9Q9c4bD6fItHWJMfLDJ7uye+S5nLp2Z9l378uzT5/bl+Wm79uai
 /fXs/PRb7fWXiySU6zPGXCXX95qh507y6G5XneSTVP4v/kZxQEWOevqjDpiS
@@ -3326,8 +3320,7 @@ UhOANhn0VEBxNui52C0A0BaDXojSfDbopYDQsWSbQa/EbjobdGiL7pPcJIDv
 MPyIjTvuLDYGkLu3kdfJjvrAQ4GXAHwvDX8grSz6wAdEHf2oepSGDwo8BPD9
 NLwkyZgc4a/R/MtbI0d1vzu5W6CTfyvg/sI4kT454sChajW3xLX6UAml2nrM
 Vceg6qhn1Qmo0l6hSs7jPxnT9xsWweLz\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -3588,8 +3581,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmO1OE0EUhofdltIAbZGPtrRiKZQtpYpolBhDokaF0nARDTGBH0aDXIrh
 VrwQL8RLqDtzpqfT5R09a/GHiSX7wcz7PufM2d3ObM8G1xcfPg6uL88HjeOr
 weeLy/MvjfefruKmcEYpdRNvXxtKnw/jU7u7GcafuPP/4e8f3ulDUdf9DTUc
@@ -3609,8 +3601,7 @@ SdtARMsdev02oqZf9JbDbQAR3THqmEl1v6hHoqGaXJVa0X5SFNKzJlKOoqOV
 /i15luVLQP44Kc+xvCiR57le6EXzIClfYDpaR96SF1iOVrNPkvISJxNK5MtM
 J/1ITc+Yq3TehRl3S9T/1xrsD1R9LkOPGk64jGry/fzEASWqcUpdp6Cr99uu
 PuhyY2Wc5AS/uKmZn/XZJ9M=\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -3862,8 +3853,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmOtOE0EUx4fdbSnUlkvLpRRNA4VSUKImRA1eIQoFjc/QEBP4YDTAoxg+
 +zj6QH6uO+fMnr30P3VqG2OiTebSOef8zpmzszuz+657ff7hY/f64qzbOLrs
 fj6/OLtqvPl0GQ75E0qpm7B8aSjd74VdU930wl8o/N+Mp3mvm0Dn9pAH3urG
@@ -3884,8 +3874,7 @@ nQ8p/C4fXzo6SvhiiM71xvClhJUXw5xkC73cGMND8RiIYUE8ovMPn/74uwYv
 KIqQtjRerZE1egc11sfUpI+5XtoanRSNdYeD7pnXMVqecdBFF0N6H6IPNzkx
 RIfo3axhUTz6kt+ci+GMGHri0XcxrMSZDqKnTFQeZJWX5Xr2iU7/gQHzXe9U
 stDhgeM4h+mPBMcJUOZCnLDoBIg6vxSdAlHSV5AIzuFDpZr4CWFFW7Y=\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -4143,8 +4132,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmOtOE0EUx4ftFcqlltILLUmFXqhITIyJGsBLkLv6Dg0xgQ9Gg7yCb2D4
 6IP4Rr6B32rnnNn/LuW/dbEh6Qea7Mx05vx/55zZ6ex0P/Quzz597l2en/Ya
 Bxe9r2fnp98a+18uBl2JKWPM1eD60TC23R80XXHVH3wGg/fV/1YfbZWws7mn
@@ -4165,8 +4153,7 @@ nP2PcOZPQF+D+WK0+VPQA3N2NNCHk3kGegFzNA8hOwE54XP4yUMYLA52InPC
 l/A4B6H4lj72ksAJt+ExB+ESPGaiha/gMQthGUJ2bnbC4A1KGsJg/bIzu55d
 9J2NjCQgrCFHPeqafRjJeF1WrNj7SHceNEcax6B1ct8Rq8O9/zvBDTzSjkPM
 ubn+r/8wBBq6p8c6dEyGjv45dEKGwr6SoeBivNA0U38BxS1LrQ==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -4427,8 +4414,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmN1OGkEYhldYEBBFBBEEW/ylFm36k7amVqPxX9uz3gCxTfSgaWO9lMZb
 6FX0tnrQE7rzfcO7C3l3yybWE0vCzjLzvs/3zcwyuzvvO9cXnz53ri/PO82j
 q87Xi8vzb83DL1deVXLEcZwb7/u96ZjzrndqDzdd7+M1/i+GL96ZImnG70gr
@@ -4451,8 +4437,7 @@ CcaH5kzq7KPwK9CLEM37QzLI3ABzor/7sg20riJ/IyEPURmi5yraAikLUQGi
 1yragSgNUQ4iu3uyh3AuRCmI7A7RAUh2YTPLpfkpIrsbFtjlQrtuovU2yrr3
 tMJuMZ5hqE8CI2aHVS8U+6Z1HAANXEqn2nRKmk7+2nRGmoKx3EByQ+yZOiN/
 AG6vItY=\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}]
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}]
 }, Closed]],
 
 Cell[BoxData[
@@ -4505,7 +4490,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"Show", "[", 
   RowBox[{
-   RowBox[{"GraphicsArray", "[", 
+   RowBox[{"GraphicsGrid", "[", 
     RowBox[{"Take", "[", 
      RowBox[{"xmovie", ",", 
       RowBox[{"{", 
@@ -5514,8 +5499,7 @@ P
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{400, 82.1875},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{400, 82.1875},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztWs1uEzEQdn4OdL1bxAmabCEIcQGaoIJEQYK2FMEJVMGtkEpRhdQeEKjt
 mSfoAW5I3DgjgQQnnoEzT4AQr8Bp2Zm1HWc1653dJFULG8mzzmfP+PvG9jqb
 5OFgf/v5i8H+ztag82B38Gp7Z2uvc//lbgw1akLU3gghHncE1KO4qgy+3oJR
@@ -5536,8 +5520,7 @@ xWH/dIIPE4E+YMXwG6oTYOsEpTWCklSUIgIrQ/OR6hdZ2LWE8E2iaf34UvII
 Svak/weUZonVJ8HiSjsHtfViYTcJrM/EqrBV2MMOq1c9hsWnnU2itU9gKtgN
 uDT0PkIoeUzayGp4WthjMXmzpFgIQqYgUpTX7/poOiYVNpXlCYe9NeGwdm7x
 t49nptYnMMUCfdXfPETtL8XlwT4=\
-\>"],
- ImageRangeCache->{{{0, 399}, {81.1875, 0}} -> {0, 0, 0, 0}, {{11.3125, \
+\>"],ImageRangeCache->{{{0, 399}, {81.1875, 0}} -> {0, 0, 0, 0}, {{11.3125, \
 98.8125}, {79.25, 1.875}} -> {0, 0, 0, 0}, {{107.562, 195.125}, {79.25, \
 1.875}} -> {-1, 0, 0, 0}, {{203.875, 291.375}, {79.25, 1.875}} -> {-2, 0, 0, \
 0}, {{300.125, 387.625}, {79.25, 1.875}} -> {-3, 0, 0, 0}}],
@@ -5846,8 +5829,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNlO20AUhk3sbJCFELInEFEgBIpauiGWdIGyqw8RoUpwUbWiXPcNelfx
 XH2SvoLrmTP5GZnfLrngpiJSPNbMf75z5tiesc+n4fXF5y/D68vzYffoavjt
 4vL8e/fw61XQ5U44jnMT/H91HXXuB6fmcOMHv2DwsblHc6IaVyXuVDqOdZNU
@@ -5871,8 +5853,7 @@ RK9AKkM0C9JrEb0BaRqiEkibItoCqQBREaRtEe1AlIPodtk2hY8B3GUhmoQ7
 Kc5IqUZbpSHKgGRKR3sgeRAlQZLylhS7zF01Et3uk6bgdmSJfPOVIZU9KeLp
 3rP/r8NUNc8wfVOyPEZmQx/ydlJCD6gpiJ6SoZN/Dp2RIduXZwV3jzKtM/EX
 yW9y9A==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -6118,8 +6099,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNlO20AYhQfH2QhJCAlkRylboFB1URdoS0s31vIQEa0EF1UrylXfoXcV
 T9dn6AP0xvXMPz4x6bFJKqFeQKR4nJnzf+ef8djjzGHv7Pjjp97ZyVGvs3Pa
 +3J8cvS1s/351K9KjCmlzv3vj47S555/ag/nnv/xG2+K4YttXST0+B1KxTtT
@@ -6141,8 +6121,7 @@ gQ0E9qfm3bhAZS0ceQEMsnwQiklgmto3mQD8MCRy5QEViKZAeiIik33yYt+K
 IMnWgboPURmi/lNDdjn8oQxEBYjGQZJtGPUMoixEaYheiWgLIheiJOxka0t2
 iFyZk54+BJBtad/ThW1S9me49uA6VtgdxQOp7w/LLubTwP/13RBo4La3O4j7
 pGnv0qYD0hT2ckPJDbFFqsb+AJSsNnI=\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -6388,8 +6367,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNtOU0EUhod9oAdKoaWltKWk0hOloCbGBFREkXBqiM/QEBO4MBjkFbz0
 zvB43nvjK9Q9a21+d7drZKqSSEKTzqys+f9vrdmH7rbHg8vTd+8Hl2cng/r+
 xeDD6dnJx/re+UWQcieUUlfB+0td6XgYhOFwNQxeweL99KfTrp5cfTTfcuIN
@@ -6409,8 +6387,7 @@ irpmeRHyJug9s3xuVE7RQ7M8B3kD9Mcs7wny7KicoidmeQbyaZYH4RzqPDUb
 0zDOwJhDxQ2zMYFTl4Mxi4rPzEYfFQswZlBxy2x0YZyHMYWK22xcE4zh76dr
 TwLFdiIeslQg8gDejYhqOhGuB9E+Lx3qibL9+4RVIvwvrs95FSrCv8PoqKvR
 X+AHEVDs4+WIl46EpcMbl/rCUrSWF2nO4s9FNfEDmIMF9A==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -6656,8 +6633,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmN1OE0EUx4f9oCy1lBRKoS2mwUJbPkRjYvyA4FeQQkh8AG8aYgIXRoO8
 hneGa1/He5/DV1hnzpmeLut/YDegMdEmuzM5c/6/c+YwO7Ps4eDs+N37wdnJ
 0aD1+nTw8fjk6FNr98OpNvljSqlzfX1pKdOPddfezmP904P/m5tpXpgmMLV9
@@ -6678,8 +6654,7 @@ oW+63dvA/T67rwP3Fh/+yrzZD5N54Ha/DegP3e5N4P7I7V4X91Ey/B+wfdsC
 kQg9ibjrFhZFSDNLvWDTQN+tjkQ9YdS0RpVvn2NGHHB/E6jHRU1zDLkXmxf1
 +FKhL/X1JewkFgZJ4cW/Z8ALISW7Zxp6NitwaPQRIDnU/6cM9uPdgdTDLpE9
 0/iJRWC3dR4Yul3c7e1Xun0w1L9y6AAMJWMFieQyfI1UYz8BfFhOGw==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -6937,8 +6912,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmFtPE0EUx4fttLa0S6GU3k1q7xcqiMQYgxdiUKDxmeeGmMCD0SBfwzfD
 V/Fb+RXqzpzp6bA9U84GeTCxyc5sZ/7/3zlz6V76aXJ98fnL5PryfFL/eDX5
 dnF5/r3+4etV0BRbEULcBMfPulDn0+DUFDfT4BN0/q8evjpU1bqa9yNoeKer
@@ -6958,8 +6932,7 @@ Ooreg2iHENUw3JFbVEHSMYh2CVEBn4lCW2mJJ49gbRy7lTlbqZ7C5vJnhDyL
 csmR+yhPhOV7hDyFk5bkyB8hPR2WPyfkEuU+LZe2HFPJ3iU2uzgX1u1bOczW
 bEF08u82mL+lxtAujMLsZT1scfut/NgCheblFLpOia6TO7vGRJcdS1rJMf5n
 Eyt/AMVHJPA=\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -7254,8 +7227,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmN9OE0EUxodlF2qhBQuWPwUp0NLWUv4oIIQQjRgQGhMvvPC2EhO4MBjk
 NbwzPJQP4yusO3Omh2HzTXvQmHhhk+5uZ77zO9+Znd3Z7dvO9fmnz53ri7NO
 +fiq8+X84uxr+ejyKmkaHFBK3STf72Wlj+Pk0G5u4uSTdP7f/Y3dB70b1CO9
@@ -7276,8 +7248,7 @@ iMzKbprse/omEFWZtO8XLbPogERPgWiB073wi+aZ9IpEz4BolkWv/aIpTndE
 oi0gKhApVvSSf0LKbaAcTz096IO2X55ni/YFIBWzA2JGOMaEGFs95BkuMErL
 nwN5xPRMWr4L5AHLs/3kukj7SptS7jnK7mWRS4tO/tUG++9Zm9pvp8cbvRt0
 zq0tjzq6srtVn1LXKeg66dvVBl1urtAxJ/g7UA38AhjctRM=\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -7538,8 +7509,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmN1OE0EUx4d2Wz4KbSmfpSCFAm0pWEAUATHERBHwI0bjfUNMIMZokFfw
 0jvDw/kQvkLdmXP2MIz/LdPghRc22dntzP/85pyZ2ZnZedm6OP3wqXVxdtIq
 H5y3vpyenXwtP/t8HmYle5RSl+H1o6z0czt85OSyHf7Cwv+3v3N7r28J3baP
@@ -7561,8 +7531,7 @@ IVGYlxf5to98SFzgg4VNIC+IPCN0Pta4D+TDIu8X+T7JHwB5XuRpceaJjzwQ
 +lOSbwF5TuSkN4V8HZDZQ2CWvTK7Phafk802sLE/atr8uXFM8h0g75No+dPB
 wyYtIZuvN+Mgy3eBPCnytCt/5Mi1G3xU5Cj3LGXUCv2u6PAfyeDjt2PKV9Hp
 EXWb3dgcTdSf9iFTFOQRFR2BosMbi45BkV1XYDnncZ6oen4D+lrzdg==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -7814,8 +7783,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNlOGzEUhgcyCQkJa9gT2gCBsC9dKUsplShbN7VPgFAluKhaAa/Ru4qL
 vmFv+grpHB/nx5n8Q91KlXpRJMaWz//9tmfsM568Ork6+/Dx5Or89KSyf3Hy
 +ez89LLy4tNF1JRqC4LgOvr/WgmkXo+q9nJdj/6i4P/iT4v3UrTL3dzVhndS
@@ -7839,8 +7807,7 @@ eR/c11X+mMh7IO+Gu/24XifybsgLcLe/Dzwh8i7Ic3DfUfkGkRcgz0D+XOWb
 RJ6HPMRg9lS+ReSdkKveBO3/vmLbBMvdYM0r4kCZp4TJYDwGPFblDlGmXKWc
 DG7kz2LyILBn7TCu3HWUjdGl46LDf6TB/mp1rO2BVdjfcswcgubv9wPHKDbJ
 Iw0dkdDhL0PHJOT2FTqD8/gZLmj7CRewlWA=\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -8098,8 +8065,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNlSE0EUhocskJ2QECCEJYQAWdhKBFwARRAERJ8hRVkFF5YWcuNDeGfx
 GD6aV97HOed0znQm/8BceiFVmW76/N/f6/T0zGXn7vrT587dzVWnenrb+Xp9
 c/WtevLl1i2KDjmOc+/+flYdynfdrLncd90/N/g/CZ98pCRC4/dWCj5QErUK
@@ -8123,8 +8089,7 @@ RFMq2hTRLvAcVXlJ5dJo9wYYlOdUXtSu7oj8OZBnVZ5Xd7F1XmiLPVFWRS9F
 tAc8UypPaxPMK/U+kCdVnlB38y5/AOQJlcdVbj4ivNIWe6KIik5EdAg845bc
 MZ8QzHu1Txn1nVMocyHyI5+c1qT9CueTH1vy3tIyL2xdFZ39qwXmw8+FjrgZ
 M/6wErV6bbongZ6sv9fnEjoHobNHQxcgZNcVsxoX4kuWM/QXZ/Axkw==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -8385,8 +8350,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmO1S00AUhmOb8FHbAoVaSgsWBIHi1zA6+FEoIKKIXgTjOKM/HB31r5fg
 P8f78Ya8Amdics7mzTZ9E5KfztiZZDO773nOu9sku9nXF1/fvf1w8fX9m4ve
 888Xn969f/Old/rxc1BVvuI4zs/g+NFzwms/uDSnn37wCxr/F/mLV2FRDsfv
@@ -8411,8 +8375,7 @@ QN4GU60GT0XEjEUtMHdVtEeYM5AvgKm5nYdgxqIGmApzHkNUg2gGpEcqGpDE
 FcirkJuNnnjrJBZVkHiooiFEUxBNgmT23Y5IYg9yD0zdGbN2t2JRCUyz23gC
 UdkSOdGm4sheX7SKE5HuZJp9TevjX79ZTOuZ0v+BCrNhe47hMP1/ERbSfWd0
 ++KFBUo8PrqDa4rRprNLm85Jk53Ltczl2IF2rvwFgVoBfQ==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}]
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}]
 }, Closed]],
 
 Cell[BoxData[
@@ -8465,7 +8428,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"Show", "[", 
   RowBox[{
-   RowBox[{"GraphicsArray", "[", 
+   RowBox[{"GraphicsGrid", "[", 
     RowBox[{"Take", "[", 
      RowBox[{"ymovie", ",", 
       RowBox[{"{", 
@@ -9468,8 +9431,7 @@ P
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{400, 92.0625},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{400, 92.0625},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztW91yFEUUbnZ+dvYvuyEEkYAGQiJqCQrE8GMUNaJioVZRGhSClUKr4MLS
 Aq688A2s0ltfwyp5DR/AF/DGB/BmnD7dfebMzNeTjlnkQqna2UlP9znf953T
 v7Nc235496uvtx/eu7O9+O797W/v3rvzYPHKN/eLomifUvt+VErdWlT6Pi9u
@@ -9515,8 +9477,7 @@ OwOwOwz7KoAdM+wEwL7BsM0i2KE2fdIsX8wyzsQr5iyzn+sAZBeCLGpcE/OQ
 rfLHkp0tmwKGzRoGpey7K/R6fAuU7dLfDUAD9ZApuELV/zNmXfZSdQro7dan
 tqNQH+bBlorMFPG578HNXbewaOWyv05YAcI71VurijAts7URZMpm1wKrh5qV
 2tKQdYvvtkCZRUFtd/HfAdS+vwEPcwG+\
-\>"],
- ImageRangeCache->{{{0, 399}, {91.0625, 0}} -> {0, 0, 0, 0}, {{11.0625, \
+\>"],ImageRangeCache->{{{0, 399}, {91.0625, 0}} -> {0, 0, 0, 0}, {{11.0625, \
 98.6875}, {88.875, 2.125}} -> {0, 0, 0, 0}, {{107.438, 195.062}, {88.875, \
 2.125}} -> {0, 0, 0, 0}, {{203.875, 291.5}, {88.875, 2.125}} -> {-1, 0, 0, \
 0}, {{300.25, 387.875}, {88.875, 2.125}} -> {-2, 0, 0, 0}}],
@@ -9818,8 +9779,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNtO20AQhk3snCAHQsg5gYgCIVDU0hPikNJCOasPEaFKcFG1olz3DXpX
 8Vx9kr5Cmp3Z/DHpb5dccFMRKV5n959vZsf2rjMfuzeXnz53b64uus3j6+7X
 y6uLb82jL9f9LnfCcZzb/vdn0zHnvf6pPdz2+p/+4GNzj+bUNK5J3Jl2nEgT
@@ -9843,8 +9803,7 @@ EM2C9FpFb0CahigH0qaKtkDKQJQFaVtFOxClIBou27bw0YG7JESTcKfFGS3V
 iFUcogRItnS0D5IHURQkLW9pscveVQPRcJ+0BbfjoUjGzZlW9rSIJ73n/1+H
 rWqeY/q2ZHmCzI78kfcnZeQBtQXRMzJ0+s+hczLk9+X5grtHmdaZ+AMyEfVV
 \
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -10090,8 +10049,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNtO20AQho1j50AIIZAGQg4ECIdwEKIVFT1RoIhT1KqvgFAluKhaUa57
 0WeoeK6+RJ8jtWc2f5bwO43vKtRI9lo7/3wzu7Z3nXl/cXv16fPF7fXlRePk
 5uLr1fXlt8bxl5ugKzHiOM5dcPxsOOF1J7g0p7tO8AuM/5vhm6OwccP5+2h1
@@ -10114,8 +10072,7 @@ om0VCdDTBacrKkH0TEXbEBUhmsKztKOiHYQrQFQAaVdFuyDlIOqtwVpl0IKI
 p898V5SDSMslWjwxz3JXlIVIyz9a5xKSC1EGIlN/OcGMiz0FuynsnKm9Y/5z
 uLAfPbR3Scf9pvbj6zClxzYGbUp9p7gzffWAUwvU94afq+mcmM7+amoTkx3L
 s5IbopbqjPwBFtGRxw==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -10361,8 +10318,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmN1OE1EUhQ/TGWgpVMDyU9pCwZbS8qMGgwL+EQ0CDdGY+AANMYELo0G8
 9SkMz+WtTzPO7HNYPW1Xy4wNN4YmM2dy9trfXmd3Op2Zk+bl2ecvzcvz02bp
 3UXz29n56ffSwdeLYCoxpJS6CrZfJRUe+8Gh2V35wScI3g2xh1fh4IRt/GRN
@@ -10383,8 +10339,7 @@ WIA8T0qZxBov1crNodQjO6O9VBHyOVLKThTSAuQzoG9ZooTfxpwmTCOXC6H0
 dw7yLJE/0fLHkN+HfAoWnmrRNkQZiCYJ08j3IE9Bfg9M/ZZFvQ4H6bIHUYYw
 jfwtmOaWslupX/OoI91U3zygJFH4ZXccTILrkifxbe13hhr/34R5idjAoo/0
 hLyoMxc23ShzYTu0QB2tPNahYxI6ujHUICG7lmuZi/BWVA39BTKqnT8=\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -10630,8 +10585,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmMtu00AUhqeO05QohSah9JJURFXS3JqkaaE3CcEC0UvKAgkWLKMK0S4Q
 qHTNU6C+EzveyHjOsY8n7u/EJkJCaiP5kjn//82Z4+v47fD64tOX4fXl+bBy
 dDX8dnF5/r3y5uuV25SaUUrduMvPitL7jrvrrW4c9+cG7zdTbg71JqWL+tFo
@@ -10651,8 +10605,7 @@ i0C+Ey1/DOTPDDnPwUVeBPLnLKchZHQkL/ICkO+yfF/kWZHngZwn+eql3szx
 RevLF4Ccv12oIxkqKVN8H7otP2D5Ccsdb/5JadlAfhiW07SKTvUX4dDgDjR4
 n6wGUu0TbqAPSXz+j07ojw1QqLanHDoFoZOJoQEImX3ZRnIxvsGpmT8UBmA0
 \
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -10910,8 +10863,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmN9OE0EUxofdLaUKFlRA2Jo0CNLSP9vWFmq8NBFK9c5EL7xpiAlcGA1y
 7VMYXsXX8I3WOXO2h+3mm7qLNMZIkz0zPef3fTM7u112eDO6OP34aXRxdjIq
 H56PvpyenXwtv/p8rlPunFLqUh/fy4r6oe5G4TLUH128bW606VGToyX+EEso
@@ -10927,8 +10879,7 @@ s+M9gNeuhQcp8bod7wK8cWP4OkXzx2ITCJtphBtAGMxU+AgIWzMVrgNhO41w
 DQg7MxWuAuGzmLDAT5Yx/hDgvBlSfWqKVHHS4IfUjF+O6Z1R9xYAzjtANWA8
 jN4uzc6unywN/8dEtFMfynoOOHFEDV/2yd3MUcwosdjHXDoGpcFvS0NQio/l
 xSaX4l8Pau4XSHRwDQ==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -11220,8 +11171,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztV8tOwkAUHQsGgzHxiQ8kIQYlBNpSiq+FW1/EvVtiTGBhNOrarzB8gR/k
 H9XemeFS8DRMFWUDSe9M73nc25nStDft1879Q/u1e9cuXjy3nzrdu5fi+eNz
 mErNCSF64fFeFDQPwqkOvSD8heBs+PvBo8GndW9EEiIld+Lj4lYerowyF+if
@@ -11234,8 +11184,7 @@ ryjqNEI/BHR7Rp8m3Qb0Y0CvzegTpdcA/RTQq/9GPyPE/q5/+wzksUNRPhAK
 B3bOj+h1QG9Q9OLxHN8w28DYnZbQA8KNYSF4s//O3AIlwDv+/wgbQLg+LPRN
 mJughPdLoQ+Ea8PCpgkzB0ronbqiQZJas0TA36otlReaIcQlDWp9hz8QLiNG
 I0t8raBrAF2NhVoAitZKR5oz+PgWc18O8gRT\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -11496,8 +11445,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmM9O20AQxhfHBBJFTQuhFQlIES2UJIT8d6DHHlog6qmHHjhFqBIcKhDl
 3EfoqeK5+kapZ8aZOu7nZN0mqqpiyd7NzO/7xru2V3beDe8uP34a3l1dDMtv
 b4c3l1cXn8tvrm/9UGrJGHPv79/Khvojvxsc7kf+5icfmrk259Qs0xR7EnhP
@@ -11513,8 +11461,7 @@ eRWmSMhP8mYyi5RaVGcI05Tx7NwJov3YbiLG+FE8XgV4f254DeBThnoA8N7c
 QLhmI+wB4RMVsgUvjLIEjR3G9/J0NUvylDwW3AM4L6ZZComGeieC96nhLz9+
 o+X8QFKn/3cg+H4fSNwERDBxMr+T3zgnIaPIjXAmqTOQOp2ZGoBUuJYbOjmL
 PyTM0g/4GWkL\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -11769,8 +11716,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmNtO20AQhhc7CSSIhEMpBadSGkFCIE44hgYqtVKlcogq9YKL3kaoElxU
 rSi97Sv0puK5eCPXM7MeHxg7dtNKlSDS2pud//92dr1ZO34/vLn89Hl4c3Ux
 rB1fD79eXl18q737cu02mRNKqVu3/KopqDtuVR9uHffjBh9PY54+wsmEST2i
@@ -11790,8 +11736,7 @@ k7A80o9edbuCcYGNVe5Hy/cE+Xy8fF+Qz8XLe4J8luXLUKMgbubej8h7sD4Q
 3BV2Y5aTEKS5Ui8FeZnl0yzXbxj6gnyG5ZjQFATfkPxQkJd4vOSB2gnJjwS5
 wSnoP5WOfrui1Cs44douRkOnD6pBv8UaULvSCj2teq041ERr5SQAiuzDZxQ6
 E0KnI0MDIRTsKxdILsVrOTXxG0yZdE0=\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -12052,8 +11997,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmG9P01AUxkvXwdiAIYIwB7IAY2yDicQ/KH81QRxoiIkvfLsQE3hhNMhr
 P4Xhc/kt/Bi19567Z137tLbsnWFJ27t7nvM755729rb90Lm++PK1c3153qkc
 X3W+X1ye/6i8/XbldWWGLMu68bZfFUu1Xa9pdjeu9/OMd4fUh0/qYKsyHkrH
@@ -12076,8 +12020,7 @@ bwHGo0UCzcF3IZC1L9RjhArKQ6HMuXxCQs3A9xEJZRy3EKonX5RWT/SU0Kcg
 HiLz1WaHMAuQ6zVPV/61yHeJPA+5Z1CdymhZ5hXgSBz3kEwONe76+Mv3TuQH
 JE7W+LgS7FSUvc9TI0FT+3/uMJ8pTzH8tnToAmZM/aXL8le27atst+gnYjoh
 pvY/TafE5I/l+JJL8N3VGvoLl9i/7g==\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0, 0, 0, 0}}],
 
 Cell[GraphicsData["PostScript", "\<\
 %!
@@ -12338,8 +12281,7 @@ grestore
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{150, 148.438},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{150, 148.438},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztmOtO20AQhY1tEggh3BKSQBDh3gBFLUK0lJsohXIp6jMgVAl+VK0ov/sU
 Lc/VR+kbpN6ZzcmSHJtEqvqjAim22Tnnm9n1xuvsxeXd9afPl3c3V5fV97eX
 X69vrr5Vj7/cRk1Bj+d599HnR9Uz1/Xo0h7u69FfFHw6dX76aE6+Gb8jbbhA
@@ -12362,8 +12304,7 @@ eE35KuSTkM+g41a0BlEZolmH2RgT+2viBeRFyKUYUdtXrnWIChAJPdRpLqIN
 cxLXKEQFiNZV9AqkYYhGkW5TRVsQ5SDKgbSlom2IshBlILL7Os1dlgxEaaSz
 G0/7EPVBFIBk98WaO0QpR+TZvTB368nHHRHRucaPnLhcNUOn/3OD3ao8R/dP
 teEEs8V7uH9w4oBapuyZhs5I6PTR0DkJublCp7gO9l69nj9+N6Hb\
-\>"],
- ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0.0668839, -4.28574, \
+\>"],ImageRangeCache->{{{0, 149}, {147.438, 0}} -> {0.0668839, -4.28574, \
 0.00581364, 0.00581364}}]
 }, Closed]],
 
@@ -12417,7 +12358,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"Show", "[", 
   RowBox[{
-   RowBox[{"GraphicsArray", "[", 
+   RowBox[{"GraphicsGrid", "[", 
     RowBox[{"Take", "[", 
      RowBox[{"zmovie", ",", 
       RowBox[{"{", 
@@ -13429,8 +13370,7 @@ P
 MathPictureEnd
 \
 \>"], "Graphics",
- ImageSize->{400, 82.1875},
- ImageCache->GraphicsData["CompressedBitmap", "\<\
+ ImageSize->{400, 82.1875},ImageCache->GraphicsData["CompressedBitmap", "\<\
 eJztWktrFEEQ7uzOPmezuyYBTYwSH4gkxoAKxvgWNQZfGATRmEAIgh5EiTl4
 EP+AIIqYgx78BZ68eRH8Ld78CR7aqerumt7Z6qQnsz4OE5ie3u6ur+v7pqq7
 ZzfXl9cePni8vPZoZXlsdnX56cNHK8/GLj9ZjZqKfUL0vRFCzI8JqMuoqgv8
@@ -13459,8 +13399,7 @@ CBjY4QRXXbsDH7WhcjzhiaZwQnOXVtcdyohExwIJmnAc2+5ZwSRtRhPuqZaY
 tkXPtqM5bA6bw/59WJP1CIupv8T0LjJtGuw43IpmHcEm9Xp4z9WxkNriiPpg
 79pJmoKRaLNxxzrl6BVsQuUew854DveFtbXFDeg+1RaZNu0F2ur/7RJ9vwHT
 PcS8\
-\>"],
- ImageRangeCache->{{{0, 399}, {81.1875, 0}} -> {0, 0, 0, 0}, {{11.3125, \
+\>"],ImageRangeCache->{{{0, 399}, {81.1875, 0}} -> {0, 0, 0, 0}, {{11.3125, \
 98.8125}, {79.25, 1.875}} -> {0, 0, 0, 0}, {{107.562, 195.125}, {79.25, \
 1.875}} -> {-1, 0, 0, 0}, {{203.875, 291.375}, {79.25, 1.875}} -> {-2, 0, 0, \
 0}, {{300.125, 387.625}, {79.25, 1.875}} -> {-3, 0, 0, 0}}],
@@ -13525,12 +13464,12 @@ Cell[BoxData[
 }, Open  ]]
 },
 WindowSize->{1289, 732},
-WindowMargins->{{290, Automatic}, {Automatic, -811}},
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "CompatibilityToolbar"],
+WindowMargins->{{8, Automatic}, {Automatic, 6}},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
 ShowSelection->True,
 CellContext->Notebook,
-FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (November 7, 2010)",
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 20, \
+2012)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -13545,174 +13484,179 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[579, 22, 32, 0, 83, "Title"],
+Cell[579, 22, 32, 0, 92, "Title"],
 Cell[CellGroupData[{
-Cell[636, 26, 28, 0, 36, "Subsection"],
-Cell[667, 28, 58, 3, 47, "Text"],
-Cell[728, 33, 289, 9, 29, "Text"],
-Cell[1020, 44, 303, 10, 29, "Text"],
-Cell[1326, 56, 1053, 27, 65, "Text"],
-Cell[2382, 85, 99, 2, 29, "Text"]
+Cell[636, 26, 28, 0, 44, "Subsection"],
+Cell[667, 28, 58, 3, 49, "Text"],
+Cell[728, 33, 289, 9, 30, "Text"],
+Cell[1020, 44, 303, 10, 30, "Text"],
+Cell[1326, 56, 1053, 27, 68, "Text"],
+Cell[2382, 85, 99, 2, 30, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2518, 92, 36, 0, 36, "Subsection"],
+Cell[2518, 92, 36, 0, 44, "Subsection"],
 Cell[CellGroupData[{
-Cell[2579, 96, 90, 2, 31, "Input",
+Cell[2579, 96, 90, 2, 28, "Input",
  InitializationCell->True],
-Cell[2672, 100, 449, 10, 21, "Message"],
-Cell[3124, 112, 78, 1, 30, "Output"]
+Cell[2672, 100, 436, 9, 24, "Message"],
+Cell[3111, 111, 78, 1, 28, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3251, 119, 26, 0, 36, "Subsection"],
-Cell[3280, 121, 2704, 76, 112, "Input",
+Cell[3238, 118, 26, 0, 44, "Subsection"],
+Cell[3267, 120, 2882, 81, 126, "Input",
  InitializationCell->True]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6021, 202, 34, 0, 71, "Section"],
-Cell[6058, 204, 59, 1, 31, "Input"],
-Cell[6120, 207, 422, 13, 31, "Input"],
+Cell[6186, 206, 34, 0, 80, "Section"],
+Cell[6223, 208, 59, 1, 28, "Input"],
+Cell[6285, 211, 422, 13, 28, "Input"],
 Cell[CellGroupData[{
-Cell[6567, 224, 4522, 114, 382, "Input"],
-Cell[11092, 340, 12481, 486, 212, 10929, 457, "GraphicsData", "PostScript", \
+Cell[6732, 228, 4113, 106, 131, "Input"],
+Cell[10848, 336, 12480, 485, 212, 10929, 457, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[23576, 828, 134, 4, 30, "Output"]
+Cell[23331, 823, 134, 4, 28, "Output"]
+}, Open  ]],
+Cell[23480, 830, 87, 1, 46, "Input"],
+Cell[CellGroupData[{
+Cell[23592, 835, 326, 6, 28, "Input"],
+Cell[23921, 843, 210, 6, 110, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[23759, 838, 36, 0, 71, "Section"],
-Cell[23798, 840, 423, 13, 31, "Input"],
+Cell[24180, 855, 36, 0, 80, "Section"],
+Cell[24219, 857, 423, 13, 28, "Input"],
 Cell[CellGroupData[{
-Cell[24246, 857, 5538, 142, 466, "Input"],
-Cell[29787, 1001, 15684, 592, 165, 13672, 556, "GraphicsData", "PostScript", \
+Cell[24667, 874, 5012, 131, 148, "Input"],
+Cell[29682, 1007, 15683, 591, 165, 13672, 556, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[45474, 1595, 134, 4, 30, "Output"]
+Cell[45368, 1600, 134, 4, 28, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[45657, 1605, 89, 4, 71, "Section"],
+Cell[45551, 1610, 89, 4, 82, "Section"],
 Cell[CellGroupData[{
-Cell[45771, 1613, 116, 3, 31, "Input"],
-Cell[45890, 1618, 372, 11, 63, "Output"]
+Cell[45665, 1618, 116, 3, 28, "Input"],
+Cell[45784, 1623, 372, 11, 64, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[46299, 1634, 267, 8, 31, "Input"],
+Cell[46193, 1639, 267, 8, 28, "Input"],
 Cell[CellGroupData[{
-Cell[46591, 1646, 7103, 270, 157, 5612, 243, "GraphicsData", "PostScript", \
+Cell[46485, 1651, 7099, 268, 157, 5612, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[53697, 1918, 7262, 271, 70, 5682, 243, "GraphicsData", "PostScript", \
+Cell[53587, 1921, 7258, 269, 70, 5682, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[60962, 2191, 7296, 271, 70, 5692, 243, "GraphicsData", "PostScript", \
+Cell[60848, 2192, 7292, 269, 70, 5692, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[68261, 2464, 7259, 271, 70, 5683, 243, "GraphicsData", "PostScript", \
+Cell[68143, 2463, 7255, 269, 70, 5683, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[75523, 2737, 7169, 277, 70, 5776, 252, "GraphicsData", "PostScript", \
+Cell[75401, 2734, 7165, 275, 70, 5776, 252, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[82695, 3016, 7809, 313, 70, 6469, 289, "GraphicsData", "PostScript", \
+Cell[82569, 3011, 7805, 311, 70, 6469, 289, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[90507, 3331, 7096, 281, 70, 5825, 258, "GraphicsData", "PostScript", \
+Cell[90377, 3324, 7092, 279, 70, 5825, 258, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[97606, 3614, 7110, 273, 70, 5746, 249, "GraphicsData", "PostScript", \
+Cell[97472, 3605, 7106, 271, 70, 5746, 249, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[104719, 3889, 7157, 279, 70, 5797, 255, "GraphicsData", "PostScript", \
+Cell[104581, 3878, 7153, 277, 70, 5797, 255, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[111879, 4170, 7272, 284, 70, 5834, 258, "GraphicsData", "PostScript", \
+Cell[111737, 4157, 7268, 282, 70, 5834, 258, "GraphicsData", "PostScript", \
 "Graphics"]
 }, Closed]],
-Cell[119166, 4457, 1313, 42, 29, "Output"]
+Cell[119020, 4442, 1313, 42, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[120516, 4504, 291, 8, 31, "Input"],
-Cell[120810, 4514, 24581, 1028, 91, 23020, 1001, "GraphicsData", \
+Cell[120370, 4489, 290, 8, 28, "Input"],
+Cell[120663, 4499, 24577, 1026, 91, 23020, 1001, "GraphicsData", \
 "PostScript", "Graphics"],
-Cell[145394, 5544, 139, 4, 30, "Output"]
+Cell[145243, 5527, 139, 4, 28, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[145582, 5554, 89, 4, 71, "Section"],
+Cell[145431, 5537, 89, 4, 83, "Section"],
 Cell[CellGroupData[{
-Cell[145696, 5562, 115, 3, 31, "Input"],
-Cell[145814, 5567, 368, 11, 63, "Output"]
+Cell[145545, 5545, 115, 3, 28, "Input"],
+Cell[145663, 5550, 368, 11, 64, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[146219, 5583, 267, 8, 31, "Input"],
-Cell[146489, 5593, 377, 7, 22, "Message"],
+Cell[146068, 5566, 267, 8, 28, "Input"],
+Cell[146338, 5576, 377, 7, 22, "Message"],
 Cell[CellGroupData[{
-Cell[146891, 5604, 7111, 270, 157, 5612, 243, "GraphicsData", "PostScript", \
+Cell[146740, 5587, 7107, 268, 157, 5612, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[154005, 5876, 7098, 268, 70, 5697, 243, "GraphicsData", "PostScript", \
+Cell[153850, 5857, 7094, 266, 70, 5697, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[161106, 6146, 6987, 266, 70, 5692, 243, "GraphicsData", "PostScript", \
+Cell[160947, 6125, 6983, 264, 70, 5692, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[168096, 6414, 7062, 267, 70, 5698, 243, "GraphicsData", "PostScript", \
+Cell[167933, 6391, 7058, 265, 70, 5698, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[175161, 6683, 7049, 278, 70, 5790, 255, "GraphicsData", "PostScript", \
+Cell[174994, 6658, 7045, 276, 70, 5790, 255, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[182213, 6963, 7847, 316, 70, 6491, 292, "GraphicsData", "PostScript", \
+Cell[182042, 6936, 7843, 314, 70, 6491, 292, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[190063, 7281, 7251, 283, 70, 5826, 258, "GraphicsData", "PostScript", \
+Cell[189888, 7252, 7247, 281, 70, 5826, 258, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[197317, 7566, 7256, 276, 70, 5729, 249, "GraphicsData", "PostScript", \
+Cell[197138, 7535, 7252, 274, 70, 5729, 249, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[204576, 7844, 7340, 282, 70, 5793, 255, "GraphicsData", "PostScript", \
+Cell[204393, 7811, 7336, 280, 70, 5793, 255, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[211919, 8128, 7408, 286, 70, 5808, 258, "GraphicsData", "PostScript", \
+Cell[211732, 8093, 7404, 284, 70, 5808, 258, "GraphicsData", "PostScript", \
 "Graphics"]
 }, Closed]],
-Cell[219342, 8417, 1313, 42, 29, "Output"]
+Cell[219151, 8380, 1313, 42, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[220692, 8464, 291, 8, 31, "Input"],
-Cell[220986, 8474, 25892, 1047, 101, 22802, 995, "GraphicsData", \
+Cell[220501, 8427, 290, 8, 28, "Input"],
+Cell[220794, 8437, 25888, 1045, 101, 22802, 995, "GraphicsData", \
 "PostScript", "Graphics"],
-Cell[246881, 9523, 139, 4, 30, "Output"]
+Cell[246685, 9484, 139, 4, 28, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[247069, 9533, 89, 4, 71, "Section"],
+Cell[246873, 9494, 89, 4, 82, "Section"],
 Cell[CellGroupData[{
-Cell[247183, 9541, 111, 3, 31, "Input"],
-Cell[247297, 9546, 406, 13, 57, "Output"]
+Cell[246987, 9502, 111, 3, 28, "Input"],
+Cell[247101, 9507, 406, 13, 63, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[247740, 9564, 267, 8, 31, "Input"],
+Cell[247544, 9525, 267, 8, 28, "Input"],
 Cell[CellGroupData[{
-Cell[248032, 9576, 7103, 270, 157, 5612, 243, "GraphicsData", "PostScript", \
+Cell[247836, 9537, 7099, 268, 157, 5612, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[255138, 9848, 7140, 269, 70, 5690, 243, "GraphicsData", "PostScript", \
+Cell[254938, 9807, 7136, 267, 70, 5690, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[262281, 10119, 7038, 267, 70, 5674, 243, "GraphicsData", "PostScript", \
+Cell[262077, 10076, 7034, 265, 70, 5674, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[269322, 10388, 6907, 266, 70, 5660, 243, "GraphicsData", "PostScript", \
+Cell[269114, 10343, 6903, 264, 70, 5660, 243, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[276232, 10656, 6825, 274, 70, 5802, 255, "GraphicsData", "PostScript", \
+Cell[276020, 10609, 6821, 272, 70, 5802, 255, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[283060, 10932, 7342, 305, 70, 6486, 289, "GraphicsData", "PostScript", \
+Cell[282844, 10883, 7338, 303, 70, 6486, 289, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[290405, 11239, 6845, 277, 70, 5830, 258, "GraphicsData", "PostScript", \
+Cell[290185, 11188, 6841, 275, 70, 5830, 258, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[297253, 11518, 7031, 275, 70, 5752, 252, "GraphicsData", "PostScript", \
+Cell[297029, 11465, 7027, 273, 70, 5752, 252, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[304287, 11795, 7290, 284, 70, 5828, 258, "GraphicsData", "PostScript", \
+Cell[304059, 11740, 7286, 282, 70, 5828, 258, "GraphicsData", "PostScript", \
 "Graphics"],
-Cell[311580, 12081, 7353, 285, 70, 5836, 258, "GraphicsData", "PostScript", \
+Cell[311348, 12024, 7349, 283, 70, 5836, 258, "GraphicsData", "PostScript", \
 "Graphics"]
 }, Closed]],
-Cell[318948, 12369, 1313, 42, 29, "Output"]
+Cell[318712, 12310, 1313, 42, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[320298, 12416, 291, 8, 31, "Input"],
-Cell[320592, 12426, 25078, 1039, 91, 23053, 1004, "GraphicsData", \
+Cell[320062, 12357, 290, 8, 28, "Input"],
+Cell[320355, 12367, 25074, 1037, 91, 23053, 1004, "GraphicsData", \
 "PostScript", "Graphics"],
-Cell[345673, 13467, 139, 4, 30, "Output"]
+Cell[345432, 13406, 139, 4, 28, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[345861, 13477, 28, 0, 71, "Section"],
-Cell[345892, 13479, 76, 2, 31, "Input"],
+Cell[345620, 13416, 28, 0, 80, "Section"],
+Cell[345651, 13418, 76, 2, 28, "Input"],
 Cell[CellGroupData[{
-Cell[345993, 13485, 559, 17, 31, "Input"],
-Cell[346555, 13504, 567, 17, 50, "Output"]
+Cell[345752, 13424, 559, 17, 28, "Input"],
+Cell[346314, 13443, 567, 17, 46, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -13721,4 +13665,3 @@ Cell[346555, 13504, 567, 17, 50, "Output"]
 *)
 
 (* End of internal cache information *)
-
