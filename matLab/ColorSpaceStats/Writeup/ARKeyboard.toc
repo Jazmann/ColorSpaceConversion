@@ -10,9 +10,9 @@
 \contentsline {subsubsection}{\numberline {2.2.2}Rotation Matrix}{4}
 \contentsline {subsection}{\numberline {2.3}Skin Statistics}{6}
 \contentsline {subsection}{\numberline {2.4}Preservation of Color Information}{7}
-\contentsline {subsubsection}{\numberline {2.4.1}ERF (Gaussian Error Function)}{8}
+\contentsline {subsubsection}{\numberline {2.4.1}Partition}{8}
 \contentsline {subsubsection}{\numberline {2.4.2}Linear}{10}
-\contentsline {subsubsection}{\numberline {2.4.3}Partition}{12}
+\contentsline {subsubsection}{\numberline {2.4.3}ERF (Gaussian Error Function)}{12}
 \contentsline {subsection}{\numberline {2.5}Setting up 2-Channel Representation}{13}
 \contentsline {subsection}{\numberline {2.6}Skin Detection}{15}
 \contentsline {subsection}{\numberline {2.7}Putting it All Together}{15}
