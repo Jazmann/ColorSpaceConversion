@@ -308,7 +308,9 @@ The Gaussian distribution and the cumulative distribution are shown in Figure~\r
 \end{figure}
 
 First, we determine the maximum value taken in the domain. This is simply found by evaluating the function at sMax. It should be noted that --- if the Gaussian distribution is well-contained in the source domain --- the maximum value should be equal to the amplitude. For the sake of simplicity, we'll ignore the amplitude of the fitted Gaussian found previously as it is not relevant to the design of the redistribution function. So, to fix the range of the distribution function, we first scale to the range 0 to 1 by simply dividing through by the maximum value, and then re-scale to the destination range dMax - dMin and shift by dMin.
-
+\begin{equation}\label{disFunction}
+  dis(x) = \frac{(\text{dMax}-\text{dMin}) \left(\text{erf}\left(\frac{x-\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\text{sMin}-\mu }{\sqrt{2} \sigma }\right)\right)}{\text{erf}\left(\frac{\text{sMax}-\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\text{sMin}-\mu }{\sqrt{2} \sigma }\right)}+\text{dMin}
+\end{equation}
 
 We will likely partition for the white/black axis, apply the linear redistribution for the distribution function on the axis which has the very low value of standard deviation, and the ERF for the axis which contains most of the variation for skin color.
 
