@@ -288,9 +288,11 @@ The integral of the cumulative Gaussian (i.e. Error Function) allows the redistr
 
 The error function distribution is mathematically correct, being directly related to the Gaussian fit. Computationally, there are two considerations: the numerical representation, and performance. The discrete representation of the numerics means that --- for a significant number of possible distributions --- distributing using the error function has little to no advantage (or indeed difference) from using a linear distribution.
 
-Considering the preservation of information captured, mappings with a gradient greater than 1 are undesirable because they preserve all the information whilst being informatically wasteful in that they produce functionally inaccessible discrete values. Our stated aim is to preserve the information in the image pertaining to human skin; unevenly distributing this information across a discrete data type is not only wasteful in terms of memory, but also of processing resources because it's a misrepresentation of the information contained in the value.
+Considering the preservation of information captured, mappings with a gradient greater than 1 are undesirable because they preserve all the information whilst being informatically wasteful in that there are functionally inaccessible discrete values in the destination range. Our stated aim is to preserve the information in the image pertaining to human skin; unevenly distributing this information across a discrete data type is not only wasteful in terms of memory, but also of processing resources because subsequent processing routines will treat the data as if it has a higher fidelity than it actually does.
 
 There are a variety of approximations to the error function. (Describe which one was chosen here.)
+
+To construct a distribution function, we first need to describe the relationship of the error function to the Gaussian fit, and then produce a function with the appropriate range and domain. 
 
 
 We will likely partition for the white/black axis, apply the linear redistribution for the distribution function on the axis which has the very low value of standard deviation, and the ERF for the axis which contains most of the variation for skin color.
