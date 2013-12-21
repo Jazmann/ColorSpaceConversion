@@ -241,29 +241,7 @@ Knowing the range of values produced by the rotation allows us to scale the tran
 
 
 
-\begin{figure}[h!]
-  \caption{Linear partition approximation.}
-  \label{fig:Partition}
-  \centering
-    \includegraphics[width=0.49\textwidth]{partitionSmooth.eps}
-    \includegraphics[width=0.49\textwidth]{partitionColor.eps}
-\end{figure}
 
-\begin{figure}[h!]
-  \caption{Linear approximation.}
-  \label{fig:Linear}
-  \centering
-    \includegraphics[width=0.49\textwidth]{linearSmooth.eps}
-    \includegraphics[width=0.49\textwidth]{linearColor.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Error Function distribution.}
-  \label{fig:ERF}
-  \centering
-    \includegraphics[width=0.49\textwidth]{ERFSmooth.eps}
-    \includegraphics[width=0.49\textwidth]{ERFColor.eps}
-\end{figure}
 
 \begin{figure}[h!]
   \caption{Unit graph.}
@@ -290,8 +268,6 @@ The error function distribution is mathematically correct, being directly relate
 
 Considering the preservation of information captured, mappings with a gradient greater than 1 are undesirable because they preserve all the information whilst being informatically wasteful in that there are functionally inaccessible discrete values in the destination range. Our stated aim is to preserve the information in the image pertaining to human skin; unevenly distributing this information across a discrete data type is not only wasteful in terms of memory, but also of processing resources because subsequent processing routines will treat the data as if it has a higher fidelity than it actually does.
 
-There are a variety of approximations to the error function. (Describe which one was chosen here.)
-
 To construct a distribution function, we first need to describe the relationship of the error function to the Gaussian fit, and then produce a function with the appropriate range and domain. For a Gaussian fit with an amplitude A, a mean of $\mu$, and a standard deviation of $\sigma$, where $\mu$ and x lie in a source range sMin to sMax. The cumulative distribution is found by integrating from sMin to the point x, as can be seen in (\ref{eq:ErfDefinition}):
 
 \begin{equation}\label{eq:ErfDefinition}
@@ -317,21 +293,60 @@ Mathematically, this distribution function~(\ref{eq:disFunction}) achieves all t
 
 First, we need to identify where the distribution is effectively constant. This can be found by solving the following equation in the region and domain $0 \le x \le 1$ and then generalised to the specific discrete numerics:
 
-\begin{equation}
- \frac{\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)+\text{erf}\left(\frac{x-\mu }{\sqrt{2} \sigma }\right)}{\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)}=\text{dL} \quad \text{where} \quad dL = \left\{ \frac{1}{\text{dMax} - \text{dMin}}, 1 - \frac{1}{\text{dMax} - \text{dMin}} \right\}
+\begin{equation}\label{eq:0to1}
+ \frac{\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)+\text{erf}\left(\frac{x-\mu }{\sqrt{2} \sigma }\right)}{\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)}=\text{dL} \quad \text{where} \quad \text{dL} = \left\{ \frac{1}{\text{dMax} - \text{dMin}}, 1 - \frac{1}{\text{dMax} - \text{dMin}} \right\}
 \end{equation}
 
 
+The solution is found for the source domain in the range $0:1$ as:
 
 
+\begin{equation}\label{eq:LowHigh}
+ x = \sqrt{2} \sigma  \text{erf}^{-1}\left((\text{dL}-1) \text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{dL} \; \text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)+\mu
+\end{equation}
+
+To find the region where all the information in the source domain is preserved, we differentiate the distribution and solve for where the gradient is equal to the destination range over the source range. This corresponds to the point at which a unit change in the source produces a unit change in the destination range:
 
 \begin{equation}\label{eq:Boundaries}
 \frac{2 \sigma e^{-\sigma^2 (\mu-x)^2}}{\sqrt{\pi } (\text{erf}(\mu \sigma)+\text{erf}(\sigma-\mu \sigma))}=\frac{\text{dMax - dMin}}{\text{sMax - sMin}}
 \end{equation}
 
+Rearranging for x, we find:
+
+\begin{equation}\label{eq:PreservedRegion}
+ x=\mu -\sigma  \sqrt{2 \log \left( \frac{\text{dMax - dMin}}{\text{sMax - sMin}} \frac{1}{ \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)}\right)+\log \left(\frac{2}{\pi }\right)}
+\end{equation}
+
+We now have an equation that gives us the four points in the source domain which mark the boundaries of the five characteristic regions. The equations are valid in the unit source domain $0:1$. It is a simple matter to scale and shift these values to give the points in a more general source domain.
 
 
-The next number we need is where one unit change in the source produces one unit change in the destination.
+\begin{figure}[h!]
+  \caption{Linear partition approximation.}
+  \label{fig:Partition}
+  \centering
+    \includegraphics[width=0.49\textwidth]{partitionSmooth2.eps}
+    \includegraphics[width=0.49\textwidth]{partitionColor2.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Linear approximation.}
+  \label{fig:Linear}
+  \centering
+    \includegraphics[width=0.49\textwidth]{linearSmooth2.eps}
+    \includegraphics[width=0.49\textwidth]{linearColor2.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Error Function distribution.}
+  \label{fig:ERF}
+  \centering
+    \includegraphics[width=0.49\textwidth]{ERFSmooth2.eps}
+    \includegraphics[width=0.49\textwidth]{ERFColor2.eps}
+\end{figure}
+
+There is one final value of interest to the development of the algorithm, which is the gradient at the mean. The reason this is of interest is because we're trying to compress the relevant data as much as possible. If the destination region is small (i.e. the destination machine type is smaller than the source type), then the gradient at the mean allows us to assess the fidelity required of the source type. If it weren't for the fact that the source is the result of a rotation transformation, then there would be little purpose in assessing this value. However, it is entirely possible that the lengthening of the axes resulting from the rotation is insignificant for the desired destination type; there's no point preserving information during the rotation which is then discarded by the redistribution.
+
+
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
