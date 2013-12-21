@@ -315,8 +315,10 @@ First, we determine the maximum value taken in the domain. This is simply found 
 
 Mathematically, this distribution function~(\ref{eq:disFunction}) achieves all the stated objectives. However, on a device we are dealing with discrete numerics and limited processing power, so further analysis is required. Where we're using a discrete domain and range, the distribution is usefully divided into three characteristic behaviors:  where it is constant, where it preserves all the information, and where it selectively preserves information. Looking at the distribution, this divides the source domain into five regions: two where it is effectively constant, two where it is selective, and one region around the mean where it preserves all the information. In order to design an efficient algorithm, it is useful to identify the boundaries of these five regions.
 
+First, we need to identify where the distribution is effectively constant. This can be found by solving the following equation:
+
 \begin{equation}\label{eq:Boundaries}
-\frac{2 \sigma e^{-\sigma^2 (\mu-x)^2}}{\sqrt{\pi } (\text{erf}(\mu \sigma)+\text{erf}(\sigma-\mu \sigma))}=\frac{\text{dRange}}{\text{sRange}}
+\frac{2 \sigma e^{-\sigma^2 (\mu-x)^2}}{\sqrt{\pi } (\text{erf}(\mu \sigma)+\text{erf}(\sigma-\mu \sigma))}=\frac{\text{dMax - dMin}}{\text{sMax - sMin}}
 \end{equation}
 
 
