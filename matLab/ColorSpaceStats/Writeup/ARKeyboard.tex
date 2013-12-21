@@ -319,33 +319,10 @@ Rearranging for x, we find:
 
 We now have an equation that gives us the four points in the source domain which mark the boundaries of the five characteristic regions. The equations are valid in the unit source domain $0:1$. It is a simple matter to scale and shift these values to give the points in a more general source domain.
 
+
 \begin{figure}[h!]
   \caption{Linear partition approximation.}
   \label{fig:Partition}
-  \centering
-    \includegraphics[width=0.49\textwidth]{partitionSmooth.eps}
-    \includegraphics[width=0.49\textwidth]{partitionColor.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Linear approximation.}
-  \label{fig:Linear}
-  \centering
-    \includegraphics[width=0.49\textwidth]{linearSmooth.eps}
-    \includegraphics[width=0.49\textwidth]{linearColor.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Error Function distribution.}
-  \label{fig:ERF}
-  \centering
-    \includegraphics[width=0.49\textwidth]{ERFSmooth.eps}
-    \includegraphics[width=0.49\textwidth]{ERFColor.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Linear partition approximation.}
-  \label{fig:Partition2}
   \centering
     \includegraphics[width=0.49\textwidth]{partitionSmooth2.eps}
     \includegraphics[width=0.49\textwidth]{partitionColor2.eps}
@@ -353,7 +330,7 @@ We now have an equation that gives us the four points in the source domain which
 
 \begin{figure}[h!]
   \caption{Linear approximation.}
-  \label{fig:Linear2}
+  \label{fig:Linear}
   \centering
     \includegraphics[width=0.49\textwidth]{linearSmooth2.eps}
     \includegraphics[width=0.49\textwidth]{linearColor2.eps}
@@ -361,11 +338,15 @@ We now have an equation that gives us the four points in the source domain which
 
 \begin{figure}[h!]
   \caption{Error Function distribution.}
-  \label{fig:ERF2}
+  \label{fig:ERF}
   \centering
     \includegraphics[width=0.49\textwidth]{ERFSmooth2.eps}
     \includegraphics[width=0.49\textwidth]{ERFColor2.eps}
 \end{figure}
+
+There is one final value of interest to the development of the algorithm, which is the gradient at the mean. The reason this is of interest is because we're trying to compress the relevant data as much as possible. If the destination region is small (i.e. the destination machine type is smaller than the source type), then the gradient at the mean allows us to assess the fidelity required of the source type. If it weren't for the fact that the source is the result of a rotation transformation, then there would be little purpose in assessing this value. However, it is entirely possible that the lengthening of the axes resulting from the rotation is insignificant for the desired destination type; there's no point preserving information during the rotation which is then discarded by the redistribution.
+
+
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
