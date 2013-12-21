@@ -351,9 +351,11 @@ There is one final value of interest to the development of the algorithm, which 
 \end{equation}
 
 therefore the required fidelity in the source domain is given by $\frac{1}{\Delta}$.
+
 \begin{equation}\label{Fidelity}
   \frac{1}{\Delta} = \sqrt{\frac{\pi }{2}} \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)
 \end{equation}
+
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
