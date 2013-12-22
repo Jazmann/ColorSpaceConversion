@@ -25,18 +25,25 @@
 
 No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.) ~\cite{Jones2002}
 
-
+For the purposes of this project, 
 
 \subsubsection{LAB}\label{sec:LAB}
-
-
+~\cite{Vezhnevets2003}
+~\cite{Yang1997a}
+~\cite{Yang1998a}
+~\cite{Zarit1999a}
 \subsubsection{RGB}\label{sec:RGB}
-
+~\cite{Vezhnevets2003}
+~\cite{Brand2000a}
+~\cite{Zarit1999a}
 \subsubsection{HSV}\label{sec:HSV}
-
+~\cite{Vezhnevets2003}
+~\cite{Sigal2000a}
+~\cite{Zarit1999a}
 \subsubsection{YCbCr}\label{sec:YCbCr}
-
-
+~\cite{Vezhnevets2003}
+~\cite{Chai2000a}
+~\cite{Phung2002a}
 
 \subsection{Constructing a New Color Space}\label{sec:ConstructingANewColorSpace}
 
@@ -212,35 +219,7 @@ For numerical reasons, the value for $\theta$ was found iteratively by performin
 
 
 
-\begin{figure}[h!]
-  \caption{Rainbowman in a stunning three colors plus the other thing.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRGB.eps}
-\end{figure}
 
-\begin{figure}[h!]
-  \caption{Rotated Rainbowman.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotated.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Final bins.}
-  \centering
-    \includegraphics[width=\textwidth]{binsFinal2.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Rotated and scaled Rainbowman.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotatedScaled.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Rotated compact scaled Rainbowman.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotatedCompactScaled.eps}
-\end{figure}
 
 
 \subsection{Preservation of Color Information}\label{sec:PreservationOfColorInformation}
@@ -443,7 +422,7 @@ We can now re-formulate the transformation matrix in three different ways.
   \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
 \widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
 \end{gather*}
-\begin{equation}\label{eq:NormRxyz}
+\begin{equation}\label{eq:NormRxyz2}
 \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
 \left(
 \begin{array}{ccc}
@@ -466,6 +445,36 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 
 
 \subsection{Skin Detection}\label{sec:SkinDetection}
+
+\begin{figure}[h!]
+  \caption{Rainbowman in a stunning three colors plus the other thing.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRGB.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Rotated Rainbowman.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRotated.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Final bins.}
+  \centering
+    \includegraphics[width=\textwidth]{binsFinal2.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Rotated and scaled Rainbowman.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRotatedScaled.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Rotated compact scaled Rainbowman.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRotatedCompactScaled.eps}
+\end{figure}
 
 \subsection{Putting it All Together}\label{sec:PuttingItAllTogether}
 
