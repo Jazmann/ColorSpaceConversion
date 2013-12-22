@@ -152,13 +152,16 @@ It is convenient to produce a transformation which will result in axes of known 
 The normalised rotation matrix is given by:
 
 \begin{equation}\label{eq:NormRxyz}
-R_{xyz}(\theta) = \left(
+\scalebox{0.7}{%
+$\displaystyle
+R_{xyz}(\theta) = \\ \left(
 \begin{array}{ccc}
+\scriptsize
  \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
  -\frac{\sqrt{3} \cos (\theta )+3 \sin (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} & \frac{2 \sqrt{3} \cos (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} & \frac{3 \sin (\theta )-\sqrt{3} \cos (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} \\
  \frac{\sqrt{3} \sin (\theta )-3 \cos (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} & -\frac{2 \sqrt{3} \sin (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} & \frac{3 \cos (\theta )+\sqrt{3} \sin (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} \\
 \end{array}
-\right)
+\right)$}
 \end{equation}
 
 \subsection{Skin Statistics}\label{sec:SkinStatistics}
