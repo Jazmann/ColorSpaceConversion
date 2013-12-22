@@ -366,10 +366,14 @@ We need to consider the requested compression of information alongside the sprea
 The condition for rescaling the axis is:
 
 \begin{equation}\label{eq:RescaleAxis}
-\frac{dRange}{sRange L(\theta)} \Delta \le 1
+\frac{dRange}{RGBRange L(\theta)} \Delta \le 1
 \end{equation}
 
-Where $dRange$ is the number of values which the destination type can contain, and $sRange$ is the number of values the RGB source type can contain.
+Where $dRange$ is the number of values which the destination type can contain, and $RGBRange$ is the number of values the RGB source type can contain.
+
+\begin{equation}\label{eq:UnscaledAxis}
+sRange = RGBRange L(\theta) \Delta > 1
+\end{equation}
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
