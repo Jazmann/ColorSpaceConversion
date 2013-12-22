@@ -156,19 +156,20 @@ In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the 
 It is convenient to produce a transformation which will result in axes of known length. Because the rotation cannot include a translation, we desire a transformation matrix which will result in the ranges 0 to 1, -$\frac{1}2$ to $\frac{1}2$, and -$\frac{1}2$ to $\frac{1}2$. Such a transformation is easily obtained by multiplying the rotation matrix by a diagonal matrix with the reciprocal of the maximums found above placed along the diagonal. This will scale each axis to a unit length.
 
 The normalised rotation matrix is given by:
-
-\begin{multline}\label{eq:NormRxyz}
-R_{xyz}(\theta) = \\ 
-\resizebox{\textwidth}{!}{%
-$\displaystyle
+\begin{gather*}
+  \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
+\widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3} 
+\end{gather*}
+\begin{equation}\label{eq:NormRxyz}
+R_{xyz}(\theta) =
 \left(
 \begin{array}{ccc}
  \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
- -\frac{\sqrt{3} \cos (\theta )+3 \sin (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} & \frac{2 \sqrt{3} \cos (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} & \frac{3 \sin (\theta )-\sqrt{3} \cos (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} \\
- \frac{\sqrt{3} \sin (\theta )-3 \cos (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} & -\frac{2 \sqrt{3} \sin (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} & \frac{3 \cos (\theta )+\sqrt{3} \sin (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} \\
+ -\frac{\sqrt{3} \cos (\theta )+3 \sin (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} & \frac{2 \sqrt{3} \cos (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} & \frac{3 \sin (\theta )-\sqrt{3} \cos (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} \\
+ \frac{\sqrt{3} \sin (\theta )-3 \cos (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} & -\frac{2 \sqrt{3} \sin (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} & \frac{3 \cos (\theta )+\sqrt{3} \sin (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} \\
 \end{array}
-\right)$}
-\end{multline}
+\right)
+\end{equation}
 
 \subsection{Skin Statistics}\label{sec:SkinStatistics}
 

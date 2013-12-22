@@ -108,6 +108,7 @@ Because the absolute values of the axes in the color space have no meaning, we'r
 
 We need to know, in each of the axes, how far out each point is. Because we're effectively rotating a hexagon, whatever the answer is, we know the function is going to be periodic, repeating every $\frac{\pi}{3}$ radians, so we only have to solve it in the 0 to $\frac{\pi}{3}$ region and then generalize. First we take the cooordinates of the RGB cube and perform the rotation to find the values in the new color space.
 
+
 \begin{multline}\label{eq:YabCube}
   R_{xyz}(\theta)\cdot\left(
 \begin{array}{cccccccc}
@@ -116,14 +117,17 @@ We need to know, in each of the axes, how far out each point is. Because we're e
  0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
 \end{array}
 \right) = \\
+\resizebox{\textwidth}{!}{%
+$\displaystyle
 \left(
 \begin{array}{cccccccc}
  0 & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \sqrt{3} \\
  0 & -\frac{\cos (\theta)}{\sqrt{6}}-\frac{\sin (\theta)}{\sqrt{2}} & \frac{\cos (\theta)}{\sqrt{6}}-\frac{\sin (\theta)}{\sqrt{2}} & \sqrt{\frac{2}{3}} \cos (\theta) & \frac{\cos (\theta)}{\sqrt{6}}+\frac{\sin (\theta)}{\sqrt{2}} & \frac{\sin (\theta)}{\sqrt{2}}-\frac{\cos (\theta)}{\sqrt{6}} & -\sqrt{\frac{2}{3}} \cos (\theta) & 0 \\
  0 & \frac{\sin (\theta)}{\sqrt{6}}-\frac{\cos (\theta)}{\sqrt{2}} & -\frac{\cos (\theta)}{\sqrt{2}}-\frac{\sin (\theta)}{\sqrt{6}} & -\sqrt{\frac{2}{3}} \sin (\theta) & \frac{\cos (\theta)}{\sqrt{2}}-\frac{\sin (\theta)}{\sqrt{6}} & \frac{\cos (\theta)}{\sqrt{2}}+\frac{\sin (\theta)}{\sqrt{6}} & \sqrt{\frac{2}{3}} \sin (\theta) & 0 \\
 \end{array}
-\right)
+\right)$}
 \end{multline}
+
 
 The extent of the new axis is found by taking the maximum and minimum values of each row i.e. the extreme corner positions relative to each new axis. An additional symmetry of the hexagonal projection of the RGB cube allows us to say that whatever functional form is taken by one of the $\theta$ dependant ranges the other can be found by a simple phase shift. So recognising that the minimum value is simply $-1$ times the maximum we have simplified the problem to solving
 
@@ -137,6 +141,7 @@ Graphically, the problem appears as follows:
 
 In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the axis ranges are given by the following:
 
+
 \begin{tabular}{|c|c|c|}
   \hline
   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
@@ -147,19 +152,23 @@ In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the 
   \hline
 \end{tabular}
 
+
 It is convenient to produce a transformation which will result in axes of known length. Because the rotation cannot include a translation, we desire a transformation matrix which will result in the ranges 0 to 1, -$\frac{1}2$ to $\frac{1}2$, and -$\frac{1}2$ to $\frac{1}2$. Such a transformation is easily obtained by multiplying the rotation matrix by a diagonal matrix with the reciprocal of the maximums found above placed along the diagonal. This will scale each axis to a unit length.
 
 The normalised rotation matrix is given by:
 
-\begin{equation}\label{eq:NormRxyz}
-R_{xyz}(\theta) = \left(
+\begin{multline}\label{eq:NormRxyz}
+R_{xyz}(\theta) = \\ 
+\resizebox{\textwidth}{!}{%
+$\displaystyle
+\left(
 \begin{array}{ccc}
  \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
  -\frac{\sqrt{3} \cos (\theta )+3 \sin (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} & \frac{2 \sqrt{3} \cos (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} & \frac{3 \sin (\theta )-\sqrt{3} \cos (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} \\
  \frac{\sqrt{3} \sin (\theta )-3 \cos (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} & -\frac{2 \sqrt{3} \sin (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} & \frac{3 \cos (\theta )+\sqrt{3} \sin (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} \\
 \end{array}
-\right)
-\end{equation}
+\right)$}
+\end{multline}
 
 \subsection{Skin Statistics}\label{sec:SkinStatistics}
 
@@ -344,15 +353,35 @@ We now have an equation that gives us the four points in the source domain which
     \includegraphics[width=0.49\textwidth]{ERFColor2.eps}
 \end{figure}
 
-There is one final value of interest to the development of the algorithm, which is the gradient at the mean. The reason this is of interest is because we're trying to compress the relevant data as much as possible. If the destination region is small (i.e. the destination machine type is smaller than the source type), then the gradient at the mean allows us to assess the fidelity required of the source type. If it weren't for the fact that the source is the result of a rotation transformation, then there would be little purpose in assessing this value. However, it is entirely possible that the lengthening of the axes resulting from the rotation is insignificant for the desired destination type; there's no point preserving information during the rotation which is then discarded by the redistribution. The gradient is given by
+There is one final value of interest to the development of the algorithm, which is the gradient at the mean. The reason this is of interest is because we're trying to compress the relevant data as much as possible. If the destination region is small (i.e. the destination machine type is smaller than the source type), then the gradient at the mean allows us to assess the fidelity required of the source type. If it weren't for the fact that the source is the result of a rotation transformation, then there would be little purpose in assessing this value. However, it is entirely possible that the lengthening of the axes resulting from the rotation is insignificant for the desired destination type; there's no point preserving information during the rotation which is then discarded by the redistribution. The gradient for a unit source and domain is given by
 
 \begin{equation}
-\Delta = \frac{\text{dMax} - \text{dMin}}{\text{sMax} - \text{sMin}} \frac{\sqrt{\frac{2}{\pi }}}{\sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)}
+\Delta = \frac{\sqrt{\frac{2}{\pi }}}{\sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)}
 \end{equation}
 
-therefore the required fidelity in the source domain is given by $\frac{\Delta}{\text{sMax} - \text{sMin}}$.
+therefore the required fidelity in the source domain is given by $\Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm it is useful to know the length of the source domain axis which would cover the destination range if a linear distribution with a gradient $\Delta$ were to be used. This length is given by
+
 \begin{equation}\label{Fidelity}
-  \frac{1}{\Delta} = \frac{\text{sMax} - \text{sMin}}{\text{dMax} - \text{dMin}} \sqrt{\frac{\pi }{2}} \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)
+  \frac{1}{\Delta} =  \sqrt{\frac{\pi }{2}} \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)
+\end{equation}
+
+\subsection{The Skin Color Space Algorithm}
+Now that all of the values necessary to preserve the skin information have been obtained, we can use them to build a color space transformation algorithm which can make intelligent decisions about the numerical precision for the intermediate and final variables, as well as determining the most efficient transformation methods. The algorithm described herein will take values of $\theta$, the rotation about the luminosity axis, the standard deviations and mean values for the two chromatic axes, and will automatically decide upon the necessary intermediate working data types and the most efficient redistribution methods.
+
+Previously, we found the lengths of the new axes after the rotational transformation. If we were to keep the same data type for the color space as is used for the RGB values, then the axes would have to be rescaled with the accompanying loss of information. Given that we have values which allow us to assess where all the relevant information lies, a more sophisticated approach is possible. For a chromatic axis --- which, after rotation, has a length $L(\theta)$ --- we can determine the positions on that axis at which the information is considered irrelevant using Equation~(\ref{eq:LowHigh}). If the distance between these two points is less than or equal to 1, then all the relevant information can be retained for that axis in the same data type as was used for the RGB color space. The only further consideration is to ensure that the values outside that range are prevented from causing errors associated with overflow. To exclude this possibility, a conditional statement can be used which checks the bounds as stated, assigning an appropriate value as necessary. The alternative is to use an intermediate value with a higher bit depth, and then to recast into the destination data type in such a way that overflow and underflow are handled appropriately. The OpenCV library provides a casting method --- "saturateCast" --- which serves this purpose.
+
+We need to consider the requested compression of information alongside the spread of information caused by the rotation, and the desired focus on the specific region of interest dictated by the statistics. The analysis of the distribution is mathematically stated in a unit, source, and domain range. The maximum gradient of the distribution, when looked at in these terms, must always be greater than or equal to 1. This indicates a focusing of interest around the mean. It's not possible to extract more information than is contained in the source. For this reason, the destination axis may usefully only be shorter than or of equal length to the source axis. In terms of the machine representation, this indicates that the destination data type may be designed to contain a smaller range of values. The question for the rotational transformation is whether the rotated axis should be rescaled with the associated loss of information or not. We can now write an algorithm which determines the necessary scaling for the axes, and whether truncation of the extreme values is significant.
+
+The condition for rescaling the axis is:
+
+\begin{equation}\label{eq:RescaleAxis}
+\frac{dRange}{RGBRange L(\theta)} \Delta \le 1
+\end{equation}
+
+Where $dRange$ is the number of values which the destination type can contain, and $RGBRange$ is the number of values the RGB source type can contain.
+
+\begin{equation}\label{eq:UnscaledAxis}
+sRange = RGBRange L(\theta) \Delta > 1
 \end{equation}
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
