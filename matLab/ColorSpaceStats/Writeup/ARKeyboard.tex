@@ -394,28 +394,16 @@ We can now re-formulate the transformation matrix in three different ways.
 \end{equation}
 
 \begin{equation}\label{eq:CompressedRotation}
- \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) = \left(
-\begin{array}{ccc}
- \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} \\
- \kappa \Lambda(\mu_2,\sigma_2) \left(-\frac{\cos (\theta )}{\sqrt{6}}-\frac{\sin (\theta )}{\sqrt{2}}\right) & 
- \kappa \Lambda(\mu_2,\sigma_2) \sqrt{\frac{2}{3}} \cos (\theta ) & 
- \kappa \Lambda(\mu_2,\sigma_2) \left(\frac{\sin (\theta )}{\sqrt{2}}-\frac{\cos (\theta )}{\sqrt{6}}\right) \\
- \kappa \Lambda(\mu_3,\sigma_3) \left(\frac{\sin (\theta )}{\sqrt{6}}-\frac{\cos (\theta )}{\sqrt{2}}\right) & 
- - \kappa \Lambda(\mu_3,\sigma_3) \sqrt{\frac{2}{3}} \sin (\theta ) & 
- \kappa \Lambda(\mu_3,\sigma_3) \left(\frac{\cos (\theta )}{\sqrt{2}}+\frac{\sin (\theta )}{\sqrt{6}}\right) \\
-\end{array}
-\right)
-\end{equation}
-
-\begin{equation}
-\widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
+ \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) = 
 \left(
-\begin{array}{ccc}
- \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
-  \frac{\text{rgbRange} }{dRange} \Lambda(\mu_2,\sigma_2)\left(-\frac{\cos (\theta )}{2}-\frac{1}{2} \sqrt{3} \sin (\theta )\right) & \frac{\text{rgbRange} }{dRange} \Lambda(\mu_2,\sigma_2)\cos (\theta ) & \frac{\text{rgbRange} }{dRange} \Lambda(\mu_2,\sigma_2)\left(\frac{1}{2} \sqrt{3} \sin (\theta )-\frac{\cos (\theta )}{2}\right) \\
- \frac{\sin (\theta )}{2}-\frac{1}{2} \sqrt{3} \cos (\theta ) & -\sin (\theta ) & \frac{1}{2} \sqrt{3} \cos (\theta )+\frac{\sin (\theta )}{2} \\
+\begin{array}{c}
+ 1  \\
+ \kappa \Lambda(\mu_2,\sigma_2) \\
+ \kappa \Lambda(\mu_3,\sigma_3) \\
 \end{array}
 \right)
+\bigotimes
+R_{xyz}(\theta)
 \end{equation}
 
 \begin{gather*}
@@ -423,14 +411,16 @@ We can now re-formulate the transformation matrix in three different ways.
 \widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
 \end{gather*}
 \begin{equation}\label{eq:NormRxyz2}
-\widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
+ \overline{R}_{xyz}(\theta) = 
 \left(
-\begin{array}{ccc}
- \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
- -\frac{\sqrt{3} \cos (\theta )+3 \sin (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} & \frac{2 \sqrt{3} \cos (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} & \frac{3 \sin (\theta )-\sqrt{3} \cos (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} \\
- \frac{\sqrt{3} \sin (\theta )-3 \cos (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} & -\frac{2 \sqrt{3} \sin (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} & \frac{3 \cos (\theta )+\sqrt{3} \sin (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} \\
+\begin{array}{c}
+ 1  \\
+ \frac{1}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} \\
+ \frac{1}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)}  \\
 \end{array}
 \right)
+\bigotimes
+R_{xyz}(\theta)
 \end{equation}
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}

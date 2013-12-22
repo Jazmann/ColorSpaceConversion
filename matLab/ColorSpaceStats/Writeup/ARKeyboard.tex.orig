@@ -23,20 +23,27 @@
 
 \subsection{Overview of ColorSpaces}\label{sec:OverviewOfColorSpaces}
 
-No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.)
+No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.) ~\cite{Jones2002}
 
-
+For the purposes of this project, 
 
 \subsubsection{LAB}\label{sec:LAB}
-
-
+~\cite{Vezhnevets2003}
+~\cite{Yang1997a}
+~\cite{Yang1998a}
+~\cite{Zarit1999a}
 \subsubsection{RGB}\label{sec:RGB}
-
+~\cite{Vezhnevets2003}
+~\cite{Brand2000a}
+~\cite{Zarit1999a}
 \subsubsection{HSV}\label{sec:HSV}
-
+~\cite{Vezhnevets2003}
+~\cite{Sigal2000a}
+~\cite{Zarit1999a}
 \subsubsection{YCbCr}\label{sec:YCbCr}
-
-
+~\cite{Vezhnevets2003}
+~\cite{Chai2000a}
+~\cite{Phung2002a}
 
 \subsection{Constructing a New Color Space}\label{sec:ConstructingANewColorSpace}
 
@@ -108,6 +115,7 @@ Because the absolute values of the axes in the color space have no meaning, we'r
 
 We need to know, in each of the axes, how far out each point is. Because we're effectively rotating a hexagon, whatever the answer is, we know the function is going to be periodic, repeating every $\frac{\pi}{3}$ radians, so we only have to solve it in the 0 to $\frac{\pi}{3}$ region and then generalize. First we take the cooordinates of the RGB cube and perform the rotation to find the values in the new color space.
 
+
 \begin{multline}\label{eq:YabCube}
   R_{xyz}(\theta)\cdot\left(
 \begin{array}{cccccccc}
@@ -116,14 +124,17 @@ We need to know, in each of the axes, how far out each point is. Because we're e
  0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
 \end{array}
 \right) = \\
+\resizebox{\textwidth}{!}{%
+$\displaystyle
 \left(
 \begin{array}{cccccccc}
  0 & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \sqrt{3} \\
  0 & -\frac{\cos (\theta)}{\sqrt{6}}-\frac{\sin (\theta)}{\sqrt{2}} & \frac{\cos (\theta)}{\sqrt{6}}-\frac{\sin (\theta)}{\sqrt{2}} & \sqrt{\frac{2}{3}} \cos (\theta) & \frac{\cos (\theta)}{\sqrt{6}}+\frac{\sin (\theta)}{\sqrt{2}} & \frac{\sin (\theta)}{\sqrt{2}}-\frac{\cos (\theta)}{\sqrt{6}} & -\sqrt{\frac{2}{3}} \cos (\theta) & 0 \\
  0 & \frac{\sin (\theta)}{\sqrt{6}}-\frac{\cos (\theta)}{\sqrt{2}} & -\frac{\cos (\theta)}{\sqrt{2}}-\frac{\sin (\theta)}{\sqrt{6}} & -\sqrt{\frac{2}{3}} \sin (\theta) & \frac{\cos (\theta)}{\sqrt{2}}-\frac{\sin (\theta)}{\sqrt{6}} & \frac{\cos (\theta)}{\sqrt{2}}+\frac{\sin (\theta)}{\sqrt{6}} & \sqrt{\frac{2}{3}} \sin (\theta) & 0 \\
 \end{array}
-\right)
+\right)$}
 \end{multline}
+
 
 The extent of the new axis is found by taking the maximum and minimum values of each row i.e. the extreme corner positions relative to each new axis. An additional symmetry of the hexagonal projection of the RGB cube allows us to say that whatever functional form is taken by one of the $\theta$ dependant ranges the other can be found by a simple phase shift. So recognising that the minimum value is simply $-1$ times the maximum we have simplified the problem to solving
 
@@ -137,6 +148,7 @@ Graphically, the problem appears as follows:
 
 In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the axis ranges are given by the following:
 
+
 \begin{tabular}{|c|c|c|}
   \hline
   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
@@ -147,16 +159,21 @@ In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the 
   \hline
 \end{tabular}
 
+
 It is convenient to produce a transformation which will result in axes of known length. Because the rotation cannot include a translation, we desire a transformation matrix which will result in the ranges 0 to 1, -$\frac{1}2$ to $\frac{1}2$, and -$\frac{1}2$ to $\frac{1}2$. Such a transformation is easily obtained by multiplying the rotation matrix by a diagonal matrix with the reciprocal of the maximums found above placed along the diagonal. This will scale each axis to a unit length.
 
 The normalised rotation matrix is given by:
-
+\begin{gather*}
+  \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
+\widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
+\end{gather*}
 \begin{equation}\label{eq:NormRxyz}
-R_{xyz}(\theta) = \left(
+\overline{R}_{xyz}(\theta) =
+\left(
 \begin{array}{ccc}
  \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
- -\frac{\sqrt{3} \cos (\theta )+3 \sin (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} & \frac{2 \sqrt{3} \cos (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} & \frac{3 \sin (\theta )-\sqrt{3} \cos (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} \\
- \frac{\sqrt{3} \sin (\theta )-3 \cos (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} & -\frac{2 \sqrt{3} \sin (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} & \frac{3 \cos (\theta )+\sqrt{3} \sin (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} \\
+ -\frac{\sqrt{3} \cos (\theta )+3 \sin (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} & \frac{2 \sqrt{3} \cos (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} & \frac{3 \sin (\theta )-\sqrt{3} \cos (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} \\
+ \frac{\sqrt{3} \sin (\theta )-3 \cos (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} & -\frac{2 \sqrt{3} \sin (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} & \frac{3 \cos (\theta )+\sqrt{3} \sin (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} \\
 \end{array}
 \right)
 \end{equation}
@@ -202,35 +219,7 @@ For numerical reasons, the value for $\theta$ was found iteratively by performin
 
 
 
-\begin{figure}[h!]
-  \caption{Rainbowman in a stunning three colors plus the other thing.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRGB.eps}
-\end{figure}
 
-\begin{figure}[h!]
-  \caption{Rotated Rainbowman.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotated.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Final bins.}
-  \centering
-    \includegraphics[width=\textwidth]{binsFinal2.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Rotated and scaled Rainbowman.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotatedScaled.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Rotated compact scaled Rainbowman.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotatedCompactScaled.eps}
-\end{figure}
 
 
 \subsection{Preservation of Color Information}\label{sec:PreservationOfColorInformation}
@@ -350,16 +339,95 @@ There is one final value of interest to the development of the algorithm, which 
 \Delta = \frac{\sqrt{\frac{2}{\pi }}}{\sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)}
 \end{equation}
 
-<<<<<<< HEAD
-therefore the required fidelity in the source domain is given by $\frac{1}{\Delta}$.
+therefore the required fidelity in the source domain is given by $\Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm it is useful to know the length of the source domain axis which would cover the destination range if a linear distribution with a gradient $\Delta$ were to be used. For a unit range this length is given by $\frac{1}{\Delta}$ which is a function of the mean and standard deviation
 
-=======
-therefore the required fidelity in the source domain is given by $\Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm it is useful to know the length of the source domain axis which would cover the destination range if a linear distribution with a gradient $\Delta$ were to be used. This length is given by
->>>>>>> 42493b88a3771194e3e109b4c763c8e88c6aecb8
 \begin{equation}\label{Fidelity}
-  \frac{1}{\Delta} =  \sqrt{\frac{\pi }{2}} \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)
+  \Lambda(\mu,\sigma) =  \sqrt{\frac{\pi }{2}} \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)
 \end{equation}
 
+\subsection{The Skin Color Space Algorithm}
+Now that all of the values necessary to preserve the skin information have been obtained, we can use them to build a color space transformation algorithm which can make intelligent decisions about the numerical precision for the intermediate and final variables, as well as determining the most efficient transformation methods. The algorithm described herein will take values of $\theta$, the rotation about the luminosity axis, the standard deviations and mean values for the two chromatic axes, and will automatically decide upon the necessary intermediate working data types and the most efficient redistribution methods.
+
+Previously, we found the lengths of the new axes after the rotational transformation. If we were to keep the same data type for the color space as is used for the RGB values, then the axes would have to be rescaled with the accompanying loss of information. Given that we have values which allow us to assess where all the relevant information lies, a more sophisticated approach is possible. For a chromatic axis --- which, after rotation, has a length $L(\theta)$ --- we can determine the positions on that axis at which the information is considered irrelevant using Equation~(\ref{eq:LowHigh}). If the distance between these two points is less than or equal to 1, then all the relevant information can be retained for that axis in the same data type as was used for the RGB color space. The only further consideration is to ensure that the values outside that range are prevented from causing errors associated with overflow. To exclude this possibility, a conditional statement can be used which checks the bounds as stated, assigning an appropriate value as necessary. The alternative is to use an intermediate value with a higher bit depth, and then to recast into the destination data type in such a way that overflow and underflow are handled appropriately. The OpenCV library provides a casting method --- "saturateCast" --- which serves this purpose.
+
+We need to consider the requested compression of information alongside the spread of information caused by the rotation, and the desired focus on the specific region of interest dictated by the statistics. Each axis in the color space is to be represented by a discrete set of numbers. The size of these sets dictates the discretization of the axis, and the ratios between them indicates the spread or compression of the information they contain. We assume that the RGB axes are each discretized to the same extent, each containing $\text{rgbRange}$ values. After the application of the un-normalized rotational transformation, the axes contain differing numbers of values given by $\text{sRange}_1 =\text{rgbRange} \sqrt{3} $, $\text{sRange}_2 = \text{rgbRange} L_2(\theta) $  and $\text{sRange}_3 = \text{rgbRange} L_3(\theta)$.
+
+\begin{align}\label{eq:L}
+  L_2(\theta) & \sqrt{\frac{2}{3}} \sin \left(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3}\right) + \sqrt{2} \cos \left(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3}\right) \\
+  L_3(\theta) & \sqrt{\frac{2}{3}} \sin \left(\theta  \bmod \frac{\pi }{3}\right) + \sqrt{2} \cos \left(\theta  \bmod \frac{\pi }{3}\right)
+\end{align}
+
+The destination color space is designed with a maximum discretization $dRange$ given by the required data type.
+
+The analysis of the distribution is mathematically stated in a unit, source, and domain range. The maximum gradient of the distribution, when looked at in these terms, must always be greater than or equal to 1. This indicates a focusing of interest around the mean. It's not possible to extract more information than is contained in the source. For this reason, the destination axis may usefully only be shorter than or of equal length to the source axis. In terms of the machine representation, this indicates that the destination data type may be designed to contain a smaller range of values. The question for the rotational transformation is whether the rotated axis should be rescaled with the associated loss of information or not. We can now write an algorithm which determines the necessary scaling for the axes, and whether truncation of the extreme values is significant.
+
+The length of the axis after rescaling should be whichever is the shorter of:
+
+\begin{equation}\label{eq:RescaleAxis}
+\min\left\{ \frac{\text{rgbRange} L(\theta)}{dRange} \Lambda(\mu,\sigma) , L(\theta) \right\}
+\end{equation}
+
+The condition for rescaling the axis is:
+
+\begin{equation}\label{eq:RescaleAxisCondition}
+\frac{dRange}{\text{rgbRange} L(\theta) \Lambda(\mu,\sigma)} \le 1
+\end{equation}
+
+We can now re-formulate the transformation matrix in three different ways.
+
+\begin{equation}\label{eq:Rotation}
+ R_{xyz}(\theta) = \left(
+\begin{array}{ccc}
+ \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} \\
+ -\frac{\cos (\theta )}{\sqrt{6}}-\frac{\sin (\theta )}{\sqrt{2}} & 
+ \sqrt{\frac{2}{3}} \cos (\theta ) & 
+ \frac{\sin (\theta )}{\sqrt{2}}-\frac{\cos (\theta )}{\sqrt{6}} \\
+ \frac{\sin (\theta )}{\sqrt{6}}-\frac{\cos (\theta )}{\sqrt{2}} & 
+ -\sqrt{\frac{2}{3}} \sin (\theta ) & 
+ \frac{\cos (\theta )}{\sqrt{2}}+\frac{\sin (\theta )}{\sqrt{6}} \\
+\end{array}
+\right)
+\end{equation}
+
+\begin{equation}\label{eq:RequestedComprerssion}
+\kappa = \frac{\text{rgbRange} }{dRange}
+\end{equation}
+
+\begin{equation}\label{eq:CompressedRotation}
+ \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) = 
+\left(
+\begin{array}{c}
+ 1  \\
+ \kappa \Lambda(\mu_2,\sigma_2) \\
+ \kappa \Lambda(\mu_3,\sigma_3) \\
+\end{array}
+\right)
+\bigotimes
+R_{xyz}(\theta)
+\end{equation}
+
+\begin{gather*}
+  \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
+\widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
+\end{gather*}
+<<<<<<< HEAD
+\begin{equation}\label{eq:NormRxyz2}
+\widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
+=======
+
+\begin{equation}\label{eq:NormRxyz}
+ \overline{R}_{xyz}(\theta) = 
+>>>>>>> 218a772011c09cc214b8d0fc18a827a6a8d51f4b
+\left(
+\begin{array}{c}
+ 1  \\
+ \frac{1}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} \\
+ \frac{1}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)}  \\
+\end{array}
+\right)
+\bigotimes
+R_{xyz}(\theta)
+\end{equation}
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
@@ -373,6 +441,36 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 
 
 \subsection{Skin Detection}\label{sec:SkinDetection}
+
+\begin{figure}[h!]
+  \caption{Rainbowman in a stunning three colors plus the other thing.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRGB.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Rotated Rainbowman.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRotated.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Final bins.}
+  \centering
+    \includegraphics[width=\textwidth]{binsFinal2.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Rotated and scaled Rainbowman.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRotatedScaled.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Rotated compact scaled Rainbowman.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRotatedCompactScaled.eps}
+\end{figure}
 
 \subsection{Putting it All Together}\label{sec:PuttingItAllTogether}
 
@@ -420,7 +518,7 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 \section{Future Work and Discussion}\label{sec:FutureWorkAndDiscussion}
 
 
-\bibliographystyle{unsrtnat}
+\newpage \bibliographystyle{unsrtnat}
 \bibliography{ARKeyboard}
 
 
