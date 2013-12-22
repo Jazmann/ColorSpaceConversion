@@ -382,15 +382,15 @@ The destination color space is designed with a maximum discretization $dRange$ g
 
 The analysis of the distribution is mathematically stated in a unit, source, and domain range. The maximum gradient of the distribution, when looked at in these terms, must always be greater than or equal to 1. This indicates a focusing of interest around the mean. It's not possible to extract more information than is contained in the source. For this reason, the destination axis may usefully only be shorter than or of equal length to the source axis. In terms of the machine representation, this indicates that the destination data type may be designed to contain a smaller range of values. The question for the rotational transformation is whether the rotated axis should be rescaled with the associated loss of information or not. We can now write an algorithm which determines the necessary scaling for the axes, and whether truncation of the extreme values is significant.
 
-The length of the axis after rescaling should be which ever is the shorter of 
+The length of the axis after rescaling should be whichever is the shorter of:
 
-\begin{equation}\label{eq:RescaleAxis}
+\begin{equation}\label{eq:RescaleAxisLength}
 \frac{\text{rgbRange} L(\theta)}{dRange} \Lambda(\mu,\sigma)
 \end{equation}
 
 The condition for rescaling the axis is:
 
-\begin{equation}\label{eq:RescaleAxis}
+\begin{equation}\label{eq:RescaleAxisCondition}
 \frac{dRange}{\text{rgbRange} L(\theta)} \Delta \le 1
 \end{equation}
 
