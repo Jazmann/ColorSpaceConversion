@@ -360,10 +360,10 @@ There is one final value of interest to the development of the algorithm, which 
 \Delta = \frac{\sqrt{\frac{2}{\pi }}}{\sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)}
 \end{equation}
 
-therefore the required fidelity in the source domain is given by $\Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm it is useful to know the length of the source domain axis which would cover the destination range if a linear distribution with a gradient $\Delta$ were to be used. This length is given by
+therefore the required fidelity in the source domain is given by $\Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm it is useful to know the length of the source domain axis which would cover the destination range if a linear distribution with a gradient $\Delta$ were to be used. For a unit range this length is given by $\frac{1}{\Delta}$ which is a function of the mean and standard deviation
 
 \begin{equation}\label{Fidelity}
-  \frac{1}{\Delta} =  \sqrt{\frac{\pi }{2}} \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)
+  \Lambda(\mu,\sigma) =  \sqrt{\frac{\pi }{2}} \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)
 \end{equation}
 
 \subsection{The Skin Color Space Algorithm}
@@ -381,6 +381,12 @@ We need to consider the requested compression of information alongside the sprea
 The destination color space is designed with a maximum discretization $dRange$ given by the required data type.
 
 The analysis of the distribution is mathematically stated in a unit, source, and domain range. The maximum gradient of the distribution, when looked at in these terms, must always be greater than or equal to 1. This indicates a focusing of interest around the mean. It's not possible to extract more information than is contained in the source. For this reason, the destination axis may usefully only be shorter than or of equal length to the source axis. In terms of the machine representation, this indicates that the destination data type may be designed to contain a smaller range of values. The question for the rotational transformation is whether the rotated axis should be rescaled with the associated loss of information or not. We can now write an algorithm which determines the necessary scaling for the axes, and whether truncation of the extreme values is significant.
+
+The length of the axis after rescaling should be which ever is the shorter of 
+
+\begin{equation}\label{eq:RescaleAxis}
+\frac{\text{rgbRange} L(\theta)}{dRange} \Lambda(\mu,\sigma)
+\end{equation}
 
 The condition for rescaling the axis is:
 
