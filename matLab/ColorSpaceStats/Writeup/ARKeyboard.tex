@@ -21,11 +21,11 @@
 
 \section{Color-spaces and information storage for computer vision processing}\label{sec:ColorSpacesAndInfoStorageForComputerVisionProcessing}
 
-\subsection{Overview of ColorSpaces}\label{sec:OverviewOfColorSpaces}
+\subsection{Overview of Color Spaces}\label{sec:OverviewOfColorSpaces}
 
-No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.) ~\cite{Jones2002}
+For the purposes of this project, a color space dedicated to human skin is necessary. When it comes to pattern recognition, it's beneficial to reduce the number of channels which the algorithm has to process, as well as reducing the information density in those channels. It's also hoped that, in an appropriate color space, it will be a simple matter to separate the characteristics associated with saturation of tissue with blood, which changes under mechanical stress from the unchanging pigmentation of the cells. ~\cite{Stamatas2004} However, seeing as the color space contains both the statistical information and the skin color information, it can be interpreted in a probabilistic way.
 
-For the purposes of this project, 
+The following four color spaces were evaluated for possible use as a skin color space:
 
 \subsubsection{LAB}\label{sec:LAB}
 ~\cite{Vezhnevets2003}
@@ -56,11 +56,9 @@ As for the discrete representation of the axes, it's desired that all the inform
 
 \subsubsection{Camera RGB and Normalization for Discrete Range}\label{sec:CameraRGB}
 
-
-
 Due to the hardware being locked down at the application level, we do not have access to the raw camera feed. We do, however, have access to the compressed, post-processing 8-bit RGB image data. The processing involves evening up the color channel senors' sensitivity by way of multiplying each channel by an appropriate correction factor. This is partly why cameras likely have a 10 or 12 bit/channel capture rate, but after accounting for differences in sensitivity, it only outputs in 8-bit color depth.
 
-The three-color RGB channel sensors commonly found in CCD cameras are based on how the human eye perceives colors. But in physical reality, light is actually hitting the camera as a continuous spectrum. Since it's impossible to map an infinite set of gaussians to it, we instead use some function which, for any frequency, will give the intensity of the light hitting the point at that frequency. This function is expanded in the basis set of three gaussians with mean values centered on the RGB frequencies. This model is used in cameras because the main purpose of cameras -- until recent times -- has been to capture images for human viewing. And while the RGB gaussian basis model is perfectly suited for capturing all the scene information which humans can perceive, it is not a complete representation.
+The three-color RGB channel sensors commonly found in CCD cameras are based on how the human eye perceives colors. But in physical reality, light is actually hitting the camera as a continuous spectrum. Since it's impossible to map an infinite set of Gaussians to it, we instead use some function which, for any frequency, will give the intensity of the light hitting the point at that frequency. This function is expanded in the basis set of three Gaussians with mean values centered on the RGB frequencies. This model is used in cameras because the main purpose of cameras -- until recent times -- has been to capture images for human viewing. And while the RGB Gaussian basis model is perfectly suited for capturing all the scene information which humans can perceive, it is not a complete representation.
 
 Because we're searching for particular points in the real color space -- which, being a continuous function, is infinite dimensional -- there is a possibility in the future that larger multi-channel color spaces will be much more common, such as the 8-channel color spaces currently in development. Though most such cameras are primarily designed for post-production editing for still pictures and film (e.g. changing the lighting independent of the scene), as well as visual effects, the possibilities for computer vision are exciting. However, computer vision tasks are computationally intensive, and more often than not require operation in real time, so there is a natural inclination to shy away from large data sets in practical computer vision applications; many tasks are done in grayscale or single channel processing to expedite the process.
 
@@ -437,13 +435,13 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 \subsection{Skin Detection}\label{sec:SkinDetection}
 
 \begin{figure}[h!]
-  \caption{Rainbowman in a stunning three colors plus the other thing.}
+  \caption{RGB channels.}
   \centering
     \includegraphics[width=\textwidth]{rainbowmanRGB.eps}
 \end{figure}
 
 \begin{figure}[h!]
-  \caption{Rotated Rainbowman.}
+  \caption{Rotated color space.}
   \centering
     \includegraphics[width=\textwidth]{rainbowmanRotated.eps}
 \end{figure}
@@ -455,13 +453,13 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 \end{figure}
 
 \begin{figure}[h!]
-  \caption{Rotated and scaled Rainbowman.}
+  \caption{Rotated and scaled color space.}
   \centering
     \includegraphics[width=\textwidth]{rainbowmanRotatedScaled.eps}
 \end{figure}
 
 \begin{figure}[h!]
-  \caption{Rotated compact scaled Rainbowman.}
+  \caption{Rotated compact scaled color space.}
   \centering
     \includegraphics[width=\textwidth]{rainbowmanRotatedCompactScaled.eps}
 \end{figure}
