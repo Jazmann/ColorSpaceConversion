@@ -7,7 +7,7 @@
 \usepackage[numbers, sort&compress]{natbib}
 \usepackage{graphicx}
 \author{Nayef Al-Saud}
-\title{AR Keyboard}
+\title{A Mechanical-Stress-Based Input Device Chromatic Skin Information}
 \begin{document}
 \newcommand{\fig}{fig. }
 \maketitle
@@ -28,22 +28,31 @@ For the purposes of this project, a color space dedicated to human skin is neces
 For the sake of comparison, the following four color spaces --- which have been used for skin detection~\cite{Vezhnevets2003}~\cite{Zarit1999a}~\cite{Yang1997a}~\cite{Yang1998a}~\cite{Brand2000a}~\cite{Sigal2000a}~\cite{Chai2000a}~\cite{Phung2002a} --- have been evaluated for the purposes of this project:
 
 \subsubsection{LAB}\label{sec:LAB}
-~\cite{Vezhnevets2003}
+
 ~\cite{Zarit1999a}
 ~\cite{Yang1997a}
 ~\cite{Yang1998a}
+
+The LAB color space's perceptual uniformity makes it well-suited for skin detection, as the human eye can perceive practically any change in its values.~\cite{Vezhnevets2003}~\cite{Poynton1997} However, the Gaussian distribution of the skin is not positioned on the axis, which makes applying the statistics troublesome.
+
 \subsubsection{RGB}\label{sec:RGB}
 ~\cite{Vezhnevets2003}
 ~\cite{Brand2000a}
 ~\cite{Zarit1999a}
+
+
 \subsubsection{HSV}\label{sec:HSV}
 ~\cite{Vezhnevets2003}
 ~\cite{Sigal2000a}
 ~\cite{Zarit1999a}
+
+
 \subsubsection{YCbCr}\label{sec:YCbCr}
 ~\cite{Vezhnevets2003}
 ~\cite{Chai2000a}
 ~\cite{Phung2002a}
+
+
 
 \subsection{Constructing a New Color Space}\label{sec:ConstructingANewColorSpace}
 
@@ -214,12 +223,6 @@ For numerical reasons, the value for $\theta$ was found iteratively by performin
 \end{figure}
 
 
-
-
-
-
-
-
 \subsection{Preservation of Color Information}\label{sec:PreservationOfColorInformation}
 
 The goal of the algorithm is to preserve all the information captured by the camera which relates to skin whilst discarding as much of the irrelevant information as possible. Given that edges and features often present as shadows and highlights, all the information captured in terms of luminosity will be regarded as relevant information, at least as far as the manipulation of individual pixel values is concerned. Considering the chromatic information, the importance of the pixel value will be directly determined by the Gaussian distribution found previously.
@@ -243,12 +246,15 @@ None of the rotated axes have lengths less than 1 for the unit RGB cube. For thi
 We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways in which to implement the redistribution functions:
 
 \subsubsection{Partition}\label{sec:Partition}
+
 The most straightforward redistribution method is to simply preserve the information in a 1-to-1 fashion within a region. The region can be defined in terms of the skin color distribution Gaussian by specifying a significance level in terms of the variance or the standard deviation.
 
 \subsubsection{Linear}\label{sec:Linear}
+
 A slightly more sophisticated method is to use a linear redistribution. A linear distribution is equivalent to partitioning given a unit gradient. However, a linear redistribution function allows for the possibility of data compression. So then, in the case where the region of interest contains more information than can be expressed in the destination data type, a linear distribution function allows an even compression of the information from source to destination.
 
 \subsubsection{ERF (Gaussian Error Function)}\label{sec:ERF}
+
 The integral of the cumulative Gaussian (i.e. Error Function) allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis (i.e. the mean of the Gaussian), and then progressively discard the information as it falls into the tails of the Gaussian. So, it provides a non-linear distribution of the information. The Gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply the computational effort involved in generating the error function.
 
 The error function distribution is mathematically correct, being directly related to the Gaussian fit. Computationally, there are two considerations: the numerical representation, and performance. The discrete representation of the numerics means that --- for a significant number of possible distributions --- distributing using the error function has little to no advantage (or indeed difference) from using a linear distribution.
@@ -344,6 +350,7 @@ therefore the required fidelity in the source domain is given by $\Delta$ in the
 \end{equation}
 
 \subsection{The Skin Color Space Algorithm}
+
 Now that all of the values necessary to preserve the skin information have been obtained, we can use them to build a color space transformation algorithm which can make intelligent decisions about the numerical precision for the intermediate and final variables, as well as determining the most efficient transformation methods. The algorithm described herein will take values of $\theta$, the rotation about the luminosity axis, the standard deviations and mean values for the two chromatic axes, and will automatically decide upon the necessary intermediate working data types and the most efficient redistribution methods.
 
 Previously, we found the lengths of the new axes after the rotational transformation. If we were to keep the same data type for the color space as is used for the RGB values, then the axes would have to be rescaled with the accompanying loss of information. Given that we have values which allow us to assess where all the relevant information lies, a more sophisticated approach is possible. For a chromatic axis --- which, after rotation, has a length $L(\theta)$ --- we can determine the positions on that axis at which the information is considered irrelevant using Equation~(\ref{eq:LowHigh}). If the distance between these two points is less than or equal to 1, then all the relevant information can be retained for that axis in the same data type as was used for the RGB color space. The only further consideration is to ensure that the values outside that range are prevented from causing errors associated with overflow. To exclude this possibility, a conditional statement can be used which checks the bounds as stated, assigning an appropriate value as necessary. The alternative is to use an intermediate value with a higher bit depth, and then to recast into the destination data type in such a way that overflow and underflow are handled appropriately. The OpenCV library provides a casting method --- "saturateCast" --- which serves this purpose.
@@ -359,13 +366,13 @@ The destination color space is designed with a maximum discretization $dRange$ g
 
 The analysis of the distribution is mathematically stated in a unit, source, and domain range. The maximum gradient of the distribution, when looked at in these terms, must always be greater than or equal to 1. This indicates a focusing of interest around the mean. It's not possible to extract more information than is contained in the source. For this reason, the destination axis may usefully only be shorter than or of equal length to the source axis. In terms of the machine representation, this indicates that the destination data type may be designed to contain a smaller range of values. The question for the rotational transformation is whether the rotated axis should be rescaled with the associated loss of information or not. We can now write an algorithm which determines the necessary scaling for the axes, and whether truncation of the extreme values is significant.
 
-The length of the axis after rescaling should be whichever is the shorter of:
+The length of the axis after rescaling should be whichever is the shorter of
 
 \begin{equation}\label{eq:RescaleAxis}
 \min\left\{ \frac{\text{rgbRange} L(\theta)}{dRange} \Lambda(\mu,\sigma) , L(\theta) \right\}
 \end{equation}
 
-The condition for rescaling the axis is:
+The condition for rescaling the axis is
 
 \begin{equation}\label{eq:RescaleAxisCondition}
 \frac{dRange}{\text{rgbRange} L(\theta) \Lambda(\mu,\sigma)} \le 1
@@ -422,6 +429,7 @@ R_{xyz}(\theta)
 \end{equation}
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
+
 We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
 
 Another method of dealing with that is set the max grad in the ERF. Don't use piecewise, just use ERF and scale the destination so it fits. By dividing the max value by the max gradient of ERF (The ERF evaluated at center point.), it becomes more horizontal, until it has a grad of 1. Advantage is not dealing with piecewise function, mathematically consistent, disadvantage is that also squash out a lot of the ERF behavior and a lot of the info we wanted to keep on either side of that value. The only place it keeps info is bang in the center; everywhere else is losing info.
@@ -474,7 +482,7 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 
 \subsubsection{Apply the Effect}\label{sec:ApplyTheEffect}
 
-
+\newpage
 \section{Pattern Recognition}\label{sec:PatternRecognition}
 
 
@@ -489,6 +497,8 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 \subsubsection{Blob Detection}\label{sec:BlobDetection}
 \subsubsection{Hand Posture Prediction}\label{sec:HandPosturePrediction}
 \subsubsection{Dynamic Tracking}\label{sec:DynamicTracking}
+
+\newpage
 \section{The Fingertip Mechanical Stress Detection App}\label{sec:FingertipMechanicalStressDetectionApp}
 \subsection{OpenCV Integration with iOS}\label{sec:OpenCVIntegrationWithIOS}
 \subsubsection{C++11 and OpenCV}\label{sec:C++11AndOpenCV}
