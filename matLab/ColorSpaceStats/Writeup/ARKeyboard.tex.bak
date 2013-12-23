@@ -23,7 +23,7 @@
 
 \subsection{Overview of ColorSpaces}\label{sec:OverviewOfColorSpaces}
 
-No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.)
+No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.) ~\cite{Jones2002}
 
 
 
@@ -161,7 +161,7 @@ The normalised rotation matrix is given by:
 \widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
 \end{gather*}
 \begin{equation}\label{eq:NormRxyz}
-R_{xyz}(\theta) =
+\overline{R}_{xyz}(\theta) =
 \left(
 \begin{array}{ccc}
  \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
@@ -391,13 +391,65 @@ The length of the axis after rescaling should be whichever is the shorter of:
 The condition for rescaling the axis is:
 
 \begin{equation}\label{eq:RescaleAxisCondition}
-\frac{dRange}{\text{rgbRange} L(\theta)} \Delta \le 1
+\frac{dRange}{\text{rgbRange} L(\theta) \Lambda(\mu,\sigma)} \le 1
 \end{equation}
 
-Where $dRange$ is the number of values which the destination type can contain, and $\text{rgbRange}$ is the number of values the RGB source type can contain.
+We can now re-formulate the transformation matrix in three different ways.
 
-\begin{equation}\label{eq:UnscaledAxis}
-sRange = \text{rgbRange} L(\theta) \Delta > 1
+\begin{equation}\label{eq:Rotation}
+ R_{xyz}(\theta) = \left(
+\begin{array}{ccc}
+ \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} \\
+ -\frac{\cos (\theta )}{\sqrt{6}}-\frac{\sin (\theta )}{\sqrt{2}} & 
+ \sqrt{\frac{2}{3}} \cos (\theta ) & 
+ \frac{\sin (\theta )}{\sqrt{2}}-\frac{\cos (\theta )}{\sqrt{6}} \\
+ \frac{\sin (\theta )}{\sqrt{6}}-\frac{\cos (\theta )}{\sqrt{2}} & 
+ -\sqrt{\frac{2}{3}} \sin (\theta ) & 
+ \frac{\cos (\theta )}{\sqrt{2}}+\frac{\sin (\theta )}{\sqrt{6}} \\
+\end{array}
+\right)
+\end{equation}
+
+\begin{equation}\label{eq:RequestedComprerssion}
+\kappa = \frac{\text{rgbRange} }{dRange}
+\end{equation}
+
+\begin{equation}\label{eq:CompressedRotation}
+ \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) = 
+\left(
+\begin{array}{c}
+ \frac{1}{3}  \\
+ \kappa \Lambda(\mu_2,\sigma_2) \\
+ \kappa \Lambda(\mu_3,\sigma_3) \\
+\end{array}
+\right)
+\bigotimes
+\left(
+\begin{array}{ccc}
+ 1 & 1 & 1 \\
+ -\frac{\cos (\theta )}{\sqrt{6}}-\frac{\sin (\theta )}{\sqrt{2}} & 
+ \sqrt{\frac{2}{3}} \cos (\theta ) & 
+ \frac{\sin (\theta )}{\sqrt{2}}-\frac{\cos (\theta )}{\sqrt{6}} \\
+ \frac{\sin (\theta )}{\sqrt{6}}-\frac{\cos (\theta )}{\sqrt{2}} & 
+ -\sqrt{\frac{2}{3}} \sin (\theta ) & 
+ \frac{\cos (\theta )}{\sqrt{2}}+\frac{\sin (\theta )}{\sqrt{6}} \\
+\end{array}
+\right)
+\end{equation}
+
+\begin{gather*}
+  \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
+\widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
+\end{gather*}
+\begin{equation}\label{eq:NormRxyz}
+\widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
+\left(
+\begin{array}{ccc}
+ \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
+ -\frac{\sqrt{3} \cos (\theta )+3 \sin (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} & \frac{2 \sqrt{3} \cos (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} & \frac{3 \sin (\theta )-\sqrt{3} \cos (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} \\
+ \frac{\sqrt{3} \sin (\theta )-3 \cos (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} & -\frac{2 \sqrt{3} \sin (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} & \frac{3 \cos (\theta )+\sqrt{3} \sin (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} \\
+\end{array}
+\right)
 \end{equation}
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
@@ -459,7 +511,7 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 \section{Future Work and Discussion}\label{sec:FutureWorkAndDiscussion}
 
 
-\bibliographystyle{unsrtnat}
+\newpage \bibliographystyle{unsrtnat}
 \bibliography{ARKeyboard}
 
 
