@@ -43,6 +43,8 @@ Unlike RGB, the HSV color space makes a clear distinction between the chrominanc
 
 This color space bears similarities to the LAB and HSV spaces in that it explicitly separates the chrominance and the luminance. The luminosity (or "luma") channel "Y" is a weighted sum of the RGB values~\cite{Poynton1997}~\cite{Phung2002a}, while the chrominance channels "Cb" and "Cr" contain the color difference between Y and the red and blue components of RGB, respectively~\cite{Vezhnevets2003}. Also like LAB, it is not oriented such that the Gaussian distribution is situated along the axis. In fact, there is little distinction between the two spaces aside from the orientation in the chromatic portion of the space.
 
+The main issue with using these color spaces is the lack of control over information flow upon transformation and the clear mathematical statement of the transformation in terms of rotation, scaling and translation. As such, the construction of a new color space is necessary.
+
 \subsection{Constructing a New Color Space}\label{sec:ConstructingANewColorSpace}
 
 In order to construct a new color space, we need to consider the coordinate system of the new color space, the orientation of the new color space, and the fidelity of the discrete representation of the axes.
