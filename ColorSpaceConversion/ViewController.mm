@@ -373,11 +373,13 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
      cv::Vec<int, 3> sp2(118, 131, 139);
     
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(240, 128, 128);
-    cv::Vec<double, 3> c(0.5, 125/255, 107/255);
+    cv::Vec<double, 3> c(0.5, 125.0/255.0, 107.0/255.0);
     // cv::Vec<typename cv::depthConverter<CV_8UC4, CV_8UC3>::srcType, 3> c(180, 50, 128);
     cv::Vec<double, 3> g(1, 18, 2.8);
     printf("here \n");
     cv::Matx<int, 3, 3> T(76,-43,127, 127,-84,-107, 29,-127,21);
+    // RGB2Rot(const int srcBlueIdx, const int dstBlueIdx, const double theta, cv::Vec<double, 3> newG, cv::Vec<double, 3> newC){
+
     cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace(2, 2, -0.1537, g, c);
    // cv::RGB2Rot<CV_8UC4,CV_8UC3> colSpace( sp0, sp1, sp2, g, c);
     
@@ -482,9 +484,9 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 	self.imagePicker = [[ImagePickerController alloc] init];
 	self.imagePicker.delegate = self;
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    imagePicker.mediaTypes =
-    [UIImagePickerController availableMediaTypesForSourceType:
-     UIImagePickerControllerSourceTypeCamera];
+  //  imagePicker.mediaTypes =
+  //  [UIImagePickerController availableMediaTypesForSourceType:
+  //   UIImagePickerControllerSourceTypeCamera];
 	[self.imagePicker showPicker:self];
 }
 
