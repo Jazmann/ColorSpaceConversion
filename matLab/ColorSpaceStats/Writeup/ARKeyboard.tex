@@ -7,7 +7,7 @@
 \usepackage[numbers, sort&compress]{natbib}
 \usepackage{graphicx}
 \author{Nayef Al-Saud}
-\title{AR Keyboard}
+\title{A Fingertip Mechanical-Stress Detector using Chromatic Skin Information}
 \begin{document}
 \newcommand{\fig}{fig. }
 \maketitle
@@ -21,22 +21,29 @@
 
 \section{Color-spaces and information storage for computer vision processing}\label{sec:ColorSpacesAndInfoStorageForComputerVisionProcessing}
 
-\subsection{Overview of ColorSpaces}\label{sec:OverviewOfColorSpaces}
+\subsection{Overview of Color Spaces}\label{sec:OverviewOfColorSpaces}
 
-No need for full probabilistic treatment; we're just looking for skin color, no pattern recognition. It's a complexity which isn't necessary for us, since we're trying to develop a color space which detects the skin while discarding anything pertaining to everything else. We're not trying to classify the image based on the pixel colors in the image. (M Jones Paper.)
+For the purposes of this project, a color space dedicated to human skin is necessary. When it comes to pattern recognition, it is beneficial to reduce the number of channels which the algorithm must process, as well as reducing the information density in those channels. It is also hoped that, in an appropriate color space, it will be a simple matter to separate the characteristics associated with saturation of tissue with blood, which changes under mechanical stress from the unchanging pigmentation of the cells~\cite{Stamatas2004}. Color spaces --- when they are normally defined --- are a combination of rotations, scaling and translations, while some (e.g. HSV~\cite{Vezhnevets2003}~\cite{Zarit1999a}) also perform a coordinate transform. The color space defined for this project is unusual in that it uses a non-linear redistribution of the values. It should be noted that this is not a pixel-based classifier~\cite{Jones2002}. However, seeing as the color space contains both the statistical information and the skin color information, it can be interpreted in a probabilistic way.
 
-
+For the sake of comparison, the following four color spaces --- which have been used for skin detection~\cite{Vezhnevets2003}~\cite{Zarit1999a}~\cite{Yang1997a}~\cite{Yang1998a}~\cite{Brand2000a}~\cite{Sigal2000a}~\cite{Chai2000a}~\cite{Phung2002a} --- have been evaluated for the purposes of this project.
 
 \subsubsection{LAB}\label{sec:LAB}
 
+The LAB color space's perceptual uniformity makes it well-suited for skin detection, as the human eye can perceive practically any change in its values~\cite{Vezhnevets2003}~\cite{Poynton1997}. However, the Gaussian distribution of the skin is not positioned on the axis, which makes applying the statistics troublesome.
 
 \subsubsection{RGB}\label{sec:RGB}
 
+The RGB color space, while widely used, is perhaps the most ill-suited color space for skin detection, as it can't make a distinction between chrominance and luminance~\cite{Vezhnevets2003}~\cite{Brand2000a}. That said, its ubiquity in cameras --- which are designed to capture images which, to us, appear to be an accurate representation of physical reality despite the opposite being true --- makes it a necessary color space to work in. The advantage to using it is simply the fact that it is a straightforward, raw output from the camera.
+
 \subsubsection{HSV}\label{sec:HSV}
+
+Unlike RGB, the HSV color space makes a clear distinction between the chrominance (the "Hue" and "Saturation" channels) and the luminance (the "Value" channel), storing them separately~\cite{Vezhnevets2003}~\cite{Sigal2000a}. This makes HSV a popular choice for skin segmentation, but it's difficult to control any information loss during the transform due to its non-linearity~\cite{Poynton1997}.
 
 \subsubsection{YCbCr}\label{sec:YCbCr}
 
+This color space bears similarities to the LAB and HSV spaces in that it explicitly separates the chrominance and the luminance. The luminosity (or "luma") channel "Y" is a weighted sum of the RGB values~\cite{Poynton1997}~\cite{Phung2002a}, while the chrominance channels "Cb" and "Cr" contain the color difference between Y and the red and blue components of RGB, respectively~\cite{Vezhnevets2003}. Also like LAB, it is not oriented such that the Gaussian distribution is situated along the axis. In fact, there is little distinction between the two spaces aside from the orientation in the chromatic portion of the space.
 
+The main issue with using these color spaces is the lack of control over information flow upon transformation and the clear mathematical statement of the transformation in terms of rotation, scaling and translation. As such, the construction of a new color space is necessary.
 
 \subsection{Constructing a New Color Space}\label{sec:ConstructingANewColorSpace}
 
@@ -49,11 +56,9 @@ As for the discrete representation of the axes, it's desired that all the inform
 
 \subsubsection{Camera RGB and Normalization for Discrete Range}\label{sec:CameraRGB}
 
-
-
 Due to the hardware being locked down at the application level, we do not have access to the raw camera feed. We do, however, have access to the compressed, post-processing 8-bit RGB image data. The processing involves evening up the color channel senors' sensitivity by way of multiplying each channel by an appropriate correction factor. This is partly why cameras likely have a 10 or 12 bit/channel capture rate, but after accounting for differences in sensitivity, it only outputs in 8-bit color depth.
 
-The three-color RGB channel sensors commonly found in CCD cameras are based on how the human eye perceives colors. But in physical reality, light is actually hitting the camera as a continuous spectrum. Since it's impossible to map an infinite set of gaussians to it, we instead use some function which, for any frequency, will give the intensity of the light hitting the point at that frequency. This function is expanded in the basis set of three gaussians with mean values centered on the RGB frequencies. This model is used in cameras because the main purpose of cameras -- until recent times -- has been to capture images for human viewing. And while the RGB gaussian basis model is perfectly suited for capturing all the scene information which humans can perceive, it is not a complete representation.
+The three-color RGB channel sensors commonly found in CCD cameras are based on how the human eye perceives colors. But in physical reality, light is actually hitting the camera as a continuous spectrum. Since it's impossible to map an infinite set of Gaussians to it, we instead use some function which, for any frequency, will give the intensity of the light hitting the point at that frequency. This function is expanded in the basis set of three Gaussians with mean values centered on the RGB frequencies. This model is used in cameras because the main purpose of cameras -- until recent times -- has been to capture images for human viewing. And while the RGB Gaussian basis model is perfectly suited for capturing all the scene information which humans can perceive, it is not a complete representation.
 
 Because we're searching for particular points in the real color space -- which, being a continuous function, is infinite dimensional -- there is a possibility in the future that larger multi-channel color spaces will be much more common, such as the 8-channel color spaces currently in development. Though most such cameras are primarily designed for post-production editing for still pictures and film (e.g. changing the lighting independent of the scene), as well as visual effects, the possibilities for computer vision are exciting. However, computer vision tasks are computationally intensive, and more often than not require operation in real time, so there is a natural inclination to shy away from large data sets in practical computer vision applications; many tasks are done in grayscale or single channel processing to expedite the process.
 
@@ -108,6 +113,7 @@ Because the absolute values of the axes in the color space have no meaning, we'r
 
 We need to know, in each of the axes, how far out each point is. Because we're effectively rotating a hexagon, whatever the answer is, we know the function is going to be periodic, repeating every $\frac{\pi}{3}$ radians, so we only have to solve it in the 0 to $\frac{\pi}{3}$ region and then generalize. First we take the cooordinates of the RGB cube and perform the rotation to find the values in the new color space.
 
+
 \begin{multline}\label{eq:YabCube}
   R_{xyz}(\theta)\cdot\left(
 \begin{array}{cccccccc}
@@ -116,14 +122,17 @@ We need to know, in each of the axes, how far out each point is. Because we're e
  0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
 \end{array}
 \right) = \\
+\resizebox{\textwidth}{!}{%
+$\displaystyle
 \left(
 \begin{array}{cccccccc}
  0 & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \sqrt{3} \\
  0 & -\frac{\cos (\theta)}{\sqrt{6}}-\frac{\sin (\theta)}{\sqrt{2}} & \frac{\cos (\theta)}{\sqrt{6}}-\frac{\sin (\theta)}{\sqrt{2}} & \sqrt{\frac{2}{3}} \cos (\theta) & \frac{\cos (\theta)}{\sqrt{6}}+\frac{\sin (\theta)}{\sqrt{2}} & \frac{\sin (\theta)}{\sqrt{2}}-\frac{\cos (\theta)}{\sqrt{6}} & -\sqrt{\frac{2}{3}} \cos (\theta) & 0 \\
  0 & \frac{\sin (\theta)}{\sqrt{6}}-\frac{\cos (\theta)}{\sqrt{2}} & -\frac{\cos (\theta)}{\sqrt{2}}-\frac{\sin (\theta)}{\sqrt{6}} & -\sqrt{\frac{2}{3}} \sin (\theta) & \frac{\cos (\theta)}{\sqrt{2}}-\frac{\sin (\theta)}{\sqrt{6}} & \frac{\cos (\theta)}{\sqrt{2}}+\frac{\sin (\theta)}{\sqrt{6}} & \sqrt{\frac{2}{3}} \sin (\theta) & 0 \\
 \end{array}
-\right)
+\right)$}
 \end{multline}
+
 
 The extent of the new axis is found by taking the maximum and minimum values of each row i.e. the extreme corner positions relative to each new axis. An additional symmetry of the hexagonal projection of the RGB cube allows us to say that whatever functional form is taken by one of the $\theta$ dependant ranges the other can be found by a simple phase shift. So recognising that the minimum value is simply $-1$ times the maximum we have simplified the problem to solving
 
@@ -137,6 +146,7 @@ Graphically, the problem appears as follows:
 
 In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the axis ranges are given by the following:
 
+
 \begin{tabular}{|c|c|c|}
   \hline
   % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
@@ -147,16 +157,21 @@ In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the 
   \hline
 \end{tabular}
 
+
 It is convenient to produce a transformation which will result in axes of known length. Because the rotation cannot include a translation, we desire a transformation matrix which will result in the ranges 0 to 1, -$\frac{1}2$ to $\frac{1}2$, and -$\frac{1}2$ to $\frac{1}2$. Such a transformation is easily obtained by multiplying the rotation matrix by a diagonal matrix with the reciprocal of the maximums found above placed along the diagonal. This will scale each axis to a unit length.
 
 The normalised rotation matrix is given by:
-
+\begin{gather*}
+  \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
+\widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
+\end{gather*}
 \begin{equation}\label{eq:NormRxyz}
-R_{xyz}(\theta) = \left(
+\overline{R}_{xyz}(\theta) =
+\left(
 \begin{array}{ccc}
  \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
- -\frac{\sqrt{3} \cos (\theta )+3 \sin (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} & \frac{2 \sqrt{3} \cos (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} & \frac{3 \sin (\theta )-\sqrt{3} \cos (\theta )}{3 \cos \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)} \\
- \frac{\sqrt{3} \sin (\theta )-3 \cos (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} & -\frac{2 \sqrt{3} \sin (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} & \frac{3 \cos (\theta )+\sqrt{3} \sin (\theta )}{3 \cos \left((\theta  \bmod \frac{\pi }{3})\right)+\sqrt{3} \sin \left((\theta  \bmod \frac{\pi }{3})\right)} \\
+ -\frac{\sqrt{3} \cos (\theta )+3 \sin (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} & \frac{2 \sqrt{3} \cos (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} & \frac{3 \sin (\theta )-\sqrt{3} \cos (\theta )}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} \\
+ \frac{\sqrt{3} \sin (\theta )-3 \cos (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} & -\frac{2 \sqrt{3} \sin (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} & \frac{3 \cos (\theta )+\sqrt{3} \sin (\theta )}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)} \\
 \end{array}
 \right)
 \end{equation}
@@ -199,40 +214,6 @@ For numerical reasons, the value for $\theta$ was found iteratively by performin
 \end{figure}
 
 
-
-
-
-\begin{figure}[h!]
-  \caption{Rainbowman in a stunning three colors plus the other thing.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRGB.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Rotated Rainbowman.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotated.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Final bins.}
-  \centering
-    \includegraphics[width=\textwidth]{binsFinal2.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Rotated and scaled Rainbowman.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotatedScaled.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Rotated compact scaled Rainbowman.}
-  \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotatedCompactScaled.eps}
-\end{figure}
-
-
 \subsection{Preservation of Color Information}\label{sec:PreservationOfColorInformation}
 
 The goal of the algorithm is to preserve all the information captured by the camera which relates to skin whilst discarding as much of the irrelevant information as possible. Given that edges and features often present as shadows and highlights, all the information captured in terms of luminosity will be regarded as relevant information, at least as far as the manipulation of individual pixel values is concerned. Considering the chromatic information, the importance of the pixel value will be directly determined by the Gaussian distribution found previously.
@@ -256,12 +237,15 @@ None of the rotated axes have lengths less than 1 for the unit RGB cube. For thi
 We can use a function to redistribute the information contained on the longer axis onto the shorter axis, which can be expressed in the discrete representation of that axis necessitated by internal integer data types. There are three ways in which to implement the redistribution functions:
 
 \subsubsection{Partition}\label{sec:Partition}
+
 The most straightforward redistribution method is to simply preserve the information in a 1-to-1 fashion within a region. The region can be defined in terms of the skin color distribution Gaussian by specifying a significance level in terms of the variance or the standard deviation.
 
 \subsubsection{Linear}\label{sec:Linear}
+
 A slightly more sophisticated method is to use a linear redistribution. A linear distribution is equivalent to partitioning given a unit gradient. However, a linear redistribution function allows for the possibility of data compression. So then, in the case where the region of interest contains more information than can be expressed in the destination data type, a linear distribution function allows an even compression of the information from source to destination.
 
 \subsubsection{ERF (Gaussian Error Function)}\label{sec:ERF}
+
 The integral of the cumulative Gaussian (i.e. Error Function) allows the redistribution of the information on the axis in a way which selectively preserves the information about a point on the axis (i.e. the mean of the Gaussian), and then progressively discard the information as it falls into the tails of the Gaussian. So, it provides a non-linear distribution of the information. The Gaussian can be seen as describing our interest in the information contained along the axis, so it's logical to use the error function to redistribute the information. The disadvantage of this is simply the computational effort involved in generating the error function.
 
 The error function distribution is mathematically correct, being directly related to the Gaussian fit. Computationally, there are two considerations: the numerical representation, and performance. The discrete representation of the numerics means that --- for a significant number of possible distributions --- distributing using the error function has little to no advantage (or indeed difference) from using a linear distribution.
@@ -350,28 +334,93 @@ There is one final value of interest to the development of the algorithm, which 
 \Delta = \frac{\sqrt{\frac{2}{\pi }}}{\sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)}
 \end{equation}
 
-therefore the required fidelity in the source domain is given by $\Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm it is useful to know the length of the source domain axis which would cover the destination range if a linear distribution with a gradient $\Delta$ were to be used. This length is given by
+therefore the required fidelity in the source domain is given by $\Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm it is useful to know the length of the source domain axis which would cover the destination range if a linear distribution with a gradient $\Delta$ were to be used. For a unit range this length is given by $\frac{1}{\Delta}$ which is a function of the mean and standard deviation
 
 \begin{equation}\label{Fidelity}
-  \frac{1}{\Delta} =  \sqrt{\frac{\pi }{2}} \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)
+  \Lambda(\mu,\sigma) =  \sqrt{\frac{\pi }{2}} \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)
 \end{equation}
 
 \subsection{The Skin Color Space Algorithm}
+
 Now that all of the values necessary to preserve the skin information have been obtained, we can use them to build a color space transformation algorithm which can make intelligent decisions about the numerical precision for the intermediate and final variables, as well as determining the most efficient transformation methods. The algorithm described herein will take values of $\theta$, the rotation about the luminosity axis, the standard deviations and mean values for the two chromatic axes, and will automatically decide upon the necessary intermediate working data types and the most efficient redistribution methods.
 
 Previously, we found the lengths of the new axes after the rotational transformation. If we were to keep the same data type for the color space as is used for the RGB values, then the axes would have to be rescaled with the accompanying loss of information. Given that we have values which allow us to assess where all the relevant information lies, a more sophisticated approach is possible. For a chromatic axis --- which, after rotation, has a length $L(\theta)$ --- we can determine the positions on that axis at which the information is considered irrelevant using Equation~(\ref{eq:LowHigh}). If the distance between these two points is less than or equal to 1, then all the relevant information can be retained for that axis in the same data type as was used for the RGB color space. The only further consideration is to ensure that the values outside that range are prevented from causing errors associated with overflow. To exclude this possibility, a conditional statement can be used which checks the bounds as stated, assigning an appropriate value as necessary. The alternative is to use an intermediate value with a higher bit depth, and then to recast into the destination data type in such a way that overflow and underflow are handled appropriately. The OpenCV library provides a casting method --- "saturateCast" --- which serves this purpose.
 
-We need to consider the requested compression of information alongside the spread of information caused by the rotation, and the desired focus on the specific region of interest dictated by the statistics. The analysis of the distribution is mathematically stated in a unit, source, and domain range. The maximum gradient of the distribution, when looked at in these terms, must always be greater than or equal to 1. This indicates a focusing of interest around the mean. It's not possible to extract more information than is contained in the source. For this reason, the destination axis may usefully only be shorter than or of equal length to the source axis. In terms of the machine representation, this indicates that the destination data type may be designed to contain a smaller range of values. The question for the rotational transformation is whether the rotated axis should be rescaled with the associated loss of information or not. We can now write an algorithm which determines the necessary scaling for the axes, and whether truncation of the extreme values is significant.
+We need to consider the requested compression of information alongside the spread of information caused by the rotation, and the desired focus on the specific region of interest dictated by the statistics. Each axis in the color space is to be represented by a discrete set of numbers. The size of these sets dictates the discretization of the axis, and the ratios between them indicates the spread or compression of the information they contain. We assume that the RGB axes are each discretized to the same extent, each containing $\text{rgbRange}$ values. After the application of the un-normalized rotational transformation, the axes contain differing numbers of values given by $\text{sRange}_1 =\text{rgbRange} \sqrt{3} $, $\text{sRange}_2 = \text{rgbRange} L_2(\theta) $  and $\text{sRange}_3 = \text{rgbRange} L_3(\theta)$.
 
-The condition for rescaling the axis is:
+\begin{align}\label{eq:L}
+  L_2(\theta) & \sqrt{\frac{2}{3}} \sin \left(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3}\right) + \sqrt{2} \cos \left(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3}\right) \\
+  L_3(\theta) & \sqrt{\frac{2}{3}} \sin \left(\theta  \bmod \frac{\pi }{3}\right) + \sqrt{2} \cos \left(\theta  \bmod \frac{\pi }{3}\right)
+\end{align}
+
+The destination color space is designed with a maximum discretization $dRange$ given by the required data type.
+
+The analysis of the distribution is mathematically stated in a unit, source, and domain range. The maximum gradient of the distribution, when looked at in these terms, must always be greater than or equal to 1. This indicates a focusing of interest around the mean. It's not possible to extract more information than is contained in the source. For this reason, the destination axis may usefully only be shorter than or of equal length to the source axis. In terms of the machine representation, this indicates that the destination data type may be designed to contain a smaller range of values. The question for the rotational transformation is whether the rotated axis should be rescaled with the associated loss of information or not. We can now write an algorithm which determines the necessary scaling for the axes, and whether truncation of the extreme values is significant.
+
+The length of the axis after rescaling should be whichever is the shorter of
 
 \begin{equation}\label{eq:RescaleAxis}
-\frac{dRange}{sRange L(\theta)} \Delta \le 1
+\min\left\{ \frac{\text{rgbRange} L(\theta)}{dRange} \Lambda(\mu,\sigma) , L(\theta) \right\}
 \end{equation}
 
-Where $dRange$ is the number of values which the destination type can contain, and $sRange$ is the number of values the RGB source type can contain.
+The condition for rescaling the axis is
+
+\begin{equation}\label{eq:RescaleAxisCondition}
+\frac{dRange}{\text{rgbRange} L(\theta) \Lambda(\mu,\sigma)} \le 1
+\end{equation}
+
+We can now re-formulate the transformation matrix in three different ways.
+
+\begin{equation}\label{eq:Rotation}
+ R_{xyz}(\theta) = \left(
+\begin{array}{ccc}
+ \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} \\
+ -\frac{\cos (\theta )}{\sqrt{6}}-\frac{\sin (\theta )}{\sqrt{2}} & 
+ \sqrt{\frac{2}{3}} \cos (\theta ) & 
+ \frac{\sin (\theta )}{\sqrt{2}}-\frac{\cos (\theta )}{\sqrt{6}} \\
+ \frac{\sin (\theta )}{\sqrt{6}}-\frac{\cos (\theta )}{\sqrt{2}} & 
+ -\sqrt{\frac{2}{3}} \sin (\theta ) & 
+ \frac{\cos (\theta )}{\sqrt{2}}+\frac{\sin (\theta )}{\sqrt{6}} \\
+\end{array}
+\right)
+\end{equation}
+
+\begin{equation}\label{eq:RequestedComprerssion}
+\kappa = \frac{\text{rgbRange} }{dRange}
+\end{equation}
+
+\begin{equation}\label{eq:CompressedRotation}
+ \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) = 
+\left(
+\begin{array}{c}
+ 1  \\
+ \kappa \Lambda(\mu_2,\sigma_2) \\
+ \kappa \Lambda(\mu_3,\sigma_3) \\
+\end{array}
+\right)
+\bigotimes
+R_{xyz}(\theta)
+\end{equation}
+
+\begin{gather*}
+  \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
+\widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
+\end{gather*}
+\begin{equation}\label{eq:NormRxyz2}
+ \overline{R}_{xyz}(\theta) = 
+\left(
+\begin{array}{c}
+ 1  \\
+ \frac{1}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} \\
+ \frac{1}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)}  \\
+\end{array}
+\right)
+\bigotimes
+R_{xyz}(\theta)
+\end{equation}
 
 \subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
+
 We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
 
 Another method of dealing with that is set the max grad in the ERF. Don't use piecewise, just use ERF and scale the destination so it fits. By dividing the max value by the max gradient of ERF (The ERF evaluated at center point.), it becomes more horizontal, until it has a grad of 1. Advantage is not dealing with piecewise function, mathematically consistent, disadvantage is that also squash out a lot of the ERF behavior and a lot of the info we wanted to keep on either side of that value. The only place it keeps info is bang in the center; everywhere else is losing info.
@@ -384,6 +433,36 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 
 \subsection{Skin Detection}\label{sec:SkinDetection}
 
+\begin{figure}[h!]
+  \caption{RGB channels.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRGB.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Rotated color space.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRotated.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Final bins.}
+  \centering
+    \includegraphics[width=\textwidth]{binsFinal2.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Rotated and scaled color space.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRotatedScaled.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Rotated compact scaled color space.}
+  \centering
+    \includegraphics[width=\textwidth]{rainbowmanRotatedCompactScaled.eps}
+\end{figure}
+
 \subsection{Putting it All Together}\label{sec:PuttingItAllTogether}
 
 \subsection{Physiology Study}\label{sec:PhysiologyStudy}
@@ -394,7 +473,7 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 
 \subsubsection{Apply the Effect}\label{sec:ApplyTheEffect}
 
-
+\newpage
 \section{Pattern Recognition}\label{sec:PatternRecognition}
 
 
@@ -409,6 +488,8 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 \subsubsection{Blob Detection}\label{sec:BlobDetection}
 \subsubsection{Hand Posture Prediction}\label{sec:HandPosturePrediction}
 \subsubsection{Dynamic Tracking}\label{sec:DynamicTracking}
+
+\newpage
 \section{The Fingertip Mechanical Stress Detection App}\label{sec:FingertipMechanicalStressDetectionApp}
 \subsection{OpenCV Integration with iOS}\label{sec:OpenCVIntegrationWithIOS}
 \subsubsection{C++11 and OpenCV}\label{sec:C++11AndOpenCV}
@@ -430,7 +511,7 @@ The reason we're talking about bit depth and not byte depth (fitting into the cl
 \section{Future Work and Discussion}\label{sec:FutureWorkAndDiscussion}
 
 
-\bibliographystyle{unsrtnat}
+\newpage \bibliographystyle{unsrtnat}
 \bibliography{ARKeyboard}
 
 
