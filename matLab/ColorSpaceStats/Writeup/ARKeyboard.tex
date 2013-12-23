@@ -7,7 +7,7 @@
 \usepackage[numbers, sort&compress]{natbib}
 \usepackage{graphicx}
 \author{Nayef Al-Saud}
-\title{A Mechanical-Stress-Based Input Device Chromatic Skin Information}
+\title{A Fingertip Mechanical-Stress Detector using Chromatic Skin Information}
 \begin{document}
 \newcommand{\fig}{fig. }
 \maketitle
@@ -23,29 +23,21 @@
 
 \subsection{Overview of Color Spaces}\label{sec:OverviewOfColorSpaces}
 
-For the purposes of this project, a color space dedicated to human skin is necessary. When it comes to pattern recognition, it is beneficial to reduce the number of channels which the algorithm has to process, as well as reducing the information density in those channels. It is also hoped that, in an appropriate color space, it will be a simple matter to separate the characteristics associated with saturation of tissue with blood, which changes under mechanical stress from the unchanging pigmentation of the cells.~\cite{Stamatas2004} Color spaces, when they're normally defined, are a combination of rotations, scaling and translations, while some (e.g. HSV~\cite{Vezhnevets2003}~\cite{Zarit1999a}) also perform a coordinate transform. The color space defined for this project is unusual in that it uses a non-linear redistribution of the values. It should be noted that this is not a pixel-based classifier.~\cite{Jones2002} However, seeing as the color space contains both the statistical information and the skin color information, it can be interpreted in a probabilistic way.
+For the purposes of this project, a color space dedicated to human skin is necessary. When it comes to pattern recognition, it is beneficial to reduce the number of channels which the algorithm must process, as well as reducing the information density in those channels. It is also hoped that, in an appropriate color space, it will be a simple matter to separate the characteristics associated with saturation of tissue with blood, which changes under mechanical stress from the unchanging pigmentation of the cells~\cite{Stamatas2004}. Color spaces --- when they are normally defined --- are a combination of rotations, scaling and translations, while some (e.g. HSV~\cite{Vezhnevets2003}~\cite{Zarit1999a}) also perform a coordinate transform. The color space defined for this project is unusual in that it uses a non-linear redistribution of the values. It should be noted that this is not a pixel-based classifier~\cite{Jones2002}. However, seeing as the color space contains both the statistical information and the skin color information, it can be interpreted in a probabilistic way.
 
 For the sake of comparison, the following four color spaces --- which have been used for skin detection~\cite{Vezhnevets2003}~\cite{Zarit1999a}~\cite{Yang1997a}~\cite{Yang1998a}~\cite{Brand2000a}~\cite{Sigal2000a}~\cite{Chai2000a}~\cite{Phung2002a} --- have been evaluated for the purposes of this project:
 
 \subsubsection{LAB}\label{sec:LAB}
 
-~\cite{Zarit1999a}
-~\cite{Yang1997a}
-~\cite{Yang1998a}
-
-The LAB color space's perceptual uniformity makes it well-suited for skin detection, as the human eye can perceive practically any change in its values.~\cite{Vezhnevets2003}~\cite{Poynton1997} However, the Gaussian distribution of the skin is not positioned on the axis, which makes applying the statistics troublesome.
+The LAB color space's perceptual uniformity makes it well-suited for skin detection, as the human eye can perceive practically any change in its values~\cite{Vezhnevets2003}~\cite{Poynton1997}. However, the Gaussian distribution of the skin is not positioned on the axis, which makes applying the statistics troublesome.
 
 \subsubsection{RGB}\label{sec:RGB}
-~\cite{Vezhnevets2003}
-~\cite{Brand2000a}
-~\cite{Zarit1999a}
 
+The RGB color space, while widely used, is perhaps the most ill-suited color space for skin detection, as it can't make a distinction between chrominance and luminance~\cite{Vezhnevets2003}~\cite{Brand2000a}. That said, its ubiquity in cameras --- which are designed to capture images which, to us, appear to be an accurate representation of physical reality despite the opposite being true --- makes it a necessary color space to work in. The advantage to using it is simply the fact that it is a straightforward, raw output from the camera.
 
 \subsubsection{HSV}\label{sec:HSV}
-~\cite{Vezhnevets2003}
-~\cite{Sigal2000a}
-~\cite{Zarit1999a}
 
+Unlike RGB, the HSV color space makes a clear distinction between the chrominance (the "Hue" and "Saturation" channels) and the luminance (the "Value" channel), storing them separately~\cite{Vezhnevets2003}~\cite{Sigal2000a}. This makes HSV a popular choice for skin segmentation, but it's difficult to control any information loss during the transform due to its non-linearity~\cite{Poynton1997}.
 
 \subsubsection{YCbCr}\label{sec:YCbCr}
 ~\cite{Vezhnevets2003}
