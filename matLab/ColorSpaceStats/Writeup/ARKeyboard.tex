@@ -42,8 +42,9 @@ Unlike RGB, the HSV color space makes a clear distinction between the chrominanc
 \subsubsection{YCbCr}\label{sec:YCbCr}
 
 This color space bears similarities to the LAB and HSV spaces in that it explicitly separates the chrominance and the luminance. The luminosity (or "luma") channel "Y" is a weighted sum of the RGB values~\cite{Poynton1997}~\cite{Phung2002a}, while the chrominance channels "Cb" and "Cr" contain the color difference between Y and the red and blue components of RGB, respectively~\cite{Vezhnevets2003}. Also like LAB, it is not oriented such that the Gaussian distribution is situated along the axis. In fact, there is little distinction between the two spaces aside from the orientation in the chromatic portion of the space.
-
-The main issue with using these color spaces is the lack of control over information flow upon transformation and the clear mathematical statement of the transformation in terms of rotation, scaling and translation. As such, the construction of a new color space is necessary.
+\\
+\\
+The main issue with using these color spaces is the lack of control over information flow upon transformation and the clear mathematical statement of the transformation in terms of rotation, scaling and translation. Therefore, the construction of a new color space is necessary.
 
 \subsection{Constructing a New Color Space}\label{sec:ConstructingANewColorSpace}
 
@@ -109,7 +110,7 @@ Where $\theta$ is the remaining rotational degree of freedom.
 
 Using the standard rotation matrices, we get a luminosity axis from 0 to $\sqrt{3}$. However, the length of the two remaining axes are dependent on the value of $\theta$ used. This is a problem because, ultimately, we want the axes to fit in a range of an appropriate data type. It would be more useful to have a matrix which provided the specified rotation and scaled the axis to known lengths. In the case of the luminosity, this is straightforward; simply divide by $\sqrt{3}$. In the case of the other two axes, we need an explicit form for the lengths of the axis resulting from the rotation.
 
-Because the absolute values of the axes in the color space have no meaning, we're only interested in the position along the axis relative to its start and end, equivalent to talking about the position in the axis relative to 0 to 1, compared to about 0-255 in unsigned, 8-bit integers. The upside is that if we're rotating the cube about its corner, we're interested in the minimum and maximum values possible along the new axis direction, which will correspond to a corner of the RGB cube. With the X axis aligned along the luminosity direction, the range of the X axis is 0 to $\sqrt{3}$. The Y and Z axes are symmetrical, spanning a range centered on 0. The range of their values is dependent upon the remaining degree of freedom.
+Because the absolute values of the axes in the color space have no meaning, we're only interested in the position along the axis relative to its start and end, equivalent to talking about the position in the axis relative to $0:1$, compared to about 0-255 in unsigned, 8-bit integers. The upside is that if we're rotating the cube about its corner, we're interested in the minimum and maximum values possible along the new axis direction, which will correspond to a corner of the RGB cube. With the X axis aligned along the luminosity direction, the range of the X axis is 0 to $\sqrt{3}$. The Y and Z axes are symmetrical, spanning a range centered on 0. The range of their values is dependent upon the remaining degree of freedom.
 
 We need to know, in each of the axes, how far out each point is. Because we're effectively rotating a hexagon, whatever the answer is, we know the function is going to be periodic, repeating every $\frac{\pi}{3}$ radians, so we only have to solve it in the 0 to $\frac{\pi}{3}$ region and then generalize. First we take the cooordinates of the RGB cube and perform the rotation to find the values in the new color space.
 
@@ -158,7 +159,7 @@ In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the 
 \end{tabular}
 
 
-It is convenient to produce a transformation which will result in axes of known length. Because the rotation cannot include a translation, we desire a transformation matrix which will result in the ranges 0 to 1, -$\frac{1}2$ to $\frac{1}2$, and -$\frac{1}2$ to $\frac{1}2$. Such a transformation is easily obtained by multiplying the rotation matrix by a diagonal matrix with the reciprocal of the maximums found above placed along the diagonal. This will scale each axis to a unit length.
+It is convenient to produce a transformation which will result in axes of known length. Because the rotation cannot include a translation, we desire a transformation matrix which will result in the ranges $0:1$, -$\frac{1}2$ to $\frac{1}2$, and -$\frac{1}2$ to $\frac{1}2$. Such a transformation is easily obtained by multiplying the rotation matrix by a diagonal matrix with the reciprocal of the maximums found above placed along the diagonal. This will scale each axis to a unit length.
 
 The normalised rotation matrix is given by:
 \begin{gather*}
@@ -267,7 +268,7 @@ The Gaussian distribution and the cumulative distribution are shown in Figure~\r
     \includegraphics[width=\textwidth]{errorFunction.eps}
 \end{figure}
 
-First, we determine the maximum value taken in the domain. This is simply found by evaluating the function at sMax. It should be noted that --- if the Gaussian distribution is well-contained in the source domain --- the maximum value should be equal to the amplitude. For the sake of simplicity, we'll ignore the amplitude of the fitted Gaussian found previously as it is not relevant to the design of the redistribution function. So, to fix the range of the distribution function, we first scale to the range 0 to 1 by simply dividing through by the maximum value, and then re-scale to the destination range dMax - dMin and shift by dMin.
+First, we determine the maximum value taken in the domain. This is simply found by evaluating the function at sMax. It should be noted that --- if the Gaussian distribution is well-contained in the source domain --- the maximum value should be equal to the amplitude. For the sake of simplicity, we'll ignore the amplitude of the fitted Gaussian found previously as it is not relevant to the design of the redistribution function. So, to fix the range of the distribution function, we first scale to the range $0:1$ by simply dividing through by the maximum value, and then re-scale to the destination range dMax - dMin and shift by dMin.
 
 \begin{equation}\label{eq:disFunction}
   dis(x) = \frac{(\text{dMax}-\text{dMin}) \left(\text{erf}\left(\frac{x-\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\text{sMin}-\mu }{\sqrt{2} \sigma }\right)\right)}{\text{erf}\left(\frac{\text{sMax}-\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\text{sMin}-\mu }{\sqrt{2} \sigma }\right)}+\text{dMin}
@@ -419,16 +420,11 @@ R_{xyz}(\theta)
 R_{xyz}(\theta)
 \end{equation}
 
-\subsection{Setting up 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
+\subsection{Setting up the 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 
-We've mathematically defined a method of distribution, but when observed in discrete terms, it's not an efficient packing of the information. One method of dealing with that is to use a lookup table. We do that where our continuous function spreads a unit interval over a larger range in the destination space. We can make the lookup table remove any jumps in it. It works with up to 8 bit numbers, because beyond that we get into massive tables, which isn't worth the effort. A way of mathematically implementing the same trick is to use a piecewise function, which behaves differently with different values. What we do is break the function into ranges (e.g. constant, ERF, linear, etc. depending on the gradient.) A linear dist is used when gradient is greater than 1, and back to the ERF when it goes down again. Const when nothing in particular's going on. Actually because it saves computational effort. (ERF gives same value; no point in doing it unnecessarily.) Doesn't fit full width of data type any more. (will be lower than max of data type; we squashed it.)
+For all computer vision tasks, the most significant influence on the required processing power is the number of channels. This is true even if the total information spread amongst the channels is less than the information contained in a single channel. Partly, this is due to the way that sequential processors operate; there is little difference between processing two 8-bit numbers and two 16-bit numbers on modern 64-bit processors. In contrast, processing a set of three related numbers is significantly more demanding; not only do the numbers have to be loaded into the processor sequentially, but the correlation between the numbers has to be taken into account. So, it is highly desirable to reduce the number of channels necessary for any further processing. The challenge is to compress all the relevant information for the desired subsequent processing into as few channels as possible. 
 
-Another method of dealing with that is set the max grad in the ERF. Don't use piecewise, just use ERF and scale the destination so it fits. By dividing the max value by the max gradient of ERF (The ERF evaluated at center point.), it becomes more horizontal, until it has a grad of 1. Advantage is not dealing with piecewise function, mathematically consistent, disadvantage is that also squash out a lot of the ERF behavior and a lot of the info we wanted to keep on either side of that value. The only place it keeps info is bang in the center; everywhere else is losing info.
-
-Finally we could compromise by finding the closest datatype which fits the amount of info into the retained range. It's not actually the amount of information that is retained, so it's accepting a bit of looseness in the data packing of that type, even if we found a perfect fit. For the datatype closest to info we want to retain, we then scale as in the second method.
-
-The reason we're talking about bit depth and not byte depth (fitting into the closest power of 2) is that it allows us to easily combine with the bits in a second channel; fitting both channels into one data type. It's difficult to predict what it will look like, since we're combining two channels into one, but it's the most efficient way of combining the two, turning it into a one-channel problem. However, now two colors that were once close to each other will end up separated. Seeing as all the information is there, though, this may not matter. The question is if all the data is usable in this form.
-
+It is not possible to compress all the information in such a way that it is appropriate for every computer vision application. It is, however, possible to tailor a compressing algorithm for a particular application.
 
 
 \subsection{Skin Detection}\label{sec:SkinDetection}
