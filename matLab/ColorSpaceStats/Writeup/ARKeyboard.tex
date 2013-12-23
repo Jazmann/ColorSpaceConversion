@@ -25,7 +25,7 @@
 
 For the purposes of this project, a color space dedicated to human skin is necessary. When it comes to pattern recognition, it is beneficial to reduce the number of channels which the algorithm must process, as well as reducing the information density in those channels. It is also hoped that, in an appropriate color space, it will be a simple matter to separate the characteristics associated with saturation of tissue with blood, which changes under mechanical stress from the unchanging pigmentation of the cells~\cite{Stamatas2004}. Color spaces --- when they are normally defined --- are a combination of rotations, scaling and translations, while some (e.g. HSV~\cite{Vezhnevets2003}~\cite{Zarit1999a}) also perform a coordinate transform. The color space defined for this project is unusual in that it uses a non-linear redistribution of the values. It should be noted that this is not a pixel-based classifier~\cite{Jones2002}. However, seeing as the color space contains both the statistical information and the skin color information, it can be interpreted in a probabilistic way.
 
-For the sake of comparison, the following four color spaces --- which have been used for skin detection~\cite{Vezhnevets2003}~\cite{Zarit1999a}~\cite{Yang1997a}~\cite{Yang1998a}~\cite{Brand2000a}~\cite{Sigal2000a}~\cite{Chai2000a}~\cite{Phung2002a} --- have been evaluated for the purposes of this project:
+For the sake of comparison, the following four color spaces --- which have been used for skin detection~\cite{Vezhnevets2003}~\cite{Zarit1999a}~\cite{Yang1997a}~\cite{Yang1998a}~\cite{Brand2000a}~\cite{Sigal2000a}~\cite{Chai2000a}~\cite{Phung2002a} --- have been evaluated for the purposes of this project.
 
 \subsubsection{LAB}\label{sec:LAB}
 
@@ -40,11 +40,8 @@ The RGB color space, while widely used, is perhaps the most ill-suited color spa
 Unlike RGB, the HSV color space makes a clear distinction between the chrominance (the "Hue" and "Saturation" channels) and the luminance (the "Value" channel), storing them separately~\cite{Vezhnevets2003}~\cite{Sigal2000a}. This makes HSV a popular choice for skin segmentation, but it's difficult to control any information loss during the transform due to its non-linearity~\cite{Poynton1997}.
 
 \subsubsection{YCbCr}\label{sec:YCbCr}
-~\cite{Vezhnevets2003}
-~\cite{Chai2000a}
-~\cite{Phung2002a}
 
-
+This color space bears similarities to the LAB and HSV spaces in that it explicitly separates the chrominance and the luminance. The luminosity (or "luma") channel "Y" is a weighted sum of the RGB values~\cite{Poynton1997}~\cite{Phung2002a}, while the chrominance channels "Cb" and "Cr" contain the color difference between Y and the red and blue components of RGB, respectively~\cite{Vezhnevets2003}. Also like LAB, it is not oriented such that the Gaussian distribution is situated along the axis. In fact, there is little distinction between the two spaces aside from the orientation in the chromatic portion of the space.
 
 \subsection{Constructing a New Color Space}\label{sec:ConstructingANewColorSpace}
 
