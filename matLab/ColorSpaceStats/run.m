@@ -1,6 +1,6 @@
 
 % Load the images and perform the statistics for a histogram with theta = 0
-dirName = 'SkinSamples';
+dirName = 'SelfSkinSamples';
 % Initialize the variables for the iteration over angle.
 nMax=12; tol = 10^-6;
 ang = zeros(nMax+1,1);
