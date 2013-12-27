@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    218471,       4384]
-NotebookOptionsPosition[    215915,       4296]
-NotebookOutlinePosition[    216270,       4312]
-CellTagsIndexPosition[    216227,       4309]
+NotebookDataLength[    215534,       4313]
+NotebookOptionsPosition[    213200,       4230]
+NotebookOutlinePosition[    213555,       4246]
+CellTagsIndexPosition[    213512,       4243]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -67,7 +67,8 @@ Cell[BoxData[
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{
-  3.5960357852029543`*^9, {3.596217012652782*^9, 3.596217032705315*^9}}]
+  3.5960357852029543`*^9, {3.596217012652782*^9, 3.596217032705315*^9}, 
+   3.596765613170801*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -474,7 +475,7 @@ Cell[BoxData[
       Rational[2, 3]^Rational[1, 2] Sin[$CellContext`\[Theta]], 0}}]],
   Editable->False]], "Print",
  CellChangeTimes->{3.596031883014731*^9, 3.5962156989828453`*^9, 
-  3.5962170412168503`*^9}]
+  3.5962170412168503`*^9, 3.5967656249304237`*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -3867,10 +3868,10 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`\[Theta]$$ = 3.141592653589793, 
-    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
-    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
-    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, Pi}}, Typeset`size$$ = {
     360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
     Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$31370$$ = 0}, 
@@ -3912,74 +3913,7 @@ Cell[BoxData[
   3.596036074818692*^9, 3.5960361066321297`*^9, 3.596036376239118*^9, 
   3.596036474069346*^9, 3.5960365314348516`*^9, 3.596036943221499*^9, 
   3.596037004104776*^9, 3.596038994849193*^9, 3.596039163411475*^9, 
-  3.5960392476156397`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0.33300882128051806`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.59621282719305*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(3\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0.33300882128051806`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.596212827269216*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Transpose", "::", "nmtx"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The first two levels of the one-dimensional list \
-\[NoBreak]\\!\\({\\(\\(\\(\\(YABAxisRanges[0.33300882128051806`]\\)\\) \
-\[LeftDoubleBracket] 2 \[RightDoubleBracket]\\)\\), \
-\\(\\(\\(\\(YABAxisRanges[0.33300882128051806`]\\)\\) \[LeftDoubleBracket] 3 \
-\[RightDoubleBracket]\\)\\)}\\)\[NoBreak] cannot be transposed. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Transpose/nmtx\\\", \
-ButtonNote -> \\\"Transpose::nmtx\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.596212827274788*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0.33300882128051806`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5962128272764673`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
-partw\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
-calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
-\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.596212827357175*^9}]
+  3.5960392476156397`*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -4315,75 +4249,70 @@ Cell[CellGroupData[{
 Cell[579, 22, 107, 1, 51, "Subtitle"],
 Cell[CellGroupData[{
 Cell[711, 27, 790, 20, 46, "Input"],
-Cell[1504, 49, 785, 20, 74, "Output"]
+Cell[1504, 49, 811, 21, 74, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2326, 74, 666, 18, 46, "Input"],
-Cell[2995, 94, 758, 19, 74, "Output"]
+Cell[2352, 75, 666, 18, 46, "Input"],
+Cell[3021, 95, 758, 19, 63, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3802, 119, 104, 1, 51, "Subtitle"],
-Cell[3909, 122, 2508, 65, 80, "Input"],
-Cell[6420, 189, 200, 4, 30, "Text"],
+Cell[3828, 120, 104, 1, 51, "Subtitle"],
+Cell[3935, 123, 2508, 65, 80, "Input"],
+Cell[6446, 190, 200, 4, 30, "Text"],
 Cell[CellGroupData[{
-Cell[6645, 197, 1833, 38, 46, "Input"],
-Cell[8481, 237, 8506, 239, 245, "Print"]
+Cell[6671, 198, 1833, 38, 46, "Input"],
+Cell[8507, 238, 8530, 239, 245, "Print"]
 }, Open  ]],
-Cell[17002, 479, 319, 8, 28, "Input"],
+Cell[17052, 480, 319, 8, 28, "Input"],
 Cell[CellGroupData[{
-Cell[17346, 491, 170, 3, 28, "Input"],
-Cell[17519, 496, 3268, 111, 131, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[20824, 612, 141, 3, 28, "Input"],
-Cell[20968, 617, 1566, 57, 113, "Output"]
+Cell[17396, 492, 170, 3, 28, "Input"],
+Cell[17569, 497, 3268, 111, 131, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[22571, 679, 286, 6, 28, "Input"],
-Cell[22860, 687, 1613, 58, 113, "Output"]
+Cell[20874, 613, 141, 3, 28, "Input"],
+Cell[21018, 618, 1566, 57, 113, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[24510, 750, 634, 15, 28, "Input"],
-Cell[25147, 767, 2948, 97, 103, "Output"]
+Cell[22621, 680, 286, 6, 28, "Input"],
+Cell[22910, 688, 1613, 58, 113, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[28132, 869, 421, 11, 28, "Input"],
-Cell[28556, 882, 35534, 598, 229, "Output"]
+Cell[24560, 751, 634, 15, 28, "Input"],
+Cell[25197, 768, 2948, 97, 103, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[64127, 1485, 650, 17, 28, "Input"],
-Cell[64780, 1504, 29973, 500, 229, "Output"]
+Cell[28182, 870, 421, 11, 28, "Input"],
+Cell[28606, 883, 35534, 598, 229, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[94790, 2009, 1118, 35, 54, "Input"],
-Cell[95911, 2046, 30455, 511, 229, "Output"]
+Cell[64177, 1486, 650, 17, 28, "Input"],
+Cell[64830, 1505, 29973, 500, 229, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[126403, 2562, 793, 19, 28, "Input"],
-Cell[127199, 2583, 30904, 515, 229, "Output"]
+Cell[94840, 2010, 1118, 35, 54, "Input"],
+Cell[95961, 2047, 30455, 511, 229, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[158140, 3103, 1336, 42, 85, "Input"],
-Cell[159479, 3147, 37988, 640, 229, 31390, 530, "CachedBoxData", "BoxData", \
+Cell[126453, 2563, 793, 19, 28, "Input"],
+Cell[127249, 2584, 30904, 515, 229, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[158190, 3104, 1336, 42, 85, "Input"],
+Cell[159529, 3148, 37988, 640, 229, 31390, 530, "CachedBoxData", "BoxData", \
 "Output"]
 }, Open  ]],
-Cell[197482, 3790, 810, 22, 28, "Input"],
+Cell[197532, 3791, 810, 22, 28, "Input"],
 Cell[CellGroupData[{
-Cell[198317, 3816, 1961, 48, 86, "Input"],
-Cell[200281, 3866, 2351, 48, 466, "Output"],
-Cell[202635, 3916, 499, 11, 24, "Message"],
-Cell[203137, 3929, 500, 11, 24, "Message"],
-Cell[203640, 3942, 706, 13, 24, "Message"],
-Cell[204349, 3957, 502, 11, 24, "Message"],
-Cell[204854, 3970, 528, 11, 24, "Message"]
+Cell[198367, 3817, 1961, 48, 86, "Input"],
+Cell[200331, 3867, 2336, 48, 466, "Output"]
 }, Open  ]],
-Cell[205397, 3984, 2448, 76, 119, "Input"],
+Cell[202682, 3918, 2448, 76, 119, "Input"],
 Cell[CellGroupData[{
-Cell[207870, 4064, 2248, 51, 80, "Input"],
-Cell[210121, 4117, 606, 12, 55, "Message"],
-Cell[210730, 4131, 1938, 60, 102, "Output"],
-Cell[212671, 4193, 3216, 99, 160, "Output"]
+Cell[205155, 3998, 2248, 51, 80, "Input"],
+Cell[207406, 4051, 606, 12, 55, "Message"],
+Cell[208015, 4065, 1938, 60, 91, "Output"],
+Cell[209956, 4127, 3216, 99, 91, "Output"]
 }, Open  ]]
 }, Open  ]]
 }
