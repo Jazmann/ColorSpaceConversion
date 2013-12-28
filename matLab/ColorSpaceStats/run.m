@@ -23,6 +23,9 @@ for i=1:nMax
 end
 theta = ang(i+1);
 g = [ 1, 255/(sqrt(2) .* sigma(i+1,2)), 255/(sqrt(2) .* sigma(i+1, 3))];
+sigma = sigma(1:i+1,:);
+c = c(1:i+1,:);
+
  
 skin = colorSpace(theta, c(i+1,:), sigma(i+1,:), [3,3,3], 0, 255, 0, 255, 1, 0);
  % Plot angle convergence
