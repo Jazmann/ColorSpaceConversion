@@ -59,6 +59,7 @@ figure(1)
 C = del2(Z);
 mesh(X,Y,Z,C) %plot data
 hold on
+figure('Name','Gaussian Fit Surface plot','NumberTitle','off');
 surface(X,Y,D2GaussFunctionRot(x,xdata),'EdgeColor','none') %Xhr,Yhr,D2GaussFunctionRot(x,xdatahr),'EdgeColor','none') %plot fit
 axis([X(1) X(end) Y(1) Y(end) min(min(Z)) max(max(Z))])
 alpha(0.2)  

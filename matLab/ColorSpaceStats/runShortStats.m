@@ -1,6 +1,6 @@
 
 % Load the images and perform the statistics for a histogram with theta = 0
-dirName = 'SelfSkinSamples2';
+dirName = 'Hands';
 % theta = Must be defined before evaluation;
 C = zeros(1,3);
 Sigma = sigma(end,:);
