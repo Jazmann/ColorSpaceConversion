@@ -132,7 +132,11 @@ The extent of the new axis is found by taking the maximum and minimum values of 
 
 Graphically, the problem appears as follows:
 
-\includegraphics{Chapter2/Figs/YABCubeEval.eps}
+\begin{figure}[h!]
+  \caption{Evaluation of the color space problem.}\label{fig:YABCubeEval}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/YABCubeEval.eps}
+\end{figure}
 
 In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the axis ranges are given by the following:
 
@@ -170,11 +174,11 @@ The normalised rotation matrix is given by:
 
 In order to identify the range of values for the skin space, a large number of skin samples were taken from photographs from the Humane project by Angelica Dass, an ongoing "chromatic inventory" art project which aims to compile every possible human skin color, categorized by the PANTONE guide color classification system. The skin colors catalogued thus far are independent of race or ethnicity, so the samples are representative of human skin tones in general.
 
-The image set consists of approximately 200 skin samples --- each of which shows only skin --- which are placed in a single directory in the file system. In accordance to our assumption that luminosity is not a significant factor in our skin model, we then perform the transformation initially with the value of $\theta$ equal to 0. The Matlab code collects frequency data for the rotated color space, incrementing the counts of a three-dimensional array of bins which span the color space. Viewing the frequency data along each of the three axes reveals that the skin image characteristics are spread widely in luminosity, but are quite confined in hue and saturation as illustrated below:
+The image set consists of approximately 200 skin samples --- each of which shows only skin --- which are placed in a single directory in the file system. In accordance to our assumption that luminosity is not a significant factor in our skin model, we then perform the transformation initially with the value of $\theta$ equal to 0. The Matlab code collects frequency data for the rotated color space, incrementing the counts of a three-dimensional array of bins which span the color space. Viewing the frequency data along each of the three axes reveals that the skin image characteristics are spread widely in luminosity, but are quite confined in hue and saturation as illustrated in Figure~\ref{fig:InitBins}.
 
 
 \begin{figure}[h!]
-  \caption{Initial set of bins.}
+  \caption{Initial set of bins.}\label{fig:InitBins}
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/InitialBins.eps}
 \end{figure}
