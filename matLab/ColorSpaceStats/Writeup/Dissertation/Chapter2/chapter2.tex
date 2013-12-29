@@ -132,7 +132,7 @@ The extent of the new axis is found by taking the maximum and minimum values of 
 
 Graphically, the problem appears as follows:
 
-\includegraphics{YABCubeEval.eps}
+\includegraphics{Chapter2/Figs/YABCubeEval.eps}
 
 In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the axis ranges are given by the following:
 
@@ -176,7 +176,7 @@ The image set consists of approximately 200 skin samples --- each of which shows
 \begin{figure}[h!]
   \caption{Initial set of bins.}
   \centering
-    \includegraphics[width=\textwidth]{InitialBins.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/InitialBins.eps}
 \end{figure}
 
 
@@ -189,7 +189,7 @@ Given that we are free to choose the orientation of the color space about the lu
   \caption{Distribution and Gaussian fit to the chromatic pixel values in the new color space.}
   \label{fig:DistributionAndGaussianFit}
   \centering
-    \includegraphics[width=\textwidth]{crosshairFigureFinal.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/crosshairFigureFinal.eps}
 \end{figure}
 
 
@@ -200,7 +200,7 @@ For numerical reasons, the value for $\theta$ was found iteratively by performin
   \caption{Convergence of color space orientation $\theta$.}
   \label{fig:ConvergenceTheta}
   \centering
-    \includegraphics[width=\textwidth]{ConvergenceOfSkinSpaceFinal.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/ConvergenceOfSkinSpaceFinal.eps}
 \end{figure}
 
 
@@ -218,7 +218,7 @@ Knowing the range of values produced by the rotation allows us to scale the tran
   \caption{Unit graph.}
   \label{fig:UnitGraph}
   \centering
-    \includegraphics[width=\textwidth]{unitGraph.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/unitGraph.eps}
 \end{figure}
 
 
@@ -254,7 +254,7 @@ The Gaussian distribution and the cumulative distribution are shown in Figure~\r
   \caption{Error function.}
   \label{fig:ErrorFunctionGraph}
   \centering
-    \includegraphics[width=\textwidth]{errorFunction.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/errorFunction.eps}
 \end{figure}
 
 First, we determine the maximum value taken in the domain. This is simply found by evaluating the function at sMax. It should be noted that --- if the Gaussian distribution is well-contained in the source domain --- the maximum value should be equal to the amplitude. For the sake of simplicity, we'll ignore the amplitude of the fitted Gaussian found previously as it is not relevant to the design of the redistribution function. So, to fix the range of the distribution function, we first scale to the range $0:1$ by simply dividing through by the maximum value, and then re-scale to the destination range dMax - dMin and shift by dMin.
@@ -298,24 +298,24 @@ We now have an equation that gives us the four points in the source domain which
   \caption{Linear partition approximation.}
   \label{fig:Partition}
   \centering
-    \includegraphics[width=0.49\textwidth]{partitionSmooth2.eps}
-    \includegraphics[width=0.49\textwidth]{partitionColor2.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/partitionSmooth2.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/partitionColor2.eps}
 \end{figure}
 
 \begin{figure}[h!]
   \caption{Linear approximation.}
   \label{fig:Linear}
   \centering
-    \includegraphics[width=0.49\textwidth]{linearSmooth2.eps}
-    \includegraphics[width=0.49\textwidth]{linearColor2.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/linearSmooth2.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/linearColor2.eps}
 \end{figure}
 
 \begin{figure}[h!]
   \caption{Error Function distribution.}
   \label{fig:ERF}
   \centering
-    \includegraphics[width=0.49\textwidth]{ERFSmooth2.eps}
-    \includegraphics[width=0.49\textwidth]{ERFColor2.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/ERFSmooth2.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/ERFColor2.eps}
 \end{figure}
 
 There is one final value of interest to the development of the algorithm, which is the gradient at the mean. The reason this is of interest is because we're trying to compress the relevant data as much as possible. If the destination region is small (i.e. the destination machine type is smaller than the source type), then the gradient at the mean allows us to assess the fidelity required of the source type. If it weren't for the fact that the source is the result of a rotation transformation, then there would be little purpose in assessing this value. However, it is entirely possible that the lengthening of the axes resulting from the rotation is insignificant for the desired destination type; there's no point preserving information during the rotation which is then discarded by the redistribution. The gradient for a unit source and domain is given by
@@ -365,11 +365,11 @@ We can now re-formulate the transformation matrix in three different ways.
  R_{xyz}(\theta) = \left(
 \begin{array}{ccc}
  \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} \\
- -\frac{\cos (\theta )}{\sqrt{6}}-\frac{\sin (\theta )}{\sqrt{2}} & 
- \sqrt{\frac{2}{3}} \cos (\theta ) & 
+ -\frac{\cos (\theta )}{\sqrt{6}}-\frac{\sin (\theta )}{\sqrt{2}} &
+ \sqrt{\frac{2}{3}} \cos (\theta ) &
  \frac{\sin (\theta )}{\sqrt{2}}-\frac{\cos (\theta )}{\sqrt{6}} \\
- \frac{\sin (\theta )}{\sqrt{6}}-\frac{\cos (\theta )}{\sqrt{2}} & 
- -\sqrt{\frac{2}{3}} \sin (\theta ) & 
+ \frac{\sin (\theta )}{\sqrt{6}}-\frac{\cos (\theta )}{\sqrt{2}} &
+ -\sqrt{\frac{2}{3}} \sin (\theta ) &
  \frac{\cos (\theta )}{\sqrt{2}}+\frac{\sin (\theta )}{\sqrt{6}} \\
 \end{array}
 \right)
@@ -380,7 +380,7 @@ We can now re-formulate the transformation matrix in three different ways.
 \end{equation}
 
 \begin{equation}\label{eq:CompressedRotation}
- \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) = 
+ \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
 \left(
 \begin{array}{c}
  1  \\
@@ -397,7 +397,7 @@ R_{xyz}(\theta)
 \widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
 \end{gather*}
 \begin{equation}\label{eq:NormRxyz2}
- \overline{R}_{xyz}(\theta) = 
+ \overline{R}_{xyz}(\theta) =
 \left(
 \begin{array}{c}
  1  \\
@@ -411,7 +411,7 @@ R_{xyz}(\theta)
 
 \section{Setting up the 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 
-For all computer vision tasks, the most significant influence on the required processing power is the number of channels. This is true even if the total information spread amongst the channels is less than the information contained in a single channel. Partly, this is due to the way that sequential processors operate; there is little difference between processing two 8-bit numbers and two 16-bit numbers on modern 64-bit processors. In contrast, processing a set of three related numbers is significantly more demanding; not only do the numbers have to be loaded into the processor sequentially, but the correlation between the numbers has to be taken into account. So, it is highly desirable to reduce the number of channels necessary for any further processing. The challenge is to compress all the relevant information for the desired subsequent processing into as few channels as possible. 
+For all computer vision tasks, the most significant influence on the required processing power is the number of channels. This is true even if the total information spread amongst the channels is less than the information contained in a single channel. Partly, this is due to the way that sequential processors operate; there is little difference between processing two 8-bit numbers and two 16-bit numbers on modern 64-bit processors. In contrast, processing a set of three related numbers is significantly more demanding; not only do the numbers have to be loaded into the processor sequentially, but the correlation between the numbers has to be taken into account. So, it is highly desirable to reduce the number of channels necessary for any further processing. The challenge is to compress all the relevant information for the desired subsequent processing into as few channels as possible.
 
 It is not possible to compress all the information in such a way that it is appropriate for every computer vision application. It is, however, possible to tailor a compressing algorithm for a particular application.
 
@@ -421,31 +421,31 @@ It is not possible to compress all the information in such a way that it is appr
 \begin{figure}[h!]
   \caption{RGB channels.}
   \centering
-    \includegraphics[width=\textwidth]{rainbowmanRGB.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/rainbowmanRGB.eps}
 \end{figure}
 
 \begin{figure}[h!]
   \caption{Rotated color space.}
   \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotated.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/rainbowmanRotated.eps}
 \end{figure}
 
 \begin{figure}[h!]
   \caption{Final bins.}
   \centering
-    \includegraphics[width=\textwidth]{binsFinal2.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/binsFinal2.eps}
 \end{figure}
 
 \begin{figure}[h!]
   \caption{Rotated and scaled color space.}
   \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotatedScaled.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/rainbowmanRotatedScaled.eps}
 \end{figure}
 
 \begin{figure}[h!]
   \caption{Rotated compact scaled color space.}
   \centering
-    \includegraphics[width=\textwidth]{rainbowmanRotatedCompactScaled.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/rainbowmanRotatedCompactScaled.eps}
 \end{figure}
 
 \section{Putting it All Together}\label{sec:PuttingItAllTogether}

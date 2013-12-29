@@ -1,0 +1,44 @@
+\chapter{Pattern Recognition}
+
+% **************************** Define Graphics Path **************************
+\ifpdf
+    \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
+\else
+    \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
+\fi
+
+\section{Constant Patterns under Mechanical Stresses in the Hand}\label{sec:ConstantPatterns}
+\section{Dynamic Patterns under Mechanical Stresses in the Hand}\label{sec:DynamicPatterns}
+\begin{figure}[h!]
+  \caption{Still images from a video taken with an iPhone. From left to right: original; rotated; rotated and scaled; rotated, compacted and scaled.}
+  \label{fig:pressureCandidates}
+  \centering
+    \includegraphics[width=\textwidth]{pressureCandidates.eps}
+\end{figure}
+\begin{figure}[h!]
+  \caption{Still images from a video taken with an iPhone. From left to right: original; rotated, separated into its component channels.}
+  \label{fig:pressureCandidates1}
+  \centering
+    \includegraphics[width=\textwidth]{fingerPressureRotated.eps}
+\end{figure}
+\begin{figure}[h!]
+  \caption{Still images from a video taken with an iPhone. From left to right: original; rotated and scaled, separated into its component channels.}
+  \label{fig:pressureCandidates2}
+  \centering
+    \includegraphics[width=\textwidth]{fingerPressureRotatedScaled.eps}
+\end{figure}
+\begin{figure}[h!]
+  \caption{Still images from a video taken with an iPhone. From left to right: original; rotated, compacted and scaled, separated into its component channels.}
+  \label{fig:pressureCandidate3}
+  \centering
+    \includegraphics[width=\textwidth]{fingerPressureRotatedCompactScaled.eps}
+\end{figure}
+\subsection{Finger Pad Pressure}\label{sec:FingerPadPressure}
+\subsection{Fingernail Pressure}\label{sec:FingernailPressure}
+\section{Pattern Recognition Techniques in OpenCV}\label{sec:PaternRecognitionOpenCV}
+\section{Implementation of Pattern Recognition using OpenCV on an iPhone}\label{sec:ImplementationOnIPhone}
+
+\section{Refining the Target Area for Search}\label{sec:RefiningTargetAreaForSearch}
+\subsection{Blob Detection}\label{sec:BlobDetection}
+\subsection{Hand Posture Prediction}\label{sec:HandPosturePrediction}
+\subsection{Dynamic Tracking}\label{sec:DynamicTracking}
