@@ -464,11 +464,45 @@ The image captured by a CCD camera is designed to fool the human eye. In physica
     \includegraphics[width=\textwidth]{Chapter2/Figs/spectrum.eps}
 \end{figure}
 
-Then quickly say how these are wavelengths, so we need to be able to 1. turn a wavelength into a point in a color space, 2. convert an absorption spectra into a color, mentioning how the absorption spectra is a complete description of the material, so you can use it to show what the material would look like under any lighting condition. White light, representation using RGB Gaussians, so what we do is turn the absorption spectra into a scattering spectra and represent it in terms of the RGB Gaussians. That will give us data points in the color space for the three molecules.
+Human skin is made up of two layers, each with its own optical properties: the surface layer --- the "epidermis" --- and the "dermis," the vascular structure underneath in which the blood vessels, lymphatic vessels and other such fibroblast structures can be found (~\cite{Stamatas2004}). The molecules which make up these layers make an important contribution to skin color. The most significant of these are melanin --- which is found in the epidermis --- and oxy-hemoglobin and deoxy-hemoglobin --- both of which reside in the dermis. Melanin is the main spectral absorber in the epidermis and the greatest contributor to the visual perception of surface skin color; it features a monotonic increase toward short wavelengths on its spectral absorption curve in the visible, approaching linear in the region 600-750 nm (~\cite{Stamatas2004,Kollias1995}). Oxy-hemoglobin and deoxy-hemoglobin are actually different states of the same molecule -- hemoglobin -- which is found in the dermal blood supply. The molecule's chromophoric state is dependent upon whether it is delivering oxygen molecules to the tissues; it exists as oxy-hemoglobin if it is delivering oxygen and deoxy-hemoglobin if it isn't. The redness of skin in the areas where hemoglobin is found is due to the molecule's absorption of incident light (~\cite{Kollias1995}). It should be noted that each form of hemoglobin has its own characteristic absorption profile; oxy-hemoglobin's maxima on the absorption curve can be found at 415, 540 and 577 nm, whereas deoxy-hemoglobin's are located at 430 and 555 nm.
 
-Human skin is made up of two layers, each with their own optical properties: the surface layer --- the "epidermis" --- and the "dermis," the vascular structure underneath in which the blood vessels, lymphatic vessels and other such fibroblast structures can be found (~\cite{Stamatas2004}). The molecules which make up these layers make an important contribution to skin color. The most significant of these are melanin --- which is found in the epidermis --- and oxy-hemoglobin and deoxy-hemoglobin --- both of which reside in the dermis. Melanin is the main spectral absorber in the epidermis and the greatest contributor to the visual perception of surface skin color; it features a monotonic increase toward short wavelengths on its spectral absorption curve in the visible, approaching linear in the region 600-750 nm (~\cite{Stamatas2004,Kollias1995}). Oxy-hemoglobin and deoxy-hemoglobin are actually different states of the same molecule -- hemoglobin -- which is found in the dermal blood supply. The molecule's chromophoric state is dependent upon whether it is delivering oxygen molecules to the tissues; it exists as oxy-hemoglobin if it is delivering oxygen and deoxy-hemoglobin if it isn't. The redness of skin in the areas where hemoglobin is found is due to the molecule's absorption of incident light (~\cite{Kollias1995}). It should be noted that each form of hemoglobin has its own characteristic absorption profile; oxy-hemoglobin's maxima on the absorption curve can be found at 415, 540 and 577 nm, whereas deoxy-hemoglobin's are located at 430 and 555 nm.
+Seeing as the chromophores' absorption characteristics are expressed as wavelengths, it should be possible to turn a wavelength into a point in a color space. The absorption spectra is a complete description of the material. As such, it can be used to show what the material would look like under any lighting condition. The white light spectrum as perceived by the human eye can be represented using RGB Gaussian waveforms by turning the absorption spectra into a scattering spectra and representing it in terms of the RGB Gaussians. Through the use of an additive process based on Grassman's law, which states that, if the sample color is a combination of two monochromatic colors, then the value found by the observer for each monochromatic base color from the sample color will be the sum of each sample base color of the two monochromatic colors observed separately, we can find points in the R, G and B channels in the RGB color space for the three chromaphores (~\cite{MIHAI2007}).
 
-Seeing as the chromophores' absorption characteristics are expressed as wavelengths, it should be possible to turn a wavelength into a point in a color space. The absorption spectra is a complete description of the material. As such, it can be used to show what the material would look like under any lighting condition. 
+The equivalent RGB points for the colors of the absorption peaks can be calculated as follows:
+
+\begin{equation}
+\begin{array}{cc}
+ \{0.6\, -0.0136667 (\lambda -380),0,0.02 (\lambda -380)+0.39\} & \lambda \geq 380.\land \lambda \leq 410. \\
+ \{0.19\, -0.00633333 (\lambda -410),0,1\} & \lambda \geq 410.\land \lambda \leq 440. \\
+ \left\{0,\frac{\lambda -490}{50}+1,1\right\} & \lambda \geq 440.\land \lambda \leq 490. \\
+ \left\{0,1,\frac{510-\lambda }{20}\right\} & \lambda \geq 490.\land \lambda \leq 510. \\
+ \left\{\frac{\lambda -580}{70}+1,1,0\right\} & \lambda \geq 510.\land \lambda \leq 580. \\
+ \left\{1,\frac{640-\lambda }{60},0\right\} & \lambda \geq 580.\land \lambda \leq 640. \\
+ \{1,0,0\} & \lambda \geq 640.\land \lambda \leq 700. \\
+ \{0.008125 (780-\lambda )+0.35,0,0\} & \lambda \geq 700.\land \lambda \leq 780. \\
+\end{array}
+ \\
+\end{equation}
+
+If the respective color is shined on a molecule with these properties, it will absorb them. To convert this into a scattering spectrum, spectrum of the incident light must be taken, subtracting the amount that is absorbed. Assuming a uniform line, the process is not unlike flipping the waveform on its Y axis.
+
+The scattering spectra needs to be represented in this three-function Gaussian basis:
+
+We will take the maximum values of these and make a quick transform of the scattering spectra, giving a color value for the molecules and their relative positions in the space. We have a function for the light source, but we will make the crude assumption of an equal amount of all wavelengths. This is sufficient for the purposes of this project.
+
+\begin{figure}[h!]
+  \caption{Hemoglobin.}\label{fig:hemoglobin}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/globin.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Melanin.}\label{fig:melanin}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/melanin.eps}
+\end{figure}
+
+
 
 \subsection{Pigment vs. Blood}\label{sec:PigmentVs.Blood}
 
