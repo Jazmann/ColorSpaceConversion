@@ -456,8 +456,6 @@ It is not possible to compress all the information in such a way that it is appr
 
 \section{Physiology Study}\label{sec:PhysiologyStudy}
 
-There are chromophores present in the skin which have biologically-determined spectral characteristics. To be able to interpret these papers on the spectral characteristics of the underlying biology, we need to be able to reinterpret the values in terms of what's available to a camera.
-
 The image captured by a CCD camera is designed to fool the human eye. In physical reality, light reaching the sensor spans full spectral range. In the human eye --- and in the camera --- the diversity of chromatic information is lost by representing the spectrum as a combination of three chromatic Gaussians, as can be seen in Figure~\ref{fig:spectrum}.
 
 \begin{figure}[h!]
@@ -466,7 +464,11 @@ The image captured by a CCD camera is designed to fool the human eye. In physica
     \includegraphics[width=\textwidth]{Chapter2/Figs/spectrum.eps}
 \end{figure}
 
+Then quickly say how these are wavelengths, so we need to be able to 1. turn a wavelength into a point in a color space, 2. convert an absorption spectra into a color, mentioning how the absorption spectra is a complete description of the material, so you can use it to show what the material would look like under any lighting condition. White light, representation using RGB Gaussians, so what we do is turn the absorption spectra into a scattering spectra and represent it in terms of the RGB Gaussians. That will give us data points in the color space for the three molecules.
 
+Human skin is made up of two layers, each with their own optical properties: the surface layer --- the "epidermis" --- and the "dermis," the vascular structure underneath in which the blood vessels, lymphatic vessels and other such fibroblast structures can be found (~\cite{Stamatas2004}). The molecules which make up these layers make an important contribution to skin color. The most significant of these are melanin --- which is found in the epidermis --- and oxy-hemoglobin and deoxy-hemoglobin --- both of which reside in the dermis. Melanin is the main spectral absorber in the epidermis and the greatest contributor to the visual perception of surface skin color; it features a monotonic increase toward short wavelengths on its spectral absorption curve in the visible, approaching linear in the region 600-750 nm (~\cite{Stamatas2004,Kollias1995}). Oxy-hemoglobin and deoxy-hemoglobin are actually different states of the same molecule -- hemoglobin -- which is found in the dermal blood supply. The molecule's chromophoric state is dependent upon whether it is delivering oxygen molecules to the tissues; it exists as oxy-hemoglobin if it is delivering oxygen and deoxy-hemoglobin if it isn't. The redness of skin in the areas where hemoglobin is found is due to the molecule's absorption of incident light (~\cite{Kollias1995}). It should be noted that each form of hemoglobin has its own characteristic absorption profile; oxy-hemoglobin's maxima on the absorption curve can be found at 415, 540 and 577 nm, whereas deoxy-hemoglobin's are located at 430 and 555 nm.
+
+Seeing as the chromophores' absorption characteristics are expressed as wavelengths, it should be possible to turn a wavelength into a point in a color space. The absorption spectra is a complete description of the material. As such, it can be used to show what the material would look like under any lighting condition.
 
 \subsection{Pigment vs. Blood}\label{sec:PigmentVs.Blood}
 
