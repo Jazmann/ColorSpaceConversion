@@ -13,25 +13,25 @@
 
 \section{Overview of Color Spaces}
 
-For the purposes of this project, a color space dedicated to human skin is necessary. When it comes to pattern recognition, it is beneficial to reduce the number of channels which the algorithm must process, as well as reducing the information density in those channels. It is also hoped that, in an appropriate color space, it will be a simple matter to separate the characteristics associated with saturation of tissue with blood, which changes under mechanical stress from the unchanging pigmentation of the cells~\cite{Stamatas2004}. Color spaces --- when they are normally defined --- are a combination of rotations, scaling and translations, while some (e.g. HSV~\citeyear{Vezhnevets2003, Zarit1999a}) also perform a coordinate transform. The color space defined for this project is unusual in that it uses a non-linear redistribution of the values. It should be noted that this is not a pixel-based classifier~\cite{Jones2002}. However, seeing as the color space contains both the statistical information and the skin color information, it can be interpreted in a probabilistic way.
+For the purposes of this project, a color space dedicated to human skin is necessary. When it comes to pattern recognition, it is beneficial to reduce the number of channels which the algorithm must process, as well as reducing the information density in those channels. It is also hoped that, in an appropriate color space, it will be a simple matter to separate the characteristics associated with saturation of tissue with blood, which changes under mechanical stress from the unchanging pigmentation of the cells (\cite{Stamatas2004}). Color spaces --- when they are normally defined --- are a combination of rotations, scaling and translations, while some (e.g. HSV (\cite{Vezhnevets2003, Zarit1999a} )) also perform a coordinate transform. The color space defined for this project is unusual in that it uses a non-linear redistribution of the values. It should be noted that this is not a pixel-based classifier (\cite{Jones2002}). However, seeing as the color space contains both the statistical information and the skin color information, it can be interpreted in a probabilistic way.
 
-For the sake of comparison, the following four color spaces --- which have been used for skin detection~\cite{Vezhnevets2003}~\cite{Zarit1999a}~\cite{Yang1997a}~\cite{Yang1998a}~\cite{Brand2000a}~\cite{Sigal2000a}~\cite{Chai2000a}~\cite{Phung2002a} --- have been evaluated for the purposes of this project.
+For the sake of comparison, the following four color spaces --- all of which have been used for skin detection (\cite{Vezhnevets2003,Zarit1999a,Yang1997a,Brand2000a,Sigal2000a,Chai2000a,Phung2002a}) --- have been evaluated for the purposes of this project.
 
 \subsection{LAB}\label{sec:LAB}
 
-The LAB color space's perceptual uniformity makes it well-suited for skin detection, as the human eye can perceive practically any change in its values~\cite{Vezhnevets2003}~\cite{Poynton1997}. However, the Gaussian distribution of the skin is not positioned on the axis, which makes applying the statistics troublesome.
+The LAB color space's perceptual uniformity makes it well-suited for skin detection, as the human eye can perceive practically any change in its values (\cite{Vezhnevets2003,Poynton1997}). However, the Gaussian distribution of the skin is not positioned on the axis, which makes applying the statistics troublesome.
 
 \subsection{RGB}\label{sec:RGB}
 
-The RGB color space, while widely used, is perhaps the most ill-suited color space for skin detection, as it can't make a distinction between chrominance and luminance~\cite{Vezhnevets2003}~\cite{Brand2000a}. That said, its ubiquity in cameras --- which are designed to capture images which, to us, appear to be an accurate representation of physical reality despite the opposite being true --- makes it a necessary color space to work in. The advantage to using it is simply the fact that it is a straightforward, raw output from the camera.
+The RGB color space, while widely used, is perhaps the most ill-suited color space for skin detection, as it can't make a distinction between chrominance and luminance, as discussed by ~\cite{Vezhnevets2003,Brand2000a}. That said, its ubiquity in cameras --- which are designed to capture images which, to us, appear to be an accurate representation of physical reality despite the opposite being true --- makes it a necessary color space to work in. The advantage to using it is simply the fact that it is a straightforward, raw output from the camera.
 
 \subsection{HSV}\label{sec:HSV}
 
-Unlike RGB, the HSV color space makes a clear distinction between the chrominance (the "Hue" and "Saturation" channels) and the luminance (the "Value" channel), storing them separately~\cite{Vezhnevets2003}~\cite{Sigal2000a}. This makes HSV a popular choice for skin segmentation, but it's difficult to control any information loss during the transform due to its non-linearity~\cite{Poynton1997}.
+Unlike RGB, the HSV color space makes a clear distinction between the chrominance (the "Hue" and "Saturation" channels) and the luminance (the "Value" channel), storing them separately (\cite{Vezhnevets2003,Sigal2000a}). This makes HSV a popular choice for skin segmentation, but it's difficult to control any information loss during the transform due to its non-linearity (\cite{Poynton1997}).
 
 \subsection{YCbCr}\label{sec:YCbCr}
 
-This color space bears similarities to the LAB and HSV spaces in that it explicitly separates the chrominance and the luminance. The luminosity (or "luma") channel "Y" is a weighted sum of the RGB values~\cite{Poynton1997}~\cite{Phung2002a}, while the chrominance channels "Cb" and "Cr" contain the color difference between Y and the red and blue components of RGB, respectively~\cite{Vezhnevets2003}. Also like LAB, it is not oriented such that the Gaussian distribution is situated along the axis. In fact, there is little distinction between the two spaces aside from the orientation in the chromatic portion of the space.
+This color space bears similarities to the LAB and HSV spaces in that it explicitly separates the chrominance and the luminance. The luminosity (or "luma") channel "Y" is a weighted sum of the RGB values (\cite{Poynton1997,Phung2002a}), while the chrominance channels "Cb" and "Cr" contain the color difference between Y and the red and blue components of RGB, respectively (\cite{Vezhnevets2003}). Also like LAB, it is not oriented such that the Gaussian distribution is situated along the axis. In fact, there is little distinction between the two spaces aside from the orientation in the chromatic portion of the space.
 
 The main issue with using these color spaces is the lack of control over information flow upon transformation and the clear mathematical statement of the transformation in terms of rotation, scaling and translation. Therefore, the construction of a new color space is necessary.
 
@@ -154,7 +154,7 @@ In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the 
 
 It is convenient to produce a transformation which will result in axes of known length. Because the rotation cannot include a translation, we desire a transformation matrix which will result in the ranges $0:1$, -$\frac{1}2$ to $\frac{1}2$, and -$\frac{1}2$ to $\frac{1}2$. Such a transformation is easily obtained by multiplying the rotation matrix by a diagonal matrix with the reciprocal of the maximums found above placed along the diagonal. This will scale each axis to a unit length.
 
-The normalised rotation matrix is given by:
+The normalized rotation matrix is given by:
 \begin{gather*}
   \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
 \widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
@@ -269,7 +269,7 @@ First, we determine the maximum value taken in the domain. This is simply found 
 
 Mathematically, this distribution function~(\ref{eq:disFunction}) achieves all the stated objectives. However, on a device we are dealing with discrete numerics and limited processing power, so further analysis is required. Where we're using a discrete domain and range, the distribution is usefully divided into three characteristic behaviors:  where it is constant, where it preserves all the information, and where it selectively preserves information. Looking at the distribution, this divides the source domain into five regions: two where it is effectively constant, two where it is selective, and one region around the mean where it preserves all the information. In order to design an efficient algorithm, it is useful to identify the boundaries of these five regions.
 
-First, we need to identify where the distribution is effectively constant. This can be found by solving the following equation in the region and domain $0 \le x \le 1$ and then generalised to the specific discrete numerics:
+First, we need to identify where the distribution is effectively constant. This can be found by solving the following equation in the region and domain $0 \le x \le 1$ and then generalized to the specific discrete numerics:
 
 \begin{equation}\label{eq:0to1}
  \frac{\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)+\text{erf}\left(\frac{x-\mu }{\sqrt{2} \sigma }\right)}{\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)}=\text{dL} \quad \text{where} \quad \text{dL} = \left\{ \frac{1}{\text{dMax} - \text{dMin}}, 1 - \frac{1}{\text{dMax} - \text{dMin}} \right\}
