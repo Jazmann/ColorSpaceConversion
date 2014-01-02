@@ -379,10 +379,6 @@ We can now re-formulate the transformation matrix in three different ways.
 \right)
 \end{equation}
 
-\begin{equation}\label{eq:RequestedComprerssion}
-\kappa = \frac{\text{rgbRange} }{dRange}
-\end{equation}
-
 \begin{equation}\label{eq:CompressedRotation}
  \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
 \left(
@@ -396,10 +392,6 @@ We can now re-formulate the transformation matrix in three different ways.
 R_{xyz}(\theta)
 \end{equation}
 
-\begin{gather*}
-  \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
-\widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
-\end{gather*}
 \begin{equation}\label{eq:NormRxyz2}
  \overline{R}_{xyz}(\theta) =
 \left(
@@ -412,6 +404,20 @@ R_{xyz}(\theta)
 \bigotimes
 R_{xyz}(\theta)
 \end{equation}
+
+
+where
+
+\begin{equation}\label{eq:RequestedComprerssion}
+\kappa = \frac{\text{rgbRange} }{dRange}
+\end{equation}
+
+and
+
+\begin{gather*}
+  \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
+\widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
+\end{gather*}
 
 \section{Setting up the 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 
@@ -504,7 +510,7 @@ The scattering spectra needs to be represented in a three-function Gaussian basi
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/scatMelanin.eps}
 \end{figure}
 
-Finally, we perform a color matching operation based on the CIE 1931 standard observer piecewise function to complete the transformation. 
+Finally, we perform a color matching operation based on the CIE 1931 standard observer piecewise function to complete the transformation.
 
 \begin{figure}[h!]
   \caption{Final skin chromophore positions.}\label{fig:colorBasis}
