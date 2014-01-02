@@ -6,6 +6,7 @@
 *.exe
 *.o
 *.so
+*.orig
 
 # Compiled LaTeX source #
 ###################
@@ -15,6 +16,7 @@
 *.dvi
 *.toc
 *.pdf
+*.ps
 
 # Packages #
 ############
