@@ -3,10 +3,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[    335614,       6428]
-NotebookOptionsPosition[    331814,       6300]
-NotebookOutlinePosition[    332158,       6315]
-CellTagsIndexPosition[    332115,       6312]
+NotebookDataLength[    348553,       6805]
+NotebookOptionsPosition[    344415,       6668]
+NotebookOutlinePosition[    344759,       6683]
+CellTagsIndexPosition[    344716,       6680]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -6296,6 +6296,374 @@ Cell[BoxData[
    {RGBColor[1., 0.23365764038585488`, 0.07113964283582956], 
     RectangleBox[{2, 0}]}}]], "Output",
  CellChangeTimes->{3.5976578934290786`*^9, 3.5976656284304953`*^9}]
+}, Open  ]],
+
+Cell["Color matching functions", "Subtitle",
+ CellChangeTimes->{{3.597667694445665*^9, 3.5976676994839525`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Alpha]x", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0.364", ",", " ", "1.056", ",", " ", 
+     RowBox[{"-", "0.065"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Alpha]y", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0.821", ",", " ", "0.286"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Alpha]z", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"1.217", ",", " ", "0.681"}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Beta]x", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"442.0", ",", " ", "599.8", ",", " ", "501.1"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Beta]y", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"568.8", ",", " ", "530.9"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Beta]z", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"437.0", ",", " ", "459.0"}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Gamma]x", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0.0624", ",", " ", "0.0264", ",", " ", "0.0490"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Gamma]y", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0.0213", ",", " ", "0.0613"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Gamma]z", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"0.0845", ",", " ", "0.0385"}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Delta]x", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0.0374", ",", " ", "0.0323", ",", " ", "0.0382"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Delta]y", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0.0247", ",", " ", "0.0322"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Delta]z", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0.0278", ",", " ", "0.0725"}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.5976667624768267`*^9, 3.5976667679716043`*^9}, {
+  3.597666805292562*^9, 3.59766704630408*^9}, {3.5976671864296083`*^9, 
+  3.597667269038333*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"S", "[", 
+    RowBox[{"x_", ",", "y_", ",", "z_"}], "]"}], ":=", " ", 
+   RowBox[{
+    RowBox[{"y", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"HeavisideTheta", "[", "x", "]"}]}], ")"}]}], " ", "+", " ", 
+    RowBox[{"z", " ", 
+     RowBox[{"HeavisideTheta", "[", "x", "]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"X", "[", "\[Lambda]_", "]"}], ":=", " ", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Alpha]x", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", 
+     RowBox[{"Exp", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "1"}], "/", "2"}], " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"\[Lambda]", " ", "-", " ", 
+            RowBox[{"\[Beta]x", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], ")"}], " ", 
+          RowBox[{"S", "[", 
+           RowBox[{
+            RowBox[{"\[Lambda]", " ", "-", " ", 
+             RowBox[{"\[Beta]x", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+            RowBox[{"\[Gamma]x", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{"\[Delta]x", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ")"}], "^", "2"}]}], 
+      "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "3"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Y", "[", "\[Lambda]_", "]"}], ":=", " ", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Alpha]y", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", 
+     RowBox[{"Exp", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "1"}], "/", "2"}], " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"\[Lambda]", " ", "-", " ", 
+            RowBox[{"\[Beta]y", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], ")"}], " ", 
+          RowBox[{"S", "[", 
+           RowBox[{
+            RowBox[{"\[Lambda]", " ", "-", " ", 
+             RowBox[{"\[Beta]y", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+            RowBox[{"\[Gamma]y", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{"\[Delta]y", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ")"}], "^", "2"}]}], 
+      "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "2"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Z", "[", "\[Lambda]_", "]"}], ":=", " ", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Alpha]z", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", 
+     RowBox[{"Exp", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "1"}], "/", "2"}], " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"\[Lambda]", " ", "-", " ", 
+            RowBox[{"\[Beta]z", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], ")"}], " ", 
+          RowBox[{"S", "[", 
+           RowBox[{
+            RowBox[{"\[Lambda]", " ", "-", " ", 
+             RowBox[{"\[Beta]z", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+            RowBox[{"\[Gamma]z", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{"\[Delta]z", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ")"}], "^", "2"}]}], 
+      "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "2"}], "}"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{
+  3.597666255216346*^9, {3.597666329618601*^9, 3.5976663901150613`*^9}, {
+   3.5976667951072254`*^9, 3.597667059687359*^9}, {3.5976670937913094`*^9, 
+   3.5976671471113586`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"RGBColorMatchingFunX", "[", "data_", "]"}], ":=", 
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"#1", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+       RowBox[{
+        RowBox[{"X", "[", 
+         RowBox[{"#1", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "]"}], " ", 
+        RowBox[{"#1", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], "&"}], ",", "data"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RGBColorMatchingFunY", "[", "data_", "]"}], ":=", 
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"#1", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+       RowBox[{
+        RowBox[{"Y", "[", 
+         RowBox[{"#1", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "]"}], " ", 
+        RowBox[{"#1", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], "&"}], ",", "data"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RGBColorMatchingFunZ", "[", "data_", "]"}], ":=", 
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"#1", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+       RowBox[{
+        RowBox[{"Z", "[", 
+         RowBox[{"#1", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "]"}], " ", 
+        RowBox[{"#1", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], "&"}], ",", "data"}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{{3.5976673926754045`*^9, 3.597667482916566*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"RGBValues", "[", "data_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "T", "}"}], ",", 
+    RowBox[{
+     RowBox[{"xyzTotals", " ", "=", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Integrate", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Interpolation", "[", 
+            RowBox[{
+             RowBox[{"RGBColorMatchingFunX", "[", "data", "]"}], ",", 
+             RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", 
+           "x", "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", 
+            RowBox[{"data", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ",", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"data", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", "1"}], "]"}], "]"}]}], "}"}]}], "]"}],
+         ",", 
+        RowBox[{"Integrate", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Interpolation", "[", 
+            RowBox[{
+             RowBox[{"RGBColorMatchingFunY", "[", "data", "]"}], ",", 
+             RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", 
+           "x", "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", 
+            RowBox[{"data", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ",", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"data", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", "1"}], "]"}], "]"}]}], "}"}]}], "]"}],
+         ",", 
+        RowBox[{"Integrate", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Interpolation", "[", 
+            RowBox[{
+             RowBox[{"RGBColorMatchingFunZ", "[", "data", "]"}], ",", 
+             RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}], "[", 
+           "x", "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", 
+            RowBox[{"data", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ",", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"data", "[", 
+             RowBox[{"[", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", "1"}], "]"}], "]"}]}], "}"}]}], 
+         "]"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"T", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"3.240479", ",", 
+          RowBox[{"-", "1.537150"}], ",", 
+          RowBox[{"-", "0.498535"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "0.969256"}], ",", " ", "1.875992", ",", "0.041556"}], 
+         "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0.055648", ",", 
+          RowBox[{"-", "0.204043"}], " ", ",", "1.057311"}], "}"}]}], "}"}]}],
+      ";", "\[IndentingNewLine]", 
+     RowBox[{"rgbTotals", " ", "=", " ", 
+      RowBox[{"T", " ", ".", " ", "xyzTotals"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"rgbTotals", "/", 
+      RowBox[{"Max", "[", "rgbTotals", "]"}]}]}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{" "}]}], "Input",
+ CellChangeTimes->{{3.5976569455448627`*^9, 3.5976569738354807`*^9}, 
+   3.5976570232033043`*^9, {3.5976570830107255`*^9, 3.5976570869139485`*^9}, 
+   3.597657206666798*^9, 3.5976572464030704`*^9, 3.59765729725698*^9, {
+   3.597657390410308*^9, 3.5976574290275164`*^9}, {3.5976574633554797`*^9, 
+   3.5976576021014156`*^9}, {3.5976579234187937`*^9, 3.597657929749156*^9}, {
+   3.597665420190585*^9, 3.597665498215048*^9}, {3.597665562446721*^9, 
+   3.597665619910008*^9}, {3.597667505309847*^9, 3.5976675323823953`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graphics", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"RGBColor", "[", 
+     RowBox[{"RGBValues", "[", "eScatOxyHemo", "]"}], "]"}], ",", 
+    RowBox[{"Rectangle", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "1"}], "}"}]}], "]"}], ",", 
+    RowBox[{"RGBColor", "[", 
+     RowBox[{"RGBValues", "[", "eScatDeOxyHemo", "]"}], "]"}], ",", 
+    RowBox[{"Rectangle", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", "1"}], "}"}]}], "]"}], ",", 
+    RowBox[{"RGBColor", "[", 
+     RowBox[{"RGBValues", "[", "eScatMel", "]"}], "]"}], ",", 
+    RowBox[{"Rectangle", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"2", ",", "0"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "1"}], "}"}]}], "]"}]}], "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.597657722964329*^9, 3.597657732268861*^9}, {
+  3.5976578634433637`*^9, 3.5976578816274033`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {RGBColor[1., 0.7278635671903414, 0.5274827726639212], 
+    RectangleBox[{0, 0}]}, 
+   {RGBColor[0.9999999999999999, 0.7497324935045037, 0.48276649518268056`], 
+    RectangleBox[{1, 0}]}, 
+   {RGBColor[1., 0.4346071376627645, 0.12278226415816591`], 
+    RectangleBox[{2, 0}]}}]], "Output",
+ CellChangeTimes->{3.5976676332861667`*^9}]
 }, Open  ]]
 },
 WindowSize->{1156, 771},
@@ -6421,7 +6789,16 @@ Cell[329963, 6245, 345, 7, 31, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[330357, 6258, 1048, 29, 52, "Input"],
-Cell[331408, 6289, 390, 8, 177, "Output"]
+Cell[331408, 6289, 390, 8, 145, "Output"]
+}, Open  ]],
+Cell[331813, 6300, 112, 1, 56, "Subtitle"],
+Cell[331928, 6303, 2201, 65, 312, "Input"],
+Cell[334132, 6370, 3679, 108, 92, "Input"],
+Cell[337814, 6480, 1563, 49, 72, "Input"],
+Cell[339380, 6531, 3578, 91, 192, "Input"],
+Cell[CellGroupData[{
+Cell[342983, 6626, 1048, 29, 52, "Input"],
+Cell[344034, 6657, 365, 8, 145, "Output"]
 }, Open  ]]
 }
 ]
