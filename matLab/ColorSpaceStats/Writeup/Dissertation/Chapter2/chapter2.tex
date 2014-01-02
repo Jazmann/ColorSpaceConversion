@@ -389,7 +389,10 @@ We can now re-formulate the transformation matrix in three different ways.
 \end{array}
 \right)
 \bigotimes
-R_{xyz}(\theta)
+R_{xyz}(\theta) \quad where \quad
+\begin{array}{c}
+\kappa = \frac{\text{rgbRange} }{dRange}
+\end{array}
 \end{equation}
 
 \begin{equation}\label{eq:NormRxyz2}
@@ -402,22 +405,14 @@ R_{xyz}(\theta)
 \end{array}
 \right)
 \bigotimes
-R_{xyz}(\theta)
-\end{equation}
-
-
-where
-
-\begin{equation}\label{eq:RequestedComprerssion}
-\kappa = \frac{\text{rgbRange} }{dRange}
-\end{equation}
-
-and
-
-\begin{gather*}
-  \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
+R_{xyz}(\theta) \quad where \quad 
+\begin{array}{c}
+\widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
 \widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
-\end{gather*}
+\end{array}
+\end{equation}
+
+
 
 \section{Setting up the 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 
