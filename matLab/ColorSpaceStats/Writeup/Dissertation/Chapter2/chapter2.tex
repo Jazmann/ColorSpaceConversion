@@ -459,7 +459,7 @@ It is not possible to compress all the information in such a way that it is appr
 The image captured by a CCD camera is designed to fool the human eye. In physical reality, light reaching the sensor spans full spectral range. In the human eye --- and in the camera --- the diversity of chromatic information is lost by representing the spectrum as a combination of three chromatic Gaussians, as can be seen in Figure~\ref{fig:spectrum}.
 
 \begin{figure}[h!]
-  \caption{Human eye representation of the color spectrum as seen in~\cite{MIHAI2007}.}\label{fig:spectrum}
+  \caption{Human eye representation of the color spectrum.}\label{fig:spectrum}
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/spectrum.eps}
 \end{figure}
@@ -486,23 +486,45 @@ The equivalent RGB points for the colors of the absorption peaks can be calculat
 
 If the respective color is shined on a molecule with these properties, it will absorb them. To convert this into a scattering spectrum, spectrum of the incident light must be taken, subtracting the amount that is absorbed. Assuming a uniform line, the process is not unlike flipping the waveform on its Y axis.
 
+\begin{figure}[h!]
+  \caption{Oxy-hemoglobin absorption characteristics.}\label{fig:absOxyHemo}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/absOxyHemo.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Deoxy-hemoglobin absorption characteristics.}\label{fig:absDeoxyHemo}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/absDeoxyHemo.eps}
+\end{figure}
+
+\begin{figure}[h!]
+  \caption{Melanin absorption characteristics.}\label{fig:absMelanin}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/absMelanin.eps}
+\end{figure}
+
 The scattering spectra needs to be represented in this three-function Gaussian basis:
 
 We will take the maximum values of these and make a quick transform of the scattering spectra, giving a color value for the molecules and their relative positions in the space. We have a function for the light source, but we will make the crude assumption of an equal amount of all wavelengths. This is sufficient for the purposes of this project.
 
 \begin{figure}[h!]
-  \caption{Hemoglobin.}\label{fig:hemoglobin}
+  \caption{Oxy-hemoglobin absorption characteristics.}\label{fig:scatOxyHemo}
   \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/globin.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/scatOxyHemo.eps}
 \end{figure}
 
 \begin{figure}[h!]
-  \caption{Melanin.}\label{fig:melanin}
+  \caption{Deoxy-hemoglobin absorption characteristics.}\label{fig:scatDeoxyHemo}
   \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/melanin.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/scatDeoxyHemo.eps}
 \end{figure}
 
-
+\begin{figure}[h!]
+  \caption{Melanin scattering spectra.}\label{fig:scatMelanin}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/scatMelanin.eps}
+\end{figure}
 
 \subsection{Pigment vs. Blood}\label{sec:PigmentVs.Blood}
 
