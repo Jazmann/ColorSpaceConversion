@@ -487,44 +487,32 @@ The equivalent RGB points for the colors of the absorption peaks can be calculat
 If the respective color is shined on a molecule with these properties, it will absorb them. To convert this into a scattering spectrum, spectrum of the incident light must be taken, subtracting the amount that is absorbed. Assuming a uniform line, the process is not unlike flipping the waveform on its Y axis.
 
 \begin{figure}[h!]
-  \caption{Oxy-hemoglobin absorption characteristics.}\label{fig:absOxyHemo}
+  \caption{Oxy-hemoglobin, deoxy-hemoglobin and melanin absorption characteristics.}\label{fig:abs}
   \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/absOxyHemo.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/absOxyHemo.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/absDeoxyHemo.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/absMelanin.eps}
 \end{figure}
+
+The scattering spectra needs to be represented in a three-function Gaussian basis. We will take the maximum values of these and make a quick transform of the scattering spectra, giving a color value for the molecules and their relative positions in the space. The scattering spectra are presented in Figure~\ref{fig:scat}.
 
 \begin{figure}[h!]
-  \caption{Deoxy-hemoglobin absorption characteristics.}\label{fig:absDeoxyHemo}
+  \caption{Oxy-hemoglobin, deoxy-hemoglobin and melanin scattering spectra.}\label{fig:scat}
   \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/absDeoxyHemo.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/scatOxyHemo.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/scatDeoxyHemo.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/scatMelanin.eps}
 \end{figure}
+
+Finally, we perform a color matching operation based on the CIE 1931 standard observer piecewise function to complete the transformation. 
 
 \begin{figure}[h!]
-  \caption{Melanin absorption characteristics.}\label{fig:absMelanin}
+  \caption{Final skin chromophore positions.}\label{fig:colorBasis}
   \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/absMelanin.eps}
+    \includegraphics[width=\textwidth]{Chapter2/Figs/colorBasis.eps}
 \end{figure}
 
-The scattering spectra needs to be represented in this three-function Gaussian basis:
-
-We will take the maximum values of these and make a quick transform of the scattering spectra, giving a color value for the molecules and their relative positions in the space. We have a function for the light source, but we will make the crude assumption of an equal amount of all wavelengths. This is sufficient for the purposes of this project.
-
-\begin{figure}[h!]
-  \caption{Oxy-hemoglobin absorption characteristics.}\label{fig:scatOxyHemo}
-  \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/scatOxyHemo.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Deoxy-hemoglobin absorption characteristics.}\label{fig:scatDeoxyHemo}
-  \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/scatDeoxyHemo.eps}
-\end{figure}
-
-\begin{figure}[h!]
-  \caption{Melanin scattering spectra.}\label{fig:scatMelanin}
-  \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/scatMelanin.eps}
-\end{figure}
+We have a function for the light source, but we will make the crude assumption of an equal amount of all wavelengths. This is sufficient for the purposes of this project.
 
 \subsection{Pigment vs. Blood}\label{sec:PigmentVs.Blood}
 
