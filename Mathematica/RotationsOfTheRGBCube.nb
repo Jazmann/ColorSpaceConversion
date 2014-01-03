@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    290430,       5788]
-NotebookOptionsPosition[    287663,       5693]
-NotebookOutlinePosition[    288010,       5708]
-CellTagsIndexPosition[    287967,       5705]
+NotebookDataLength[    305432,       6149]
+NotebookOptionsPosition[    301529,       6024]
+NotebookOutlinePosition[    301877,       6039]
+CellTagsIndexPosition[    301834,       6036]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -88,7 +88,7 @@ Cell[BoxData[
   3.5960357852029543`*^9, {3.596217012652782*^9, 3.596217032705315*^9}, 
    3.596765613170801*^9, 3.5971350857918262`*^9, 3.597136585711935*^9, {
    3.5971367883402195`*^9, 3.5971368088712482`*^9}, 3.597315849976206*^9, 
-   3.5973412731803293`*^9, 3.5973923924468017`*^9}],
+   3.5973412731803293`*^9, 3.5973923924468017`*^9, 3.597682298486968*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -113,7 +113,7 @@ Cell[BoxData[
   3.5960357852029543`*^9, {3.596217012652782*^9, 3.596217032705315*^9}, 
    3.596765613170801*^9, 3.5971350857918262`*^9, 3.597136585711935*^9, {
    3.5971367883402195`*^9, 3.5971368088712482`*^9}, 3.597315849976206*^9, 
-   3.5973412731803293`*^9, 3.597392392458802*^9}]
+   3.5973412731803293`*^9, 3.5973923924468017`*^9, 3.5976822985779734`*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -739,6 +739,8 @@ Cell[BoxData[
    3.597139351088835*^9, {3.597139405402911*^9, 3.597139405962912*^9}, 
    3.597139452155977*^9}],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  TagBox[
   StyleBox[
@@ -817,7 +819,170 @@ Cell[BoxData[
   3.597137963171878*^9, 3.5971380217959595`*^9, 3.5971382548242874`*^9, 
   3.5971382980673475`*^9, 3.597138484310609*^9, 3.597138521333661*^9, 
   3.5971393551998405`*^9, 3.597139407442914*^9, 3.5971394537459793`*^9, 
-  3.597341281472804*^9, 3.5973413427783103`*^9}]
+  3.597341281472804*^9, 3.5973413427783103`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(faces \
+\[LeftDoubleBracket] 1 \[RightDoubleBracket]\\)\[NoBreak] is longer than \
+depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
+\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822108159533`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "pspec"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(faces \
+\[LeftDoubleBracket] 1 \[RightDoubleBracket]\\)\[NoBreak] is neither a \
+machine-sized integer nor a list of machine-sized integers. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/pspec\\\", \
+ButtonNote -> \\\"Part::pspec\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822109049587`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(faces \
+\[LeftDoubleBracket] 1 \[RightDoubleBracket]\\)\[NoBreak] is longer than \
+depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
+\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822109939637`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "pspec"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(faces \
+\[LeftDoubleBracket] 1 \[RightDoubleBracket]\\)\[NoBreak] is neither a \
+machine-sized integer nor a list of machine-sized integers. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/pspec\\\", \
+ButtonNote -> \\\"Part::pspec\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822110949697`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"MapThread", "::", "list"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"List expected at position \[NoBreak]\\!\\(2\\)\[NoBreak] \
+in \[NoBreak]\\!\\(MapThread[\\(\\(RGBColor, \
+\\(\\(Transpose[\\(\\(\\(\\(Transpose[RGBCube]\\)\\) \[LeftDoubleBracket] \\(\
+\\(faces \[LeftDoubleBracket] 1 \[RightDoubleBracket]\\)\\) \
+\[RightDoubleBracket]\\)\\)]\\)\\)\\)\\)]\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\
+\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/list\\\", ButtonNote -> \
+\\\"MapThread::list\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822111959753`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(faces \
+\[LeftDoubleBracket] 2 \[RightDoubleBracket]\\)\[NoBreak] is longer than \
+depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\
+\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
+\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822111989756`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
+partd\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822112959814`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "pspec"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part specification \[NoBreak]\\!\\(faces \
+\[LeftDoubleBracket] 2 \[RightDoubleBracket]\\)\[NoBreak] is neither a \
+machine-sized integer nor a list of machine-sized integers. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/pspec\\\", \
+ButtonNote -> \\\"Part::pspec\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597682211298981*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
+pspec\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822113929863`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"MapThread", "::", "list"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"List expected at position \[NoBreak]\\!\\(2\\)\[NoBreak] \
+in \[NoBreak]\\!\\(MapThread[\\(\\(RGBColor, \
+\\(\\(Transpose[\\(\\(\\(\\(Transpose[RGBCube]\\)\\) \[LeftDoubleBracket] \\(\
+\\(faces \[LeftDoubleBracket] 2 \[RightDoubleBracket]\\)\\) \
+\[RightDoubleBracket]\\)\\)]\\)\\)\\)\\)]\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\
+\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/list\\\", ButtonNote -> \
+\\\"MapThread::list\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597682211394987*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"MapThread", "::", "list"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"List expected at position \[NoBreak]\\!\\(2\\)\[NoBreak] \
+in \[NoBreak]\\!\\(MapThread[\\(\\(RGBColor, \
+\\(\\(Transpose[\\(\\(\\(\\(Transpose[RGBCube]\\)\\) \[LeftDoubleBracket] \\(\
+\\(faces \[LeftDoubleBracket] 3 \[RightDoubleBracket]\\)\\) \
+\[RightDoubleBracket]\\)\\)]\\)\\)\\)\\)]\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\
+\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/list\\\", ButtonNote -> \
+\\\"MapThread::list\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822114839916`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(MapThread \
+:: list\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597682211574997*^9}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -3824,13 +3989,15 @@ Cell[BoxData[
    3.596039217732134*^9, 3.596039244576934*^9}, {3.597139999631431*^9, 
    3.5971400340473995`*^9}, {3.5971400691684084`*^9, 3.5971400704054794`*^9}}],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0., Typeset`show$$ = True, 
-    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
-    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
-    "\"untitled\"", Typeset`specs$$ = {{
+   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0.4146902302738527, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, Pi}}, Typeset`size$$ = {
     360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
     Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$12472$$ = 0}, 
@@ -3877,7 +4044,87 @@ Cell[BoxData[
   3.596036474069346*^9, 3.5960365314348516`*^9, 3.596036943221499*^9, 
   3.596037004104776*^9, 3.596038994849193*^9, 3.596039163411475*^9, 
   3.5960392476156397`*^9, 3.597140037569601*^9, 3.597140071563545*^9, 
-  3.597341418320631*^9}]
+  3.597341418320631*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
+\[NoBreak]\\!\\(YABAxisRanges[0.`]\\)\[NoBreak] does not exist. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
+ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822839091344`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(3\\)\[NoBreak] of \
+\[NoBreak]\\!\\(YABAxisRanges[0.`]\\)\[NoBreak] does not exist. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
+ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822839651375`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Transpose", "::", "nmtx"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The first two levels of the one-dimensional list \
+\[NoBreak]\\!\\({\\(\\(\\(\\(YABAxisRanges[0.`]\\)\\) \[LeftDoubleBracket] 2 \
+\[RightDoubleBracket]\\)\\), \\(\\(\\(\\(YABAxisRanges[0.`]\\)\\) \
+\[LeftDoubleBracket] 3 \[RightDoubleBracket]\\)\\)}\\)\[NoBreak] cannot be \
+transposed. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/Transpose/nmtx\\\", ButtonNote -> \
+\\\"Transpose::nmtx\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.59768228400914*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\({2, 3, 4, 5, 6, 7}\\)\[NoBreak] of \
+\[NoBreak]\\!\\(Transpose[RGBCube]\\)\[NoBreak] does not exist. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
+ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597682284076144*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
+partw\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597682284116146*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"MapThread", "::", "list"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"List expected at position \[NoBreak]\\!\\(2\\)\[NoBreak] \
+in \[NoBreak]\\!\\(MapThread[\\(\\(RGBColor, \
+\\(\\(Transpose[\\(\\(\\(\\(Transpose[RGBCube]\\)\\) \[LeftDoubleBracket] \\(\
+\\({2, 3, 4, 5, 6, 7}\\)\\) \[RightDoubleBracket]\\)\\)]\\)\\)\\)\\)]\\)\
+\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/list\\\", ButtonNote -> \
+\\\"MapThread::list\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822841781497`*^9}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -4040,7 +4287,7 @@ Cell[BoxData[
           FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
        SqrtBox["6"]]}]}], "}"}]}], "}"}]], "Output",
  CellChangeTimes->{{3.597322992380728*^9, 3.5973230208863583`*^9}, 
-   3.597341273408343*^9, 3.597392392783821*^9}]
+   3.597341273408343*^9, 3.597392392783821*^9, 3.5976822988769903`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -4186,7 +4433,7 @@ Cell[BoxData[
    MatrixForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{3.596216951868449*^9, 3.5962184609957247`*^9, 
   3.5973229267449737`*^9, 3.597342868448574*^9, 3.597343231447336*^9, 
-  3.5974278415053716`*^9}],
+  3.5974278415053716`*^9, 3.597682299491026*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -4300,7 +4547,7 @@ Cell[BoxData[
    MatrixForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{3.596216951868449*^9, 3.5962184609957247`*^9, 
   3.5973229267449737`*^9, 3.597342868448574*^9, 3.597343231447336*^9, 
-  3.5974278417103834`*^9}]
+  3.5974278415053716`*^9, 3.5976822996940374`*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -4406,6 +4653,8 @@ Cell[BoxData[
    3.5973432425659723`*^9, 3.597343244014055*^9}, {3.597343658742776*^9, 
    3.597343671238491*^9}}],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  TagBox[
   StyleBox[
@@ -4455,7 +4704,89 @@ Cell[BoxData[
  CellChangeTimes->{
   3.597343014306916*^9, 3.597343058694455*^9, 3.597343140547137*^9, {
    3.597343236330615*^9, 3.597343244678093*^9}, 3.5973436740786533`*^9, {
-   3.5974278285666313`*^9, 3.597427844935568*^9}}]
+   3.5974278285666313`*^9, 3.597427844935568*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
+\[NoBreak]\\!\\(YABAxisRanges[2.538406864100553`]\\)\[NoBreak] does not \
+exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
+\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822861852646`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\(3\\)\[NoBreak] of \
+\[NoBreak]\\!\\(YABAxisRanges[2.538406864100553`]\\)\[NoBreak] does not \
+exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
+\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822862422676`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Transpose", "::", "nmtx"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The first two levels of the one-dimensional list \
+\[NoBreak]\\!\\({\\(\\(\\(\\(YABAxisRanges[2.538406864100553`]\\)\\) \
+\[LeftDoubleBracket] 2 \[RightDoubleBracket]\\)\\), \
+\\(\\(\\(\\(YABAxisRanges[2.538406864100553`]\\)\\) \[LeftDoubleBracket] 3 \
+\[RightDoubleBracket]\\)\\)}\\)\[NoBreak] cannot be transposed. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Transpose/nmtx\\\", \
+ButtonNote -> \\\"Transpose::nmtx\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.59768228628527*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Part", "::", "partw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Part \[NoBreak]\\!\\({2, 3, 4, 5, 6, 7}\\)\[NoBreak] of \
+\[NoBreak]\\!\\(Transpose[RGBCube]\\)\[NoBreak] does not exist. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
+ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.597682286333273*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
+partw\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
+calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
+\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.5976822863802757`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"MapThread", "::", "list"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"List expected at position \[NoBreak]\\!\\(2\\)\[NoBreak] \
+in \[NoBreak]\\!\\(MapThread[\\(\\(RGBColor, \
+\\(\\(Transpose[\\(\\(\\(\\(Transpose[RGBCube]\\)\\) \[LeftDoubleBracket] \\(\
+\\({2, 3, 4, 5, 6, 7}\\)\\) \[RightDoubleBracket]\\)\\)]\\)\\)\\)\\)]\\)\
+\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/list\\\", ButtonNote -> \
+\\\"MapThread::list\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.59768228644928*^9}]
+}, Open  ]]
 }, Open  ]],
 
 Cell["Discrete Representation of the rotation", "Subtitle",
@@ -5577,7 +5908,7 @@ Cell[BoxData[
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, Pi}, {
       Hold[$CellContext`srcRange$$], 1, 255, 1}}, Typeset`size$$ = {
-    618., {18., 22.5}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    2709., {69., 22.5}}, Typeset`update$$ = 0, Typeset`initDone$$, 
     Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$33627$$ = 
     0, $CellContext`srcRange$33628$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
@@ -5602,7 +5933,7 @@ $CellContext`srcRange$$]] - N[
       "Specifications" :> {{$CellContext`\[Theta]$$, 0, 
          Pi}, {$CellContext`srcRange$$, 1, 255, 1}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{669., {79., 84.}},
+     ImageSizeCache->{3031., {104., 109.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -5692,7 +6023,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.5973578771120205`*^9, 3.5973579777017736`*^9}}]
 },
 WindowSize->{1440, 878},
-WindowMargins->{{Automatic, 1432}, {-8, Automatic}},
+WindowMargins->{{Automatic, 1432}, {-16, Automatic}},
 FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
 StyleDefinitions->"Default.nb"
 ]
@@ -5712,84 +6043,114 @@ Cell[579, 22, 107, 1, 56, "Subtitle"],
 Cell[CellGroupData[{
 Cell[711, 27, 1754, 42, 72, "Input",
  InitializationCell->True],
-Cell[2468, 71, 820, 19, 31, "Output"],
-Cell[3291, 92, 983, 23, 72, "Output"]
+Cell[2468, 71, 842, 19, 31, "Output"],
+Cell[3313, 92, 1009, 23, 72, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4323, 121, 104, 1, 56, "Subtitle"],
-Cell[4430, 124, 2535, 66, 92, "Input",
+Cell[4371, 121, 104, 1, 56, "Subtitle"],
+Cell[4478, 124, 2535, 66, 92, "Input",
  InitializationCell->True],
-Cell[6968, 192, 200, 4, 30, "Text"],
-Cell[7171, 198, 455, 13, 31, "Input",
- InitializationCell->True],
-Cell[CellGroupData[{
-Cell[7651, 215, 1453, 26, 31, "Input"],
-Cell[9107, 243, 8581, 240, 124, "Print"]
-}, Open  ]],
-Cell[17703, 486, 344, 8, 31, "Input",
+Cell[7016, 192, 200, 4, 30, "Text"],
+Cell[7219, 198, 455, 13, 31, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[18072, 498, 170, 3, 31, "Input"],
-Cell[18245, 503, 3289, 111, 136, "Output"]
+Cell[7699, 215, 1453, 26, 31, "Input"],
+Cell[9155, 243, 8581, 240, 124, "Print"]
 }, Open  ]],
-Cell[CellGroupData[{
-Cell[21571, 619, 5050, 120, 172, "Input"],
-Cell[26624, 741, 3621, 78, 478, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[30282, 824, 634, 15, 31, "Input"],
-Cell[30919, 841, 2994, 97, 102, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[33950, 943, 421, 11, 31, "Input"],
-Cell[34374, 956, 35534, 598, 228, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[69945, 1559, 4121, 115, 178, "Input"],
-Cell[74069, 1676, 122881, 2057, 222, "Output"]
-}, Open  ]],
-Cell[196965, 3736, 837, 23, 31, "Input",
+Cell[17751, 486, 344, 8, 31, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[197827, 3763, 2546, 61, 115, "Input"],
-Cell[200376, 3826, 2567, 53, 470, "Output"]
+Cell[18120, 498, 170, 3, 31, "Input"],
+Cell[18293, 503, 3289, 111, 136, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[202980, 3884, 2691, 79, 118, "Input",
- InitializationCell->True],
-Cell[205674, 3965, 2360, 77, 60, "Output"]
-}, Open  ]],
+Cell[21619, 619, 5050, 120, 172, "Input"],
 Cell[CellGroupData[{
-Cell[208071, 4047, 3018, 72, 92, "Input"],
-Cell[211092, 4121, 2040, 67, 148, "Output"],
-Cell[213135, 4190, 3338, 112, 150, "Output"]
+Cell[26694, 743, 3621, 78, 478, "Output"],
+Cell[30318, 823, 513, 11, 21, "Message"],
+Cell[30834, 836, 554, 11, 21, "Message"],
+Cell[31391, 849, 513, 11, 21, "Message"],
+Cell[31907, 862, 554, 11, 21, "Message"],
+Cell[32464, 875, 688, 13, 21, "Message"],
+Cell[33155, 890, 513, 11, 21, "Message"],
+Cell[33671, 903, 530, 11, 21, "Message"],
+Cell[34204, 916, 552, 11, 21, "Message"],
+Cell[34759, 929, 530, 11, 21, "Message"],
+Cell[35292, 942, 686, 13, 21, "Message"],
+Cell[35981, 957, 688, 13, 21, "Message"],
+Cell[36672, 972, 532, 11, 21, "Message"]
 }, Open  ]]
 }, Open  ]],
-Cell[216500, 4306, 398, 10, 31, "Input",
+Cell[CellGroupData[{
+Cell[37253, 989, 634, 15, 31, "Input"],
+Cell[37890, 1006, 2994, 97, 102, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40921, 1108, 421, 11, 31, "Input"],
+Cell[41345, 1121, 35534, 598, 228, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[76916, 1724, 4121, 115, 178, "Input"],
+Cell[81040, 1841, 122881, 2057, 222, "Output"]
+}, Open  ]],
+Cell[203936, 3901, 837, 23, 31, "Input",
  InitializationCell->True],
-Cell[216901, 4318, 886, 23, 31, "Input",
+Cell[CellGroupData[{
+Cell[204798, 3928, 2546, 61, 115, "Input"],
+Cell[CellGroupData[{
+Cell[207369, 3993, 2583, 53, 470, "Output"],
+Cell[209955, 4048, 483, 10, 21, "Message"],
+Cell[210441, 4060, 483, 10, 21, "Message"],
+Cell[210927, 4072, 671, 13, 21, "Message"],
+Cell[211601, 4087, 498, 10, 21, "Message"],
+Cell[212102, 4099, 528, 11, 21, "Message"],
+Cell[212633, 4112, 656, 13, 21, "Message"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[213338, 4131, 2691, 79, 118, "Input",
+ InitializationCell->True],
+Cell[216032, 4212, 2384, 77, 60, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[218453, 4294, 3018, 72, 92, "Input"],
+Cell[221474, 4368, 2062, 67, 204, "Output"],
+Cell[223539, 4437, 3362, 112, 150, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[226928, 4553, 398, 10, 31, "Input",
+ InitializationCell->True],
+Cell[227329, 4565, 886, 23, 31, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[217812, 4345, 2704, 61, 72, "Input"],
-Cell[220519, 4408, 2281, 49, 502, "Output"]
-}, Open  ]],
-Cell[222815, 4460, 127, 1, 56, "Subtitle"],
-Cell[222945, 4463, 614, 9, 49, "Text"],
+Cell[228240, 4592, 2704, 61, 72, "Input"],
 Cell[CellGroupData[{
-Cell[223584, 4476, 5103, 132, 123, "Input"],
-Cell[228690, 4610, 53795, 927, 233, "Output"]
+Cell[230969, 4657, 2281, 49, 470, "Output"],
+Cell[233253, 4708, 500, 11, 21, "Message"],
+Cell[233756, 4721, 500, 11, 21, "Message"],
+Cell[234259, 4734, 701, 13, 21, "Message"],
+Cell[234963, 4749, 498, 10, 21, "Message"],
+Cell[235464, 4761, 530, 11, 21, "Message"],
+Cell[235997, 4774, 653, 13, 21, "Message"]
+}, Open  ]]
+}, Open  ]],
+Cell[236677, 4791, 127, 1, 56, "Subtitle"],
+Cell[236807, 4794, 614, 9, 49, "Text"],
+Cell[CellGroupData[{
+Cell[237446, 4807, 5103, 132, 123, "Input"],
+Cell[242552, 4941, 53795, 927, 233, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[282522, 5542, 1029, 26, 31, "Input"],
-Cell[283554, 5570, 2090, 44, 180, "Output"]
+Cell[296384, 5873, 1029, 26, 31, "Input"],
+Cell[297416, 5901, 2094, 44, 230, "Output"]
 }, Open  ]],
-Cell[285659, 5617, 99, 2, 31, "Input"],
+Cell[299525, 5948, 99, 2, 31, "Input"],
 Cell[CellGroupData[{
-Cell[285783, 5623, 63, 1, 31, "Input"],
-Cell[285849, 5626, 1515, 55, 59, "Output"]
+Cell[299649, 5954, 63, 1, 31, "Input"],
+Cell[299715, 5957, 1515, 55, 59, "Output"]
 }, Open  ]],
-Cell[287379, 5684, 280, 7, 31, "Input"]
+Cell[301245, 6015, 280, 7, 31, "Input"]
 }
 ]
 *)
