@@ -442,30 +442,30 @@ We have a well-defined distribution which represents the desired conservation of
 \newcommand{\dR}{\discreteR}
 \newcommand{\delR}{\delta\uR}
 
-\newcommand{\tRange}{tRange}
+\newcommand{\tRange}{\text{rRange}}
+\begin{eqnarray}\label{eq:lxyPixel}
+\begin{aligned}
+\uR  \cdot \uSrc &= \uDst  \\
+(\discreteR + \delR)  \cdot \uSrc &= \discreteDst + \delDst \\
+\end{aligned} \\
+\text{therefore if } \discreteR \cdot \uSrc &= \discreteDst \quad \text{then}\quad \delR  \cdot \uSrc = \delDst
+\end{eqnarray}
+The continuous rotation $\uR$ can be expressed as the sum of its discrete representation $\dR$ and the perturbation $\delR$. The elements of the discrete rotation can be expressed as rational fractions.
+\begin{eqnarray}\label{eq:dRRange}
+\dR = \dfrac{int(\uR \tRange)}{\tRange}\quad \text{where}\quad int(1.5) = 1, int (-1.5) = -1\\
+therefore\quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
+\end{eqnarray}
 
-\begin{equation}\label{eq:lxyPixel}
-\begin{array}{c}
-(\discreteR + \delR)  \cdot \uSrc = \discreteDst + \delDst\\
-therefore\quad \delR  \cdot \uSrc = \delDst
-\end{array}
-\end{equation}
-
-The continuous rotation \uR can be expressed as the sum of its discrete representation \dR and the perturbation \delR. The discrete rotation can be expressed as a rational fraction against the elements of \dR.
-
-\begin{equation}\label{eq:dRRange}
-\begin{array}{c}
+\begin{eqnarray}\label{eq:dRRange}
 \uR = \dR + \delR\\
 \dR = \dfrac{int(\uR \cdot \tRange)}{\tRange}\quad where\quad int(1.5) = 1, int (-1.5) = -1\\
 therefore\quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
-\end{array}
-\end{equation}
+\end{eqnarray}
 
-It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. 
+It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. We must therefore consider both the maximum and minumum of $\delDst$. As $\uSrc \ge 0$ the extrema of $\delDst$ are found where $\uSrc$ is a vector with elements of 0 and 1. If the matrix is decomposed into a sum of positive and negative elements $\delDst = \delDst_+ + \delDst_-$ then the extrema are given by $\max(\delDst_+ \cdot \mathbf{1})$ and $\min(\delDst_- \cdot \mathbf{1})$. Where the elements are positive or negative is determined by the sign of the elements in the rotation matrix $\uR$
 
-\begin{equation}\label{eq:allSrc}
-\begin{array}{c}
-\quad max(\delR \cdot \uSrc)~\forall~\uSrc\\
+\begin{eqnarray}\label{eq:allSrc}
+\quad max(\delR \cdot \uSrc) \le ~\forall~\uSrc\\
 \left(
 \begin{array}{ccc}
 \delR_{11} & \delR_{12} & \delR_{13}\\
@@ -486,8 +486,7 @@ b\\
 \delR_{31}r + \delR_{32}g + \delR_{33}b\\
 \end{array}
 \right)
-\end{array}
-\end{equation}
+\end{eqnarray}
 
 \section{Setting up the 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 
