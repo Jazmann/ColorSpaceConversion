@@ -416,13 +416,78 @@ The final piece of the metaphorical jigsaw is to add the capability to deal with
 
 It is significantly advantageous to perform calculations using integer types, particularly given that the input and output types are integers with small ranges, meaning it's possible to construct algorithms which avoid conversion to floating point operations. To this end, we wish to determine the most efficient internal representation for the transformation.
 
-We have a well-defined distribution which represents the desired conservation of information, which itself is represented by the distribution function in the unit ranges. Each of these unit ranges is discretized into steps of $\frac{1}{sRange}$ and $\frac{1}{dRange}$. The question then is: "to what degree of accuracy do we need to represent the internal numerics?" If we represent the transformation in a discrete type, we can express the problem In terms of the largest perturbation, which can be made to the transformation without affecting the result.
+We have a well-defined distribution which represents the desired conservation of information, which itself is represented by the distribution function in the unit ranges. Each of these unit ranges is discretized into steps of $\frac{1}{sRange}$ and $\frac{1}{dRange}$. The question then is to what degree of accuracy do we need to represent the internal numerics? If we represent the transformation in a discrete type, we can express the problem in terms of the largest perturbation which can be made to the transformation without affecting the result.
+
+\newcommand{\unitDst}{\text{uDst}}
+\newcommand{\uDst}{\unitDst}
+\newcommand{\intDst}{\text{iDst}}
+\newcommand{\iDst}{\intDst}
+\newcommand{\discreteDst}{\widetilde{\uDst}}
+\newcommand{\dDst}{\discreteDst}
+\newcommand{\delDst}{\delta\uDst}
+
+\newcommand{\unitSrc}{\text{uSrc}}
+\newcommand{\uSrc}{\unitSrc}
+\newcommand{\intSrc}{\text{iSrc}}
+\newcommand{\iSrc}{\intSrc}
+\newcommand{\discreteSrc}{\widetilde{\uSrc}}
+\newcommand{\dSrc}{\discreteSrc}
+\newcommand{\delSrc}{\delta\uSrc}
+
+\newcommand{\unitR}{\text{uR}}
+\newcommand{\uR}{\unitR}
+\newcommand{\intR}{\text{iR}}
+\newcommand{\iR}{\intR}
+\newcommand{\discreteR}{\widetilde{\uR}}
+\newcommand{\dR}{\discreteR}
+\newcommand{\delR}{\delta\uR}
+\newcommand{\tRange}{\text{tRange}}
 
 \begin{equation}\label{eq:lxyPixel}
-{R + \delta~R~rgbPixel = lxyPixel + \delta~lxyPixel \quad therefore~= \delta~lxyPixel}
+\begin{array}{c}
+(\discreteR + \delR)  \cdot \uSrc = \discreteDst + \delDst\\
+therefore \quad \delR  \cdot \uSrc = \delDst
+\end{array}
 \end{equation}
 
 
+
+\begin{equation}\label{eq:dRRange}
+\begin{array}{c}
+\uR = \dR + \delR\\
+\\
+\dR = \dfrac{\text{floor}(\uR \cdot \tRange)}{\tRange}\\
+\\
+therefore \quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
+\end{array}
+\end{equation}
+
+\begin{equation}\label{eq:allSrc}
+\begin{array}{c}
+0 \le \uSrc \le 1\\
+therefore \quad max(\delR \cdot \uSrc)~\forall~\uSrc\\
+\left(
+\begin{array}{ccc}
+\delR_{11} & \delR_{12} & \delR_{13}\\
+\delR_{21} & \delR_{22} & \delR_{23}\\
+\delR_{31} & \delR_{32} & \delR_{33}\\
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+r\\
+g\\
+b\\
+\end{array}
+\right) = \left(
+\begin{array}{c}
+\delR_{11}r + \delR_{12}g + \delR_{13}b\\
+\delR_{21}r + \delR_{22}g + \delR_{23}b\\
+\delR_{31}r + \delR_{32}g + \delR_{33}b\\
+\end{array}
+\right)
+\end{array}
+\end{equation}
 
 \section{Setting up the 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 
