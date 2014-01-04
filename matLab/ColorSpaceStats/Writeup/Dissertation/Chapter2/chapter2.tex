@@ -441,31 +441,31 @@ We have a well-defined distribution which represents the desired conservation of
 \newcommand{\discreteR}{\widetilde{\uR}}
 \newcommand{\dR}{\discreteR}
 \newcommand{\delR}{\delta\uR}
-\newcommand{\tRange}{\text{tRange}}
+
+\newcommand{\tRange}{tRange}
 
 \begin{equation}\label{eq:lxyPixel}
 \begin{array}{c}
 (\discreteR + \delR)  \cdot \uSrc = \discreteDst + \delDst\\
-therefore \quad \delR  \cdot \uSrc = \delDst
+therefore\quad \delR  \cdot \uSrc = \delDst
 \end{array}
 \end{equation}
 
-
+The continuous rotation \uR can be expressed as the sum of its discrete representation \dR and the perturbation \delR. The discrete rotation can be expressed as a rational fraction against the elements of \dR.
 
 \begin{equation}\label{eq:dRRange}
 \begin{array}{c}
 \uR = \dR + \delR\\
-\\
-\dR = \dfrac{\text{floor}(\uR \cdot \tRange)}{\tRange}\\
-\\
-therefore \quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
+\dR = \dfrac{int(\uR \cdot \tRange)}{\tRange}\quad where\quad int(1.5) = 1, int (-1.5) = -1\\
+therefore\quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
 \end{array}
 \end{equation}
 
+It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. 
+
 \begin{equation}\label{eq:allSrc}
 \begin{array}{c}
-0 \le \uSrc \le 1\\
-therefore \quad max(\delR \cdot \uSrc)~\forall~\uSrc\\
+\quad max(\delR \cdot \uSrc)~\forall~\uSrc\\
 \left(
 \begin{array}{ccc}
 \delR_{11} & \delR_{12} & \delR_{13}\\
