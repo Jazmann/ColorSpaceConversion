@@ -51,7 +51,7 @@ Finally, a binary image is produced which labels pixels as either edge pixels or
 
 Included within OpenCV is a class for blob detection --- "SimpleBlobDetector" --- which implements a simple algorithm for extracting blobs from a source image. It converts the image into a sequence of binary images between two threshold values "minThreshold" and "maxThreshold," with a specified step difference "thresholdStep" between each neighboring threshold. From each binary image, any connected components are extracted and their centers calculated. The centers are then grouped together into blobs based on their coordinates, the minimum distance between each specified by the "minDistBetweenBlobs" parameter.
 
-Using the skin color space defined in the preceding chapter, this thresholding is simplified; by applying an appropriate destination range and distribution, the distance in the skin color space can be directly related to the standard deviation of the distribution. It should be noted that this isn't necessarily the case for compact scaled images as the maximum gradient is 1, therefore the distribution is no longer Gaussian.
+Using the skin color space defined in the preceding chapter, this thresholding is simplified; by applying an appropriate destination range and distribution, the distance in the skin color space can be directly related to the standard deviation of the distribution. It should be noted that this isn't necessarily the case for compact scaled images as the maximum gradient is 1, therefore the distribution is no longer Gaussian~\cite{Dass2012}.
 
 \subsection{Hand Posture Prediction}\label{sec:HandPosturePrediction}
 \subsection{Dynamic Tracking}\label{sec:DynamicTracking}

@@ -289,7 +289,7 @@ To find the region where all the information in the source domain is preserved, 
 \frac{2 \sigma e^{-\sigma^2 (\mu-x)^2}}{\sqrt{\pi } (\text{erf}(\mu \sigma)+\text{erf}(\sigma-\mu \sigma))}=\frac{\text{dMax - dMin}}{\text{sMax - sMin}}
 \end{equation}
 
-Rearranging for x, we find:
+Rearranging for $x$, we find:
 
 \begin{equation}\label{eq:PreservedRegion}
  x=\mu -\sigma  \sqrt{2 \log \left( \frac{\text{dMax - dMin}}{\text{sMax - sMin}} \frac{1}{ \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)}\right)+\log \left(\frac{2}{\pi }\right)}
@@ -488,8 +488,10 @@ It should be noted that --- unlike the source type \uSrc --- the perturbation ca
 \end{equation}
 The rotation matrix may now be adequately represented in a discrete range of $\tRange = 2 \dstRange$ with all elements taking values between -1 and 1. 
 
-One further optimisation is possible if we consider the redistribution of the values which is performed after the rotation. Not all information contained in the source is of equal value and so an error introduced by using a less accurate discretization of the rotation may well be mitigated by the subsequent redistribution. Halving the discrete range will introduce errors of at most 1 for some of the pixel values. In general using $\tRange = 2^{1-n)} \dstRange$ will introduce a maximum error of $\frac{2^n -1}{\dstRange}$ into the resulting matrix We must now establish which elements are affected.
+One further optimization is possible if we consider the redistribution of the values which is performed after the rotation. Not all information contained in the source is of equal value, so an error introduced by using a less accurate discretization of the rotation may well be mitigated by the subsequent redistribution. Halving the discrete range will introduce errors of at most 1 for some of the pixel values. In general, using $\tRange = 2^{1-n)} \dstRange$ will introduce a maximum error of $\frac{2^n -1}{\dstRange}$ into the resulting matrix. We must now establish which elements are affected.
+
 The sign of the rotation matrix is given by
+
 \begin{equation}
 \left(
 \begin{array}{ccc}
@@ -534,7 +536,7 @@ The sign of the rotation matrix is given by
 \right)
 \end{equation}
 
-We are interested in which elements in each row share the same sign as these will determine the pixel values which contribute to the error. If we find the intersecting conditions and flip the sign where there are two negative elements the following is found 
+We are interested in which elements in each row share the same sign, as these will determine the pixel values which contribute to the error. If we find the intersecting conditions and flip the sign where there are two negative elements, the following is found
 \begin{equation}
 \begin{array}{cc}
  \{ & 
