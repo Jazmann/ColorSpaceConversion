@@ -443,6 +443,9 @@ We have a well-defined distribution which represents the desired conservation of
 \newcommand{\delR}{\delta\uR}
 
 \newcommand{\tRange}{\text{rRange}}
+\newcommand{\dstRange}{\text{dstRange}}
+
+
 \begin{eqnarray}\label{eq:lxyPixel}
 \begin{aligned}
 \uR  \cdot \uSrc &= \uDst  \\
@@ -462,8 +465,131 @@ therefore\quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
 therefore\quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
 \end{eqnarray}
 
-It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. We must therefore consider both the maximum and minumum of $\delDst$. As $\uSrc \ge 0$ the extrema of $\delDst$ are found where $\uSrc$ is a vector with elements of 0 and 1. If the matrix is decomposed into a sum of positive and negative elements $\delDst = \delDst_+ + \delDst_-$ then the extrema are given by $\max(\delDst_+ \cdot \mathbf{1})$ and $\min(\delDst_- \cdot \mathbf{1})$. Where the elements are positive or negative is determined by the sign of the elements in the rotation matrix $\uR$
+It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. We must therefore consider both the maximum and minimum of $\delDst$. As $\uSrc \ge 0$ the extrema of $\delDst$ are found where $\uSrc$ is a vector with elements of 0 and 1. If the matrix is decomposed into a sum of positive and negative elements $\delDst = \delDst_+ + \delDst_-$ then the extrema are given by $\max(\delDst_+ \cdot \mathbf{1})$ and $\min(\delDst_- \cdot \mathbf{1})$. Where the elements are positive or negative is determined by the sign of the elements in the rotation matrix $\uR$. If we were to scale the entire matrix evenly then the top row would dominate as it is always positive and the necessary discrete representation would be characterised by $\tRange = 3 \dstRange$. This would however necessitate the matrix being stored in a data type with at least 2 more bits than the source type. As the source type will be fully utilised in all but the most unusual applications this will result in a doubling of the bit depth for the matrix and a quadrupling of the bit depth for the working calculation. We will therefore consider each row individually and because the transformation is scaled by row as described previously. The second and third rows each sum to zero $\uR \mathbf{1} = [\sqrt{3},0,0]$ allowing us to state that each of the rows has one element of the opposite sign to the other two elements. The discretization for the second and third rows then only requires $\tRange = 2 \dstRange$. It is also possible to pull out common factors from the rows to facilitate the reduction in the required representation. 
 
+\begin{equation}
+\uR(\theta) = 
+\left(
+\begin{array}{c}
+ \frac{1}{\sqrt{3}} \\
+ \sqrt{\frac{2}{3}}  \\
+ \sqrt{\frac{2}{3}} \\
+\end{array}
+\right) \bigotimes
+\left(
+\begin{array}{ccc}
+ 1 & 1 & 1 \\
+ -\sin \left(\theta +\frac{\pi }{6}\right) &  \cos (\theta ) &  \sin \left(\theta -\frac{\pi }{6}\right) \\
+ -\cos \left(\theta +\frac{\pi }{6}\right) & - \sin (\theta ) & \cos \left(\theta -\frac{\pi }{6}\right) \\
+\end{array}
+\right)
+\end{equation}
+The rotation matrix may now be adequately represented in a discrete range of $\tRange = 2 \dstRange$ with all elements taking values between -1 and 1. 
+
+One further optimisation is possible if we consider the redistribution of the values which is performed after the rotation. Not all information contained in the source is of equal value and so an error introduced by using a less accurate discretization of the rotation may well be mitigated by the subsequent redistribution. Halving the discrete range will introduce errors of at most 1 for some of the pixel values. In general using $\tRange = 2^{1-n)} \dstRange$ will introduce a maximum error of $\frac{2^n -1}{\dstRange}$ into the resulting matrix We must now establish which elements are affected.
+The sign of the rotation matrix is given by
+\begin{equation}
+\left(
+\begin{array}{ccc}
+1
+ & 
+1
+ & 
+1
+ \\
+\begin{cases}
+ 1 & \frac{5 \pi }{6}<\theta <\frac{11 \pi }{6} \\
+ -1 & 0\leq \theta <\frac{5 \pi }{6}\lor \frac{11 \pi }{6}<\theta <2 \pi  \\
+\end{cases}
+ & 
+\begin{cases}
+ 1 & 0\leq \theta <\frac{\pi }{2}\lor \frac{3 \pi }{2}<\theta <2 \pi  \\
+ -1 & \frac{\pi }{2}<\theta <\frac{3 \pi }{2} \\
+\end{cases}
+ & 
+\begin{cases}
+ 1 & \frac{\pi }{6}<\theta <\frac{7 \pi }{6} \\
+ -1 & 0\leq \theta <\frac{\pi }{6}\lor \frac{7 \pi }{6}<\theta <2 \pi  \\
+\end{cases}
+ \\
+ 
+\begin{cases}
+ 1 & \frac{\pi }{3}<\theta <\frac{4 \pi }{3} \\
+ -1 & 0\leq \theta <\frac{\pi }{3}\lor \frac{4 \pi }{3}<\theta <2 \pi  \\
+\end{cases}
+ & 
+\begin{cases}
+ 1 & \pi <\theta <2 \pi  \\
+ -1 & 0<\theta <\pi  \\
+\end{cases}
+ & 
+\begin{cases}
+ 1 & 0\leq \theta <\frac{2 \pi }{3}\lor \frac{5 \pi }{3}<\theta <2 \pi  \\
+ -1 & \frac{2 \pi }{3}<\theta <\frac{5 \pi }{3} \\
+\end{cases}
+ \\
+\end{array}
+\right)
+\end{equation}
+
+We are interested in which elements in each row share the same sign as these will determine the pixel values which contribute to the error. If we find the intersecting conditions and flip the sign where there are two negative elements the following is found 
+\begin{equation}
+\begin{array}{cc}
+ \{ & 
+\begin{array}{cc}
+ \left(
+\begin{array}{ccc}
+ 1 & 1 & 1 \\
+ 0 & 0 & 0 \\
+ 0 & 0 & 0 \\
+\end{array}
+\right) & \theta =\frac{\pi }{6}\lor \theta =\frac{\pi }{2}\lor \theta =\frac{5 \pi }{6}\lor \theta =\frac{7 \pi }{6}\lor \theta =\frac{3 \pi }{2}\lor \theta =\frac{11 \pi }{6} \\
+ \left(
+\begin{array}{ccc}
+ 1 & 1 & 1 \\
+ -1 & 1 & 1 \\
+ -1 & 1 & 1 \\
+\end{array}
+\right) & \frac{\pi }{6}<\theta <\frac{\pi }{2}\lor \frac{7 \pi }{6}<\theta <\frac{3 \pi }{2} \\
+ \left(
+\begin{array}{ccc}
+ 1 & 1 & 1 \\
+ 0 & 0 & 0 \\
+ 0 & 0 & 0 \\
+\end{array}
+\right) & \theta =\frac{\pi }{6}\lor \theta =\frac{\pi }{2}\lor \theta =\frac{5 \pi }{6}\lor \theta =\frac{7 \pi }{6}\lor \theta =\frac{3 \pi }{2}\lor \theta =\frac{11 \pi }{6} \\
+ \left(
+\begin{array}{ccc}
+ 1 & 1 & 1 \\
+ 1 & -1 & 1 \\
+ 1 & -1 & 1 \\
+\end{array}
+\right) & 0\leq \theta <\frac{\pi }{6}\lor \frac{5 \pi }{6}<\theta <\frac{7 \pi }{6}\lor \frac{11 \pi }{6}<\theta <2 \pi  \\
+ \left(
+\begin{array}{ccc}
+ 1 & 1 & 1 \\
+ 1 & 1 & -1 \\
+ 1 & 1 & -1 \\
+\end{array}
+\right) & \frac{\pi }{2}<\theta <\frac{5 \pi }{6}\lor \frac{3 \pi }{2}<\theta <\frac{11 \pi }{6} \\
+\end{array}
+ \\
+\end{array}
+\end{equation}
+So for a pixel $\{R,G,B\}$ 
+\begin{equation}
+\begin{array}{cc}
+ \{ & 
+\begin{array}{cc}
+ G + B < 1 & \frac{\pi }{6}<\theta <\frac{\pi }{2}\lor \frac{7 \pi }{6}<\theta <\frac{3 \pi }{2} \\
+ R + B < 1 & 0\leq \theta <\frac{\pi }{6}\lor \frac{5 \pi }{6}<\theta <\frac{7 \pi }{6}\lor \frac{11 \pi }{6}<\theta <2 \pi  \\
+ R + G < 1 & \frac{\pi }{2}<\theta <\frac{5 \pi }{6}\lor \frac{3 \pi }{2}<\theta <\frac{11 \pi }{6} \\
+\end{array}
+ \\
+\end{array}
+\end{equation}
+
+where 1 indicates that the element shares its sign with another element in the same row and -1 indicates the opposite.
 \begin{eqnarray}\label{eq:allSrc}
 \quad max(\delR \cdot \uSrc) \le ~\forall~\uSrc\\
 \left(
