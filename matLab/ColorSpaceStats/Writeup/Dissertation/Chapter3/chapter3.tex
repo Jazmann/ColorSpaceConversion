@@ -37,7 +37,11 @@
 \subsection{Fingernail Pressure}\label{sec:FingernailPressure}
 \section{Pattern Recognition Techniques in OpenCV}\label{sec:PaternRecognitionOpenCV}
 
-OpenCV provides several edge detection methods to suit a range of static and realtime feature detection applications. However, none are quite as effective for the purposes of this project as the Canny edge detector.
+OpenCV provides several edge detection methods to suit a range of static and realtime feature detection applications. However, none are quite as effective for the purposes of this project as the Canny edge detector, which is widely used in practice (\cite{Ziou1998}). After applying a Gaussian filter to smooth the image and eliminate noise, it uses four filters to detect vertical, horizontal and diagonal edges in the blurred image. The first derivative of the vertical and horizontal directions are returned, and from these the edge gradient and direction can be found.
+
+With our new gradient estimate, we begin searching for local maxima in the gradient direction; a 3x3 filter is moved through the discrete vertical, horizontal and diagonal edge directions defined earlier. If the magnitude of the current pixel is less than that of its neighbors in the gradient direction, the center pixel is set to zero, thereby eliminating any undesirable points.
+
+Finally, a binary image is produced which labels pixels as either edge pixels or non-edge pixels by applying a thresholding method whereby two threshold values are used: a strict one to find the starting point on an edge, and a looser one which traces the edges that remain.
 
 \section{Implementation of Pattern Recognition using OpenCV on an iPhone}\label{sec:ImplementationOnIPhone}
 
