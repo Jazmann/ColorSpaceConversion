@@ -1,10 +1,3 @@
-% Example
-C = zeros(1,3);
-Sigma = sigma(end,:);
-
-C = c(end,:);
-Sigma = sigma(end,:);
- 
 skin = colorSpace(theta, C(1,:), sig .* Sigma(1,:), [3,3,3], 0, 255, 0, 255, 1, 0);
  
 img = imread('pressure1.png');

@@ -7,8 +7,10 @@
     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
 \fi
 
-\section{Constant Patterns under Mechanical Stresses in the Hand}\label{sec:ConstantPatterns}
-\section{Dynamic Patterns under Mechanical Stresses in the Hand}\label{sec:DynamicPatterns}
+\section{Constant Patterns under Mechanical Stresses in the Fingertips}\label{sec:ConstantPatterns}
+
+\section{Dynamic Patterns under Mechanical Stresses in the Fingertips}\label{sec:DynamicPatterns}
+
 \begin{figure}[h!]
   \caption{Still images from a video taken with an iPhone. From left to right: original; rotated; rotated and scaled; rotated, compacted and scaled.}
   \label{fig:pressureCandidates}
@@ -34,7 +36,11 @@
     \includegraphics[width=\textwidth]{Chapter3/Figs/fingerPressureRotatedCompactScaled.eps}
 \end{figure}
 \subsection{Finger Pad Pressure}\label{sec:FingerPadPressure}
+
+
+
 \subsection{Fingernail Pressure}\label{sec:FingernailPressure}
+
 \section{Pattern Recognition Techniques in OpenCV}\label{sec:PaternRecognitionOpenCV}
 
 OpenCV provides several edge detection methods to suit a range of static and realtime feature detection applications. However, none are quite as effective for the purposes of this project as the Canny edge detector, which is widely used in practice (\cite{Ziou1998}). After applying a Gaussian filter to smooth the image and eliminate noise, it uses four filters to detect vertical, horizontal and diagonal edges in the blurred image. The first derivative of the vertical and horizontal directions are returned, and from these the edge gradient and direction can be found.
@@ -51,7 +57,7 @@ Finally, a binary image is produced which labels pixels as either edge pixels or
 
 Included within OpenCV is a class for blob detection --- "SimpleBlobDetector" --- which implements a simple algorithm for extracting blobs from a source image. It converts the image into a sequence of binary images between two threshold values "minThreshold" and "maxThreshold," with a specified step difference "thresholdStep" between each neighboring threshold. From each binary image, any connected components are extracted and their centers calculated. The centers are then grouped together into blobs based on their coordinates, the minimum distance between each specified by the "minDistBetweenBlobs" parameter.
 
-Using the skin color space defined in the preceding chapter, this thresholding is simplified; by applying an appropriate destination range and distribution, the distance in the skin color space can be directly related to the standard deviation of the distribution. It should be noted that this isn't necessarily the case for compact scaled images as the maximum gradient is 1, therefore the distribution is no longer Gaussian.
+Using the skin color space defined in the preceding chapter, this thresholding is simplified; by applying an appropriate destination range and distribution, the distance in the skin color space can be directly related to the standard deviation of the distribution. It should be noted that this isn't necessarily the case for compact scaled images as the maximum gradient is 1, therefore the distribution is no longer Gaussian~\cite{Dass2012}.
 
 \subsection{Hand Posture Prediction}\label{sec:HandPosturePrediction}
 \subsection{Dynamic Tracking}\label{sec:DynamicTracking}
