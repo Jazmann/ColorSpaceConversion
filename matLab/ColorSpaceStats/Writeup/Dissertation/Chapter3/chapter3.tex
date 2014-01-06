@@ -7,8 +7,10 @@
     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
 \fi
 
-\section{Constant Patterns under Mechanical Stresses in the Hand}\label{sec:ConstantPatterns}
-\section{Dynamic Patterns under Mechanical Stresses in the Hand}\label{sec:DynamicPatterns}
+\section{Constant Patterns under Mechanical Stresses in the Fingertips}\label{sec:ConstantPatterns}
+
+\section{Dynamic Patterns under Mechanical Stresses in the Fingertips}\label{sec:DynamicPatterns}
+
 \begin{figure}[h!]
   \caption{Still images from a video taken with an iPhone. From left to right: original; rotated; rotated and scaled; rotated, compacted and scaled.}
   \label{fig:pressureCandidates}
@@ -34,7 +36,11 @@
     \includegraphics[width=\textwidth]{Chapter3/Figs/fingerPressureRotatedCompactScaled.eps}
 \end{figure}
 \subsection{Finger Pad Pressure}\label{sec:FingerPadPressure}
+
+
+
 \subsection{Fingernail Pressure}\label{sec:FingernailPressure}
+
 \section{Pattern Recognition Techniques in OpenCV}\label{sec:PaternRecognitionOpenCV}
 
 OpenCV provides several edge detection methods to suit a range of static and realtime feature detection applications. However, none are quite as effective for the purposes of this project as the Canny edge detector, which is widely used in practice (\cite{Ziou1998}). After applying a Gaussian filter to smooth the image and eliminate noise, it uses four filters to detect vertical, horizontal and diagonal edges in the blurred image. The first derivative of the vertical and horizontal directions are returned, and from these the edge gradient and direction can be found.
