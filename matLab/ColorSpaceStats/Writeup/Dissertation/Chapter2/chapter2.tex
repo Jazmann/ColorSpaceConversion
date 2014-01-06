@@ -500,24 +500,24 @@ The sign of the rotation matrix is given by
 1
  \\
 \begin{cases}
- 1 & \frac{5 \pi }{6}<\theta <\frac{11 \pi }{6} \\
- -1 & 0\leq \theta <\frac{5 \pi }{6}\lor \frac{11 \pi }{6}<\theta <2 \pi  \\
+   1 & \frac{5 \pi }{6}<\theta <\frac{11 \pi }{6} \\
+ -1 & \left\lgroup \begin{array}{c} 0\leq \theta <\frac{5 \pi }{6} \\ \frac{11 \pi }{6}<\theta <2 \pi  \end{array} \right.\\
 \end{cases}
  & 
 \begin{cases}
- 1 & 0\leq \theta <\frac{\pi }{2}\lor \frac{3 \pi }{2}<\theta <2 \pi  \\
+ 1   & \left\lgroup \begin{array}{c} 0\leq \theta <\frac{\pi }{2} \\ \frac{3 \pi }{2}<\theta <2 \pi  \end{array} \right.\\
  -1 & \frac{\pi }{2}<\theta <\frac{3 \pi }{2} \\
 \end{cases}
  & 
 \begin{cases}
  1 & \frac{\pi }{6}<\theta <\frac{7 \pi }{6} \\
- -1 & 0\leq \theta <\frac{\pi }{6}\lor \frac{7 \pi }{6}<\theta <2 \pi  \\
+ -1 & \left\lgroup \begin{array}{c}  0\leq \theta <\frac{\pi }{6} \\ \frac{7 \pi }{6}<\theta <2 \pi  \end{array} \right.\\
 \end{cases}
  \\
  
 \begin{cases}
  1 & \frac{\pi }{3}<\theta <\frac{4 \pi }{3} \\
- -1 & 0\leq \theta <\frac{\pi }{3}\lor \frac{4 \pi }{3}<\theta <2 \pi  \\
+ -1 & \left\lgroup \begin{array}{c} 0 \leq \theta <\frac{\pi }{3} \\ \frac{4 \pi }{3}<\theta <2 \pi \end{array} \right. \\
 \end{cases}
  & 
 \begin{cases}
@@ -526,7 +526,7 @@ The sign of the rotation matrix is given by
 \end{cases}
  & 
 \begin{cases}
- 1 & 0\leq \theta <\frac{2 \pi }{3}\lor \frac{5 \pi }{3}<\theta <2 \pi  \\
+   1 & \left\lgroup \begin{array}{c} 0\leq \theta <\frac{2 \pi }{3} \\ \frac{5 \pi }{3}<\theta <2 \pi  \end{array} \right.\\
  -1 & \frac{2 \pi }{3}<\theta <\frac{5 \pi }{3} \\
 \end{cases}
  \\
@@ -536,9 +536,7 @@ The sign of the rotation matrix is given by
 
 We are interested in which elements in each row share the same sign as these will determine the pixel values which contribute to the error. If we find the intersecting conditions and flip the sign where there are two negative elements the following is found 
 \begin{equation}
-\begin{array}{cc}
- \{ & 
-\begin{array}{cc}
+\begin{cases}
  \left(
 \begin{array}{ccc}
  1 & 1 & 1 \\
@@ -574,24 +572,26 @@ We are interested in which elements in each row share the same sign as these wil
  1 & 1 & -1 \\
 \end{array}
 \right) & \frac{\pi }{2}<\theta <\frac{5 \pi }{6}\lor \frac{3 \pi }{2}<\theta <\frac{11 \pi }{6} \\
-\end{array}
- \\
-\end{array}
+\end{cases}
 \end{equation}
 So for a pixel $\{R,G,B\}$ 
 \begin{equation}
-\begin{array}{cc}
- \{ & 
-\begin{array}{cc}
+\begin{cases}
  G + B < 1 & \frac{\pi }{6}<\theta <\frac{\pi }{2}\lor \frac{7 \pi }{6}<\theta <\frac{3 \pi }{2} \\
  R + B < 1 & 0\leq \theta <\frac{\pi }{6}\lor \frac{5 \pi }{6}<\theta <\frac{7 \pi }{6}\lor \frac{11 \pi }{6}<\theta <2 \pi  \\
  R + G < 1 & \frac{\pi }{2}<\theta <\frac{5 \pi }{6}\lor \frac{3 \pi }{2}<\theta <\frac{11 \pi }{6} \\
-\end{array}
- \\
-\end{array}
+\end{cases}
 \end{equation}
 
-where 1 indicates that the element shares its sign with another element in the same row and -1 indicates the opposite.
+where 1 indicates that the element shares its sign with another element in the same row and -1 indicates the opposite. One channel from the source can be left error free whilst the sum of the other two must be less than one. this divides the color space in two. If the portion of the source which is to be preserved better than in a 2:1 ratio lies entirely within the error free half then the rotation matrix can be stored in the same data type as the source itself. 
+
+
+\begin{figure}[h!]
+  \caption{RGB channels.}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/ErrorIntheRotation.eps}
+\end{figure}
+
 \begin{eqnarray}\label{eq:allSrc}
 \quad max(\delR \cdot \uSrc) \le ~\forall~\uSrc\\
 \left(
