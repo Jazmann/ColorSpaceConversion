@@ -7,11 +7,9 @@ neg = dImg1(p2(2):p1(2),p1(1):p2(1),:) - dImg2(p2(2):p1(2),p1(1):p2(1),:);
 
 %imageChannels(neg,cutFig1);
 
-neg = neg - (min(min(min(neg))));
-
-neg(:,:,1) = neg(:,:,1) ./ (max(max(neg(:,:,1))));
-neg(:,:,2) = neg(:,:,2) ./ (max(max(neg(:,:,2))));
-neg(:,:,3) = neg(:,:,3) ./ (max(max(neg(:,:,3))));
+neg(:,:,1) = (neg(:,:,1)-(min(min(neg(:,:,1))))) ./ (max(max(neg(:,:,1))));
+neg(:,:,2) = (neg(:,:,2)-(min(min(neg(:,:,1))))) ./ (max(max(neg(:,:,2))));
+neg(:,:,3) = (neg(:,:,3)-(min(min(neg(:,:,1))))) ./ (max(max(neg(:,:,3))));
 
 cutFig1 = figure('Name','Cut Fig Min/Max','NumberTitle','off');
 imageChannels(neg,cutFig1);
