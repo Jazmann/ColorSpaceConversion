@@ -1,5 +1,5 @@
 % [Y B R bin A] = colorStats( 0.114, 0.299, pi/2 -0.778, 0, 255, 256, 0, 255, 256, 0, 255, 256)
-function [ Yv, Bv, Rv, binOut, cA ] = colorStats(dirName, theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins)
+function [ Yv, Bv, Rv, binOut, cA ] = colorStats(dirName, theta, yMin, yMax, yBins, bMin, bMax, bBins, rMin, rMax, rBins,minChan,maxChan)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -28,23 +28,27 @@ cT = [0 0 0];
 cA = [0 0 0];
 cN = 0;
 
+
+newColor = colorSpace(theta, [yScale/2,yScale/2,yScale/2], [10,10,10], [3,3,3], yMin, yMax, bMin, bMax, 1, 0);
+
 D = [dir(strcat(dirName,'/*.jpg')),dir(strcat(dirName,'/*.JPG'))];
 % D = dir('SkinSamples/*.jpg');
 imcell = cell(1,numel(D));
 for k = 1:numel(D)
   % imcell{k} = rgb2ycbcr(imread(strcat('Skin Samples/',D(k).name)));
   % imcell{k} = rgbToYcbcr(imread(strcat('Skin Samples/',D(k).name)), Kb, Kr, theta, yScale, bScale, rScale);
-  imcell{k} = rgb2Rot(imread(strcat(dirName,'/',D(k).name)),theta, yScale, bScale, rScale);
+  imcell{k} = newColor.toRot(imread(strcat(dirName,'/',D(k).name)));
 [rows, cols, channels] = size(imcell{k});
 for i = 1:rows
     for j = 1:cols
+        if squeeze(imcell{k}(i,j,:)) > minChan && squeeze(imcell{k}(i,j,:)) < maxChan
         chanVals = squeeze(imcell{k}(i,j,:)) - uint8([yMin; bMin; rMin]) + 1;
         bin(yBin(chanVals(1)),bBin(chanVals(2)),rBin(chanVals(3))) = bin(yBin(chanVals(1)),bBin(chanVals(2)),rBin(chanVals(3))) + 1;
+        end
     end
 end
 
 end
-
 
 for i = 1:rBins
     for j = 1:bBins

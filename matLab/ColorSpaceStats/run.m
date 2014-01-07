@@ -21,13 +21,17 @@ for i=1:nMax
      break
  end
 end
+
 theta = ang(i+1);
 g = [ 1, 255/(sqrt(2) .* sigma(i+1,2)), 255/(sqrt(2) .* sigma(i+1, 3))];
 sigma = sigma(1:i+1,:);
 c = c(1:i+1,:);
 
- 
-skin = colorSpace(theta, c(i+1,:), sigma(i+1,:), [3,3,3], 0, 255, 0, 255, 1, 0);
+C = zeros(1,3); C = c(end,:);
+Sigma = sigma(end,:); Sigma = sigma(end,:);
+
+skin = colorSpace(theta, C, Sigma, [3,3,3], 0, 255, 0, 255, 1, 0);
+
  % Plot angle convergence
  angIterFig = figure('Name','Convergence of the skin space chromatic angle with itteration.','NumberTitle','off');
  plot(ang(:,1)); xlabel({'Iteration'}); ylabel({'Angle'}); title({'Convergence of the skin space chromatic angle with itteration.'});
@@ -38,54 +42,3 @@ skin = colorSpace(theta, c(i+1,:), sigma(i+1,:), [3,3,3], 0, 255, 0, 255, 1, 0);
  rgbFig = figure('Name','RGB','NumberTitle','off');
  imageChannels(img,rgbFig);
  
- %rotFig = figure('Name','Rotated','NumberTitle','off');
- %img2 = skin.toRot(img);
- %imageChannels(img2,rotFig);
- 
- %rotScaledFig = figure('Name','Rotated Scaled','NumberTitle','off');
- %img3 = skin.toRotScaled(img);
- %imageChannels(img3,rotScaledFig);
- 
- %rotCompactScaledFig = figure('Name','Rotated Compact Scaled','NumberTitle','off');
- %img4 = skin.toRotCompactScaled(img);
- %imageChannels(img4,rotCompactScaledFig);
- 
- %[ img2, img3] = showColorSpaces(img, theta, g, c, allFig);
- %yabFig = figure('Name','Skin color space','NumberTitle','off');
- %img2 = rgbToSkin(img, double(T), 255, 255, 255);
- %imageChannels(img2,yabFig);
- %yabScaledFig = figure('Name','Scaled Skin color space','NumberTitle','off');
- %img3 = rgbToSkinScaled(img2, g, c, 0, 255, 0, 255);
- %imageChannels(img3,yabScaledFig);
- 
-img = imread('pressure1.png');
-img2 = imread('pressure2.png');
-img3 = imread('pressure3.png');
-img4 = imread('pressure4.png');
-
-imgRot = skin.toRot(img);
-imgRot2 = skin.toRot(img2);
-imgRot3 = skin.toRot(img3);
-imgRot4 = skin.toRot(img4);
-
-imgRotScaled = skin.toRotScaled(img);
-imgRotScaled2 = skin.toRotScaled(img2);
-imgRotScaled3 = skin.toRotScaled(img3);
-imgRotScaled4 = skin.toRotScaled(img4);
-
-imgRotCompactScaled = skin.toRotCompactScaled(img);
-imgRotCompactScaled2 = skin.toRotCompactScaled(img2);
-imgRotCompactScaled3 = skin.toRotCompactScaled(img3);
-imgRotCompactScaled4 = skin.toRotCompactScaled(img4);
-
-rotFig = figure('Name','Rotated','NumberTitle','off');
-
-pressureList(img, imgRot, img2, imgRot2, img3, imgRot3, img4, imgRot4, rotFig);
-
-rotFig = figure('Name','Rotated Scaled','NumberTitle','off');
-
-pressureList(img, imgRotScaled, img2, imgRotScaled2, img3, imgRotScaled3, img4, imgRotScaled4, rotFig);
-
-rotFig = figure('Name','Rotated Compact Scaled','NumberTitle','off');
-
-pressureList(img, imgRotCompactScaled, img2, imgRotCompactScaled2, img3, imgRotCompactScaled3, img4, imgRotCompactScaled4, rotFig);

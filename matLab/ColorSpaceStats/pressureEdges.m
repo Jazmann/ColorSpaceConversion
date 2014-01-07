@@ -1,10 +1,6 @@
 
 edgeImgRotCompactScaled = imgRotCompactScaled;
 
-%edgeImgRotCompactScaled(:,:,1) = 0;
-%edgeImgRotCompactScaled(:,:,3) = 0;
-grayImgRotCompactScaled = edgeImgRotCompactScaled(:,:,1);
-%grayImgRotCompactScaled = rgb2gray(edgeImgRotCompactScaled);
 pressureEdge = zeros(size(edgeImgRotCompactScaled));
 pressureEdge(:,:,1) = edge(edgeImgRotCompactScaled(:,:,1), 'canny',0.16);
 pressureEdge(:,:,2) = edge(edgeImgRotCompactScaled(:,:,2), 'canny',0.4);
