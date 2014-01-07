@@ -32,13 +32,12 @@ cN = 0;
 for i = 1:rows
     for j = 1:cols
         if squeeze(img(i,j,:)) > minChan && squeeze(img(i,j,:)) < maxChan
-        chanVals = squeeze(img(i,j,:)) - uint8([yMin; bMin; rMin]) + 1;
-        bin(yBin(chanVals(1)),bBin(chanVals(2)),rBin(chanVals(3))) = bin(yBin(chanVals(1)),bBin(chanVals(2)),rBin(chanVals(3))) + 1;
+            chanVals = squeeze(img(i,j,:)) - uint8([yMin; bMin; rMin]) + 1;
+            bin(yBin(chanVals(1)),bBin(chanVals(2)),rBin(chanVals(3))) = bin(yBin(chanVals(1)),bBin(chanVals(2)),rBin(chanVals(3))) + 1;
         end
     end
 end
 
-end
 
 for i = 1:rBins
     for j = 1:bBins
