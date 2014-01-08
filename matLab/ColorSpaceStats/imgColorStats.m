@@ -31,7 +31,7 @@ cN = 0;
 [rows, cols, channels] = size(img);
 for i = 1:rows
     for j = 1:cols
-        if all(squeeze(img(i,j,:))' > minChan) && all(squeeze(img(i,j,:))' < maxChan)
+        if all(squeeze(img(i,j,:))' >= minChan) && all(squeeze(img(i,j,:))' <= maxChan)
             chanVals = squeeze(img(i,j,:)) - uint8([yMin; bMin; rMin]) + 1;
             bin(yBin(chanVals(1)),bBin(chanVals(2)),rBin(chanVals(3))) = bin(yBin(chanVals(1)),bBin(chanVals(2)),rBin(chanVals(3))) + 1;
         end
