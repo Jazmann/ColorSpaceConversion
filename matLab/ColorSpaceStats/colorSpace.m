@@ -3,7 +3,7 @@ classdef colorSpace
     %   Detailed explanation goes here
     
     properties
-        sigma; sig; g; c; uC; uT;
+        sigma; sig; g; c; uC; nT; T;
         sMin; sMax; sRange;
         dMin; dMax; dRange;
         ErfA; ErfB; ErfAB;
@@ -37,11 +37,12 @@ classdef colorSpace
             end
             
             if nargin>=1
-                obj.uT = transformationMatrixLAB(theta);
+                obj.nT = transform(theta,'yes');
+                obj.T  = transform(theta,'no');
             end
             
             if cInSrc && nargin==10
-                obj.uC = obj.srcToUnit(c) * obj.uT' + [0, 0.5, 0.5];
+                obj.uC = obj.nT.toRot(obj.srcToUnit(c));
             else
                 obj.uC = obj.dstToUnit(c );
             end
@@ -69,7 +70,8 @@ classdef colorSpace
         end % function
         
         function obj = setTheta(theta)
-            obj.uT = transformationMatrixLAB(theta);
+                obj.nT = transform(theta,'yes');
+                obj.T  = transform(theta,'no');
         end % function
         
         function outImage = toScaled(obj, img)
@@ -100,11 +102,7 @@ classdef colorSpace
             [rows, cols, chans] = size(img);
             %# First convert the RGB image to double precision
             uImage = reshape(double(img)./obj.sRange,[],3);
-            uRotImage = uImage * obj.uT';
-            %# Shift each color plane (stored in each column of the N-by-3 matrix):
-            uRotImage(:,1) =  uRotImage(:,1);
-            uRotImage(:,2) = (uRotImage(:,2) + 0.5);
-            uRotImage(:,3) = (uRotImage(:,3) + 0.5);
+            uRotImage = obj.nT.toRot(uImage);
             %# Convert back to type uint8 and reshape to its original size:
             outImage = reshape(uint8(uRotImage.* obj.dRange + obj.dMin), [rows, cols, chans]);
         end % function
@@ -115,44 +113,25 @@ classdef colorSpace
             [rows, cols, chans] = size(img);
             
             uImage = reshape(double(img)./obj.sRange,[],3);
-            uRotImage = uImage * obj.uT';
-            %# Shift each color plane (stored in each column of the N-by-3 matrix):
-            uRotImage(:,1) =  uRotImage(:,1);
-            uRotImage(:,2) = (uRotImage(:,2) + 0.5);
-            uRotImage(:,3) = (uRotImage(:,3) + 0.5);
+            uRotImage = obj.nT.toRot(uImage);
             %# Apply the rescaling function
             scaledImage = zeros(size(uRotImage));
             for i=1:rows*cols
                 scaledImage(i,:) = obj.scaledPoint(obj.dRange.*uRotImage(i,:) +obj.dMin);
             end
-            %# Shift each color plane (stored in each column of the N-by-3 matrix):
-            % scaledImage(:,1) = obj.shift(1) + obj.scale(1) * erf( obj.g(1) * (uRotImage(:,1) - obj.uC(1)) );
-            % scaledImage(:,2) = obj.shift(2) + obj.scale(2) * erf( obj.g(2) * (uRotImage(:,2) - obj.uC(2)) );
-            % scaledImage(:,3) = obj.shift(3) + obj.scale(3) * erf( obj.g(3) * (uRotImage(:,3) - obj.uC(3)) );
-            %# Convert back to type uint8 and reshape to its original size:
             outImage = reshape(uint8(scaledImage),[rows, cols, chans]);
             
         end % function
         
         function outImage = toRotCompactScaled(obj, img)
-            
             [rows, cols, chans] = size(img);
-            
             uImage = reshape(double(img)./obj.sRange,[],3);
-            uRotImage = uImage * obj.uT';
-            %# Shift each color plane (stored in each column of the N-by-3 matrix):
-            uRotImage(:,1) =  uRotImage(:,1);
-            uRotImage(:,2) = (uRotImage(:,2) + 0.5);
-            uRotImage(:,3) = (uRotImage(:,3) + 0.5);
+            uRotImage = obj.nT.toRot(uImage);
             %# Apply the rescaling function
             scaledImage = zeros(size(uRotImage));
             for i=1:rows*cols
                 scaledImage(i,:) = obj.compactScaledPoint(obj.dRange.*uRotImage(i,:) +obj.dMin);
             end
-            %# Shift each color plane (stored in each column of the N-by-3 matrix):
-            % scaledImage(:,1) = obj.shift(1) + obj.scale(1) * erf( obj.g(1) * (uRotImage(:,1) - obj.uC(1)) );
-            % scaledImage(:,2) = obj.shift(2) + obj.scale(2) * erf( obj.g(2) * (uRotImage(:,2) - obj.uC(2)) );
-            % scaledImage(:,3) = obj.shift(3) + obj.scale(3) * erf( obj.g(3) * (uRotImage(:,3) - obj.uC(3)) );
             %# Convert back to type uint8 and reshape to its original size:
             outImage = reshape(uint8(scaledImage),[rows, cols, chans]);
             
@@ -163,11 +142,7 @@ classdef colorSpace
             [rows, cols, chans] = size(img);
             
             uImage = reshape(double(img)./obj.sRange,[],3);
-            uRotImage = uImage * obj.uT';
-            %# Shift each color plane (stored in each column of the N-by-3 matrix):
-            uRotImage(:,1) =  uRotImage(:,1);
-            uRotImage(:,2) = (uRotImage(:,2) + 0.5);
-            uRotImage(:,3) = (uRotImage(:,3) + 0.5);
+            uRotImage = obj.nT.toRot(uImage);
             
             uProb = zeros(rows * cols, 2);
             uProb(:,1) = uImage(:,1)<(obj.sMax-obj.cubeSkin)/obj.sMax & uImage(:,2)<(obj.sMax-obj.cubeSkin)/obj.sMax & uImage(:,3)<(obj.sMax-obj.cubeSkin)/obj.sMax & uImage(:,1)>(obj.cubeSkin + obj.sMin)/obj.sMax & uImage(:,2)>(obj.cubeSkin + obj.sMin)/obj.sMax & uImage(:,3)>(obj.cubeSkin + obj.sMin)/obj.sMax;
@@ -183,11 +158,7 @@ classdef colorSpace
             [rows, cols, chans] = size(img);
             
             uImage = reshape(double(img)./obj.sRange,[],3);
-            uRotImage = uImage * obj.uT';
-            %# Shift each color plane (stored in each column of the N-by-3 matrix):
-            uRotImage(:,1) =  uRotImage(:,1);
-            uRotImage(:,2) = (uRotImage(:,2) + 0.5);
-            uRotImage(:,3) = (uRotImage(:,3) + 0.5);
+            uRotImage = obj.uT.toRot(uImage);
             %# Apply the rescaling function
             scaledImage = zeros(size(uRotImage));
             compactScaledImage = zeros(size(uRotImage));
