@@ -29,11 +29,11 @@ classdef transform
                 (2.).*(2.^(-1/2).*cos(mod((-1/6).*pi+theta,(1/3).*pi))+6.^(-1/2).*sin(mod((-1/6).*pi+theta,(1/3).*pi))), ...
                 (2.).*(2.^(-1/2).*cos(mod(theta,(1/3).*pi))+6.^(-1/2).*sin(mod(theta,(1/3).*pi)))];
             
-            obj.intIndx = uint32(obj.axisLength.*255)+1;
+            obj.intIndx = floor(obj.axisLength.*255)+1;
             
             obj.shift = [0; ...
-                2.^(-1/2).*cos(mod((-1/6).*pi+theta,(1/3).*pi))+(-1).*6.^(-1/2).*sin(mod((-1/6).*pi+theta,(1/3).*pi)); ...
-                2.^(-1/2).*cos(mod(theta,(1/3).*pi))+(-1).*6.^(-1/2).*sin(mod(theta,(1/3).*pi))];
+                2.^(-1/2).*cos(mod((-1/6).*pi+theta,(1/3).*pi))+      6.^(-1/2).*sin(mod((-1/6).*pi+theta,(1/3).*pi)); ...
+                2.^(-1/2).*cos(mod(theta,(1/3).*pi))+      6.^(-1/2).*sin(mod(theta,(1/3).*pi))];
             else
             
             obj.unscaledAxisLength = [3.^(1/2), ...
@@ -52,7 +52,7 @@ classdef transform
             
             obj.axisLength = [1, 1, 1];
             
-            obj.intIndx = uint32([256,256,256]);
+            obj.intIndx = floor([256,256,256]);
             
             obj.shift = [0, 0.5, 0.5];
             end
@@ -74,7 +74,7 @@ classdef transform
                 scale = 255;
             end
             pixelIndx = reshape(indx,3,[]);
-            indx = uint32(obj.T * pixelIndx + scale .* obj.shift)+1;
+            indx = floor(obj.T * pixelIndx + scale .* obj.shift)+1;
         end % function
         
         function indx = fromRotIndx(obj, indx, scale)
@@ -84,7 +84,7 @@ classdef transform
                 intScale = scale;
             end
             pixelIndx = reshape(indx,3,[]);
-            indx = uint32(obj.T' * (pixelIndx - intScale .* obj.shift - 1));
+            indx = floor(obj.T' * (pixelIndx - intScale .* obj.shift - 1));
         end % function
         
     end
