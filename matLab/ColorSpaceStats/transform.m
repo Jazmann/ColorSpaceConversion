@@ -82,7 +82,7 @@ classdef transform
                 scale = 255;
             end
             pixelIndx = reshape(indx,3,[]);
-            indx = round(obj.T' * ((pixelIndx-1) - scale .* obj.shift) + 1);
+            indx = round(obj.T' * ((pixelIndx-1) - scale .* obj.shift)) + 1;
         end % function
         
     end
