@@ -29,7 +29,7 @@ classdef transform
                 (2.).*(2.^(-1/2).*cos(mod((-1/6).*pi+theta,(1/3).*pi))+6.^(-1/2).*sin(mod((-1/6).*pi+theta,(1/3).*pi))), ...
                 (2.).*(2.^(-1/2).*cos(mod(theta,(1/3).*pi))+6.^(-1/2).*sin(mod(theta,(1/3).*pi)))];
             
-            obj.intIndx = floor(obj.axisLength.*255)+1;
+            obj.intIndx = ceil(obj.axisLength.*255)+1;
             
             obj.shift = [0; ...
                 2.^(-1/2).*cos(mod((-1/6).*pi+theta,(1/3).*pi))+      6.^(-1/2).*sin(mod((-1/6).*pi+theta,(1/3).*pi)); ...
@@ -74,7 +74,7 @@ classdef transform
                 scale = 255;
             end
             pixelIndx = reshape(indx,3,[]);
-            indx = obj.T * (pixelIndx-1) + (scale .* obj.shift) + 1;
+            indx = round(obj.T * (pixelIndx-1) + (scale .* obj.shift) + 1);
         end % function
         
         function indx = fromRotIndx(obj, indx, scale)
@@ -82,7 +82,7 @@ classdef transform
                 scale = 255;
             end
             pixelIndx = reshape(indx,3,[]);
-            indx = obj.T' * ((pixelIndx-1) - scale .* obj.shift) + 1;
+            indx = round(obj.T' * ((pixelIndx-1) - scale .* obj.shift) + 1);
         end % function
         
     end
