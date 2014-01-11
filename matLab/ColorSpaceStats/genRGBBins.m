@@ -85,6 +85,7 @@ save(strcat(dirName,'/Gv'),'Gv');
 save(strcat(dirName,'/Bv'),'Bv');
 save(strcat(dirName,'/binOut'),'binOut');
 save(strcat(dirName,'/cA'),'cA');
+save(strcat(dirName,'/chromBins'),'chromBins');
 
 figure('Name','Bins','NumberTitle','off');
 subplot(1,3,1)
