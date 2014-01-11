@@ -74,17 +74,15 @@ classdef transform
                 scale = 255;
             end
             pixelIndx = reshape(indx,3,[]);
-            indx = floor(obj.T * (pixelIndx-1) + scale .* obj.shift)+1;
+            indx = obj.T * (pixelIndx-1) + (scale .* obj.shift) + 1;
         end % function
         
         function indx = fromRotIndx(obj, indx, scale)
             if nargin < 3
-                intScale = 255;
-            else
-                intScale = scale;
+                scale = 255;
             end
             pixelIndx = reshape(indx,3,[]);
-            indx = floor(obj.T' * ((pixelIndx-1) - intScale .* obj.shift - 1));
+            indx = obj.T' * ((pixelIndx-1) - scale .* obj.shift) + 1;
         end % function
         
     end
