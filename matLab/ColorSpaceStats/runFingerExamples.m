@@ -1,4 +1,4 @@
-skin = colorSpace(theta, C2(1,:), Sigma(1,:), [3,3,3], 0, 255, 0, 255, 1, 0);
+skin = colorSpace(theta, C2(1,:), Sigma(1,:), [2,2,2], 0, 255, 0, 255, 1, 0);
 
 imgP1 = imread('pressure1.JPG');
 imgP2 = imread('pressure2.JPG');
