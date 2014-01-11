@@ -40,7 +40,7 @@ for i = 1:rows
         chanVals = squeeze(imcell{k}(i,j,:)) - uint8([rMin; gMin; bMin]) + 1;
         bin(rBin(chanVals(1)),gBin(chanVals(2)),bBin(chanVals(3))) = bin(rBin(chanVals(1)),gBin(chanVals(2)),bBin(chanVals(3))) + 1;
         chromVals = TZero * double((chanVals)) + [0; rScale + bScale; rScale] +1;
-        chromBin(chromVals(1),chromVals(2)) = chromBin(chromVals(1),chromVals(2)) +1;
+        chromBin(chromVals(2),chromVals(3)) = chromBin(chromVals(2),chromVals(3)) +1;
     end
 end
 
