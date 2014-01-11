@@ -66,11 +66,11 @@ NaNLoc = isnan(binOut)==1;
 binOut(NaNLoc) = 0;
 
 % save the output Rv, Gv, Bv, binOut, cA
-save(strcat(dirName,'/Rv',Rv));
-save(strcat(dirName,'/Gv',Gv));
-save(strcat(dirName,'/Bv',Bv));
-save(strcat(dirName,'/binOut',binOut));
-save(strcat(dirName,'/cA',cA));
+save(strcat(dirName,'/Rv'),'Rv');
+save(strcat(dirName,'/Gv'),'Gv');
+save(strcat(dirName,'/Bv'),'Bv');
+save(strcat(dirName,'/binOut'),'binOut');
+save(strcat(dirName,'/cA'),'cA');
 
 figure('Name','Bins','NumberTitle','off');
 subplot(1,3,1)
