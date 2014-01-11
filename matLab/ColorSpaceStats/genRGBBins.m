@@ -1,5 +1,5 @@
 % [Y B R bin A] = colorStats( 0.114, 0.299, pi/2 -0.778, 0, 255, 256, 0, 255, 256, 0, 255, 256)
-function [ Rv, Gv, Bv, binOut, cA ] = genRGBBins(dirName, rMin, rMax, rBins, gMin, gMax, gBins, bMin, bMax, bBins)
+function [ Rv, Gv, Bv, binOut, chromBin, cA ] = genRGBBins(dirName, rMin, rMax, rBins, gMin, gMax, gBins, bMin, bMax, bBins)
 %
 if nargin<2
     rMin = 0; rMax = 255; rBins = 256; gMin = 0; gMax = 255; gBins =256; bMin = 0; bMax =255; bBins = 256;
@@ -19,10 +19,13 @@ gBin = floor((0:gScale).*(gBins)./(gScale+1))+1;
 bBin = floor((0:bScale).*(bBins)./(bScale+1))+1;
 
 bin = zeros(rBins,gBins,bBins);
+chromBin = zeros(rScale+ 2*gScale + bScale,rScale+bScale);
 chanVals = [0 0 0];
 cT = [0 0 0];
 cA = [0 0 0];
 cN = 0;
+TZero = [1,1,1;(-1),2,(-1);(-1),0,1];
+TzeroScale = [1/sqrt(3),1/sqrt(6),1/sqrt(2)];
 
 D = [dir(strcat(dirName,'/*.jpg')),dir(strcat(dirName,'/*.JPG'))];
 % D = dir('SkinSamples/*.jpg');
@@ -36,6 +39,8 @@ for i = 1:rows
     for j = 1:cols
         chanVals = squeeze(imcell{k}(i,j,:)) - uint8([rMin; gMin; bMin]) + 1;
         bin(rBin(chanVals(1)),gBin(chanVals(2)),bBin(chanVals(3))) = bin(rBin(chanVals(1)),gBin(chanVals(2)),bBin(chanVals(3))) + 1;
+        chromVals = TZero * double((chanVals)) + [0; rScale + bScale; rScale] +1;
+        chromBin(chromVals(1),chromVals(2)) = chromBin(chromVals(1),chromVals(2)) +1;
     end
 end
 
