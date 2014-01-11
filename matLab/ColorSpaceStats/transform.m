@@ -10,14 +10,15 @@ classdef transform
         unscaledAxisLength;
         axisLength;
         intIndx;
+        discreteRange = 256;
     end
     
     methods
         function obj = transform(theta, norm)
             if nargin <= 1 
             obj.T = [1/sqrt(3), 1/sqrt(3), 1/sqrt(3) ;...
-                -(sqrt(2./3.)*sin(pi/6. + theta)),sqrt(2./3.)*cos(theta), -(sqrt(2./3.)*sin(pi/6. - theta)) ; ...
-                -(sqrt(2./3.)*cos(pi/6. + theta)), -(sqrt(2./3.)*sin(theta)), sqrt(2./3.)*cos(pi/6. - theta)];
+                -(sqrt(2./3.)*sin(pi/6. + theta)),   sqrt(2./3.)*cos(theta), -(sqrt(2./3.)*sin(pi/6. - theta)) ; ...
+                -(sqrt(2./3.)*cos(pi/6. + theta)), -(sqrt(2./3.)*sin(theta)),  sqrt(2./3.)*cos(pi/6. - theta)];
             
             obj.range = [0,3.^(1/2); ...
                 (-1).*2.^(-1/2).*cos(mod((-1/6).*pi+theta,(1/3).*pi))+(-1).*6.^(-1/2).*sin(mod((-1/6).*pi+theta,(1/3).*pi)), ...
@@ -27,9 +28,9 @@ classdef transform
             
             obj.axisLength = [3.^(1/2), ...
                 (2.).*(2.^(-1/2).*cos(mod((-1/6).*pi+theta,(1/3).*pi))+6.^(-1/2).*sin(mod((-1/6).*pi+theta,(1/3).*pi))), ...
-                (2.).*(2.^(-1/2).*cos(mod(theta,(1/3).*pi))+6.^(-1/2).*sin(mod(theta,(1/3).*pi)))];
+                (2.).*(2.^(-1/2).*cos(mod(theta,(1/3).*pi))           +6.^(-1/2).*sin(mod(theta,(1/3).*pi)))];
             
-            obj.intIndx = ceil(obj.axisLength.*255)+1;
+            obj.intIndx = ceil(obj.axisLength.*(obj.discreteRange-1))+1;
             
             obj.shift = [0; ...
                 2.^(-1/2).*cos(mod((-1/6).*pi+theta,(1/3).*pi))+      6.^(-1/2).*sin(mod((-1/6).*pi+theta,(1/3).*pi)); ...
@@ -52,7 +53,7 @@ classdef transform
             
             obj.axisLength = [1, 1, 1];
             
-            obj.intIndx = floor([256,256,256]);
+            obj.intIndx = floor([obj.discreteRange,obj.discreteRange,obj.discreteRange]);
             
             obj.shift = [0, 0.5, 0.5];
             end
@@ -71,18 +72,18 @@ classdef transform
         
         function indx = toRotIndx(obj, indx, scale)
             if nargin < 3
-                scale = 255;
+                scale = obj.discreteRange;
             end
             pixelIndx = reshape(indx,3,[]);
-            indx = round(obj.T * (pixelIndx-1) + (scale .* obj.shift) + 1);
+            indx = round(obj.T * (pixelIndx-1) + (scale .* obj.shift)) + 1;
         end % function
         
         function indx = fromRotIndx(obj, indx, scale)
             if nargin < 3
-                scale = 255;
+                scale = obj.discreteRange;
             end
             pixelIndx = reshape(indx,3,[]);
-            indx = round(obj.T' * ((pixelIndx-1) - scale .* obj.shift) + 1);
+            indx = round(obj.T' * ((pixelIndx-1) - scale .* obj.shift)) + 1;
         end % function
         
     end
