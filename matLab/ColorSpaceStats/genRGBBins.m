@@ -19,7 +19,16 @@ gBin = floor((0:gScale).*(gBins)./(gScale+1))+1;
 bBin = floor((0:bScale).*(bBins)./(bScale+1))+1;
 
 bin = zeros(rBins,gBins,bBins);
-chromBin = zeros(rScale+ 2*gScale + bScale,rScale+bScale);
+
+CrScale = rScale+ 2*gScale + bScale;
+CbScale = rScale+bScale;
+CrBins = ceil(2 * sqrt(2./3.) * rScale)+1;
+CbBins = ceil(sqrt(2.) * rScale)+1;
+CrBin = floor((0:CrScale).*(CrBins)./(CrScale+1))+1;
+CbBin = floor((0:CbScale).*(CbBins)./(CbScale+1))+1;
+
+
+chromBin = zeros(CrBins,CbBins);
 chanVals = [0 0 0];
 cT = [0 0 0];
 cA = [0 0 0];
@@ -40,7 +49,7 @@ for i = 1:rows
         chanVals = squeeze(imcell{k}(i,j,:)) - uint8([rMin; gMin; bMin]) + 1;
         bin(rBin(chanVals(1)),gBin(chanVals(2)),bBin(chanVals(3))) = bin(rBin(chanVals(1)),gBin(chanVals(2)),bBin(chanVals(3))) + 1;
         chromVals = TZero * double((chanVals)) + [0; rScale + bScale; rScale] +1;
-        chromBin(chromVals(2),chromVals(3)) = chromBin(chromVals(2),chromVals(3)) +1;
+        chromBin(CrBin(chromVals(2)),CbBin(chromVals(3))) = chromBin(CrBin(chromVals(2)),CbBin(chromVals(3))) +1;
     end
 end
 
