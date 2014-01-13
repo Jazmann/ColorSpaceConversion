@@ -25,8 +25,8 @@ CbScale = rScale+bScale;
 CrBins = ceil(2 * sqrt(2./3.) * rScale)+1;
 CbBins = ceil(sqrt(2.) * rScale)+1;
 
-Crv = 0:1/CrBins:1;
-Cbv = 0:1/CbBins:1;
+Crv = 0:CrScale/CrBins:CrScale;
+Cbv = 0:CbScale/CbBins:CbScale;
 [Cr, Cb] = meshgrid(Crv, Cbv);
 
 CrBin = floor((0:CrScale).*(CrBins)./(CrScale+1))+1;
@@ -84,7 +84,7 @@ binOut = griddata(R(loc),G(loc),B(loc),ZGood,R,G,B);
 NaNLoc = isnan(binOut)==1;
 binOut(NaNLoc) = 0;
 
-
+clear('loc','ZGood','NaNLoc');
 loc = find(chromBin>0);
 ZGood = chromBin(loc)/max(max(max(chromBin)));
 

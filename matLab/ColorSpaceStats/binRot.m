@@ -24,3 +24,12 @@ end
 
 end
 
+
+RGBpoints = zeros(256,256,256,3);
+for i = 1:256
+    for j = 1:256
+        for k = 1:256
+            RGBpoints(i,j,k,:) = nTrans.toRotIndx([i,j,k]);
+        end
+    end
+end
