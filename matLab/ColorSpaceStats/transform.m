@@ -64,7 +64,7 @@ classdef transform
         function outImage = toRot(obj, pixelList)
             outImage = pixelList * obj.T';
             %# Shift each color plane (stored in each column of the N-by-3 matrix):
-            outImage(:,1) =  outImage(:,1) + obj.shift(1);
+            outImage(:,1) = (outImage(:,1) + obj.shift(1));
             outImage(:,2) = (outImage(:,2) + obj.shift(2));
             outImage(:,3) = (outImage(:,3) + obj.shift(3));
         end % function
