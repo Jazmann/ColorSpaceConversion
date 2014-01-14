@@ -25,9 +25,11 @@ CbScale = rScale+bScale;
 CrBins = ceil(2 * sqrt(2./3.) * rScale)+1;
 CbBins = ceil(sqrt(2.) * rScale)+1;
 
-Crv = 0:CrScale/CrBins:CrScale;
-Cbv = 0:CbScale/CbBins:CbScale;
+Crv = 0:CrScale/(CrBins-1):CrScale;
+Cbv = 0:CbScale/(CbBins-1):CbScale;
 [Cr, Cb] = meshgrid(Crv, Cbv);
+Cr = Cr';
+Cb = Cb';
 
 CrBin = floor((0:CrScale).*(CrBins)./(CrScale+1))+1;
 CbBin = floor((0:CbScale).*(CbBins)./(CbScale+1))+1;
@@ -91,6 +93,34 @@ ZGood = chromBin(loc)/max(max(max(chromBin)));
 chromBinOut = griddata(Cr(loc),Cb(loc),ZGood,Cr,Cb);
 NaNLoc = isnan(chromBinOut)==1;
 chromBinOut(NaNLoc) = 0;
+
+% [locRow,locCol] = ind2sub(size(chromBin),loc);
+% % [row,col] = meshgrid(locRow(1):locRow(end),locCol(1):locCol(end));
+% [row,col] = meshgrid(1:size(chromBin,1),1:size(chromBin,2));
+% chromBinOut = griddata(locRow,locCol,ZGood,row,col);
+% 
+% 
+% [locRow,locCol] = ind2sub(size(chromBin),loc);
+% locRow = locRow-1;
+% locCol = locCol-1;
+% % [row,col] = meshgrid(locRow(1):locRow(end),locCol(1):locCol(end));
+% [row,col] = meshgrid(0:size(chromBin,1)-1,0:size(chromBin,2)-1);
+% chromBinOut = griddata(locRow,locCol,ZGood,row,col);
+% 
+% 
+% [locRow,locCol] = ind2sub(size(chromBin),loc);
+% locRow = (locRow-1)./size(chromBin,1);
+% locCol = (locCol-1)./size(chromBin,2);
+% [row,col] = meshgrid(0:1/size(chromBin,1):1,0:1/size(chromBin,1):1);
+% chromBinOut = griddata(locRow,locCol,ZGood,row,col);
+% 
+% 
+% 
+% [locRow,locCol] = ind2sub(size(chromBin),loc);
+% locRow = (locRow-1).*(CrScale/size(chromBin,1));
+% locCol = (locCol-1).*(CbScale/size(chromBin,2));
+% [row,col] = meshgrid(0:(CrScale/size(chromBin,1)):CrScale,0:(CbScale/size(chromBin,2)):CbScale);
+% chromBinOut = griddata(locRow,locCol,ZGood,row,col);
 
 % save the output Rv, Gv, Bv, binOut, cA
 save(strcat(dirName,'/Rv'),'Rv');
