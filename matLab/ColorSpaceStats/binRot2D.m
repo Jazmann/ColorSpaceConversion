@@ -2,14 +2,15 @@ function [binOut] = binRot2D(bin, theta )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 T = [cos(theta), sin(theta); -1*sin(theta),cos(theta)];
+TScale = sqrt(2) * sin(mod(theta, pi/2.)+pi/4.);
 
 CrBins = size(bin,1); CbBins = size(bin,2);
-Crv = 0:1/(CrBins-1):1;
-Cbv = 0:1/(CbBins-1):1;
+Crv = -1:2/(CrBins-1):1;
+Cbv = -1:2/(CbBins-1):1;
 [Cr, Cb] = meshgrid(Crv, Cbv);
 Cr = Cr';
 Cb = Cb';
-CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[]));
+CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) ./ TScale;
 
 loc = find(bin>0);
 ZGood = bin(loc)/max(max(max(bin)));
