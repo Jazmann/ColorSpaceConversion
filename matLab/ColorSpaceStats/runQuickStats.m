@@ -20,6 +20,8 @@ trans = transform(ang(1),'yes');
 
 c(1,:) = trans.toRot((AOutRGB ./ 255));
 
+c(1,:) = AOut;
+
 for i=1:nMax
  chromBinOut=binRot2D(chromBin,ang(i));
  %   x = [Amp,x0,wx,y0,wy,fi]
@@ -42,6 +44,13 @@ C = zeros(1,3); C = c(end,:);
 Sigma = sigma(end,:); Sigma = sigma(end,:);
 
 skin = colorSpace(theta, C, Sigma, [3,3,3], 0, 255, 0, 255, 1, 0);
+
+save(strcat(dirName,'/theta'),'theta');
+save(strcat(dirName,'/sigma'),'sigma');
+save(strcat(dirName,'/c'),'c');
+save(strcat(dirName,'/ang'),'ang');
+save(strcat(dirName,'/C'),'C');
+save(strcat(dirName,'/Sigma'),'Sigma');
 
  % Plot angle convergence
  angIterFig = figure('Name','Convergence of the skin space chromatic angle with itteration.','NumberTitle','off');
