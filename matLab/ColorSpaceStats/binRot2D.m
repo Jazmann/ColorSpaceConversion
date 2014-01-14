@@ -11,11 +11,13 @@ Cbv = -1:2/(CbBins-1):1;
 Cr = Cr';
 Cb = Cb';
 CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) ./ TScale;
+CrT = reshape(CrCbT(1,:),size(bin));
+CbT = reshape(CrCbT(2,:),size(bin));
 
 loc = find(bin>0);
 ZGood = bin(loc)/max(max(max(bin)));
 
-binOut = griddata(Cr(loc),Cb(loc),ZGood,reshape(CrCbT(1,:),size(bin)),reshape(CrCbT(2,:),size(bin)));
+binOut = griddata(CrT(loc),CbT(loc),ZGood,Cr,Cb);
 NaNLoc = isnan(binOut)==1;
 binOut(NaNLoc) = 0;
 
