@@ -45,6 +45,13 @@ Sigma = sigma(end,:); Sigma = sigma(end,:);
 
 skin = colorSpace(theta, C, Sigma, [3,3,3], 0, 255, 0, 255, 1, 0);
 
+save(strcat(dirName,'/theta'),'theta');
+save(strcat(dirName,'/sigma'),'sigma');
+save(strcat(dirName,'/c'),'c');
+save(strcat(dirName,'/ang'),'ang');
+save(strcat(dirName,'/C'),'C');
+save(strcat(dirName,'/Sigma'),'Sigma');
+
  % Plot angle convergence
  angIterFig = figure('Name','Convergence of the skin space chromatic angle with itteration.','NumberTitle','off');
  plot(ang(:,1)); xlabel({'Iteration'}); ylabel({'Angle'}); title({'Convergence of the skin space chromatic angle with itteration.'});
