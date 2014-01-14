@@ -35,7 +35,7 @@ xin = x;
 
 %% ---Generate centroid to be fitted--------------------------------------
 %[X,Y] = meshgrid(X(1):(X(end)-X(1))/(MdataSize-1):X(end),Y(1):(Y(end)-Y(1))/(MdataSize-1):Y(end));
-xdata = zeros(length(X),length(Y),2);
+xdata = zeros(length(Y),length(X),2);
 [ xdata(:,:,1), xdata(:,:,2)] =  meshgrid(X,Y);
 
 %% --- Fit---------------------
