@@ -2,6 +2,7 @@ function [binOut] = binRot2D(bin, thetaIn )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 theta = -1. * thetaIn; % the src is rotated so flip the sign.
+theta = 1. * thetaIn; % the src is rotated so flip the sign.
 T = [cos(theta), sin(theta); -1*sin(theta),cos(theta)];
 TScale = sqrt(2) * sin(mod(theta, pi/2.)+pi/4.);
 
