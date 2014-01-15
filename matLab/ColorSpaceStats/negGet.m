@@ -1,5 +1,5 @@
 function [neg] = negGet( img1, img2, p1, p2 )
-if narg<=2
+if nargIn<=2
     p1 = [0, 0];
     p2 = [min(size(img1,1),size(img2,1)), min(size(img1,2),size(img2,2))];
 end
