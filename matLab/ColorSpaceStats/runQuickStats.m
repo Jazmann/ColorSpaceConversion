@@ -1,5 +1,5 @@
 % Load the images and perform the statistics for a histogram with theta = 0
-dirName = 'SkinSamples';
+dirName = 'SelfSkinSamples2';
 load(strcat(dirName,'/chromBin.mat'));
 load(strcat(dirName,'/cA.mat'));
 AOutRGB = cA;
