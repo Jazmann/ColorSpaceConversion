@@ -1,13 +1,16 @@
-function [ ] = negGet( img1, img2, p1, p2 )
+function [ ] = negGet( img1, img2, pp1, pp2 )
 if narg<=2
     p1 = [0, 0];
-    p2 = [min(size(img1,1),size(img2,1)), min(size(img1,2),size(img2,2))];
+    p2 = [min(size(img1,2),size(img2,2)), min(size(img1,1),size(img2,1))];
+else
+    p1 = [min(pp1(1),pp2(1)), max(pp1(1),pp2(1))];
+    p2 = [min(pp1(2),pp2(2)), max(pp1(2),pp2(2))];
 end
 
 dImg1 = im2double(img1);
 dImg2 = im2double(img2);
 
-neg = dImg1(p2(2):p1(2),p1(1):p2(1),:) - dImg2(p2(2):p1(2),p1(1):p2(1),:);
+neg = dImg1(p1(2):p2(2),p1(1):p2(1),:) - dImg2(p1(2):p2(2),p1(1):p2(1),:);
 
 %imageChannels(neg,cutFig1);
 
