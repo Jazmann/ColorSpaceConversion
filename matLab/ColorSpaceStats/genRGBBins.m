@@ -20,6 +20,26 @@ bBin = floor((0:bScale).*(bBins)./(bScale+1))+1;
 
 bin = zeros(rBins,gBins,bBins);
 
+% Lxy bins
+LScale = rScale+ gScale + bScale;
+xScale = rScale+ 2*gScale + bScale;
+yScale = rScale + bScale;
+LBins = ceil(sqrt(3.) * rScale)+1;
+xBins = ceil(2 * sqrt(2./3.) * rScale)+1;
+yBins = ceil(sqrt(2.) * rScale)+1;
+Lv = 0:LScale/(LBins-1):LScale;
+xv = 0:xScale/(xBins-1):xScale;
+yv = 0:yScale/(yBins-1):yScale;
+[L, x, y] = meshgrid(Lv, xv, yv);
+% Bin map : input chan value - chan min +1 (1:chanScale+1) : Output bin
+% number (1:chanBins).
+LBin = floor((0:LScale).*(LBins)./(LScale+1))+1;
+xBin = floor((0:xScale).*(xBins)./(xScale+1))+1;
+yBin = floor((0:yScale).*(yBins)./(yScale+1))+1;
+
+LxyBin = zeros(LBins,xBins,yBins);
+
+% Cr Cb Bins
 CrScale = rScale+ 2*gScale + bScale;
 CbScale = rScale+bScale;
 CrBins = ceil(2 * sqrt(2./3.) * rScale)+1;
@@ -34,8 +54,8 @@ Cb = Cb';
 CrBin = floor((0:CrScale).*(CrBins)./(CrScale+1))+1;
 CbBin = floor((0:CbScale).*(CbBins)./(CbScale+1))+1;
 
-
 chromBin = zeros(CrBins,CbBins);
+
 chanVals = [0 0 0];
 cT = [0 0 0];
 cA = [0 0 0];
@@ -56,7 +76,8 @@ for i = 1:rows
         chanVals = squeeze(imcell{k}(i,j,:)) - uint8([rMin; gMin; bMin]) + 1;
         bin(rBin(chanVals(1)),gBin(chanVals(2)),bBin(chanVals(3))) = bin(rBin(chanVals(1)),gBin(chanVals(2)),bBin(chanVals(3))) + 1;
         chromVals = TZero * double((chanVals)) + [0; rScale + bScale; rScale] +1;
-        chromBin(CrBin(chromVals(2)),CbBin(chromVals(3))) = chromBin(CrBin(chromVals(2)),CbBin(chromVals(3))) +1;
+        LxyBin(LBin(chromVals(1)),xBin(chromVals(2)),yBin(chromVals(3))) = LxyBin(LBin(chromVals(1)),xBin(chromVals(2)),yBin(chromVals(3))) + 1;
+        chromBin(CrBin(chromVals(2)),CbBin(chromVals(3))) = chromBin(CrBin(chromVals(2)),CbBin(chromVals(3))) + 1;
     end
 end
 
