@@ -1,5 +1,6 @@
-dirName = 'JSkinSamples';
+dirName = 'NSkinSamples';
 D = [dir(strcat(dirName,'/*.jpg')),dir(strcat(dirName,'/*.JPG'))];
+mkdir(dirName,'Neg');
 % D = dir('SkinSamples/*.jpg');
 imcell = cell(1,numel(D));
 for k = 1:numel(D)
@@ -12,7 +13,7 @@ for k = j:numel(D)
     [path,name2,ext] = fileparts(D(k).name);
     deltaImage = negGet(imcell{j},imcell{k});
     
-imwrite(deltaImage, strcat(dirName,'/',name1,'_',name2,'.jpg'));
+imwrite(deltaImage, strcat(dirName,'/Neg/',name1,'_',name2,'.jpg'));
     
 end
 
