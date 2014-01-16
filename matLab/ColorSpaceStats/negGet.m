@@ -1,4 +1,4 @@
-function [neg] = negGet( img1, img2, pp1, pp2 )
+function [neg] = negGet( img1, img2, pp1, pp2, scale )
 if nargin<=2
     p1 = [1, 1];
     p2 = [min(size(img1,2),size(img2,2)), min(size(img1,1),size(img2,1))];
@@ -12,7 +12,7 @@ end
 
 %neg = dImg1(p1(2):p2(2),p1(1):p2(1),:) - dImg2(p1(2):p2(2),p1(1):p2(1),:);
 
-neg = img1(p1(2):p2(2),p1(1):p2(1),:) - img2(p1(2):p2(2),p1(1):p2(1),:);
+neg = img1(p1(2):p2(2),p1(1):p2(1),:) - img2(p1(2):p2(2),p1(1):p2(1),:) + scale;
 
 %imageChannels(neg,cutFig1);
 

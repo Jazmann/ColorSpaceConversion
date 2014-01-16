@@ -150,6 +150,7 @@ save(strcat(dirName,'/Bv'),'Bv');
 save(strcat(dirName,'/binOut'),'binOut');
 save(strcat(dirName,'/cA'),'cA');
 save(strcat(dirName,'/chromBin'),'chromBin');
+save(strcat(dirName,'/LxyBin'),'LxyBin');
 
 figure('Name','Bins','NumberTitle','off');
 subplot(1,3,1)
