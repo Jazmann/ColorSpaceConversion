@@ -1,11 +1,18 @@
-function [neg] = negGet( img1, img2, pp1, pp2 )
-if isa(img1,'float')
-    scale = 1;
-elseif isa(img1,'uint8')
-    scale = 255;
+function [neg] = negGet( img1_in, img2_in, pp1, pp2 )
+
+if isa(img1_in,'float')
+    img1 = double(img1_in)./max(max(max(img1_in)));
+elseif isa(img1_in,'uint8')
+    img1 = double(img1_in)./255.;
 end
     
-if nargin<=3
+if isa(img2_in,'float')
+    img2 = double(img2_in) ./ max(max(max(img2_in)));
+elseif isa(img2_in,'uint8')
+    img2 = double(img2_in) ./ 255.;
+end
+
+if nargin<=2
     p1 = [1, 1];
     p2 = [min(size(img1,2),size(img2,2)), min(size(img1,1),size(img2,1))];
 else
@@ -13,7 +20,7 @@ else
     p2 = [min(pp1(2),pp2(2)), max(pp1(2),pp2(2))];
 end
 
-neg = img1(p1(2):p2(2),p1(1):p2(1),:) - img2(p1(2):p2(2),p1(1):p2(1),:) + scale;
+neg = img1(p1(2):p2(2),p1(1):p2(1),:) - img2(p1(2):p2(2),p1(1):p2(1),:) + 1;
 
 neg(:,:,1) = neg(:,:,1) ./ 2.;
 neg(:,:,2) = neg(:,:,2) ./ 2.;

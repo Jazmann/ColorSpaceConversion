@@ -8,7 +8,7 @@ for k = 1:numel(D)
 end
 
 for j = 1:numel(D)
-for k = j:numel(D)
+for k = j+1:numel(D)
     [path,name1,ext] = fileparts(D(j).name);
     [path,name2,ext] = fileparts(D(k).name);
     deltaImage = negGet(imcell{j},imcell{k});
