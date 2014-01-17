@@ -1,4 +1,4 @@
-dirName = 'NSkinSamples';
+dirName = 'JSkinSamples';
 D = [dir(strcat(dirName,'/*.jpg')),dir(strcat(dirName,'/*.JPG'))];
 mkdir(dirName,'Neg');
 % D = dir('SkinSamples/*.jpg');
