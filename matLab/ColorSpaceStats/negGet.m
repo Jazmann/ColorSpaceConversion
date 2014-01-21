@@ -16,15 +16,16 @@ if nargin<=2
     p1 = [1, 1];
     p2 = [min(size(img1,2),size(img2,2)), min(size(img1,1),size(img2,1))];
 else
-    p1 = [min(pp1(1),pp2(1)), max(pp1(1),pp2(1))];
-    p2 = [min(pp1(2),pp2(2)), max(pp1(2),pp2(2))];
+    p1 = [min(pp1(1),pp2(1)), min(pp1(2),pp2(2))];
+    p2 = [max(pp1(1),pp2(1)), max(pp1(2),pp2(2))];
 end
 
-neg = img1(p1(2):p2(2),p1(1):p2(1),:) - img2(p1(2):p2(2),p1(1):p2(1),:) + 1;
+%neg = img1(p1(2):p2(2),p1(1):p2(1),:) - img2(p1(2):p2(2),p1(1):p2(1),:) +1 ;
+neg = abs(img1(p1(2):p2(2),p1(1):p2(1),:) - img2(p1(2):p2(2),p1(1):p2(1),:)) ;
 
-neg(:,:,1) = neg(:,:,1) ./ 2.;
-neg(:,:,2) = neg(:,:,2) ./ 2.;
-neg(:,:,3) = neg(:,:,3) ./ 2.;
+% neg(:,:,1) = neg(:,:,1) ./ 2.;
+% neg(:,:,2) = neg(:,:,2) ./ 2.;
+% neg(:,:,3) = neg(:,:,3) ./ 2.;
 
 %dImg1 = im2double(img1);
 %dImg2 = im2double(img2);

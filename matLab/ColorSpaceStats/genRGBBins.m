@@ -1,5 +1,5 @@
 % [Y B R bin A] = colorStats( 0.114, 0.299, pi/2 -0.778, 0, 255, 256, 0, 255, 256, 0, 255, 256)
-function [ Rv, Gv, Bv, binOut, chromBin, cA ] = genRGBBins(dirName, rMin, rMax, rBins, gMin, gMax, gBins, bMin, bMax, bBins)
+function [ Rv, Gv, Bv, binOut, chromBin, LxyBin, cA ] = genRGBBins(dirName, rMin, rMax, rBins, gMin, gMax, gBins, bMin, bMax, bBins)
 %
 if nargin<2
     rMin = 0; rMax = 255; rBins = 256; gMin = 0; gMax = 255; gBins =256; bMin = 0; bMax =255; bBins = 256;

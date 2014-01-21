@@ -11,7 +11,7 @@ for j = 1:numel(D)
 for k = j+1:numel(D)
     [path,name1,ext] = fileparts(D(j).name);
     [path,name2,ext] = fileparts(D(k).name);
-    deltaImage = negGet(imcell{j},imcell{k});
+    deltaImage = negGet(imcell{j},imcell{k},[138,273],[164,303]);
     
 imwrite(deltaImage, strcat(dirName,'/Neg/',name1,'_',name2,'.jpg'));
     

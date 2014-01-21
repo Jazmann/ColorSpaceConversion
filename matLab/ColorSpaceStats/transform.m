@@ -15,7 +15,7 @@ classdef transform
     
     methods
         function obj = transform(theta, norm)
-            if nargin <= 1 || strcmp(norm,'no')
+            if nargin <= 1 && strcmp(norm,'no')
             obj.T = [1/sqrt(3), 1/sqrt(3), 1/sqrt(3) ;...
                 -(sqrt(2./3.)*sin(pi/6. + theta)),   sqrt(2./3.)*cos(theta), -(sqrt(2./3.)*sin(pi/6. - theta)) ; ...
                 -(sqrt(2./3.)*cos(pi/6. + theta)), -(sqrt(2./3.)*sin(theta)),  sqrt(2./3.)*cos(pi/6. - theta)];
