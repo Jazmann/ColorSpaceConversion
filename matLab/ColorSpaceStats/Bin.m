@@ -3,11 +3,14 @@ classdef Bin
     %   Detailed explanation goes here
     
     properties
+        name = 'Bins'; % A discriptive name of the bin.
+        axisNames;
         dims;
         bin;
         vals;
         bins;  % the counts for each bin.
-        fBin; % bins normalised to 1:0 with zero bins removed.
+        fBin; % bins normalised to 1:0 .
+        f; % interpolated data at non zero points.
         aScale;
         count = 0;
         a;
@@ -19,14 +22,18 @@ classdef Bin
             obj.dims = length(bins);
             obj.aScale = aMax(:) - aMin(:);
             obj.vals = cell(obj.dims,1);
-            
+            obj.bin = zeros(bins);
             obj.bins = cell(obj.dims,1);
+            names = ['a','b','c','d','e'];
+            obj.axisNames = names(1:obj.dims);
+            
+            if nargin >=2
             for i = 1:obj.dims
                 obj.vals{i} = aMin(i):(obj.aScale(i))/(bins(i)-1):aMax(i);
                 obj.bins{i} = uint32((0:obj.aScale(i)).*(bins(i))./(obj.aScale(i)+1))+1;
             end
+            end
             
-            obj.bin = zeros(bins(1),bins(2),bins(3));
         end
         
         function self = addValue(self,pixel)
@@ -38,22 +45,25 @@ classdef Bin
             %--- Normalised Histogram data ---------------------
             % we remove zeros from the input bin data as some are due to the color
             % space rotation and they affect the sigma values.
-            
-            grid = cell(self.dims,1);
-            if self.dims == 3
-                [grid{1}, grid{2}, grid{3}] = meshgrid(self.vals{1}, self.vals{2}, self.vals{3});
-            elseif obj.dims == 2
-                [grid{1}, grid{2}] = meshgrid(self.vals{1}, self.vals{2});
-                grid{1} = grid{1}';
-                grid{2} = grid{2}';
-            end
             loc = find(self.bin>0);
             locSub = zeros(length(loc),3);
             [locSub(:,1),locSub(:,2),locSub(:,3)] = ind2sub(size(self.bin),loc);
             self.fBin = self.bin(loc)/max(max(max(self.bin)));
-            self.fBin = griddata(self.vals{1}(locSub(:,2)), self.vals{2}(locSub(:,1)), self.vals{3}(locSub(:,3)), self.fBin, grid{1}, grid{2}, grid{3});
-            NaNLoc = isnan(self.fBin)==1;
+            self.f = TriScatteredInterp(self.vals{1}(locSub(:,2)), self.vals{2}(locSub(:,1)), self.vals{3}(locSub(:,3)), self.fBin);
+            NaNLoc = isnan(binOut)==1;
             self.fBin(NaNLoc) = 0;
+        end
+        
+        
+        function grid = grid(obj)
+            grid = cell(obj.dims,1);
+            if obj.dims == 3
+                [grid{1}, grid{2}, grid{3}] = meshgrid(obj.vals{1}, obj.vals{2}, obj.vals{3});
+            elseif obj.dims == 2
+                [grid{1}, grid{2}] = meshgrid(obj.vals{1}, obj.vals{2});
+                grid{1} = grid{1}';
+                grid{2} = grid{2}';
+            end
         end
         
         function self = mean(self)
@@ -70,15 +80,33 @@ classdef Bin
             obj.a = cT/obj.count;
         end
         
+        function binOut = collapse(obj, d, range)
+            ind = sort([mod(d,obj.dims)+1,mod(d+1,obj.dims)+1]);
+            binOut = Bin([length(obj.vals{ind(1)}),length(obj.vals{ind(2)})], [obj.vals{ind(1)}(1),obj.vals{ind(2)}(1)], [obj.vals{ind(1)}(end),obj.vals{ind(2)}(end)]);
+            binOut.name = obj.name;
+            binOut.axisNames = [obj.axisNames(ind(1)),obj.axisNames(ind(2))];
+            if d==1
+                binOut.bin = squeeze(sum(obj.bin(range(1):range(2),:,:),d));
+            elseif d==2
+                binOut.bin = squeeze(sum(obj.bin(:,range(1):range(2),:),d));
+            elseif d==3
+                binOut.bin = squeeze(sum(obj.bin(:,:,range(1):range(2)),d));
+            end
+        end
+        
         function obj = show(obj)
-            
-            figure('Name','Bins','NumberTitle','off');
-            subplot(1,3,1)
-            imagesc(squeeze(sum(obj.bin,1)));
-            subplot(1,3,2)
-            imagesc(squeeze(sum(obj.bin,2)));
-            subplot(1,3,3)
-            imagesc(squeeze(sum(obj.bin,3)));
+            if obj.dims ==3
+                figure('Name',obj.name,'NumberTitle','off');
+                subplot(1,3,1)
+                imagesc(squeeze(sum(obj.bin,1)));
+                subplot(1,3,2)
+                imagesc(squeeze(sum(obj.bin,2)));
+                subplot(1,3,3)
+                imagesc(squeeze(sum(obj.bin,3)));
+            elseif obj.dims == 2
+                figure('Name','2D Bins','NumberTitle','off');
+                imagesc(obj.bin);
+            end
         end
         
         

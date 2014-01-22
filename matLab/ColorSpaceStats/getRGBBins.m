@@ -1,5 +1,5 @@
 % [Y B R bin A] = colorStats( 0.114, 0.299, pi/2 -0.778, 0, 255, 256, 0, 255, 256, 0, 255, 256)
-function [ rgbBin, LxyBin] = genRGBBins(dirName)
+function [ rgbBin, LxyBin] = getRGBBins(dirName)
 %
 dataMin  = 0; dataMax = 255; 
 rgbBin = Bin([dataMax+1,dataMax+1,dataMax+1],[dataMin,dataMin,dataMin],[dataMax,dataMax,dataMax]);
