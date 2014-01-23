@@ -28,10 +28,10 @@ classdef Bin
             obj.axisNames = names(1:obj.dims);
             
             if nargin >=2
-            for i = 1:obj.dims
-                obj.vals{i} = aMin(i):(obj.aScale(i))/(bins(i)-1):aMax(i);
-                obj.bins{i} = uint32((0:obj.aScale(i)).*(bins(i))./(obj.aScale(i)+1))+1;
-            end
+                for i = 1:obj.dims
+                    obj.vals{i} = aMin(i):(obj.aScale(i))/(bins(i)-1):aMax(i);
+                    obj.bins{i} = uint32((0:obj.aScale(i)).*(bins(i))./(obj.aScale(i)+1))+1;
+                end
             end
             
         end
@@ -121,6 +121,18 @@ classdef Bin
         end
     end
     
+    methods (Static = true)
+        
+        function overlap(bin1,bin2)
+            test = zeros(size(bin1.bin));
+            loc = find(bin1.bin);
+            test(loc)=1;
+            loc = find(xy_bg_red.bin);
+            test(loc)=test(loc)+2;
+            figure('Name',strcat('Overlap of ',bin1.name,' and ',bin2.name),'NumberTitle','off')
+            imagesc(test)
+        end
+    end
 end
 
 
