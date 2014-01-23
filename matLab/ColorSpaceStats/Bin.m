@@ -94,6 +94,13 @@ classdef Bin
                 binOut.bin = squeeze(sum(obj.bin(:,:,range(1):range(2)),d));
             end
         end
+       
+        function binOut = negate(obj, maskBin)
+            loc = find(maskBin.bin);
+            binOut = obj;
+            binOut.bin(loc) = 0;
+            binOut.name = strcat(binOut.name,' ! ',maskBin.name);
+        end
         
         function obj = show(obj)
             if obj.dims ==3
