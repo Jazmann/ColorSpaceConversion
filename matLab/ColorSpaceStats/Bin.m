@@ -95,6 +95,12 @@ classdef Bin
             end
         end
        
+        function obj = add(obj, addBin)
+            obj.bin = obj.bin + addbin.bin;
+            obj.count = obj.count + addBin.count;
+            obj.name = strcat(binOut.name,' + ',addBin.name);
+        end
+        
         function binOut = negate(obj, maskBin)
             loc = find(maskBin.bin);
             binOut = obj;
@@ -139,6 +145,14 @@ classdef Bin
             test(loc)=test(loc)+2;
             figure('Name',strcat('Overlap of ',bin1.name,' and ',bin2.name),'NumberTitle','off')
             imagesc(test)
+        end
+        
+        
+        function binOut = negateBins(bin, maskBin)
+            loc = find(maskBin.bin);
+            binOut = bin;
+            binOut.bin(loc) = 0;
+            binOut.name = strcat(binOut.name,' ! ',maskBin.name);
         end
     end
 end
