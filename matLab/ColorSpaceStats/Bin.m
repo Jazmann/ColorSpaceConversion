@@ -83,8 +83,9 @@ classdef Bin
         function binOut = collapse(obj, d, range)
             ind = sort([mod(d,obj.dims)+1,mod(d+1,obj.dims)+1]);
             binOut = Bin([length(obj.vals{ind(1)}),length(obj.vals{ind(2)})], [obj.vals{ind(1)}(1),obj.vals{ind(2)}(1)], [obj.vals{ind(1)}(end),obj.vals{ind(2)}(end)]);
-            binOut.name = obj.name;
             binOut.axisNames = [obj.axisNames(ind(1)),obj.axisNames(ind(2))];
+            binOut.name = strcat(obj.name,'_',obj.axisNames(ind(1)),obj.axisNames(ind(2)));
+            
             if d==1
                 binOut.bin = squeeze(sum(obj.bin(range(1):range(2),:,:),d));
             elseif d==2
@@ -127,7 +128,7 @@ classdef Bin
             test = zeros(size(bin1.bin));
             loc = find(bin1.bin);
             test(loc)=1;
-            loc = find(xy_bg_red.bin);
+            loc = find(bin2.bin);
             test(loc)=test(loc)+2;
             figure('Name',strcat('Overlap of ',bin1.name,' and ',bin2.name),'NumberTitle','off')
             imagesc(test)
