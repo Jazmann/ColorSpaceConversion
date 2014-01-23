@@ -96,9 +96,9 @@ classdef Bin
         end
        
         function obj = add(obj, addBin)
-            obj.bin = obj.bin + addbin.bin;
+            obj.bin = obj.bin + addBin.bin;
             obj.count = obj.count + addBin.count;
-            obj.name = strcat(binOut.name,' + ',addBin.name);
+            obj.name = strcat(obj.name,' + ',addBin.name);
         end
         
         function binOut = negate(obj, maskBin)
