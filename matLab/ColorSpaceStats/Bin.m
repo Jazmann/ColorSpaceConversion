@@ -143,7 +143,7 @@ classdef Bin
                 subplot(1,3,3)
                 imagesc(squeeze(sum(obj.bin,3)));
             elseif obj.dims == 2
-                figure('Name','2D Bins','NumberTitle','off');
+                figure('Name',strcat('2D ',obj.name'),'NumberTitle','off');
                 imagesc(obj.bin);
             end
         end
@@ -152,15 +152,15 @@ classdef Bin
             if obj.dims ==3
                 figure('Name',obj.name,'NumberTitle','off');
                 subplot(1,3,1)
-                contour3(squeeze(sum(obj.fbin,1)));
+                contour(squeeze(sum(obj.fBin,1)));
                 subplot(1,3,2)
-                contour3(squeeze(sum(obj.fbin,2)));
+                contour(squeeze(sum(obj.fBin,2)));
                 subplot(1,3,3)
-                contour3(squeeze(sum(obj.fbin,3)));
+                contour(squeeze(sum(obj.fBin,3)));
             elseif obj.dims == 2
-                figure('Name','2D fBins','NumberTitle','off');
-                contour(obj.fbin);
-                clabel(obj.fbin);
+                figure('Name',strcat('2D ',obj.name'),'NumberTitle','off');
+                contour(obj.fBin);
+                clabel(obj.fBin);
             end
         end
         
