@@ -148,6 +148,21 @@ classdef Bin
             end
         end
         
+        function obj = fshow(obj)
+            if obj.dims ==3
+                figure('Name',obj.name,'NumberTitle','off');
+                subplot(1,3,1)
+                contour3(squeeze(sum(obj.fbin,1)));
+                subplot(1,3,2)
+                contour3(squeeze(sum(obj.fbin,2)));
+                subplot(1,3,3)
+                contour3(squeeze(sum(obj.fbin,3)));
+            elseif obj.dims == 2
+                figure('Name','2D fBins','NumberTitle','off');
+                contour(obj.fbin);
+            end
+        end
+        
         
         function obj = showNormBin(obj)
             figure('Name','Normalized Bins','NumberTitle','off');
