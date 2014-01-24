@@ -160,6 +160,7 @@ classdef Bin
             elseif obj.dims == 2
                 figure('Name','2D fBins','NumberTitle','off');
                 contour(obj.fbin);
+                clabel(obj.fbin);
             end
         end
         
