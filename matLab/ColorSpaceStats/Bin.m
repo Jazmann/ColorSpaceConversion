@@ -101,11 +101,13 @@ classdef Bin
             obj.name = strcat(obj.name,' + ',addBin.name);
         end
         
-        function binOut = negate(obj, maskBin)
-            loc = find(maskBin.bin);
-            binOut = obj;
-            binOut.bin(loc) = 0;
-            binOut.name = strcat(binOut.name,' ! ',maskBin.name);
+        function obj = negate(obj, maskBin,thresh)
+            if nargin <=2
+                thresh = 0;
+            end
+            loc = find(maskBin.bin > thresh);
+            obj.bin(loc) = 0;
+            obj.name = strcat(obj.name,' ! ',maskBin.name);
         end
         
         function obj = show(obj)
@@ -137,11 +139,14 @@ classdef Bin
     
     methods (Static = true)
         
-        function overlap(bin1,bin2)
+        function overlap(bin1,bin2, thresh)
+            if nargin <=2
+                thresh = 0;
+            end
             test = zeros(size(bin1.bin));
-            loc = find(bin1.bin);
+            loc = find(bin1.bin > thresh);
             test(loc)=1;
-            loc = find(bin2.bin);
+            loc = find(bin2.bin > thresh);
             test(loc)=test(loc)+2;
             figure('Name',strcat('Overlap of ',bin1.name,' and ',bin2.name),'NumberTitle','off')
             imagesc(test)
