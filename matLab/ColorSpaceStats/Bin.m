@@ -133,6 +133,16 @@ classdef Bin
             obj.name = strcat(obj.name,' ! ',maskBin.name);
         end
         
+        
+        function obj = fNegate(obj, maskBin,thresh)
+            if nargin <=2
+                thresh = 0;
+            end
+            loc = find(maskBin.fBin > thresh);
+            obj.fBin(loc) = 0;
+            obj.name = strcat(obj.name,' ! ',maskBin.name);
+        end
+        
         function obj = show(obj)
             if obj.dims ==3
                 figure('Name',obj.name,'NumberTitle','off');
