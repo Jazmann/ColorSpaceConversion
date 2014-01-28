@@ -60,7 +60,7 @@ classdef Bin
         function self = norm(self)
             %--- Normalised Histogram data ---------------------
             self.fBin = self.bin ./ max(max(max(self.bin)));
-            NaNLoc = isnan(binOut)==1;
+            NaNLoc = isnan(self.fBin)==1;
             self.fBin(NaNLoc) = 0;
         end
         
@@ -115,9 +115,9 @@ classdef Bin
         function [x,resnorm,residual,exitflag] = gFit(obj)
             xdata = zeros(obj.nBins(1),obj.nBins(2),2);
             [ xdata(:,:,1), xdata(:,:,2)] =  meshgrid(obj.vals{2},obj.vals{1});
-            x0 = [1.0, obj.a(1),obj.aScale(1)/4.0,obj.a(2),obj.aScale(2)/4.0,0.0]; % Inital guess parameters
-            lb = [0.9,obj.vals{2}(1),3.0 * obj.aScale(1)/obj.nBins(1), obj.vals{1}(1),3.0 * obj.aScale(2)/obj.nBins(2),-pi/4];
-            ub = [1.0,obj.vals{2}(end),obj.aScale(1),obj.vals{1}(end),obj.aScale(2),pi/4];
+            x0 = [1.0, obj.a(2),         obj.aScale(2)/4.0,                obj.a(1),        obj.aScale(1)/4.0,                0.0]; % Inital guess parameters
+            lb = [0.9, obj.vals{2}(1),   obj.aScale(2)*(3.0/obj.nBins(2)), obj.vals{1}(1),  obj.aScale(1)*(3.0/obj.nBins(1)),-pi/4];
+            ub = [1.0, obj.vals{2}(end), obj.aScale(2),                    obj.vals{1}(end),obj.aScale(1),                    pi/4];
             [x,resnorm,residual,exitflag] = lsqcurvefit(@D2GaussFunctionRot,x0,xdata,obj.fBin,lb,ub);
         end
         
@@ -208,40 +208,83 @@ classdef Bin
         
         function obj = show(obj)
             if obj.dims ==3
-                figure('Name',obj.name,'NumberTitle','off');
+                figure('Name',strcat('3D ',obj.name,' bin'),'NumberTitle','off');
                 subplot(1,3,1)
-                imagesc(squeeze(sum(obj.bin,1)));
-                subplot(1,3,2)
-                imagesc(squeeze(sum(obj.bin,2)));
-                subplot(1,3,3)
-                imagesc(squeeze(sum(obj.bin,3)));
-            elseif obj.dims == 2
-                figure('Name',strcat('2D ',obj.name),'NumberTitle','off');
-                imagesc(obj.bin);
-            end
-        end
-        
-        function obj = fShow(obj)
-            if obj.dims ==3
-                figure('Name',obj.name,'NumberTitle','off');
-                subplot(1,3,1)
-                contour(obj.vals{3},obj.vals{2},squeeze(sum(obj.fBin,1)));
+                imagesc(obj.vals{3},obj.vals{2},squeeze(sum(obj.bin,1)));
                 xlabel(obj.axisNames(3));
                 ylabel(obj.axisNames(2));
                 subplot(1,3,2)
-                contour(obj.vals{3},obj.vals{1},squeeze(sum(obj.fBin,2)));
+                imagesc(obj.vals{3},obj.vals{1},squeeze(sum(obj.bin,2)));
                 xlabel(obj.axisNames(3));
                 ylabel(obj.axisNames(1));
                 subplot(1,3,3)
-                contour(obj.vals{2},obj.vals{1},squeeze(sum(obj.fBin,3)));
+                imagesc(obj.vals{2},obj.vals{1},squeeze(sum(obj.bin,3)));
+                xlabel(obj.axisNames(2));
+                ylabel(obj.axisNames(1));
+            elseif obj.dims == 2
+                figure('Name',strcat('2D ',obj.name,' bin'),'NumberTitle','off');
+                imagesc(obj.vals{2},obj.vals{1},obj.bin);
+                xlabel(obj.axisNames(2));
+                ylabel(obj.axisNames(1));
+            end
+            figure(gcf);
+        end
+        
+        function obj = binShow(obj,nContours)
+            if nargin <= 1
+                nContours = 25;
+            end
+            vMax = max(max(max(obj.bin)));
+            vStep = ceil(vMax / nContours);
+            v = 1:vStep:vMax-vStep+1;
+            if obj.dims ==3
+                figure('Name',obj.name,'NumberTitle','off');
+                subplot(1,3,1)
+                contour(obj.vals{3},obj.vals{2},squeeze(sum(obj.bin,1)), v);
+                xlabel(obj.axisNames(3));
+                ylabel(obj.axisNames(2));
+                subplot(1,3,2)
+                contour(obj.vals{3},obj.vals{1},squeeze(sum(obj.bin,2)), v);
+                xlabel(obj.axisNames(3));
+                ylabel(obj.axisNames(1));
+                subplot(1,3,3)
+                contour(obj.vals{2},obj.vals{1},squeeze(sum(obj.bin,3)), v);
                 xlabel(obj.axisNames(2));
                 ylabel(obj.axisNames(1));
             elseif obj.dims == 2
                 figure('Name',strcat('2D ',obj.name),'NumberTitle','off');
-                contour(obj.vals{2},obj.vals{1},obj.fBin);
+                contour(obj.vals{2},obj.vals{1},obj.bin, v);
                 xlabel(obj.axisNames(2));
                 ylabel(obj.axisNames(1));
             end
+            figure(gcf);
+        end
+        
+        function obj = fShow(obj,nContours)
+            if nargin <= 1
+                nContours = 25;
+            end
+            if obj.dims ==3
+                figure('Name',obj.name,'NumberTitle','off');
+                subplot(1,3,1)
+                contour(obj.vals{3},obj.vals{2},squeeze(sum(obj.fBin,1)), nContours);
+                xlabel(obj.axisNames(3));
+                ylabel(obj.axisNames(2));
+                subplot(1,3,2)
+                contour(obj.vals{3},obj.vals{1},squeeze(sum(obj.fBin,2)), nContours);
+                xlabel(obj.axisNames(3));
+                ylabel(obj.axisNames(1));
+                subplot(1,3,3)
+                contour(obj.vals{2},obj.vals{1},squeeze(sum(obj.fBin,3)), nContours);
+                xlabel(obj.axisNames(2));
+                ylabel(obj.axisNames(1));
+            elseif obj.dims == 2
+                figure('Name',strcat('2D ',obj.name),'NumberTitle','off');
+                contour(obj.vals{2},obj.vals{1},obj.fBin, nContours);
+                xlabel(obj.axisNames(2));
+                ylabel(obj.axisNames(1));
+            end
+            figure(gcf);
         end
         
         
@@ -253,6 +296,7 @@ classdef Bin
             imagesc(squeeze(sum(obj.fBin,2)));
             subplot(1,3,3)
             imagesc(squeeze(sum(obj.fBin,3)));
+            figure(gcf);
         end
     end
     
@@ -271,6 +315,7 @@ classdef Bin
             test(loc)=test(loc)+2;
             figure('Name',strcat('Overlap of ',bin1.name,' and ',bin2.name),'NumberTitle','off')
             imagesc(test)
+            figure(gcf);
         end
         
         
@@ -279,7 +324,19 @@ classdef Bin
             binOut = bin;
             binOut.bin(loc) = 0;
             binOut.name = strcat(binOut.name,' ! ',maskBin.name);
-            
+            binOut.count = sum(sum(sum(binOut.bin)));
+        end
+        
+        function showGaussianFit(bin, x, nContours)
+            figure('Name','Gaussian fit','NumberTitle','off');
+            if nargin <= 2
+                nContours = 25;
+            end
+            xdata = zeros(bin.nBins(1),bin.nBins(2),2);
+            [ xdata(:,:,1), xdata(:,:,2)] =  meshgrid(bin.vals{2},bin.vals{1});
+            gF = D2GaussFunctionRot(x,xdata);
+            contour(bin.vals{2},bin.vals{1},gF, nContours);
+            figure(gcf);
         end
     end
 end
