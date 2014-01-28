@@ -6,34 +6,50 @@ classdef Bin
         name = 'Bins'; % A discriptive name of the bin.
         axisNames;
         dims;
+        nBins;
         bin;
         vals;
         bins;  % the counts for each bin.
         fBin; % bins normalised to 1:0 .
         f; % interpolated data at non zero points.
-        aScale;
+        aMin; aMax; aScale;
         count = 0;
         a;
+        subs; loc;
         
     end
     
     methods
-        function obj = Bin(bins, aMin, aMax)
-            obj.dims = length(bins);
-            obj.aScale = aMax(:) - aMin(:);
+        function obj = Bin(nBins, aMin, aMax)
+            obj.dims = length(nBins);
+            obj.nBins = nBins;
+            obj.aMin = aMin; obj.aMax = aMax; obj.aScale = aMax(:) - aMin(:);
             obj.vals = cell(obj.dims,1);
-            obj.bin = zeros(bins);
+            obj.bin = zeros(nBins);
             obj.bins = cell(obj.dims,1);
             names = ['a','b','c','d','e'];
             obj.axisNames = names(1:obj.dims);
             
             if nargin >=2
                 for i = 1:obj.dims
-                    obj.vals{i} = aMin(i):(obj.aScale(i))/(bins(i)-1):aMax(i);
-                    obj.bins{i} = uint32((0:obj.aScale(i)).*(bins(i))./(obj.aScale(i)+1))+1;
+                    obj.vals{i} = aMin(i):(obj.aScale(i))/(nBins(i)-1):aMax(i);
+                    obj.bins{i} = uint32((0:obj.aScale(i)).*(nBins(i))./(obj.aScale(i)+1))+1;
                 end
             end
             
+        end
+        
+        function obj = setAxis(obj, aMin, aMax)
+            if length(aMax) == obj.dims && length(aMin) == obj.dims
+                obj.aMin = aMin;
+                obj.aMax = aMax;
+                obj.aScale = obj.aMax(:) - obj.aMin(:);
+                for i = 1:obj.dims
+                    obj.vals{i} = aMin(i):(obj.aScale(i))/(obj.nBins(i)-1):aMax(i);
+                end
+                obj = obj.mean;
+                
+            end
         end
         
         function self = addValue(self,pixel)
@@ -44,6 +60,35 @@ classdef Bin
         function self = norm(self)
             %--- Normalised Histogram data ---------------------
             self.fBin = self.bin ./ max(max(max(self.bin)));
+            NaNLoc = isnan(binOut)==1;
+            self.fBin(NaNLoc) = 0;
+        end
+        
+        function obj = removeZeros(obj,rad)
+            obj.loc = find(obj.fBin);
+            obj = obj.resetSubs;
+            mask = ones(size(obj.fBin));
+            if obj.dims == 2
+                for i = 1:length(obj.subs(:,1))
+                    mask(obj.subs(i,1)-rad:obj.subs(i,1)+rad,obj.subs(i,2)-rad:obj.subs(i,2)+rad) = 0;
+                end
+            elseif obj.dims == 3
+                for i = 1:length(obj.subs(:,1))
+                    mask(obj.subs(i,1)-rad:obj.subs(i,1)+rad,obj.subs(i,2)-rad:obj.subs(i,2)+rad,obj.subs(i,3)-rad:obj.subs(i,3)+rad) = 0;
+                end
+            end
+            keep = find(mask);
+            obj.loc = vertcat(obj.loc,keep);
+            obj = obj.resetSubs;
+        end
+        
+        function obj = resetSubs(obj)
+            obj.subs = zeros(length(obj.loc),obj.dims);
+            if obj.dims ==2
+                [obj.subs(:,1), obj.subs(:,2)] = ind2sub(size(obj.fBin),obj.loc);
+            elseif obj.dims ==3
+                [obj.subs(:,1), obj.subs(:,2), obj.subs(:,3)] = ind2sub(size(obj.fBin),obj.loc);
+            end
         end
         
         function self = smooth(self)
@@ -56,17 +101,24 @@ classdef Bin
             end
         end
         
-        function self = fit(self)
+        function obj = fit(obj)
             %--- Normalised Histogram data ---------------------
             % we remove zeros from the input bin data as some are due to the color
             % space rotation and they affect the sigma values.
-            loc = find(self.bin>0);
-            locSub = zeros(length(loc),3);
-            [locSub(:,1),locSub(:,2),locSub(:,3)] = ind2sub(size(self.bin),loc);
-            self.fBin = self.bin(loc)/max(max(max(self.bin)));
-            self.f = TriScatteredInterp(self.vals{1}(locSub(:,2)), self.vals{2}(locSub(:,1)), self.vals{3}(locSub(:,3)), self.fBin);
-            NaNLoc = isnan(binOut)==1;
-            self.fBin(NaNLoc) = 0;
+            if obj.dims ==2
+                obj.f = TriScatteredInterp(obj.vals{2}(obj.subs(:,2))', obj.vals{1}(obj.subs(:,1))', obj.fBin(obj.loc));
+            elseif obj.dims ==3
+                obj.f = TriScatteredInterp(obj.vals{2}(obj.subs(:,2))', obj.vals{1}(obj.subs(:,1))', obj.vals{3}(obj.subs(:,3))', obj.fBin(obj.loc));
+            end
+        end
+        
+        function [x,resnorm,residual,exitflag] = gFit(obj)
+            xdata = zeros(obj.nBins(1),obj.nBins(2),2);
+            [ xdata(:,:,1), xdata(:,:,2)] =  meshgrid(obj.vals{2},obj.vals{1});
+            x0 = [1.0, obj.a(1),obj.aScale(1)/4.0,obj.a(2),obj.aScale(2)/4.0,0.0]; % Inital guess parameters
+            lb = [0.9,obj.vals{2}(1),3.0 * obj.aScale(1)/obj.nBins(1), obj.vals{1}(1),3.0 * obj.aScale(2)/obj.nBins(2),-pi/4];
+            ub = [1.0,obj.vals{2}(end),obj.aScale(1),obj.vals{1}(end),obj.aScale(2),pi/4];
+            [x,resnorm,residual,exitflag] = lsqcurvefit(@D2GaussFunctionRot,x0,xdata,obj.fBin,lb,ub);
         end
         
         function grid = grid(obj)
@@ -80,14 +132,24 @@ classdef Bin
             end
         end
         
-        function self = mean(self)
-            cT = [0 0 0];
-            for i = 1:self.bins{1}
-                for j = 1:self.bins{2}
-                    for k = 1:self.bins{3}
-                        cT(1) = cT(1) + self.bin(k,j,i) * self.vals(1,k,j,i);
-                        cT(2) = cT(2) + self.bin(k,j,i) * self.vals(2,k,j,i);
-                        cT(3) = cT(3) + self.bin(k,j,i) * self.vals(3,k,j,i);
+        function obj = mean(obj)
+            if obj.dims == 3
+                cT = [0 0 0];
+                for i = 1:obj.nBins(1)
+                    for j = 1:obj.nBins(2)
+                        for k = 1:obj.nBins(3)
+                            cT(1) = cT(1) + obj.bin(i,j,k) * obj.vals{1}(i);
+                            cT(2) = cT(2) + obj.bin(i,j,k) * obj.vals{2}(j);
+                            cT(3) = cT(3) + obj.bin(i,j,k) * obj.vals{3}(k);
+                        end
+                    end
+                end
+            elseif obj.dims == 2
+                cT = [0 0];
+                for i = 1:obj.nBins(1)
+                    for j = 1:obj.nBins(2)
+                        cT(1) = cT(1) + obj.bin(i,j) * obj.vals{1}(i);
+                        cT(2) = cT(2) + obj.bin(i,j) * obj.vals{2}(j);
                     end
                 end
             end
@@ -128,9 +190,10 @@ classdef Bin
             if nargin <=2
                 thresh = 0;
             end
-            loc = find(maskBin.bin > thresh);
-            obj.bin(loc) = 0;
+            Loc = find(maskBin.bin > thresh);
+            obj.bin(Loc) = 0;
             obj.name = strcat(obj.name,' ! ',maskBin.name);
+            obj.count = sum(sum(sum(obj.bin)));
         end
         
         
@@ -138,8 +201,8 @@ classdef Bin
             if nargin <=2
                 thresh = 0;
             end
-            loc = find(maskBin.fBin > thresh);
-            obj.fBin(loc) = 0;
+            Loc = find(maskBin.fBin > thresh);
+            obj.fBin(Loc) = 0;
             obj.name = strcat(obj.name,' ! ',maskBin.name);
         end
         
@@ -153,24 +216,31 @@ classdef Bin
                 subplot(1,3,3)
                 imagesc(squeeze(sum(obj.bin,3)));
             elseif obj.dims == 2
-                figure('Name',strcat('2D ',obj.name'),'NumberTitle','off');
+                figure('Name',strcat('2D ',obj.name),'NumberTitle','off');
                 imagesc(obj.bin);
             end
         end
         
-        function obj = fshow(obj)
+        function obj = fShow(obj)
             if obj.dims ==3
                 figure('Name',obj.name,'NumberTitle','off');
                 subplot(1,3,1)
-                contour(squeeze(sum(obj.fBin,1)));
+                contour(obj.vals{3},obj.vals{2},squeeze(sum(obj.fBin,1)));
+                xlabel(obj.axisNames(3));
+                ylabel(obj.axisNames(2));
                 subplot(1,3,2)
-                contour(squeeze(sum(obj.fBin,2)));
+                contour(obj.vals{3},obj.vals{1},squeeze(sum(obj.fBin,2)));
+                xlabel(obj.axisNames(3));
+                ylabel(obj.axisNames(1));
                 subplot(1,3,3)
-                contour(squeeze(sum(obj.fBin,3)));
+                contour(obj.vals{2},obj.vals{1},squeeze(sum(obj.fBin,3)));
+                xlabel(obj.axisNames(2));
+                ylabel(obj.axisNames(1));
             elseif obj.dims == 2
-                figure('Name',strcat('2D ',obj.name'),'NumberTitle','off');
-                contour(obj.fBin);
-                clabel(obj.fBin);
+                figure('Name',strcat('2D ',obj.name),'NumberTitle','off');
+                contour(obj.vals{2},obj.vals{1},obj.fBin);
+                xlabel(obj.axisNames(2));
+                ylabel(obj.axisNames(1));
             end
         end
         
@@ -209,6 +279,7 @@ classdef Bin
             binOut = bin;
             binOut.bin(loc) = 0;
             binOut.name = strcat(binOut.name,' ! ',maskBin.name);
+            
         end
     end
 end
