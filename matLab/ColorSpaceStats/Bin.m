@@ -178,6 +178,7 @@ classdef Bin
                     binOut.bin = squeeze(sum(obj.bin(:,:,range(1):range(2)),d));
                 end
             end
+            binOut.count = obj.count;
         end
         
         function obj = add(obj, addBin)
@@ -190,7 +191,11 @@ classdef Bin
             if nargin <=2
                 thresh = 0;
             end
-            Loc = find(maskBin.bin > thresh);
+            if isa(maskBin,'Bin')
+                Loc = find(maskBin.bin > thresh);
+            else
+                Loc = find(maskBin>thresh);
+            end
             obj.bin(Loc) = 0;
             obj.name = strcat(obj.name,' ! ',maskBin.name);
             obj.count = sum(sum(sum(obj.bin)));
@@ -201,7 +206,11 @@ classdef Bin
             if nargin <=2
                 thresh = 0;
             end
-            Loc = find(maskBin.fBin > thresh);
+            if isa(maskBin,'Bin')
+                Loc = find(maskBin.fBin > thresh);
+            else
+                Loc = find(maskBin>thresh);
+            end
             obj.fBin(Loc) = 0;
             obj.name = strcat(obj.name,' ! ',maskBin.name);
         end
