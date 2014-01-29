@@ -80,6 +80,12 @@ classdef Bin
             keep = find(mask);
             obj.loc = vertcat(obj.loc,keep);
             obj = obj.resetSubs;
+            obj = obj.fit;
+            grid = obj.grid;
+            obj.fBin = obj.f(grid{2},grid{1});
+            minCount = 1.0/max(max(obj.bin));
+            loc = find(obj.fBin < minCount);
+            obj.fBin(loc) = 0;
         end
         
         function obj = resetSubs(obj)
@@ -193,26 +199,26 @@ classdef Bin
             end
             if isa(maskBin,'Bin')
                 Loc = find(maskBin.bin > thresh);
+                obj.name = strcat(obj.name,' ! ',maskBin.name);
             else
                 Loc = find(maskBin>thresh);
             end
             obj.bin(Loc) = 0;
-            obj.name = strcat(obj.name,' ! ',maskBin.name);
             obj.count = sum(sum(sum(obj.bin)));
         end
         
         
-        function obj = fNegate(obj, maskBin,thresh)
+        function obj = fNegate(obj, maskBin, thresh)
             if nargin <=2
                 thresh = 0;
             end
             if isa(maskBin,'Bin')
                 Loc = find(maskBin.fBin > thresh);
+                obj.name = strcat(obj.name,' ! ',maskBin.name);
             else
                 Loc = find(maskBin>thresh);
             end
             obj.fBin(Loc) = 0;
-            obj.name = strcat(obj.name,' ! ',maskBin.name);
         end
         
         function obj = show(obj)
@@ -243,9 +249,13 @@ classdef Bin
             if nargin <= 1
                 nContours = 25;
             end
-            vMax = max(max(max(obj.bin)));
-            vStep = ceil(vMax / nContours);
-            v = 1:vStep:vMax-vStep+1;
+            if isa(nContours,'number')
+                vMax = max(max(max(obj.bin)));
+                vStep = ceil(vMax / nContours);
+                v = 1:vStep:vMax-vStep+1;
+            else
+                v = nContours;
+            end
             if obj.dims ==3
                 figure('Name',obj.name,'NumberTitle','off');
                 subplot(1,3,1)
