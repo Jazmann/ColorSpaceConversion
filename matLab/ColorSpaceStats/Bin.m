@@ -334,7 +334,7 @@ classdef Bin
         end
     
     
-        function showGFit(obj, nContours)
+        function gShow(obj, nContours)
             figure('Name',strcat('Gaussian fit ',obj.name),'NumberTitle','off');
             if nargin <= 2
                 nContours = 25;
