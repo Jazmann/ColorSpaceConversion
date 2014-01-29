@@ -299,7 +299,7 @@ classdef Bin
                 nContours = 25;
             end
             if obj.dims ==3
-                figure('Name',obj.name,'NumberTitle','off');
+                figure('Name',strcat('Normalized, Smoothed  ',obj.name),'NumberTitle','off');
                 subplot(1,3,1)
                 contour(obj.vals{3},obj.vals{2},squeeze(sum(obj.fBin,1)), nContours);
                 xlabel(obj.axisNames(3));
@@ -313,7 +313,7 @@ classdef Bin
                 xlabel(obj.axisNames(2));
                 ylabel(obj.axisNames(1));
             elseif obj.dims == 2
-                figure('Name',strcat('2D ',obj.name),'NumberTitle','off');
+                figure('Name',strcat('Normalized, Smoothed  ',obj.name),'NumberTitle','off');
                 contour(obj.vals{2},obj.vals{1},obj.fBin, nContours);
                 xlabel(obj.axisNames(2));
                 ylabel(obj.axisNames(1));
