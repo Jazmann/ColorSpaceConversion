@@ -57,20 +57,20 @@ classdef Bin
             end
         end
         
-        function self = addValue(self,pixel)
-            self.bin(self.bins{1}(pixel(1)),self.bins{2}(pixel(2)),self.bins{3}(pixel(3))) = self.bin(self.bins{1}(pixel(1)),self.bins{2}(pixel(2)),self.bins{3}(pixel(3))) + 1;
-            self.count = self.count + 1;
+        function obj = addValue(obj,pixel)
+            obj.bin(obj.bins{1}(pixel(1)),obj.bins{2}(pixel(2)),obj.bins{3}(pixel(3))) = obj.bin(obj.bins{1}(pixel(1)),obj.bins{2}(pixel(2)),obj.bins{3}(pixel(3))) + 1;
+            obj.count = obj.count + 1;
         end
         
-        function self = norm(self)
+        function obj = norm(obj)
             %--- Normalised Histogram data ---------------------
             if exists(obj.fBin)
-                self.fBin = self.bin ./ max(max(max(self.fBin)));
+                obj.fBin = obj.bin ./ max(max(max(obj.fBin)));
             else
-            self.fBin = self.bin ./ max(max(max(self.bin)));
+            obj.fBin = obj.bin ./ max(max(max(obj.bin)));
             end
-            NaNLoc = isnan(self.fBin)==1;
-            self.fBin(NaNLoc) = 0;
+            NaNLoc = isnan(obj.fBin)==1;
+            obj.fBin(NaNLoc) = 0;
         end
         
         function obj = removeZeros(obj,rad)
@@ -106,13 +106,13 @@ classdef Bin
             end
         end
         
-        function self = smooth(self)
+        function obj = smooth(obj)
             %--- Normalised Histogram data ---------------------
             % we remove zeros from the input bin data as some are due to the color
             % space rotation and they affect the sigma values.
-            if self.dims == 2
+            if obj.dims == 2
                 G = fspecial('gaussian',[3,3],1);
-                self.fBin = imfilter(self.fBin,G,'same');
+                obj.fBin = imfilter(obj.fBin,G,'same');
             end
         end
         
