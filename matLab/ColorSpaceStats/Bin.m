@@ -64,7 +64,7 @@ classdef Bin
         
         function obj = norm(obj)
             %--- Normalised Histogram data ---------------------
-            if exists(obj.fBin)
+            if exist(obj.fBin)
                 obj.fBin = obj.bin ./ max(max(max(obj.fBin)));
             else
             obj.fBin = obj.bin ./ max(max(max(obj.bin)));
