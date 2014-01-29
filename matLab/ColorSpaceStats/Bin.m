@@ -12,6 +12,11 @@ classdef Bin
         bins;  % the counts for each bin.
         fBin; % bins normalised to 1:0 .
         f; % interpolated data at non zero points.
+        g;
+        gMean = [0,0];
+        gSigma = [0,0];
+        gTheta = 0;;
+        gAmp = 1.0;
         aMin; aMax; aScale;
         count = 0;
         a;
@@ -59,7 +64,11 @@ classdef Bin
         
         function self = norm(self)
             %--- Normalised Histogram data ---------------------
+            if exists(obj.fBin)
+                self.fBin = self.bin ./ max(max(max(self.fBin)));
+            else
             self.fBin = self.bin ./ max(max(max(self.bin)));
+            end
             NaNLoc = isnan(self.fBin)==1;
             self.fBin(NaNLoc) = 0;
         end
@@ -118,13 +127,19 @@ classdef Bin
             end
         end
         
-        function [x,resnorm,residual,exitflag] = gFit(obj)
+        function obj = gFit(obj)
             xdata = zeros(obj.nBins(1),obj.nBins(2),2);
             [ xdata(:,:,1), xdata(:,:,2)] =  meshgrid(obj.vals{2},obj.vals{1});
             x0 = [1.0, obj.a(2),         obj.aScale(2)/4.0,                obj.a(1),        obj.aScale(1)/4.0,                0.0]; % Inital guess parameters
             lb = [0.9, obj.vals{2}(1),   obj.aScale(2)*(3.0/obj.nBins(2)), obj.vals{1}(1),  obj.aScale(1)*(3.0/obj.nBins(1)),-pi/4];
             ub = [1.0, obj.vals{2}(end), obj.aScale(2),                    obj.vals{1}(end),obj.aScale(1),                    pi/4];
             [x,resnorm,residual,exitflag] = lsqcurvefit(@D2GaussFunctionRot,x0,xdata,obj.fBin,lb,ub);
+            obj.gAmp = x(1);
+            obj.gMean(1) = x(2);
+            obj.gSigma(1) = x(3);
+            obj.gMean(2) = x(4);
+            obj.gSigma(2) = x(5);
+            obj.gTheta = x(6);
         end
         
         function grid = grid(obj)
