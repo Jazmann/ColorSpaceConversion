@@ -64,10 +64,10 @@ classdef Bin
         
         function obj = norm(obj)
             %--- Normalised Histogram data ---------------------
-            if exist(obj.fBin)
-                obj.fBin = obj.bin ./ max(max(max(obj.fBin)));
+            if isempty(obj.fBin)
+                obj.fBin = obj.bin ./ max(max(max(obj.bin)));
             else
-            obj.fBin = obj.bin ./ max(max(max(obj.bin)));
+                obj.fBin = obj.fBin ./ max(max(max(obj.fBin)));
             end
             NaNLoc = isnan(obj.fBin)==1;
             obj.fBin(NaNLoc) = 0;
