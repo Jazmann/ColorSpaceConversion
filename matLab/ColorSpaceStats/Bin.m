@@ -135,10 +135,10 @@ classdef Bin
             ub = [1.0, obj.vals{2}(end), obj.aScale(2),                    obj.vals{1}(end),obj.aScale(1),                    pi/4];
             [x,resnorm,residual,exitflag] = lsqcurvefit(@D2GaussFunctionRot,x0,xdata,obj.fBin,lb,ub);
             obj.gAmp = x(1);
-            obj.gMean(1) = x(2);
-            obj.gSigma(1) = x(3);
-            obj.gMean(2) = x(4);
-            obj.gSigma(2) = x(5);
+            obj.gMean(2) = x(2);
+            obj.gSigma(2) = x(3);
+            obj.gMean(1) = x(4);
+            obj.gSigma(1) = x(5);
             obj.gTheta = x(6);
         end
         
@@ -330,6 +330,19 @@ classdef Bin
             imagesc(squeeze(sum(obj.fBin,2)));
             subplot(1,3,3)
             imagesc(squeeze(sum(obj.fBin,3)));
+            figure(gcf);
+        end
+    
+    
+        function showGFit(obj, nContours)
+            figure('Name','Gaussian fit','NumberTitle','off');
+            if nargin <= 2
+                nContours = 25;
+            end
+            xdata = zeros(obj.nBins(1), obj.nBins(2),2);
+            [ xdata(:,:,1), xdata(:,:,2)] =  meshgrid(obj.vals{2}, obj.vals{1});
+            gF = D2GaussFunctionRot([obj.gAmp, obj.gMean(2), obj.gSigma(2), obj.gMean(1),obj.gSigma(1),obj.gTheta],xdata);
+            contour(obj.vals{2},obj.vals{1},gF, nContours);
             figure(gcf);
         end
     end
