@@ -343,6 +343,8 @@ classdef Bin
             [ xdata(:,:,1), xdata(:,:,2)] =  meshgrid(obj.vals{2}, obj.vals{1});
             gF = D2GaussFunctionRot([obj.gAmp, obj.gMean(2), obj.gSigma(2), obj.gMean(1),obj.gSigma(1),obj.gTheta],xdata);
             contour(obj.vals{2},obj.vals{1},gF, nContours);
+                xlabel(obj.axisNames(2));
+                ylabel(obj.axisNames(1));
             figure(gcf);
         end
     end
