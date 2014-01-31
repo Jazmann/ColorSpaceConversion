@@ -44,7 +44,7 @@ classdef Bin
             
         end
         
-        function obj = setAxis(obj, aMin, aMax)
+        function obj = setAxis(obj, aMin, aMax, theta)
             if length(aMax) == obj.dims && length(aMin) == obj.dims
                 obj.aMin = aMin;
                 obj.aMax = aMax;
@@ -53,7 +53,22 @@ classdef Bin
                     obj.vals{i} = aMin(i):(obj.aScale(i))/(obj.nBins(i)-1):aMax(i);
                 end
                 obj = obj.mean;
-                
+                if nargin >=4
+                    T = [cos(theta), sin(theta); -1*sin(theta),cos(theta)];
+                    TScale = sqrt(2) * sin(mod(theta, pi/2.)+pi/4.);
+                    
+                    Crv = -0.5:1/(obj.nBins(1)-1):0.5;
+                    Cbv = -0.5:1/(obj.nBins(2)-1):0.5;
+                    [Cr, Cb] = meshgrid(Crv, Cbv);
+                    Cr = Cr';
+                    Cb = Cb';
+                    CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) ./ ( TScale) + 0.5;
+                    CrT = reshape(CrCbT(1,:),size(obj.fBin));
+                    CbT = reshape(CrCbT(2,:),size(obj.fBin));
+                    obj.fBin = obj.f(CbT,CrT);
+                    iT = inv(T);
+                    obj.a = (iT * ([obj.a(2)-0.5; obj.a(1)-0.5] .* ( TScale)));
+                end
             end
         end
         

@@ -14,22 +14,28 @@ classdef colorSpace
     
     methods
         function obj = colorSpace(theta, c, sigma, sig, sMin, sMax, dMin, dMax, cubeSkin, cInSrc)
-            if nargin>=6
-                obj.sMin = sMin; obj.sMax = sMax; obj.sRange = (sMax - sMin);
-                if nargin>=8
-                    obj.dMin = dMin; obj.dMax = dMax; obj.dRange = (dMax - dMin);
-                else
-                    obj.dMin = 0; obj.dMax = 255; obj.dRange = 255;
-                end
-            else
-                obj.sMin = 0; obj.sMax = 255; obj.sRange = 255;
-            end
             
+            if nargin>=10
+                CInSrc = cInSrc;
+            else
+                CInSrc = 0;
+            end
             if nargin>=9
                 obj.cubeSkin = cubeSkin;
             else
                 obj.cubeSkin = 0;
             end
+            if nargin>=8
+                obj.dMin = dMin; obj.dMax = dMax; obj.dRange = (dMax - dMin);
+            else
+                obj.dMin = 0; obj.dMax = 255; obj.dRange = 255;
+            end
+            if nargin>=6
+                obj.sMin = sMin; obj.sMax = sMax; obj.sRange = (sMax - sMin);
+            else
+                obj.sMin = 0; obj.sMax = 255; obj.sRange = 255;
+            end
+            
             
             if nargin>=4
                 obj.sig = sig; obj.sigma = sigma;
@@ -40,13 +46,19 @@ classdef colorSpace
                 obj.nT = transform(theta,'yes');
                 obj.T  = transform(theta,'no');
             end
-            
-            if cInSrc && nargin==10
+            if all(c < 1.0) && all(c > 0.0) 
+            if CInSrc
+                obj.uC = obj.nT.toRot(c);
+            else
+                obj.uC = c;
+            end
+            else
+            if CInSrc
                 obj.uC = obj.nT.toRot(obj.srcToUnit(c));
             else
                 obj.uC = obj.dstToUnit(c );
             end
-            
+            end
             obj.c = obj.unitToDst( obj.uC);
             obj.ErfA = erf(obj.g .* obj.uC );
             obj.ErfB = erf(obj.g .* (1. - obj.uC));
@@ -70,8 +82,8 @@ classdef colorSpace
         end % function
         
         function obj = setTheta(theta)
-                obj.nT = transform(theta,'yes');
-                obj.T  = transform(theta,'no');
+            obj.nT = transform(theta,'yes');
+            obj.T  = transform(theta,'no');
         end % function
         
         function outImage = toScaled(obj, img)
@@ -195,11 +207,11 @@ classdef colorSpace
         
         
         function pixelOut = scaledPoint(obj, point)
-                pixelOut = obj.shift(:) + obj.scale(:) .* erf( obj.g(:) .* (point(:) - obj.c(:)) ./ obj.sRange );
-%             pixelOut = zeros(size(point));
-%             for i=1:length(point)
-%                 pixelOut(i) = obj.shift(i) + obj.scale(i) * erf( obj.g(i) * (point(i) - obj.c(i)) ./ obj.sRange );
-%             end
+            pixelOut = obj.shift(:) + obj.scale(:) .* erf( obj.g(:) .* (point(:) - obj.c(:)) ./ obj.sRange );
+            %             pixelOut = zeros(size(point));
+            %             for i=1:length(point)
+            %                 pixelOut(i) = obj.shift(i) + obj.scale(i) * erf( obj.g(i) * (point(i) - obj.c(i)) ./ obj.sRange );
+            %             end
         end % function
         
         function unit = srcToUnit(obj, point)
