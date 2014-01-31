@@ -94,11 +94,11 @@ classdef Bin
             mask = ones(size(obj.fBin));
             if obj.dims == 2
                 for i = 1:length(obj.subs(:,1))
-                    mask(obj.subs(i,1)-rad:obj.subs(i,1)+rad,obj.subs(i,2)-rad:obj.subs(i,2)+rad) = 0;
+                    mask(max(obj.subs(i,1)-rad,1):min(obj.subs(i,1)+rad,obj.nBins(1)),max(obj.subs(i,2)-rad,1):min(obj.subs(i,2)+rad,obj.nBins(2))) = 0;
                 end
             elseif obj.dims == 3
                 for i = 1:length(obj.subs(:,1))
-                    mask(obj.subs(i,1)-rad:obj.subs(i,1)+rad,obj.subs(i,2)-rad:obj.subs(i,2)+rad,obj.subs(i,3)-rad:obj.subs(i,3)+rad) = 0;
+                    mask(max(obj.subs(i,1)-rad,1):min(obj.subs(i,1)+rad,obj.nBins(1)),max(obj.subs(i,2)-rad,1):min(obj.subs(i,2)+rad,obj.nBins(2)),max(obj.subs(i,3)-rad,1):min(obj.subs(i,3)+rad,obj.nBins(3))) = 0;
                 end
             end
             keep = find(mask);
