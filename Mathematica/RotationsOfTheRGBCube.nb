@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[   1213359,      27155]
-NotebookOptionsPosition[   1198738,      26698]
-NotebookOutlinePosition[   1199086,      26713]
-CellTagsIndexPosition[   1199043,      26710]
+NotebookDataLength[   1189448,      26497]
+NotebookOptionsPosition[   1175841,      26061]
+NotebookOutlinePosition[   1176197,      26077]
+CellTagsIndexPosition[   1176154,      26074]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -25,6 +25,7 @@ Cell["The RGB Cube corners.", "Subtitle",
 
 Cell[BoxData[
  RowBox[{"<<", "ToMatlab`"}]], "Input",
+ InitializationCell->True,
  CellChangeTimes->{{3.5982701510309753`*^9, 3.5982701642642107`*^9}}],
 
 Cell[BoxData[
@@ -273,10 +274,9 @@ Cell[BoxData[
         RowBox[{"[", 
          RowBox[{"3", ",", "2"}], "]"}], "]"}]}], "}"}]}], "}"}]}], 
   ";"}]], "Input",
+ InitializationCell->True,
  CellChangeTimes->{{3.598104076120545*^9, 3.5981043202884827`*^9}, 
    3.598109768098722*^9, 3.59826004305897*^9}],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
@@ -301,10 +301,51 @@ Cell[BoxData[{
       RowBox[{"3", ",", "4", ",", "5", ",", "8"}], "}"}], ",", 
      RowBox[{"{", 
       RowBox[{"1", ",", "4", ",", "5", ",", "6"}], "}"}]}], "}"}]}], 
+  ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.598260760658156*^9, 3.598260806851488*^9}, {
+  3.600343003419705*^9, 3.600343008039996*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"RGBAxisRanges", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RGBCube", " ", "=", " ", 
+   RowBox[{"cubeCorners", "[", "RGBAxisRanges", "]"}]}], 
   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"faces", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "7", ",", "6"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3", ",", "8", ",", "7"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "4", ",", "5", ",", "8"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "4", ",", "5", ",", "6"}], "}"}]}], "}"}]}], 
+  ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{3.600343066116569*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
  RowBox[{"MatrixForm", "[", 
-  RowBox[{"YABCube", "[", "\[Theta]", "]"}], "]"}]}], "Input",
- CellChangeTimes->{{3.598260760658156*^9, 3.598260806851488*^9}}],
+  RowBox[{"YABCube", "[", "\[Theta]", "]"}], "]"}]], "Input"],
 
 Cell[BoxData[
  TagBox[
@@ -593,44 +634,17 @@ Cell[BoxData[
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.5982608094277077`*^9, 3.5986409102905493`*^9}]
+ CellChangeTimes->{3.5982608094277077`*^9, 3.5986409102905493`*^9, 
+  3.600343086980898*^9}]
 }, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.600343046383244*^9, 3.60034305735287*^9}}],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"RGBAxisRanges", " ", "=", " ", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"0", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"RGBCube", " ", "=", " ", 
-   RowBox[{"cubeCorners", "[", "RGBAxisRanges", "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"faces", " ", "=", " ", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"5", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"1", ",", "2", ",", "7", ",", "6"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"2", ",", "3", ",", "8", ",", "7"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"3", ",", "4", ",", "5", ",", "8"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"1", ",", "4", ",", "5", ",", "6"}], "}"}]}], "}"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"MatrixForm", "[", "RGBCube", "]"}]}], "Input"],
+Cell[BoxData[
+ RowBox[{"MatrixForm", "[", "RGBCube", "]"}]], "Input"],
 
 Cell[BoxData[
  TagBox[
@@ -813,6 +827,7 @@ Cell[BoxData[
             RowBox[{"ranges", "[", 
              RowBox[{"[", 
               RowBox[{"3", ",", "2"}], "]"}], "]"}]}], "}"}]}], "}"}]}], ",", 
+       
        RowBox[{"Axes", "\[Rule]", "True"}]}], "]"}]}]}], 
    "\[IndentingNewLine]", "]"}]}]], "Input",
  InitializationCell->True,
@@ -1005,6 +1020,7 @@ Cell[BoxData[
             RowBox[{"ranges", "[", 
              RowBox[{"[", 
               RowBox[{"3", ",", "2"}], "]"}], "]"}]}], "}"}]}], "}"}]}], ",", 
+       
        RowBox[{"Axes", "\[Rule]", "True"}]}], "]"}]}]}], 
    "\[IndentingNewLine]", "]"}]}]], "Input",
  InitializationCell->True,
@@ -1299,318 +1315,6 @@ Cell[BoxData[
           FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
        SqrtBox["6"]]}]}], "}"}]}], "}"}]], "Output",
  CellChangeTimes->{3.5981068311498413`*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"ToMatlab", "[", 
-  RowBox[{"nYAB", "[", "theta", "]"}], "]"}]], "Input",
- CellChangeTimes->{{3.5982698631702023`*^9, 3.598269867496805*^9}, {
-  3.598270089563245*^9, 3.5982700935119753`*^9}, {3.5982701850815697`*^9, 
-  3.598270194201536*^9}, {3.5982707527578087`*^9, 3.598270754627191*^9}}],
-
-Cell[BoxData["\<\"[(1/3),(1/3),(1/3);(-1/2).*6.^(-1/2).*cos(theta).*(2.^(-1/2)\
-.*cos( ...\\n  \
-Mod((-1/6).*pi+theta,(1/3).*pi))+6.^(-1/2).*sin(Mod((-1/6).*pi+ ...\\n  \
-theta,(1/3).*pi))).^(-1)+(-1/2).*2.^(-1/2).*sin(theta).*(2.^(-1/2) ...\\n  \
-.*cos(Mod((-1/6).*pi+theta,(1/3).*pi))+6.^(-1/2).*sin(Mod((-1/6).* ...\\n  \
-pi+theta,(1/3).*pi))).^(-1),6.^(-1/2).*cos(theta).*(2.^(-1/2).* ...\\n  \
-cos(Mod((-1/6).*pi+theta,(1/3).*pi))+6.^(-1/2).*sin(Mod((-1/6).* ...\\n  \
-pi+theta,(1/3).*pi))).^(-1),(-1/2).*6.^(-1/2).*cos(theta).*(2.^( ...\\n  \
--1/2).*cos(Mod((-1/6).*pi+theta,(1/3).*pi))+6.^(-1/2).*sin(Mod(( ...\\n  \
--1/6).*pi+theta,(1/3).*pi))).^(-1)+(1/2).*2.^(-1/2).*sin(theta).*( ...\\n  \
-2.^(-1/2).*cos(Mod((-1/6).*pi+theta,(1/3).*pi))+6.^(-1/2).*sin( ...\\n  \
-Mod((-1/6).*pi+theta,(1/3).*pi))).^(-1);(-1/2).*2.^(-1/2).*cos( ...\\n  \
-theta).*(2.^(-1/2).*cos(Mod(theta,(1/3).*pi))+6.^(-1/2).*sin(Mod( ...\\n  \
-theta,(1/3).*pi))).^(-1)+(1/2).*6.^(-1/2).*sin(theta).*(2.^(-1/2) ...\\n  \
-.*cos(Mod(theta,(1/3).*pi))+6.^(-1/2).*sin(Mod(theta,(1/3).*pi))) ...\\n  \
-.^(-1),(-1).*6.^(-1/2).*sin(theta).*(2.^(-1/2).*cos(Mod(theta,( ...\\n  \
-1/3).*pi))+6.^(-1/2).*sin(Mod(theta,(1/3).*pi))).^(-1),(1/2).*2.^( ...\\n  \
--1/2).*cos(theta).*(2.^(-1/2).*cos(Mod(theta,(1/3).*pi))+6.^(-1/2) ...\\n  \
-.*sin(Mod(theta,(1/3).*pi))).^(-1)+(1/2).*6.^(-1/2).*sin(theta).*( ...\\n  \
-2.^(-1/2).*cos(Mod(theta,(1/3).*pi))+6.^(-1/2).*sin(Mod(theta,( ...\\n  \
-1/3).*pi))).^(-1)];\\n\"\>"], "Output",
- CellChangeTimes->{{3.598269852344061*^9, 3.598269868905293*^9}, 
-   3.598270094428483*^9, 3.5982701960066547`*^9, 3.598270601962048*^9, 
-   3.598270755809741*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Transpose", "[", 
-  RowBox[{"cubeCorners", "[", " ", 
-   RowBox[{"YABAxisRanges", "[", "\[Theta]", "]"}], "]"}], "]"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"0", ",", 
-     RowBox[{
-      FractionBox[
-       RowBox[{"Cos", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["2"]], "+", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}], ",", 
-     RowBox[{
-      FractionBox[
-       RowBox[{"Cos", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["2"]], "+", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     SqrtBox["3"], ",", 
-     RowBox[{
-      FractionBox[
-       RowBox[{"Cos", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["2"]], "+", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}], ",", 
-     RowBox[{
-      FractionBox[
-       RowBox[{"Cos", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["2"]], "+", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     SqrtBox["3"], ",", 
-     RowBox[{
-      RowBox[{"-", 
-       FractionBox[
-        RowBox[{"Cos", "[", 
-         RowBox[{"Mod", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"-", 
-             FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-           FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-        SqrtBox["2"]]}], "-", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}], ",", 
-     RowBox[{
-      FractionBox[
-       RowBox[{"Cos", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["2"]], "+", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"0", ",", 
-     RowBox[{
-      RowBox[{"-", 
-       FractionBox[
-        RowBox[{"Cos", "[", 
-         RowBox[{"Mod", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"-", 
-             FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-           FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-        SqrtBox["2"]]}], "-", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}], ",", 
-     RowBox[{
-      FractionBox[
-       RowBox[{"Cos", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["2"]], "+", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"0", ",", 
-     RowBox[{
-      RowBox[{"-", 
-       FractionBox[
-        RowBox[{"Cos", "[", 
-         RowBox[{"Mod", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"-", 
-             FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-           FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-        SqrtBox["2"]]}], "-", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}], ",", 
-     RowBox[{
-      RowBox[{"-", 
-       FractionBox[
-        RowBox[{"Cos", "[", 
-         RowBox[{"Mod", "[", 
-          RowBox[{"\[Theta]", ",", 
-           FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-        SqrtBox["2"]]}], "-", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"0", ",", 
-     RowBox[{
-      FractionBox[
-       RowBox[{"Cos", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["2"]], "+", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}], ",", 
-     RowBox[{
-      RowBox[{"-", 
-       FractionBox[
-        RowBox[{"Cos", "[", 
-         RowBox[{"Mod", "[", 
-          RowBox[{"\[Theta]", ",", 
-           FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-        SqrtBox["2"]]}], "-", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     SqrtBox["3"], ",", 
-     RowBox[{
-      FractionBox[
-       RowBox[{"Cos", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["2"]], "+", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"-", 
-            FractionBox["\[Pi]", "6"]}], "+", "\[Theta]"}], ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}], ",", 
-     RowBox[{
-      RowBox[{"-", 
-       FractionBox[
-        RowBox[{"Cos", "[", 
-         RowBox[{"Mod", "[", 
-          RowBox[{"\[Theta]", ",", 
-           FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-        SqrtBox["2"]]}], "-", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     SqrtBox["3"], ",", "1", ",", 
-     RowBox[{
-      RowBox[{"-", 
-       FractionBox[
-        RowBox[{"Cos", "[", 
-         RowBox[{"Mod", "[", 
-          RowBox[{"\[Theta]", ",", 
-           FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-        SqrtBox["2"]]}], "-", 
-      FractionBox[
-       RowBox[{"Sin", "[", 
-        RowBox[{"Mod", "[", 
-         RowBox[{"\[Theta]", ",", 
-          FractionBox["\[Pi]", "3"]}], "]"}], "]"}], 
-       SqrtBox["6"]]}]}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{3.598107915985642*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -4357,7 +4061,8 @@ Cell[BoxData[
   RowBox[{"YABCube", "[", "\[Theta]_", "]"}], ":=", 
   RowBox[{"FullSimplify", "[", 
    RowBox[{
-    RowBox[{"YAB", "[", "\[Theta]", "]"}], ".", "RGBCube"}], "]"}]}]], "Input",
+    RowBox[{"YAB", "[", "\[Theta]", "]"}], ".", "RGBCube"}], "]"}]}]], "Input",\
+
  InitializationCell->True,
  CellChangeTimes->{{3.596032403095932*^9, 3.5960324253912687`*^9}, {
    3.596032460461591*^9, 3.596032462451202*^9}, {3.598144734827881*^9, 
@@ -4541,22 +4246,20 @@ Cell[BoxData[
    3.598102716886051*^9, 3.59810274122301*^9}, {3.598102827959939*^9, 
    3.59810295048919*^9}, {3.598103002701921*^9, 3.59810305034873*^9}}],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0.5403539364174444, 
-    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
-    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
-    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, Pi}}, Typeset`size$$ = {
-    303., {47., 51.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$663723$$ = 0}, 
+    360., {172., 177.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$19784$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`\[Theta]$$ = 0}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$663723$$, 0]}, 
+        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$19784$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -4575,7 +4278,7 @@ $CellContext`YABAxisRanges[$CellContext`\[Theta]$$]; Cuboid[0.9 {{
                Part[$CellContext`ranges, 3, 2]}}]}]], 
       "Specifications" :> {{$CellContext`\[Theta]$$, 0, Pi}}, "Options" :> {},
        "DefaultOptions" :> {}],
-     ImageSizeCache->{354., {93., 98.}},
+     ImageSizeCache->{405., {216., 221.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -4595,547 +4298,7 @@ $CellContext`YABAxisRanges[$CellContext`\[Theta]$$]; Cuboid[0.9 {{
    3.59810100613698*^9}, {3.5981025709963903`*^9, 3.598102656010915*^9}, 
    3.598102877111755*^9, 3.598102915714476*^9, {3.5981030111000834`*^9, 
    3.598103051351694*^9}, 3.5981077218411007`*^9, 3.598107807689767*^9, 
-   3.598107982907465*^9, 3.598109800403185*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partd"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part specification \
-\[NoBreak]\\!\\(\\(\\(YABAxisRanges[0.5403539364174444`]\\)\\) \
-\[LeftDoubleBracket] \\(\\(1, 1\\)\\) \[RightDoubleBracket]\\)\[NoBreak] is \
-longer than depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
-\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640522840389*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0.5403539364174444`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986405229053926`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(3\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0.5403539364174444`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640522965396*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partd"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part specification \
-\[NoBreak]\\!\\(\\(\\(YABAxisRanges[0.5403539364174444`]\\)\\) \
-\[LeftDoubleBracket] \\(\\(1, 2\\)\\) \[RightDoubleBracket]\\)\[NoBreak] is \
-longer than depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
-\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640523025399*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0.5403539364174444`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986405231074038`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
-partw\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
-calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
-\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986405231314054`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partd"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part specification \
-\[NoBreak]\\!\\(\\(\\(YABAxisRanges[0.5403539364174444`]\\)\\) \
-\[LeftDoubleBracket] \\(\\(1, 1\\)\\) \[RightDoubleBracket]\\)\[NoBreak] is \
-longer than depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
-\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640523189409*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
-partd\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
-calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
-\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986405232214108`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Show", "::", "gcomb"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Could not combine the graphics objects in \
-\[NoBreak]\\!\\(Show[\\(\\(\\(\\(YABCube3D[0.5403539364174444`]\\)\\), \
-\\*Graphics3DBox[List[Opacity[0.5`], CuboidBox[List[List[Times[0.9`, \
-Part[Skeleton[3]]], Times[0.9`, Part[Skeleton[3]]], Times[0.9`, \
-Part[Skeleton[3]]]], List[Times[0.9`, Part[Skeleton[3]]], Times[0.9`, \
-Part[Skeleton[3]]], Times[0.9`, Part[Skeleton[3]]]]]]]]\\)\\)]\\)\[NoBreak]. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Show/gcomb\\\", \
-ButtonNote -> \\\"Show::gcomb\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640527089632*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Show", "::", "gcomb"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Could not combine the graphics objects in \
-\[NoBreak]\\!\\(Show[\\(\\(\\(\\(YABCube3D[0.5403539364174444`]\\)\\), \
-\\*Graphics3DBox[List[Opacity[0.5`], CuboidBox[List[List[Times[0.9`, \
-Part[Skeleton[3]]], Times[0.9`, Part[Skeleton[3]]], Times[0.9`, \
-Part[Skeleton[3]]]], List[Times[0.9`, Part[Skeleton[3]]], Times[0.9`, \
-Part[Skeleton[3]]], Times[0.9`, Part[Skeleton[3]]]]]]]]\\)\\)]\\)\[NoBreak]. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Show/gcomb\\\", \
-ButtonNote -> \\\"Show::gcomb\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640527109633*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partd"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part specification \
-\[NoBreak]\\!\\(\\(\\(YABAxisRanges[0.5403539364174444`]\\)\\) \
-\[LeftDoubleBracket] \\(\\(1, 1\\)\\) \[RightDoubleBracket]\\)\[NoBreak] is \
-longer than depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
-\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986406304245424`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0.5403539364174444`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640630509547*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(3\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0.5403539364174444`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640630598552*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partd"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part specification \
-\[NoBreak]\\!\\(\\(\\(YABAxisRanges[0.5403539364174444`]\\)\\) \
-\[LeftDoubleBracket] \\(\\(1, 2\\)\\) \[RightDoubleBracket]\\)\[NoBreak] is \
-longer than depth of object. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partd\\\", ButtonNote -> \
-\\\"Part::partd\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640630688557*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0.5403539364174444`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986406306925573`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
-partw\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
-calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
-\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986406306935577`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Show", "::", "gcomb"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Could not combine the graphics objects in \
-\[NoBreak]\\!\\(Show[\\(\\(\\(\\(YABCube3D[0.5403539364174444`]\\)\\), \
-\\*Graphics3DBox[List[Opacity[0.5`], CuboidBox[List[List[Times[0.9`, \
-Part[Skeleton[3]]], Times[0.9`, Part[Skeleton[3]]], Times[0.9`, \
-Part[Skeleton[3]]]], List[Times[0.9`, Part[Skeleton[3]]], Times[0.9`, \
-Part[Skeleton[3]]], Times[0.9`, Part[Skeleton[3]]]]]]]]\\)\\)]\\)\[NoBreak]. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Show/gcomb\\\", \
-ButtonNote -> \\\"Show::gcomb\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986406307835627`*^9}]
-}, Open  ]]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      FractionBox["1", 
-       SqrtBox["3"]], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["6"]]}], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["2"]]}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      FractionBox["1", 
-       SqrtBox["3"]], ",", 
-      SqrtBox[
-       FractionBox["2", "3"]], ",", "0"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      FractionBox["1", 
-       SqrtBox["3"]], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["6"]]}], ",", 
-      FractionBox["1", 
-       SqrtBox["2"]]}], "}"}]}], "}"}], ".", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{
-       FractionBox[
-        SqrtBox[
-         FractionBox["3", "2"]], "2"], "+", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      FractionBox["1", 
-       SqrtBox["2"]]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      SqrtBox["3"], ",", 
-      RowBox[{
-       FractionBox[
-        SqrtBox[
-         FractionBox["3", "2"]], "2"], "+", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      FractionBox["1", 
-       SqrtBox["2"]]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      SqrtBox["3"], ",", 
-      RowBox[{
-       RowBox[{"-", 
-        FractionBox[
-         SqrtBox[
-          FractionBox["3", "2"]], "2"]}], "-", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      FractionBox["1", 
-       SqrtBox["2"]]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{
-       RowBox[{"-", 
-        FractionBox[
-         SqrtBox[
-          FractionBox["3", "2"]], "2"]}], "-", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      FractionBox["1", 
-       SqrtBox["2"]]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{
-       RowBox[{"-", 
-        FractionBox[
-         SqrtBox[
-          FractionBox["3", "2"]], "2"]}], "-", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["2"]]}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{
-       FractionBox[
-        SqrtBox[
-         FractionBox["3", "2"]], "2"], "+", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["2"]]}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      SqrtBox["3"], ",", 
-      RowBox[{
-       FractionBox[
-        SqrtBox[
-         FractionBox["3", "2"]], "2"], "+", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["2"]]}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      SqrtBox["3"], ",", "1", ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["2"]]}]}], "}"}]}], "}"}]}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Dot", "::", "dotsh"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Tensors \[NoBreak]\\!\\({\\(\\({1\\/\\@3, \
-\\(\\(-\\(\\(1\\/\\@6\\)\\)\\)\\), \\(\\(-\\(\\(1\\/\\@2\\)\\)\\)\\)}\\)\\), \
-\\(\\({1\\/\\@3, \\@\\(2\\/3\\), 0}\\)\\), \\(\\({1\\/\\@3, \\(\\(-\\(\\(1\\/\
-\\@6\\)\\)\\)\\), 1\\/\\@2}\\)\\)}\\)\[NoBreak] and \
-\[NoBreak]\\!\\({\\(\\({0, \\(\\(\\@\\(3\\/2\\)\\/2 + 1\\/\\(2\\\\ \\@6\\)\\)\
-\\), 1\\/\\@2}\\)\\), \\(\\({\\@3, \\(\\(\\@\\(3\\/2\\)\\/2 + 1\\/\\(2\\\\ \
-\\@6\\)\\)\\), 1\\/\\@2}\\)\\), \\(\\({\\@3, \
-\\(\\(\\(\\(-\\(\\(\\@\\(3\\/2\\)\\/2\\)\\)\\)\\) - 1\\/\\(2\\\\ \
-\\@6\\)\\)\\), 1\\/\\@2}\\)\\), \\(\\({0, \
-\\(\\(\\(\\(-\\(\\(\\@\\(3\\/2\\)\\/2\\)\\)\\)\\) - 1\\/\\(2\\\\ \
-\\@6\\)\\)\\), 1\\/\\@2}\\)\\), \\(\\({0, \
-\\(\\(\\(\\(-\\(\\(\\@\\(3\\/2\\)\\/2\\)\\)\\)\\) - 1\\/\\(2\\\\ \
-\\@6\\)\\)\\), \\(\\(-\\(\\(1\\/\\@2\\)\\)\\)\\)}\\)\\), \\(\\({0, \
-\\(\\(\\@\\(3\\/2\\)\\/2 + 1\\/\\(2\\\\ \\@6\\)\\)\\), \
-\\(\\(-\\(\\(1\\/\\@2\\)\\)\\)\\)}\\)\\), \\(\\({\\@3, \
-\\(\\(\\@\\(3\\/2\\)\\/2 + 1\\/\\(2\\\\ \\@6\\)\\)\\), \
-\\(\\(-\\(\\(1\\/\\@2\\)\\)\\)\\)}\\)\\), \\(\\({\\@3, 1, \
-\\(\\(-\\(\\(1\\/\\@2\\)\\)\\)\\)}\\)\\)}\\)\[NoBreak] have incompatible \
-shapes. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/Dot/dotsh\\\", ButtonNote -> \
-\\\"Dot::dotsh\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.59810783197075*^9}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      FractionBox["1", 
-       SqrtBox["3"]], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["6"]]}], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["2"]]}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      FractionBox["1", 
-       SqrtBox["3"]], ",", 
-      SqrtBox[
-       FractionBox["2", "3"]], ",", "0"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      FractionBox["1", 
-       SqrtBox["3"]], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["6"]]}], ",", 
-      FractionBox["1", 
-       SqrtBox["2"]]}], "}"}]}], "}"}], ".", 
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{
-       FractionBox[
-        SqrtBox[
-         FractionBox["3", "2"]], "2"], "+", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      FractionBox["1", 
-       SqrtBox["2"]]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      SqrtBox["3"], ",", 
-      RowBox[{
-       FractionBox[
-        SqrtBox[
-         FractionBox["3", "2"]], "2"], "+", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      FractionBox["1", 
-       SqrtBox["2"]]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      SqrtBox["3"], ",", 
-      RowBox[{
-       RowBox[{"-", 
-        FractionBox[
-         SqrtBox[
-          FractionBox["3", "2"]], "2"]}], "-", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      FractionBox["1", 
-       SqrtBox["2"]]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{
-       RowBox[{"-", 
-        FractionBox[
-         SqrtBox[
-          FractionBox["3", "2"]], "2"]}], "-", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      FractionBox["1", 
-       SqrtBox["2"]]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{
-       RowBox[{"-", 
-        FractionBox[
-         SqrtBox[
-          FractionBox["3", "2"]], "2"]}], "-", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["2"]]}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", 
-      RowBox[{
-       FractionBox[
-        SqrtBox[
-         FractionBox["3", "2"]], "2"], "+", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["2"]]}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      SqrtBox["3"], ",", 
-      RowBox[{
-       FractionBox[
-        SqrtBox[
-         FractionBox["3", "2"]], "2"], "+", 
-       FractionBox["1", 
-        RowBox[{"2", " ", 
-         SqrtBox["6"]}]]}], ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["2"]]}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      SqrtBox["3"], ",", "1", ",", 
-      RowBox[{"-", 
-       FractionBox["1", 
-        SqrtBox["2"]]}]}], "}"}]}], "}"}]}]], "Output",
- CellChangeTimes->{3.598107831973543*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Definition", "[", "Sphere", "]"}]], "Input",
- CellChangeTimes->{{3.598102472486389*^9, 3.598102482106784*^9}}],
-
-Cell[BoxData[
- InterpretationBox[GridBox[{
-    {
-     RowBox[{
-      RowBox[{"Attributes", "[", "Sphere", "]"}], "=", 
-      RowBox[{"{", 
-       RowBox[{"Protected", ",", "ReadProtected"}], "}"}]}]}
-   },
-   BaselinePosition->{Baseline, {1, 1}},
-   GridBoxAlignment->{
-    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
-     "RowsIndexed" -> {}}],
-  Definition[Sphere],
-  Editable->False]], "Output",
- CellChangeTimes->{3.598102484460916*^9}]
+   3.598107982907465*^9, 3.598109800403185*^9, 3.6003431382981586`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -8143,22 +7306,20 @@ Cell[BoxData[
    3.596039217732134*^9, 3.596039244576934*^9}, {3.597139999631431*^9, 
    3.5971400340473995`*^9}, {3.5971400691684084`*^9, 3.5971400704054794`*^9}}],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`\[Theta]$$ = 1.0932742434492482`, 
-    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
-    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
-    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, Pi}}, Typeset`size$$ = {
     360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$12475$$ = 0}, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$19889$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`\[Theta]$$ = 0}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$12475$$, 0]}, 
+        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$19889$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -8182,7 +7343,7 @@ Cell[BoxData[
            Rational[1, 2]}, {-(2/3)^Rational[1, 2], (2/3)^Rational[1, 2]}}], 
       "Specifications" :> {{$CellContext`\[Theta]$$, 0, Pi}}, "Options" :> {},
        "DefaultOptions" :> {}],
-     ImageSizeCache->{411., {224., 229.}},
+     ImageSizeCache->{405., {222., 227.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -8198,89 +7359,7 @@ Cell[BoxData[
   3.596036474069346*^9, 3.5960365314348516`*^9, 3.596036943221499*^9, 
   3.596037004104776*^9, 3.596038994849193*^9, 3.596039163411475*^9, 
   3.5960392476156397`*^9, 3.597140037569601*^9, 3.597140071563545*^9, 
-  3.597341418320631*^9, 3.597787447877696*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[1.0932742434492482`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986406259492865`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(3\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[1.0932742434492482`]\\)\[NoBreak] does not \
-exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.59864062600729*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Transpose", "::", "nmtx"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The first two levels of the one-dimensional list \
-\[NoBreak]\\!\\({\\(\\(\\(\\(YABAxisRanges[1.0932742434492482`]\\)\\) \
-\[LeftDoubleBracket] 2 \[RightDoubleBracket]\\)\\), \
-\\(\\(\\(\\(YABAxisRanges[1.0932742434492482`]\\)\\) \[LeftDoubleBracket] 3 \
-\[RightDoubleBracket]\\)\\)}\\)\[NoBreak] cannot be transposed. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Transpose/nmtx\\\", \
-ButtonNote -> \\\"Transpose::nmtx\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640626066293*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\({2, 3, 4, 5, 6, 7}\\)\[NoBreak] of \
-\[NoBreak]\\!\\(Transpose[RGBCube]\\)\[NoBreak] does not exist. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
-ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986406261252966`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
-partw\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
-calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
-\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986406261292963`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"MapThread", "::", "list"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"List expected at position \[NoBreak]\\!\\(2\\)\[NoBreak] \
-in \[NoBreak]\\!\\(MapThread[\\(\\(RGBColor, \
-\\(\\(Transpose[\\(\\(\\(\\(Transpose[RGBCube]\\)\\) \[LeftDoubleBracket] \\(\
-\\({2, 3, 4, 5, 6, 7}\\)\\) \[RightDoubleBracket]\\)\\)]\\)\\)\\)\\)]\\)\
-\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/list\\\", ButtonNote -> \
-\\\"MapThread::list\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986406261872997`*^9}]
-}, Open  ]]
+  3.597341418320631*^9, 3.597787447877696*^9, 3.6003431859122868`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -8450,7 +7529,7 @@ Cell[BoxData[
    3.597341273408343*^9, 3.597392392783821*^9, 3.5976822988769903`*^9, 
    3.597782233832562*^9, 3.597840826887998*^9, 3.597858373913493*^9, 
    3.598109651820496*^9, 3.59827268513698*^9, 3.5982727946765823`*^9, 
-   3.5986406965493245`*^9}]
+   3.5986406965493245`*^9, 3.6003427651767178`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -8617,7 +7696,7 @@ Cell[BoxData[
   3.5973229267449737`*^9, 3.597342868448574*^9, 3.597343231447336*^9, 
   3.5974278415053716`*^9, 3.597682299491026*^9, 3.5977874350329857`*^9, 
   3.5978583750887737`*^9, 3.598270300130087*^9, 3.598270354644113*^9, 
-  3.5982704782105494`*^9}],
+  3.5982704782105494`*^9, 3.6003432186772423`*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -8731,7 +7810,7 @@ Cell[BoxData[
   3.5973229267449737`*^9, 3.597342868448574*^9, 3.597343231447336*^9, 
   3.5974278415053716`*^9, 3.597682299491026*^9, 3.5977874350329857`*^9, 
   3.5978583750887737`*^9, 3.598270300130087*^9, 3.598270354644113*^9, 
-  3.5982704782422123`*^9}],
+  3.5982704782105494`*^9, 3.600343218863336*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -9008,7 +8087,7 @@ Cell[BoxData[
   3.5973229267449737`*^9, 3.597342868448574*^9, 3.597343231447336*^9, 
   3.5974278415053716`*^9, 3.597682299491026*^9, 3.5977874350329857`*^9, 
   3.5978583750887737`*^9, 3.598270300130087*^9, 3.598270354644113*^9, 
-  3.598270478248275*^9}]
+  3.5982704782105494`*^9, 3.600343219734923*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -9033,7 +8112,7 @@ Cell[BoxData[
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, Pi}}, Typeset`size$$ = {
-    168., {2., 8.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    626., {21.125, 26.875}}, Typeset`update$$ = 0, Typeset`initDone$$, 
     Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$684685$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`\[Theta]$$ = 0}, 
@@ -9049,7 +8128,7 @@ Cell[BoxData[
           $CellContext`nYAB[$CellContext`\[Theta]$$], $CellContext`RGBCube]]],
        "Specifications" :> {{$CellContext`\[Theta]$$, 0, Pi}}, 
       "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{256., {52., 57.}},
+     ImageSizeCache->{671., {66., 71.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -9165,22 +8244,20 @@ Cell[BoxData[
    3.5973432425659723`*^9, 3.597343244014055*^9}, {3.597343658742776*^9, 
    3.597343671238491*^9}}],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0, Typeset`show$$ = True, 
-    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
-    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
-    "\"untitled\"", Typeset`specs$$ = {{
+   DynamicModuleBox[{$CellContext`\[Theta]$$ = 2.494424566950296, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, Pi}}, Typeset`size$$ = {
     360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$12414$$ = 0}, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$22117$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`\[Theta]$$ = 0}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$12414$$, 0]}, 
+        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$22117$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -9203,7 +8280,7 @@ Cell[BoxData[
         PlotRange -> {{(-1)/2, 1/2}, {(-1)/2, 1/2}}], 
       "Specifications" :> {{$CellContext`\[Theta]$$, 0, Pi}}, "Options" :> {},
        "DefaultOptions" :> {}],
-     ImageSizeCache->{411., {224., 229.}},
+     ImageSizeCache->{405., {222., 227.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -9217,150 +8294,7 @@ Cell[BoxData[
   3.597343014306916*^9, 3.597343058694455*^9, 3.597343140547137*^9, {
    3.597343236330615*^9, 3.597343244678093*^9}, 3.5973436740786533`*^9, {
    3.5974278285666313`*^9, 3.597427844935568*^9}, {3.5977874232248287`*^9, 
-   3.597787440203265*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(2\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0]\\)\[NoBreak] does not exist. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
-ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986406165837507`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(3\\)\[NoBreak] of \
-\[NoBreak]\\!\\(YABAxisRanges[0]\\)\[NoBreak] does not exist. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
-ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640616642754*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Transpose", "::", "nmtx"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The first two levels of the one-dimensional list \
-\[NoBreak]\\!\\({\\(\\(\\(\\(YABAxisRanges[0]\\)\\) \[LeftDoubleBracket] 2 \
-\[RightDoubleBracket]\\)\\), \\(\\(\\(\\(YABAxisRanges[0]\\)\\) \
-\[LeftDoubleBracket] 3 \[RightDoubleBracket]\\)\\)}\\)\[NoBreak] cannot be \
-transposed. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/Transpose/nmtx\\\", ButtonNote -> \
-\\\"Transpose::nmtx\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640616681756*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\({2, 3, 4, 5, 6, 7}\\)\[NoBreak] of \
-\[NoBreak]\\!\\(Transpose[RGBCube]\\)\[NoBreak] does not exist. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/partw\\\", \
-ButtonNote -> \\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.59864061674076*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \[NoBreak]\\!\\(\\*StyleBox[\\(Part :: \
-partw\\), \\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this \
-calculation. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/stop\\\", ButtonNote -> \
-\\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986406167737617`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"MapThread", "::", "list"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"List expected at position \[NoBreak]\\!\\(2\\)\[NoBreak] \
-in \[NoBreak]\\!\\(MapThread[\\(\\(RGBColor, \
-\\(\\(Transpose[\\(\\(\\(\\(Transpose[RGBCube]\\)\\) \[LeftDoubleBracket] \\(\
-\\({2, 3, 4, 5, 6, 7}\\)\\) \[RightDoubleBracket]\\)\\)]\\)\\)\\)\\)]\\)\
-\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/list\\\", ButtonNote -> \
-\\\"MapThread::list\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640616837765*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Take", "::", "take"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Cannot take positions \[NoBreak]\\!\\(2\\)\[NoBreak] \
-through \[NoBreak]\\!\\(7\\)\[NoBreak] in \[NoBreak]\\!\\({\\(\\({0, 1, 1, 0, \
-0, 0, 1, 1}\\)\\), \\(\\({0, 0, 1, 1, 1, 0, 0, 1}\\)\\), \\(\\({0, 0, 0, 0, \
-1, 1, 1, 1}\\)\\)}\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/Take/take\\\", ButtonNote -> \
-\\\"Take::take\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640922973275*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Part", "::", "partw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Part \[NoBreak]\\!\\(3\\)\[NoBreak] of \[NoBreak]\\!\\(\\(\
-\\(nYAB[0]\\)\\) . \\(\\({\\(\\({0, 1, 1, 0, 0, 0, 1, 1}\\)\\), \\(\\({0, 0, \
-1, 1, 1, 0, 0, 1}\\)\\), \\(\\({0, 0, 0, 0, 1, 1, 1, 1}\\)\\)}\\)\\)\\)\
-\[NoBreak] does not exist. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/partw\\\", ButtonNote -> \
-\\\"Part::partw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986409229762754`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Take", "::", "take"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Cannot take positions \[NoBreak]\\!\\(2\\)\[NoBreak] \
-through \[NoBreak]\\!\\(7\\)\[NoBreak] in \
-\[NoBreak]\\!\\(\\(\\((\\(\\(nYAB[0]\\)\\) . \\(\\({\\(\\({0, 1, 1, 0, 0, 0, \
-1, 1}\\)\\), \\(\\({0, 0, 1, 1, 1, 0, 0, 1}\\)\\), \\(\\({0, 0, 0, 0, 1, 1, \
-1, 1}\\)\\)}\\)\\))\\)\\) \[LeftDoubleBracket] 3 \[RightDoubleBracket]\\)\
-\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/Take/take\\\", ButtonNote -> \
-\\\"Take::take\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.5986409229802756`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Transpose", "::", "nmtx"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"The first two levels of the one-dimensional list \
-\[NoBreak]\\!\\({\\(\\(Take[\\(\\(\\(\\({\\(\\({0, 1, 1, 0, 0, 0, 1, \
-1}\\)\\), \\(\\({0, 0, 1, 1, 1, 0, 0, 1}\\)\\), \\(\\({0, 0, 0, 0, 1, 1, 1, \
-1}\\)\\)}\\)\\), \\(\\({2, 7}\\)\\)\\)\\)]\\)\\), \
-\\(\\(Take[\\(\\(\\(\\(\\(\\((\\(\\(nYAB[0]\\)\\) . \\(\\({\\(\\({0, 1, 1, 0, \
-0, 0, 1, 1}\\)\\), \\(\\({0, 0, 1, 1, 1, 0, 0, 1}\\)\\), \\(\\({0, 0, 0, 0, \
-1, 1, 1, 1}\\)\\)}\\)\\))\\)\\) \[LeftDoubleBracket] 3 \
-\[RightDoubleBracket]\\)\\), \\(\\({2, 7}\\)\\)\\)\\)]\\)\\)}\\)\[NoBreak] \
-cannot be transposed. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/Transpose/nmtx\\\", ButtonNote -> \
-\\\"Transpose::nmtx\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.598640922984276*^9}]
-}, Open  ]]
+   3.597787440203265*^9}, 3.6003432282282743`*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -10485,7 +9419,7 @@ Cell[BoxData[
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, Pi}, {
       Hold[$CellContext`srcRange$$], 1, 255, 1}}, Typeset`size$$ = {
-    264., {2., 8.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    2521., {78.125, 25.875}}, Typeset`update$$ = 0, Typeset`initDone$$, 
     Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$637752$$ = 
     0, $CellContext`srcRange$637753$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
@@ -10510,7 +9444,7 @@ $CellContext`srcRange$$]] - N[
       "Specifications" :> {{$CellContext`\[Theta]$$, 0, 
          Pi}, {$CellContext`srcRange$$, 1, 255, 1}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{315., {66., 71.}},
+     ImageSizeCache->{2823., {108., 113.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -10855,7 +9789,7 @@ Cell[BoxData[
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`\[Theta]$$], 0, 2 Pi}}, Typeset`size$$ = {
-    160., {2., 8.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    157., {2.4375, 9.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
     Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$117529$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`\[Theta]$$ = 0}, 
@@ -10871,7 +9805,7 @@ Cell[BoxData[
           $CellContext`maskPos[$CellContext`\[Theta]$$]]]}, 
       "Specifications" :> {{$CellContext`\[Theta]$$, 0, 2 Pi}}, 
       "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{256., {52., 57.}},
+     ImageSizeCache->{246., {49., 54.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -17173,7 +16107,7 @@ Cell[BoxData[
     "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`\[Theta]$$], -0.1537}, -Pi, Pi}, {
       Hold[$CellContext`tRange$$], 1, 765, 1}}, Typeset`size$$ = {
-    888., {24., 12.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    809., {82.125, 13.875}}, Typeset`update$$ = 0, Typeset`initDone$$, 
     Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$30592$$ = 
     0, $CellContext`tRange$30593$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
@@ -17201,7 +16135,7 @@ $CellContext`RGBCube]]]},
       "Specifications" :> {{{$CellContext`\[Theta]$$, -0.1537}, -Pi, 
          Pi}, {$CellContext`tRange$$, 1, 765, 1}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{939., {76., 81.}},
+     ImageSizeCache->{854., {104., 109.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -17290,9 +16224,10 @@ Cell[BoxData[
        Hold[$CellContext`\[Theta]$$], -0.1537}, -Pi, Pi}, {{
        Hold[$CellContext`tRange$$], 255}, 1, 1024, 1}, {{
        Hold[$CellContext`dstRange$$], 255}, 1, 255, 1}}, Typeset`size$$ = {
-    533.5, {44., 12.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$31018$$ = 
-    0, $CellContext`tRange$31019$$ = 0, $CellContext`dstRange$31020$$ = 0}, 
+    829.50634765625, {2893.4375, 12.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`\[Theta]$31018$$ = 0, $CellContext`tRange$31019$$ = 
+    0, $CellContext`dstRange$31020$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`dstRange$$ = 255, $CellContext`tRange$$ = 
@@ -17318,7 +16253,7 @@ $CellContext`dstRange$$]; {
          Pi}, {{$CellContext`tRange$$, 255}, 1, 1024, 
          1}, {{$CellContext`dstRange$$, 255}, 1, 255, 1}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{585., {99., 104.}},
+     ImageSizeCache->{875., {1523., 1528.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -18770,7 +17705,7 @@ Cell[BoxData[
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`\[Theta]$$], -0.1537}, -Pi, Pi}}, Typeset`size$$ = {
-    32., {0., 8.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    31., {1., 8.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
     Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$111920$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`\[Theta]$$ = -0.1537}, 
@@ -18793,7 +17728,7 @@ Cell[BoxData[
             6]}} == $CellContext`YAB[$CellContext`\[Theta]$$], 
       "Specifications" :> {{{$CellContext`\[Theta]$$, -0.1537}, -Pi, Pi}}, 
       "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{256., {52., 57.}},
+     ImageSizeCache->{246., {49., 54.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -19104,9 +18039,10 @@ Cell[BoxData[
        Hold[$CellContext`\[Theta]$$], -0.1537}, -Pi, Pi}, {{
        Hold[$CellContext`tRange$$], 255}, 1, 1024, 1}, {{
        Hold[$CellContext`dstRange$$], 255}, 1, 255, 1}}, Typeset`size$$ = {
-    507.5, {44., 12.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`\[Theta]$112569$$ = 
-    0, $CellContext`tRange$112570$$ = 0, $CellContext`dstRange$112571$$ = 0}, 
+    779.30126953125, {88.19921875, 9.80078125}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`\[Theta]$112569$$ = 0, $CellContext`tRange$112570$$ = 
+    0, $CellContext`dstRange$112571$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`dstRange$$ = 255, $CellContext`tRange$$ = 
@@ -19132,7 +18068,7 @@ $CellContext`dstRange$$]; {
          Pi}, {{$CellContext`tRange$$, 255}, 1, 1024, 
          1}, {{$CellContext`dstRange$$, 255}, 1, 255, 1}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{559., {99., 104.}},
+     ImageSizeCache->{825., {119., 124.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -24223,7 +23159,7 @@ $CellContext`L$, $CellContext`a$, $CellContext`b$},
          Pi}, {$CellContext`maxL$$, 0, 1}, {$CellContext`maxA$$, 0, 
          0.5}, {$CellContext`maxB$$, 0, 0.5}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{411., {281., 286.}},
+     ImageSizeCache->{405., {279., 284.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -25118,12 +24054,14 @@ Cell[BoxData[
 }, Open  ]]
 }, Open  ]],
 
+Cell[CellGroupData[{
+
 Cell["2 D rotation Matrix", "Subtitle",
  CellChangeTimes->{{3.5954073303425417`*^9, 3.595407356913694*^9}}],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"RotationMatrix2D", "[", "\[Theta]", "]"}], ":=", 
+  RowBox[{"RotationMatrix2D", "[", "\[Theta]_", "]"}], ":=", 
   RowBox[{
    RowBox[{"1", "/", 
     RowBox[{"(", 
@@ -25147,26 +24085,138 @@ Cell[BoxData[
         RowBox[{"Sin", "[", "\[Theta]", "]"}]}], ",", 
        RowBox[{"Cos", "[", "\[Theta]", "]"}]}], "}"}]}], "}"}]}]}]], "Input",
  CellChangeTimes->{{3.5986437535191727`*^9, 3.59864378335888*^9}, {
-  3.5986451303419228`*^9, 3.5986451365932803`*^9}, {3.59864518711117*^9, 
-  3.598645198160802*^9}, {3.598645264648605*^9, 3.5986452697118945`*^9}}],
+   3.5986451303419228`*^9, 3.5986451365932803`*^9}, {3.59864518711117*^9, 
+   3.598645198160802*^9}, {3.598645264648605*^9, 3.5986452697118945`*^9}, 
+   3.600343654868698*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"RotationMatrix2DScale", "[", "\[Theta]_", "]"}], ":=", 
+  RowBox[{"(", 
+   RowBox[{
+    SqrtBox["2"], " ", 
+    RowBox[{"Sin", "[", 
+     RowBox[{
+      FractionBox["\[Pi]", "4"], "+", 
+      RowBox[{"Mod", "[", 
+       RowBox[{"\[Theta]", ",", 
+        RowBox[{"Pi", "/", "2"}]}], "]"}]}], "]"}]}], " ", 
+   ")"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RotationMatrix2D", "[", "\[Theta]_", "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"Cos", "[", "\[Theta]", "]"}], ",", 
+      RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{"Sin", "[", "\[Theta]", "]"}]}], ",", 
+      RowBox[{"Cos", "[", "\[Theta]", "]"}]}], "}"}]}], "}"}]}]}], "Input",
+ CellChangeTimes->{
+  3.600342920258679*^9, 3.600343651565379*^9, {3.600344314209228*^9, 
+   3.600344330491984*^9}, {3.600354623198207*^9, 3.60035462358183*^9}}],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"InputForm", "[", 
-  RowBox[{"RotationMatrix2D", "[", "\[Theta]", "]"}], "]"}]], "Input",
+ RowBox[{"MatrixForm", "[", 
+  RowBox[{"TrigFactor", "[", 
+   RowBox[{"RotationMatrix2D", "[", "\[Theta]", "]"}], "]"}], "]"}]], "Input",\
+
  CellChangeTimes->{{3.5986437411664667`*^9, 3.5986437425835476`*^9}, {
   3.598643792143382*^9, 3.598643848902629*^9}, {3.5986454240877237`*^9, 
-  3.598645424214731*^9}}],
+  3.598645424214731*^9}, {3.6003427816717*^9, 3.6003428253940363`*^9}}],
 
-Cell["\<\
-{{(Cos[\[Theta]]*Csc[Pi/4 + Mod[\[Theta], Pi/2]])/Sqrt[2], (Csc[Pi/4 + Mod[\
-\[Theta], Pi/2]]*Sin[\[Theta]])/Sqrt[2]}, 
- {-((Csc[Pi/4 + Mod[\[Theta], Pi/2]]*Sin[\[Theta]])/Sqrt[2]), \
-(Cos[\[Theta]]*Csc[Pi/4 + Mod[\[Theta], Pi/2]])/Sqrt[2]}}\
-\>", "Output",
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox["1", "2"]}], "-", 
+         FractionBox["\[ImaginaryI]", "2"]}], ")"}], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"-", "1"}], ")"}], 
+        RowBox[{"3", "/", "4"}]], " ", 
+       RowBox[{"Cos", "[", "\[Theta]", "]"}], " ", 
+       RowBox[{"Csc", "[", 
+        RowBox[{
+         FractionBox["\[Pi]", "4"], "+", 
+         RowBox[{"Mod", "[", 
+          RowBox[{"\[Theta]", ",", 
+           FractionBox["\[Pi]", "2"]}], "]"}]}], "]"}]}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox["1", "2"]}], "-", 
+         FractionBox["\[ImaginaryI]", "2"]}], ")"}], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"-", "1"}], ")"}], 
+        RowBox[{"3", "/", "4"}]], " ", 
+       RowBox[{"Csc", "[", 
+        RowBox[{
+         FractionBox["\[Pi]", "4"], "+", 
+         RowBox[{"Mod", "[", 
+          RowBox[{"\[Theta]", ",", 
+           FractionBox["\[Pi]", "2"]}], "]"}]}], "]"}], " ", 
+       RowBox[{"Sin", "[", "\[Theta]", "]"}]}]},
+     {
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         FractionBox["1", "2"], "+", 
+         FractionBox["\[ImaginaryI]", "2"]}], ")"}], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"-", "1"}], ")"}], 
+        RowBox[{"3", "/", "4"}]], " ", 
+       RowBox[{"Csc", "[", 
+        RowBox[{
+         FractionBox["\[Pi]", "4"], "+", 
+         RowBox[{"Mod", "[", 
+          RowBox[{"\[Theta]", ",", 
+           FractionBox["\[Pi]", "2"]}], "]"}]}], "]"}], " ", 
+       RowBox[{"Sin", "[", "\[Theta]", "]"}]}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox["1", "2"]}], "-", 
+         FractionBox["\[ImaginaryI]", "2"]}], ")"}], " ", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"-", "1"}], ")"}], 
+        RowBox[{"3", "/", "4"}]], " ", 
+       RowBox[{"Cos", "[", "\[Theta]", "]"}], " ", 
+       RowBox[{"Csc", "[", 
+        RowBox[{
+         FractionBox["\[Pi]", "4"], "+", 
+         RowBox[{"Mod", "[", 
+          RowBox[{"\[Theta]", ",", 
+           FractionBox["\[Pi]", "2"]}], "]"}]}], "]"}]}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{3.5986437434855995`*^9, 3.5986438567310762`*^9, 
-  3.5986454248507676`*^9}]
+  3.5986454248507676`*^9, 3.600342785684965*^9, 3.600342825918029*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -26694,11 +25744,325 @@ Cell[BoxData[
       RowBox[{"Sin", "[", "\[Theta]", "]"}]}], ",", 
      RowBox[{"Cos", "[", "\[Theta]", "]"}]}], "}"}]}], "}"}]], "Output",
  CellChangeTimes->{3.5986412884891815`*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"square", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.5"}], ",", "0.5", ",", "0.5", ",", 
+       RowBox[{"-", "0.5"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.5"}], ",", 
+       RowBox[{"-", "0.5"}], ",", "0.5", ",", "0.5"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"squareShift", "[", "\[Theta]_", "]"}], ":=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"0.5", " ", 
+        RowBox[{"Cos", "[", "\[Theta]", "]"}]}], ",", 
+       RowBox[{"0.5", " ", 
+        RowBox[{"Cos", "[", "\[Theta]", "]"}]}], ",", 
+       RowBox[{"0.5", " ", 
+        RowBox[{"Cos", "[", "\[Theta]", "]"}]}], ",", 
+       RowBox[{"0.5", " ", 
+        RowBox[{"Cos", "[", "\[Theta]", "]"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"0.5", " ", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"-", "\[Theta]"}], "]"}]}], ",", 
+       RowBox[{"0.5", " ", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"-", "\[Theta]"}], "]"}]}], ",", 
+       RowBox[{"0.5", " ", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"-", "\[Theta]"}], "]"}]}], ",", 
+       RowBox[{"0.5", " ", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"-", "\[Theta]"}], "]"}]}]}], "}"}]}], "}"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.600344083412917*^9, 3.6003440955285482`*^9}, {
+   3.60034417060178*^9, 3.6003442069835787`*^9}, {3.600346171687635*^9, 
+   3.6003463080391197`*^9}, 3.6003463726154947`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"xyCube", "[", "\[Theta]_", "]"}], ":=", 
+  RowBox[{"FullSimplify", "[", " ", 
+   RowBox[{"Transpose", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"RotationMatrix2DScale", "[", "\[Theta]", "]"}], 
+      RowBox[{
+       RowBox[{"RotationMatrix2D", "[", "\[Theta]", "]"}], ".", "square"}]}], 
+     " ", "+", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0.5", ",", "0.5", ",", "0.5", ",", "0.5"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0.5", ",", "0.5", ",", "0.5", ",", "0.5"}], "}"}]}], "}"}]}],
+     " ", "]"}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.596032403095932*^9, 3.5960324253912687`*^9}, {
+   3.596032460461591*^9, 3.596032462451202*^9}, {3.59734294706007*^9, 
+   3.597342949132189*^9}, {3.6003435296766787`*^9, 3.600343604426983*^9}, {
+   3.6003439742808123`*^9, 3.6003440029027157`*^9}, {3.600344053928721*^9, 
+   3.600344059640087*^9}, 3.600344194683984*^9, {3.60034609735738*^9, 
+   3.600346098401417*^9}, {3.600346315800701*^9, 3.600346321220726*^9}, {
+   3.600346387165134*^9, 3.600346389427198*^9}, {3.6003522180066423`*^9, 
+   3.600352241126309*^9}, {3.6003544960416803`*^9, 3.600354497577633*^9}, {
+   3.600354589559607*^9, 3.6003545985110703`*^9}, {3.600354913217334*^9, 
+   3.600354917368333*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Graphics", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Blue", ",", 
+       RowBox[{"Polygon", "[", 
+        RowBox[{
+         RowBox[{"xyCube", "[", "\[Theta]", "]"}], ",", 
+         RowBox[{"VertexColors", "\[Rule]", 
+          RowBox[{"MapThread", "[", 
+           RowBox[{"RGBColor", ",", 
+            RowBox[{"Transpose", "[", 
+             RowBox[{
+              RowBox[{"Transpose", "[", "RGBCube", "]"}], "[", 
+              RowBox[{"[", 
+               RowBox[{"{", 
+                RowBox[{"2", ",", "3", ",", "4", ",", "5"}], "}"}], "]"}], 
+              "]"}], "]"}]}], "]"}]}]}], "]"}], ",", "Black", ",", 
+       RowBox[{"Rectangle", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "0.5"}], ",", "1.5"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "0.5"}], " ", ",", "1.5"}], "}"}]}], "}"}]}]}], "]"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Theta]", ",", 
+     RowBox[{
+      RowBox[{"-", "Pi"}], "/", "2"}], ",", 
+     RowBox[{"Pi", "/", "2"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.59603528082524*^9, 3.596035374167285*^9}, {
+   3.596035477195263*^9, 3.596035480095965*^9}, {3.596035520869375*^9, 
+   3.596035525916095*^9}, {3.596036085005292*^9, 3.59603610268393*^9}, {
+   3.596036235184937*^9, 3.596036267474069*^9}, {3.596036320159943*^9, 
+   3.596036373246657*^9}, {3.5960364581198053`*^9, 3.596036469904462*^9}, 
+   3.59603653045776*^9, {3.5960369326584473`*^9, 3.5960369422065563`*^9}, {
+   3.59603699108624*^9, 3.59603700306532*^9}, {3.5960388897583647`*^9, 
+   3.596038990712243*^9}, {3.596039154902692*^9, 3.596039162303257*^9}, {
+   3.596039217732134*^9, 3.596039244576934*^9}, {3.597139999631431*^9, 
+   3.5971400340473995`*^9}, {3.5971400691684084`*^9, 3.5971400704054794`*^9}, 
+   3.59734299916105*^9, {3.5973430308648634`*^9, 3.597343042741543*^9}, {
+   3.5973431225271063`*^9, 3.59734313867903*^9}, 3.5973431790783405`*^9, {
+   3.5973432425659723`*^9, 3.597343244014055*^9}, {3.597343658742776*^9, 
+   3.597343671238491*^9}, {3.6003439223507853`*^9, 3.600343948218164*^9}, {
+   3.6003442534600973`*^9, 3.60034426719639*^9}, {3.600346410540168*^9, 
+   3.600346412684066*^9}, {3.600346534425886*^9, 3.600346537712839*^9}, {
+   3.600354644267932*^9, 3.600354647259665*^9}, {3.6003546784861937`*^9, 
+   3.600354734877804*^9}, {3.6003548451462193`*^9, 3.600354848311805*^9}, {
+   3.6003549851265497`*^9, 3.600354997685006*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`\[Theta]$$ = 0.2136283004441062, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`\[Theta]$$], Rational[-1, 2] Pi, Rational[1, 2] Pi}}, 
+    Typeset`size$$ = {360., {178., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`\[Theta]$28745$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`\[Theta]$$ = Rational[-1, 2] Pi}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$28745$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Graphics[{Blue, 
+         Polygon[
+          $CellContext`xyCube[$CellContext`\[Theta]$$], VertexColors -> 
+          MapThread[RGBColor, 
+            Transpose[
+             Part[
+              Transpose[$CellContext`RGBCube], {2, 3, 4, 5}]]]], Black, 
+         Rectangle[{0, 0}, {1, 1}]}, PlotRange -> {{-0.5, 1.5}, {-0.5, 1.5}}],
+       "Specifications" :> {{$CellContext`\[Theta]$$, Rational[-1, 2] Pi, 
+         Rational[1, 2] Pi}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{405., {222., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.600343935184498*^9, 3.6003439497245207`*^9}, 
+   3.600344006790689*^9, 3.600344268979837*^9, 3.600346414309067*^9, 
+   3.6003465389105377`*^9, {3.600354629743751*^9, 3.6003546477167883`*^9}, 
+   3.600354702984207*^9, 3.600354736496788*^9, 3.600354849450473*^9, 
+   3.6003549983709173`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"YABAxisRanges", "[", "0", "]"}]], "Input",
+ CellChangeTimes->{{3.600344630955681*^9, 3.600344636201605*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     SqrtBox["3"]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", 
+       FractionBox[
+        SqrtBox[
+         FractionBox["3", "2"]], "2"]}], "-", 
+      FractionBox["1", 
+       RowBox[{"2", " ", 
+        SqrtBox["6"]}]]}], ",", 
+     RowBox[{
+      FractionBox[
+       SqrtBox[
+        FractionBox["3", "2"]], "2"], "+", 
+      FractionBox["1", 
+       RowBox[{"2", " ", 
+        SqrtBox["6"]}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", 
+       SqrtBox["2"]]}], ",", 
+     FractionBox["1", 
+      SqrtBox["2"]]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.600344636682317*^9}]
+}, Open  ]],
+
+Cell[BoxData["RotationMatrix2DScale"], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"nYABPolygon", "[", "0", "]"}]], "Input",
+ CellChangeTimes->{{3.600343463221168*^9, 3.600343471099443*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "4"]}], ",", 
+     RowBox[{"-", 
+      FractionBox["1", "2"]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["1", "4"], ",", 
+     RowBox[{"-", 
+      FractionBox["1", "2"]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["1", "2"], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     FractionBox["1", "4"], ",", 
+     FractionBox["1", "2"]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "4"]}], ",", 
+     FractionBox["1", "2"]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["1", "2"]}], ",", "0"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.600343463821347*^9, 3.6003434720298347`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RGBCube", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.600343579412168*^9, 3.600343584757565*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "0", ",", "1", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", 
+     "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "0", ",", "0", ",", "1", ",", "1", ",", "1", ",", "0", ",", "0", ",", 
+     "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "1", ",", 
+     "1"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.600343586225819*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"xyCube", "[", 
+  RowBox[{"Pi", "/", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.600343617130801*^9, 3.600343630176508*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.600343618883486*^9, 3.600343631870562*^9}, 
+   3.6003436635926847`*^9}]
+}, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1074, 656},
-WindowMargins->{{-1294, Automatic}, {32, Automatic}},
-FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+WindowSize->{1143, 726},
+WindowMargins->{{2, Automatic}, {Automatic, 5}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 20, \
+2012)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -26713,449 +26077,427 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[579, 22, 107, 1, 56, "Subtitle"],
-Cell[689, 25, 123, 2, 31, "Input"],
-Cell[815, 29, 131, 2, 31, "Input"],
-Cell[CellGroupData[{
-Cell[971, 35, 275, 6, 52, "Input"],
-Cell[1249, 43, 4435, 144, 136, "Output"]
-}, Open  ]],
-Cell[5699, 190, 2957, 86, 132, "Input"],
-Cell[CellGroupData[{
-Cell[8681, 280, 997, 26, 72, "Input"],
-Cell[9681, 308, 9084, 287, 129, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[18802, 600, 1129, 32, 92, "Input"],
-Cell[19934, 634, 734, 19, 128, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[20705, 658, 153, 3, 31, "Input"],
-Cell[20861, 663, 158, 4, 31, "Output"]
-}, Open  ]],
-Cell[21034, 670, 6847, 162, 272, "Input",
+Cell[579, 22, 107, 1, 51, "Subtitle"],
+Cell[689, 25, 150, 3, 28, "Input",
  InitializationCell->True],
-Cell[27884, 834, 7868, 189, 312, "Input",
+Cell[842, 30, 131, 2, 28, "Input"],
+Cell[CellGroupData[{
+Cell[998, 36, 275, 6, 46, "Input"],
+Cell[1276, 44, 4435, 144, 131, "Output"]
+}, Open  ]],
+Cell[5726, 191, 2984, 87, 80, "Input",
+ InitializationCell->True],
+Cell[8713, 280, 968, 26, 46, "Input",
+ InitializationCell->True],
+Cell[9684, 308, 1128, 33, 63, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[35777, 1027, 218, 4, 31, "Input"],
-Cell[35998, 1033, 8096, 267, 431, "Output"]
+Cell[10837, 345, 104, 2, 28, "Input"],
+Cell[10944, 349, 9109, 288, 118, "Output"]
+}, Open  ]],
+Cell[20068, 640, 91, 1, 28, "Input"],
+Cell[CellGroupData[{
+Cell[20184, 645, 69, 1, 28, "Input"],
+Cell[20256, 648, 734, 19, 63, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[44131, 1305, 314, 5, 31, "Input"],
-Cell[44448, 1312, 1659, 23, 432, "Output"]
+Cell[21027, 672, 153, 3, 28, "Input"],
+Cell[21183, 677, 158, 4, 28, "Output"]
 }, Open  ]],
-Cell[CellGroupData[{
-Cell[46144, 1340, 153, 3, 31, "Input"],
-Cell[46300, 1345, 8094, 267, 431, "Output"]
-}, Open  ]],
-Cell[54409, 1615, 108, 3, 31, "Input"],
-Cell[54520, 1620, 10927, 257, 592, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[65484, 1882, 104, 1, 56, "Subtitle"],
-Cell[65591, 1885, 2535, 66, 92, "Input",
+Cell[21356, 684, 6855, 163, 199, "Input",
  InitializationCell->True],
-Cell[68129, 1953, 200, 4, 30, "Text"],
-Cell[68332, 1959, 1672, 45, 72, "Input",
+Cell[28214, 849, 7876, 190, 233, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[70029, 2008, 2090, 42, 52, "Input"],
+Cell[36115, 1043, 218, 4, 28, "Input"],
+Cell[36336, 1049, 8096, 267, 372, "Output"]
+}, Open  ]],
+Cell[44447, 1319, 108, 3, 28, "Input"],
+Cell[44558, 1324, 10927, 257, 369, "Input"]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[72144, 2054, 8516, 238, 266, "Print"],
-Cell[80663, 2294, 65217, 1691, 138, "Print"]
+Cell[55522, 1586, 104, 1, 51, "Subtitle"],
+Cell[55629, 1589, 2535, 66, 80, "Input",
+ InitializationCell->True],
+Cell[58167, 1657, 200, 4, 30, "Text"],
+Cell[58370, 1663, 1672, 45, 63, "Input",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[60067, 1712, 2090, 42, 46, "Input"],
+Cell[CellGroupData[{
+Cell[62182, 1758, 8516, 238, 245, "Print"],
+Cell[70701, 1998, 65217, 1691, 118, "Print"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[145929, 3991, 273, 6, 31, "Input"],
-Cell[146205, 3999, 683, 19, 58, "Output"]
+Cell[135967, 3695, 273, 6, 28, "Input"],
+Cell[136243, 3703, 683, 19, 63, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[146925, 4023, 227, 5, 31, "Input"],
-Cell[147155, 4030, 302, 9, 31, "Output"]
+Cell[136963, 3727, 227, 5, 28, "Input"],
+Cell[137193, 3734, 302, 9, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[147494, 4044, 424, 8, 72, "Input"],
-Cell[147921, 4054, 1902, 63, 134, "Output"],
-Cell[149826, 4119, 1902, 63, 147, "Output"],
-Cell[151731, 4184, 1902, 63, 147, "Output"]
+Cell[137532, 3748, 424, 8, 63, "Input"],
+Cell[137959, 3758, 1902, 63, 129, "Output"],
+Cell[139864, 3823, 1902, 63, 147, "Output"],
+Cell[141769, 3888, 1902, 63, 147, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[153670, 4252, 95, 2, 31, "Input"],
-Cell[153768, 4256, 415, 8, 65, "Output"]
+Cell[143708, 3956, 95, 2, 28, "Input"],
+Cell[143806, 3960, 415, 8, 59, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[154220, 4269, 297, 6, 52, "Input"],
-Cell[154520, 4277, 413, 8, 65, "Output"]
+Cell[144258, 3973, 297, 6, 46, "Input"],
+Cell[144558, 3981, 413, 8, 59, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[154970, 4290, 207, 4, 31, "Input"],
-Cell[155180, 4296, 1543, 55, 59, "Output"]
+Cell[145008, 3994, 207, 4, 28, "Input"],
+Cell[145218, 4000, 1543, 55, 58, "Output"]
 }, Open  ]],
-Cell[156738, 4354, 417, 9, 31, "Input",
+Cell[146776, 4058, 419, 10, 28, "Input",
  InitializationCell->True],
 Cell[CellGroupData[{
-Cell[157180, 4367, 170, 3, 31, "Input"],
-Cell[157353, 4372, 3266, 109, 136, "Output"]
+Cell[147220, 4072, 170, 3, 28, "Input"],
+Cell[147393, 4077, 3266, 109, 131, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[160656, 4486, 2579, 55, 112, "Input"],
+Cell[150696, 4191, 2579, 55, 97, "Input"],
+Cell[153278, 4248, 2724, 52, 488, "Output"]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[163260, 4545, 2715, 52, 208, "Output"],
-Cell[165978, 4599, 569, 12, 21, "Message"],
-Cell[166550, 4613, 501, 11, 21, "Message"],
-Cell[167054, 4626, 499, 11, 21, "Message"],
-Cell[167556, 4639, 569, 12, 21, "Message"],
-Cell[168128, 4653, 501, 11, 21, "Message"],
-Cell[168632, 4666, 530, 11, 21, "Message"],
-Cell[169165, 4679, 569, 12, 21, "Message"],
-Cell[169737, 4693, 530, 11, 21, "Message"],
-Cell[170270, 4706, 776, 14, 108, "Message"],
-Cell[171049, 4722, 776, 14, 108, "Message"],
-Cell[171828, 4738, 571, 12, 21, "Message"],
-Cell[172402, 4752, 499, 11, 21, "Message"],
-Cell[172904, 4765, 499, 11, 21, "Message"],
-Cell[173406, 4778, 569, 12, 21, "Message"],
-Cell[173978, 4792, 501, 11, 21, "Message"],
-Cell[174482, 4805, 530, 11, 21, "Message"],
-Cell[175015, 4818, 778, 14, 108, "Message"]
+Cell[156039, 4305, 634, 15, 28, "Input"],
+Cell[156676, 4322, 2994, 97, 103, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[159707, 4424, 421, 11, 28, "Input"],
+Cell[160131, 4437, 35534, 598, 229, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[195702, 5040, 4121, 115, 186, "Input"],
+Cell[199826, 5157, 122881, 2057, 223, "Output"]
+}, Open  ]],
+Cell[322722, 7217, 837, 23, 28, "Input",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[323584, 7244, 2552, 62, 103, "Input"],
+Cell[326139, 7308, 2612, 53, 500, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[328788, 7366, 2869, 82, 137, "Input",
+ InitializationCell->True],
+Cell[331660, 7450, 2662, 81, 112, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[334359, 7536, 168, 3, 28, "Input"],
+Cell[334530, 7541, 361, 5, 97, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[334928, 7551, 3327, 78, 114, "Input"],
+Cell[338258, 7631, 2156, 67, 140, "Output"],
+Cell[340417, 7700, 3459, 112, 142, "Output"],
+Cell[343879, 7814, 9333, 275, 120, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[353249, 8094, 382, 10, 28, "Input"],
+Cell[353634, 8106, 1681, 34, 154, "Output"]
+}, Open  ]],
+Cell[355330, 8143, 398, 10, 28, "Input",
+ InitializationCell->True],
+Cell[355731, 8155, 886, 23, 28, "Input",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[356642, 8182, 2710, 62, 63, "Input"],
+Cell[359355, 8246, 2359, 50, 466, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[175842, 4838, 3077, 122, 210, "Input"],
-Cell[178922, 4962, 1500, 27, 188, "Message"],
-Cell[180425, 4991, 3120, 123, 210, "Output"]
+Cell[361763, 8302, 127, 1, 51, "Subtitle"],
+Cell[361893, 8305, 614, 9, 49, "Text"],
+Cell[CellGroupData[{
+Cell[362532, 8318, 5103, 132, 123, "Input"],
+Cell[367638, 8452, 53795, 927, 231, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[183582, 5119, 134, 2, 31, "Input"],
-Cell[183719, 5123, 468, 14, 31, "Output"]
+Cell[421470, 9384, 1029, 26, 28, "Input"],
+Cell[422502, 9412, 2105, 44, 238, "Output"]
+}, Open  ]],
+Cell[424622, 9459, 99, 2, 28, "Input"],
+Cell[CellGroupData[{
+Cell[424746, 9465, 302, 7, 28, "Input"],
+Cell[425051, 9474, 750, 23, 69, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[184224, 5142, 634, 15, 31, "Input"],
-Cell[184861, 5159, 2994, 97, 102, "Output"]
+Cell[425838, 9502, 852, 20, 28, "Input"],
+Cell[426693, 9524, 2699, 81, 79, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[187892, 5261, 421, 11, 31, "Input"],
-Cell[188316, 5274, 35534, 598, 228, "Output"]
+Cell[429429, 9610, 1613, 41, 80, "Input"],
+Cell[431045, 9653, 2091, 57, 79, "Output"],
+Cell[433139, 9712, 1931, 53, 79, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[223887, 5877, 4121, 115, 179, "Input"],
-Cell[228011, 5994, 122881, 2057, 222, "Output"]
-}, Open  ]],
-Cell[350907, 8054, 837, 23, 31, "Input",
- InitializationCell->True],
-Cell[CellGroupData[{
-Cell[351769, 8081, 2552, 62, 133, "Input"],
-Cell[CellGroupData[{
-Cell[354346, 8147, 2606, 53, 470, "Output"],
-Cell[356955, 8202, 501, 11, 21, "Message"],
-Cell[357459, 8215, 498, 11, 21, "Message"],
-Cell[357960, 8228, 704, 13, 21, "Message"],
-Cell[358667, 8243, 500, 10, 21, "Message"],
-Cell[359170, 8255, 530, 11, 21, "Message"],
-Cell[359703, 8268, 656, 13, 21, "Message"]
-}, Open  ]]
+Cell[435107, 9770, 442, 11, 28, "Input"],
+Cell[435552, 9783, 1685, 35, 120, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[360408, 8287, 2869, 82, 182, "Input",
- InitializationCell->True],
-Cell[363280, 8371, 2638, 81, 142, "Output"]
+Cell[437274, 9823, 2287, 57, 80, "Input"],
+Cell[439564, 9882, 20566, 555, 229, "Output"],
+Cell[460133, 10439, 15041, 405, 199, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[365955, 8457, 168, 3, 31, "Input"],
-Cell[366126, 8462, 361, 5, 112, "Output"]
+Cell[475211, 10849, 382, 8, 46, "Input"],
+Cell[475596, 10859, 18088, 528, 523, "Output"],
+Cell[493687, 11389, 16131, 457, 523, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[366524, 8472, 3327, 78, 132, "Input"],
-Cell[369854, 8552, 2132, 67, 134, "Output"],
-Cell[371989, 8621, 3437, 112, 136, "Output"],
-Cell[375429, 8735, 9309, 275, 123, "Output"]
+Cell[509855, 11851, 601, 15, 46, "Input"],
+Cell[510459, 11868, 11337, 336, 555, "Output"],
+Cell[521799, 12206, 11079, 323, 555, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[384775, 9015, 382, 10, 31, "Input"],
-Cell[385160, 9027, 1673, 34, 126, "Output"]
-}, Open  ]],
-Cell[386848, 9064, 398, 10, 31, "Input",
- InitializationCell->True],
-Cell[387249, 9076, 886, 23, 31, "Input",
- InitializationCell->True],
-Cell[CellGroupData[{
-Cell[388160, 9103, 2710, 62, 92, "Input"],
-Cell[CellGroupData[{
-Cell[390895, 9169, 2319, 50, 470, "Output"],
-Cell[393217, 9221, 481, 10, 21, "Message"],
-Cell[393701, 9233, 479, 10, 21, "Message"],
-Cell[394183, 9245, 668, 13, 21, "Message"],
-Cell[394854, 9260, 497, 10, 21, "Message"],
-Cell[395354, 9272, 530, 11, 21, "Message"],
-Cell[395887, 9285, 654, 13, 21, "Message"],
-Cell[396544, 9300, 616, 12, 21, "Message"],
-Cell[397163, 9314, 617, 12, 21, "Message"],
-Cell[397783, 9328, 715, 14, 21, "Message"],
-Cell[398501, 9344, 951, 17, 56, "Message"]
-}, Open  ]]
-}, Open  ]]
+Cell[532915, 12534, 253, 6, 28, "Input"],
+Cell[533171, 12542, 149, 3, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[399513, 9368, 127, 1, 56, "Subtitle"],
-Cell[399643, 9371, 614, 9, 49, "Text"],
-Cell[CellGroupData[{
-Cell[400282, 9384, 5103, 132, 123, "Input"],
-Cell[405388, 9518, 53795, 927, 233, "Output"]
+Cell[533357, 12550, 1605, 37, 80, "Input"],
+Cell[534965, 12589, 19585, 549, 1165, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[459220, 10450, 1029, 26, 52, "Input"],
-Cell[460252, 10478, 2093, 44, 154, "Output"]
-}, Open  ]],
-Cell[462360, 10525, 99, 2, 31, "Input"],
-Cell[CellGroupData[{
-Cell[462484, 10531, 302, 7, 31, "Input"],
-Cell[462789, 10540, 750, 23, 63, "Output"]
+Cell[554587, 13143, 162, 3, 28, "Input"],
+Cell[554752, 13148, 1845, 55, 53, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[463576, 10568, 852, 20, 31, "Input"],
-Cell[464431, 10590, 2699, 81, 77, "Output"]
+Cell[556634, 13208, 186, 3, 28, "Input"],
+Cell[556823, 13213, 4693, 146, 237, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[467167, 10676, 1613, 41, 92, "Input"],
-Cell[468783, 10719, 2091, 57, 77, "Output"],
-Cell[470877, 10778, 1931, 53, 77, "Output"]
+Cell[561553, 13364, 360, 7, 46, "Input"],
+Cell[561916, 13373, 4335, 135, 237, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[472845, 10836, 442, 11, 31, "Input"],
-Cell[473290, 10849, 1681, 35, 126, "Output"]
+Cell[566288, 13513, 491, 11, 28, "Input"],
+Cell[566782, 13526, 12052, 371, 237, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[475008, 10889, 2287, 57, 92, "Input"],
-Cell[477298, 10948, 20566, 555, 222, "Output"],
-Cell[497867, 11505, 15041, 405, 189, "Output"]
+Cell[578871, 13902, 183, 3, 28, "Input"],
+Cell[579057, 13907, 113, 1, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[512945, 11915, 382, 8, 52, "Input"],
-Cell[513330, 11925, 18088, 528, 534, "Output"],
-Cell[531421, 12455, 16131, 457, 534, "Output"]
+Cell[579207, 13913, 13116, 382, 277, "Input"],
+Cell[592326, 14297, 48243, 812, 239, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[547589, 12917, 601, 15, 52, "Input"],
-Cell[548193, 12934, 11337, 336, 556, "Output"],
-Cell[559533, 13272, 11079, 323, 556, "Output"]
+Cell[640606, 15114, 1371, 41, 86, "Input"],
+Cell[641980, 15157, 48242, 811, 239, "Output"]
+}, Open  ]],
+Cell[690237, 15971, 1343, 44, 57, "Input"],
+Cell[CellGroupData[{
+Cell[691605, 16019, 870, 21, 46, "Input"],
+Cell[692478, 16042, 393, 11, 237, "Output"]
+}, Open  ]],
+Cell[692886, 16056, 312, 8, 28, "Input"],
+Cell[CellGroupData[{
+Cell[693223, 16068, 1066, 29, 46, "Input"],
+Cell[694292, 16099, 2229, 49, 230, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[570649, 13600, 253, 6, 31, "Input"],
-Cell[570905, 13608, 149, 3, 31, "Output"]
+Cell[696558, 16153, 116, 2, 28, "Input"],
+Cell[696677, 16157, 72, 1, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[571091, 13616, 1605, 37, 92, "Input"],
-Cell[572699, 13655, 19585, 549, 1186, "Output"]
+Cell[696786, 16163, 2038, 50, 63, "Input"],
+Cell[698827, 16215, 3143, 57, 3068, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[592321, 14209, 162, 3, 31, "Input"],
-Cell[592486, 14214, 1845, 55, 48, "Output"]
+Cell[702007, 16277, 167, 4, 28, "Input"],
+Cell[702177, 16283, 108, 3, 48, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[594368, 14274, 186, 3, 31, "Input"],
-Cell[594557, 14279, 4693, 146, 246, "Output"]
+Cell[702322, 16291, 144, 3, 28, "Input"],
+Cell[702469, 16296, 86, 2, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[599287, 14430, 360, 7, 52, "Input"],
-Cell[599650, 14439, 4335, 135, 246, "Output"]
+Cell[702592, 16303, 198, 4, 28, "Input"],
+Cell[702793, 16309, 1216, 45, 58, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[604022, 14579, 491, 11, 31, "Input"],
-Cell[604516, 14592, 12052, 371, 246, "Output"]
+Cell[704046, 16359, 1466, 50, 90, "Input"],
+Cell[705515, 16411, 54007, 901, 229, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[616605, 14968, 183, 3, 31, "Input"],
-Cell[616791, 14973, 113, 1, 31, "Output"]
+Cell[759559, 17317, 518, 14, 74, "Input"],
+Cell[760080, 17333, 402, 13, 48, "Output"],
+Cell[760485, 17348, 1857, 62, 129, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[616941, 14979, 13116, 382, 265, "Input"],
-Cell[630060, 15363, 48243, 812, 241, "Output"]
+Cell[762379, 17415, 253, 5, 28, "Input"],
+Cell[762635, 17422, 1857, 62, 129, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[678340, 16180, 1371, 41, 86, "Input"],
-Cell[679714, 16223, 48242, 811, 241, "Output"]
-}, Open  ]],
-Cell[727971, 17037, 1343, 44, 56, "Input"],
-Cell[CellGroupData[{
-Cell[729339, 17085, 870, 21, 52, "Input"],
-Cell[730212, 17108, 393, 11, 236, "Output"]
-}, Open  ]],
-Cell[730620, 17122, 312, 8, 31, "Input"],
-Cell[CellGroupData[{
-Cell[730957, 17134, 1066, 29, 52, "Input"],
-Cell[732026, 17165, 2221, 49, 174, "Output"]
+Cell[764529, 17489, 2336, 70, 158, "Input"],
+Cell[766868, 17561, 1604, 53, 80, "Output"],
+Cell[768475, 17616, 233, 5, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[734284, 17219, 116, 2, 31, "Input"],
-Cell[734403, 17223, 72, 1, 31, "Output"]
+Cell[768745, 17626, 2326, 71, 129, "Input"],
+Cell[771074, 17699, 2194, 42, 120, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[734512, 17229, 2038, 50, 72, "Input"],
-Cell[736553, 17281, 3119, 56, 220, "Output"]
+Cell[773305, 17746, 1653, 46, 79, "Input"],
+Cell[774961, 17794, 5292, 147, 91, "Output"]
+}, Open  ]],
+Cell[780268, 17944, 1332, 38, 79, "Input"],
+Cell[CellGroupData[{
+Cell[781625, 17986, 1384, 42, 80, "Input"],
+Cell[783012, 18030, 2648, 50, 260, "Output"]
+}, Open  ]],
+Cell[785675, 18083, 160, 2, 30, "Text"],
+Cell[CellGroupData[{
+Cell[785860, 18089, 996, 27, 46, "Input"],
+Cell[786859, 18118, 19109, 514, 187, "Output"]
+}, Open  ]],
+Cell[805983, 18635, 318, 8, 28, "Input"],
+Cell[CellGroupData[{
+Cell[806326, 18647, 881, 24, 28, "Input"],
+Cell[807210, 18673, 5010, 139, 123, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[739709, 17342, 167, 4, 31, "Input"],
-Cell[739879, 17348, 108, 3, 46, "Output"]
+Cell[812257, 18817, 6207, 165, 143, "Input"],
+Cell[818467, 18984, 7872, 214, 291, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[740024, 17356, 144, 3, 31, "Input"],
-Cell[740171, 17361, 86, 2, 31, "Output"]
+Cell[826376, 19203, 2047, 58, 127, "Input"],
+Cell[828426, 19263, 2953, 84, 105, "Output"]
 }, Open  ]],
+Cell[831394, 19350, 1142, 37, 63, "Input"],
 Cell[CellGroupData[{
-Cell[740294, 17368, 198, 4, 31, "Input"],
-Cell[740495, 17374, 1216, 45, 59, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[741748, 17424, 1466, 50, 89, "Input"],
-Cell[743217, 17476, 54007, 901, 228, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[797261, 18382, 518, 14, 75, "Input"],
-Cell[797782, 18398, 402, 13, 46, "Output"],
-Cell[798187, 18413, 1857, 62, 134, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[800081, 18480, 253, 5, 31, "Input"],
-Cell[800337, 18487, 1857, 62, 134, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[802231, 18554, 2336, 70, 160, "Input"],
-Cell[804570, 18626, 1604, 53, 77, "Output"],
-Cell[806177, 18681, 233, 5, 31, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[806447, 18691, 2326, 71, 127, "Input"],
-Cell[808776, 18764, 2194, 42, 126, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[811007, 18811, 1653, 46, 75, "Input"],
-Cell[812663, 18859, 5292, 147, 107, "Output"]
-}, Open  ]],
-Cell[817970, 19009, 1332, 38, 75, "Input"],
-Cell[CellGroupData[{
-Cell[819327, 19051, 1384, 42, 92, "Input"],
-Cell[820714, 19095, 2617, 49, 220, "Output"]
-}, Open  ]],
-Cell[823346, 19147, 160, 2, 30, "Text"],
-Cell[CellGroupData[{
-Cell[823531, 19153, 996, 27, 52, "Input"],
-Cell[824530, 19182, 19109, 514, 174, "Output"]
-}, Open  ]],
-Cell[843654, 19699, 318, 8, 31, "Input"],
-Cell[CellGroupData[{
-Cell[843997, 19711, 881, 24, 31, "Input"],
-Cell[844881, 19737, 5010, 139, 118, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[849928, 19881, 6207, 165, 138, "Input"],
-Cell[856138, 20048, 7872, 214, 258, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[864047, 20267, 2047, 58, 118, "Input"],
-Cell[866097, 20327, 2953, 84, 102, "Output"]
-}, Open  ]],
-Cell[869065, 20414, 1142, 37, 72, "Input"],
-Cell[CellGroupData[{
-Cell[870232, 20455, 6526, 166, 333, "Input"],
-Cell[876761, 20623, 172301, 2899, 365, 162795, 2742, "CachedBoxData", \
+Cell[832561, 19391, 6526, 166, 293, "Input"],
+Cell[839090, 19559, 172301, 2899, 365, 162795, 2742, "CachedBoxData", \
 "BoxData", "Output"]
 }, Open  ]],
-Cell[1049077, 23525, 94, 1, 31, "Input"],
+Cell[1011406, 22461, 94, 1, 28, "Input"],
 Cell[CellGroupData[{
-Cell[1049196, 23530, 395, 9, 52, "Input"],
-Cell[1049594, 23541, 1058, 36, 51, "Output"],
-Cell[1050655, 23579, 1568, 47, 87, "Output"]
+Cell[1011525, 22466, 395, 9, 46, "Input"],
+Cell[1011923, 22477, 1058, 36, 52, "Output"],
+Cell[1012984, 22515, 1568, 47, 91, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1052260, 23631, 751, 20, 72, "Input"],
-Cell[1053014, 23653, 1049, 37, 56, "Output"],
-Cell[1054066, 23692, 1111, 38, 56, "Output"],
-Cell[1055180, 23732, 1050, 37, 51, "Output"]
+Cell[1014589, 22567, 751, 20, 63, "Input"],
+Cell[1015343, 22589, 1049, 37, 57, "Output"],
+Cell[1016395, 22628, 1111, 38, 57, "Output"],
+Cell[1017509, 22668, 1050, 37, 52, "Output"]
 }, Open  ]],
-Cell[1056245, 23772, 283, 5, 30, "Text"],
-Cell[1056531, 23779, 444, 10, 52, "Input"],
-Cell[1056978, 23791, 553, 13, 31, "Input"],
-Cell[1057534, 23806, 189, 3, 31, "Input"],
+Cell[1018574, 22708, 283, 5, 30, "Text"],
+Cell[1018860, 22715, 444, 10, 46, "Input"],
+Cell[1019307, 22727, 553, 13, 28, "Input"],
+Cell[1019863, 22742, 189, 3, 28, "Input"],
 Cell[CellGroupData[{
-Cell[1057748, 23813, 467, 10, 31, "Input"],
-Cell[1058218, 23825, 6304, 170, 93, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1064559, 24000, 6194, 149, 232, "Input"],
-Cell[1070756, 24151, 4715, 88, 584, "Output"],
-Cell[1075474, 24241, 588, 12, 21, "Message"],
-Cell[1076065, 24255, 588, 12, 21, "Message"]
+Cell[1020077, 22749, 467, 10, 28, "Input"],
+Cell[1020547, 22761, 6304, 170, 93, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1076690, 24272, 205, 4, 31, "Input"],
-Cell[1076898, 24278, 228, 5, 31, "Output"]
+Cell[1026888, 22936, 6194, 149, 182, "Input"],
+Cell[1033085, 23087, 4715, 88, 580, "Output"],
+Cell[1037803, 23177, 588, 12, 24, "Message"],
+Cell[1038394, 23191, 588, 12, 24, "Message"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1077163, 24288, 1868, 50, 152, "Input"],
-Cell[1079034, 24340, 36671, 614, 490, "Output"]
-}, Open  ]],
-Cell[1115720, 24957, 126, 2, 31, "Input"],
-Cell[CellGroupData[{
-Cell[1115871, 24963, 337, 9, 60, "Input"],
-Cell[1116211, 24974, 875, 28, 69, "Output"]
+Cell[1039019, 23208, 205, 4, 28, "Input"],
+Cell[1039227, 23214, 228, 5, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1117123, 25007, 365, 12, 78, "Input"],
-Cell[1117491, 25021, 133, 1, 52, "Output"]
+Cell[1039492, 23224, 1868, 50, 131, "Input"],
+Cell[1041363, 23276, 36671, 614, 490, "Output"]
+}, Open  ]],
+Cell[1078049, 23893, 126, 2, 28, "Input"],
+Cell[CellGroupData[{
+Cell[1078200, 23899, 337, 9, 58, "Input"],
+Cell[1078540, 23910, 875, 28, 73, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1117661, 25027, 241, 4, 31, "Input"],
-Cell[1117905, 25033, 515, 20, 59, "Output"]
+Cell[1079452, 23943, 365, 12, 81, "Input"],
+Cell[1079820, 23957, 133, 1, 46, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1118457, 25058, 188, 5, 56, "Input"],
-Cell[1118648, 25065, 125, 4, 56, "Output"]
+Cell[1079990, 23963, 241, 4, 28, "Input"],
+Cell[1080234, 23969, 515, 20, 58, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1118810, 25074, 279, 9, 56, "Input"],
-Cell[1119092, 25085, 178, 4, 31, "Output"]
+Cell[1080786, 23994, 188, 5, 57, "Input"],
+Cell[1080977, 24001, 125, 4, 56, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1119307, 25094, 511, 16, 79, "Input"],
-Cell[1119821, 25112, 151, 4, 31, "Output"]
+Cell[1081139, 24010, 279, 9, 57, "Input"],
+Cell[1081421, 24021, 178, 4, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1081636, 24030, 511, 16, 76, "Input"],
+Cell[1082150, 24048, 151, 4, 28, "Output"]
 }, Open  ]]
 }, Open  ]],
-Cell[1119999, 25120, 107, 1, 56, "Subtitle"],
-Cell[1120109, 25123, 980, 27, 44, "Input"],
 Cell[CellGroupData[{
-Cell[1121114, 25154, 282, 5, 31, "Input"],
-Cell[1121399, 25161, 362, 7, 62, "Output"]
+Cell[1082350, 24058, 107, 1, 51, "Subtitle"],
+Cell[1082460, 24061, 1009, 28, 46, "Input"],
+Cell[1083472, 24091, 969, 28, 63, "Input"],
+Cell[CellGroupData[{
+Cell[1084466, 24123, 369, 7, 28, "Input"],
+Cell[1084838, 24132, 2926, 86, 74, "Output"]
 }, Open  ]],
-Cell[1121776, 25171, 580, 16, 31, "Input"],
+Cell[1087779, 24221, 580, 16, 28, "Input"],
 Cell[CellGroupData[{
-Cell[1122381, 25191, 34, 0, 31, "Input"],
-Cell[1122418, 25193, 5822, 180, 219, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[1128277, 25378, 117, 3, 31, "Input"],
-Cell[1128397, 25383, 609, 17, 31, "Output"]
+Cell[1088384, 24241, 34, 0, 28, "Input"],
+Cell[1088421, 24243, 5822, 180, 216, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1129043, 25405, 318, 7, 31, "Input"],
-Cell[1129364, 25414, 488, 8, 62, "Output"]
+Cell[1094280, 24428, 117, 3, 28, "Input"],
+Cell[1094400, 24433, 609, 17, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1129889, 25427, 533, 11, 52, "Input"],
-Cell[1130425, 25440, 2353, 73, 77, "Output"],
-Cell[1132781, 25515, 2355, 73, 77, "Output"]
+Cell[1095046, 24455, 318, 7, 28, "Input"],
+Cell[1095367, 24464, 488, 8, 44, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1135173, 25593, 601, 13, 31, "Input"],
-Cell[1135777, 25608, 24034, 402, 273, "Output"]
+Cell[1095892, 24477, 533, 11, 46, "Input"],
+Cell[1096428, 24490, 2353, 73, 77, "Output"],
+Cell[1098784, 24565, 2355, 73, 77, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1159848, 26015, 791, 25, 44, "Input"],
-Cell[1160642, 26042, 37479, 631, 238, "Output"]
+Cell[1101176, 24643, 601, 13, 28, "Input"],
+Cell[1101780, 24658, 24034, 402, 239, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1198158, 26678, 75, 1, 31, "Input"],
-Cell[1198236, 26681, 486, 14, 31, "Output"]
+Cell[1125851, 25065, 791, 25, 45, "Input"],
+Cell[1126645, 25092, 37479, 631, 238, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1164161, 25728, 75, 1, 28, "Input"],
+Cell[1164239, 25731, 486, 14, 28, "Output"]
+}, Open  ]],
+Cell[1164740, 25748, 1588, 46, 46, "Input"],
+Cell[1166331, 25796, 1323, 28, 46, "Input",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[1167679, 25828, 2748, 59, 46, "Input"],
+Cell[1170430, 25889, 2224, 44, 500, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1172691, 25938, 132, 2, 28, "Input"],
+Cell[1172826, 25942, 747, 30, 78, "Output"]
+}, Open  ]],
+Cell[1173588, 25975, 47, 0, 28, "Input"],
+Cell[CellGroupData[{
+Cell[1173660, 25979, 130, 2, 28, "Input"],
+Cell[1173793, 25983, 825, 30, 47, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1174655, 26018, 134, 2, 46, "Input"],
+Cell[1174792, 26022, 485, 15, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1175314, 26042, 149, 3, 28, "Input"],
+Cell[1175466, 26047, 347, 10, 28, "Output"]
+}, Open  ]]
 }, Open  ]]
 }
 ]
