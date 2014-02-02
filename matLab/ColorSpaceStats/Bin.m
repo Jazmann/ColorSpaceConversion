@@ -62,12 +62,13 @@ classdef Bin
                     [Cr, Cb] = meshgrid(Crv, Cbv);
                     Cr = Cr';
                     Cb = Cb';
-                    CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) ./ ( TScale) + 0.5;
+                  %  CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) ./ ( TScale) + 0.5;
+                    CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) * TScale  + 0.5 * TScale;
                     CrT = reshape(CrCbT(1,:),size(obj.fBin));
                     CbT = reshape(CrCbT(2,:),size(obj.fBin));
                     obj.fBin = obj.f(CbT,CrT);
                     iT = inv(T);
-                    obj.a = (iT * ([obj.a(2)-0.5; obj.a(1)-0.5] .* ( TScale)));
+                    obj.a = (T' * [obj.a(2)-0.5; obj.a(1)-0.5]) + 0.5 * TScale;
                 end
             end
         end
