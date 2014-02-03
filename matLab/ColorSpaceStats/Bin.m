@@ -63,7 +63,7 @@ classdef Bin
                     Cr = Cr';
                     Cb = Cb';
                   %  CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) ./ ( TScale) + 0.5;
-                    CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) * TScale  + 0.5 * TScale;
+                    CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) * TScale  + 0.5;
                     CrT = reshape(CrCbT(1,:),size(obj.fBin));
                     CbT = reshape(CrCbT(2,:),size(obj.fBin));
                     obj.fBin = obj.f(CbT,CrT);
