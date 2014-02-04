@@ -222,7 +222,12 @@ Naively collapsing the bins along the luminosity axis artificially skews the chr
 
 To accommodate this, we collapse the bins excluding the bins which are clearly suffering from white-out and black-out. This could be done mathematically by taking the bin of the distribution which is furthest from the luminosity axis, and then finding the intersection with the RGB cube when this chromatic value is at its limits, just before it reaches the edge of the cube where it suffers from white-out or black-out. But it's a simple matter to look at the three projections of the 3D Lxy bins and manually determine the limits for the valid region.
 
-<Another graph showing the excluded region in the three-channel white-out/black-out bins>
+\begin{figure}[h!]
+  \caption{The projection along the L axis showing the chromatic space with a free rotational angle of 0.}
+  \label{fig:WhiteOutBlackOut}
+  \centering
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/xy_Polygon.eps}
+\end{figure}
 
 
 
