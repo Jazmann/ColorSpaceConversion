@@ -81,7 +81,7 @@ R_z(\theta) &= \begin{bmatrix}
 
 It should be noted that the solutions are not unique; there are many ways in which to rotate an object from one position to another, or use a combination of different rotations to get to the same point, so they aren't necessarily unique, but this has no bearing on this project. So any rotation which orients the RGB color space such that one of the new axes lies along the luminosity direction is sufficient. To achieve this end using rotations about the RGB color space axes requires a rotation in only two of those axes.
 
-A rotation which aligns the X axis along the luminosity direction is produced by a rotation of $\frac{\pi}4$ about the Y axis, followed by a rotation of $\arctan{\frac{1}{\sqrt{2}}}$ about the Z axis. This leaves one free rotational degree of freedom about the X axis. The resulting rotation matrix is given by:
+A rotation which aligns the L axis along the luminosity direction is produced by a rotation of $\frac{\pi}4$ about the x axis, followed by a rotation of $\arctan{\frac{1}{\sqrt{2}}}$ about the y axis. This leaves one free rotational degree of freedom about the L axis. The resulting rotation matrix is given by:
 
 \begin{equation}
 R_{xyz}(\theta) =
@@ -99,7 +99,7 @@ Where $\theta$ is the remaining rotational degree of freedom.
 
 Using the standard rotation matrices, we get a luminosity axis from 0 to $\sqrt{3}$. However, the length of the two remaining axes are dependent on the value of $\theta$ used. This is a problem because, ultimately, we want the axes to fit in a range of an appropriate data type. It would be more useful to have a matrix which provided the specified rotation and scaled the axis to known lengths. In the case of the luminosity, this is straightforward; simply divide by $\sqrt{3}$. In the case of the other two axes, we need an explicit form for the lengths of the axis resulting from the rotation.
 
-Because the absolute values of the axes in the color space have no meaning, we're only interested in the position along the axis relative to its start and end, equivalent to talking about the position in the axis relative to $0:1$, compared to about 0-255 in unsigned, 8-bit integers. The upside is that if we're rotating the cube about its corner, we're interested in the minimum and maximum values possible along the new axis direction, which will correspond to a corner of the RGB cube. With the X axis aligned along the luminosity direction, the range of the X axis is 0 to $\sqrt{3}$. The Y and Z axes are symmetrical, spanning a range centered on 0. The range of their values is dependent upon the remaining degree of freedom.
+Because the absolute values of the axes in the color space have no meaning, we're only interested in the position along the axis relative to its start and end, equivalent to talking about the position in the axis relative to $0:1$, compared to about 0-255 in unsigned, 8-bit integers. The upside is that if we're rotating the cube about its corner, we're interested in the minimum and maximum values possible along the new axis direction, which will correspond to a corner of the RGB cube. With the L axis aligned along the luminosity direction, the range of the L axis is 0 to $\sqrt{3}$. The x and y axes are symmetrical, spanning a range centered on 0. The range of their values is dependent upon the remaining degree of freedom.
 
 We need to know, in each of the axes, how far out each point is. Because we're effectively rotating a hexagon, whatever the answer is, we know the function is going to be periodic, repeating every $\frac{\pi}{3}$ radians, so we only have to solve it in the 0 to $\frac{\pi}{3}$ region and then generalize. First we take the cooordinates of the RGB cube and perform the rotation to find the values in the new color space.
 
@@ -130,7 +130,7 @@ The extent of the new axis is found by taking the maximum and minimum values of 
  \max\left(\pm\frac{\sin (\theta )}{\sqrt{6}}\pm\frac{\cos (\theta )}{\sqrt{2}}, \pm\sqrt{\frac{2}{3}} \sin (\theta ) \right) \quad \text{Where} \quad 0\leq \theta \leq \frac{\pi}{3}
 \end{equation}
 
-Graphically, the problem appears as follows:
+A graphical representation of the problem can be seen in Figure~\ref{eq:YabCube}.
 
 \begin{figure}[h!]
   \caption{Evaluation of the color space problem.}\label{fig:YABCubeEval}
@@ -172,7 +172,7 @@ The normalized rotation matrix is given by:
 
 \section{Skin Statistics}\label{sec:SkinStatistics}
 
-In order to identify the range of values for the skin space, a large number of skin samples were taken from photographs from the Humane project by Angelica Dass, an ongoing "chromatic inventory" art project which aims to compile every possible human skin color, categorized by the PANTONE guide color classification system. The skin colors catalogued thus far are independent of race or ethnicity, so the samples are representative of human skin tones in general.
+In order to identify the range of values for the skin space, a large number of skin samples were taken from photographs from the Humane project by Angelica Dass, an ongoing "chromatic inventory" art project which aims to compile every possible human skin color, categorized by the PANTONE guide color classification system~\cite{Dass2012}. The skin colors catalogued thus far are independent of race or ethnicity, so the samples are representative of human skin tones in general.
 
 The image set consists of approximately 200 skin samples --- each of which shows only skin --- which are placed in a single directory in the file system. In accordance to our assumption that luminosity is not a significant factor in our skin model, we then perform the transformation initially with the value of $\theta$ equal to 0. The Matlab code collects frequency data for the rotated color space, incrementing the counts of a three-dimensional array of bins which span the color space. Viewing the frequency data along each of the three axes reveals that the skin image characteristics are spread widely in luminosity, but are quite confined in hue and saturation as illustrated in Figure~\ref{fig:InitBins}.
 
@@ -206,6 +206,24 @@ For numerical reasons, the value for $\theta$ was found iteratively by performin
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/ConvergenceOfSkinSpaceFinal.eps}
 \end{figure}
+
+\section{Implementation of Skin Color Space Statistics in Matlab}\label{sec:SkinColorSpaceStatsMatlab}
+
+\subsection{Removing Zeroes}\label{sec:RemovingZeroes}
+<stuff above>
+
+The obvious idea is to find all the non-zero bins and fit an interpolating function between them. This will effectively remove the empty bin artifacts within the density-packed region which is the distribution we're interested in. However, the empty bins outside the main distribution are not artifacts and are genuinely empty bins, so removing all the empty bins and then fitting the function joins together any outlying points or secondary distributions corresponding to regions such as the background. We therefore desire a method which will allow us to keep all the non-empty bins and the empty bins outside the main distribution, i.e. all the genuinely empty bins. To achieve this, we designed a Matlab routine which essentially paints a region around each non-zero point, marking it as part of the main distribution. It then takes all the unmarked regions and includes all the empty bins in those regions. So, the set of points which is all the non-empty bins and all the empty bins in the unmarked regions satisfies the requirement, and a simple interpolating function can easily be fitted to those points.
+
+<flow chart, maybe? Or maybe at the end; we'll see.>
+
+\subsection{White-Out and Black-Out}\label{sec:WhiteOut}
+
+Naively collapsing the bins along the luminosity axis artificially skews the chromatic distribution along the axis which passed through the luminosity axis; this is easily explained due to white-out and black-out. As luminosity increases or decreases, it will eventually hit the edge of the cube. Having reached its numerical limit, the luminosity slides toward the corner of the cube, resulting in a white or black value.
+
+To accommodate this, we collapse the bins excluding the bins which are clearly suffering from white-out and black-out. This could be done mathematically by taking the bin of the distribution which is furthest from the luminosity axis, and then finding the intersection with the RGB cube when this chromatic value is at its limits, just before it reaches the edge of the cube where it suffers from white-out or black-out. But it's a simple matter to look at the three projections of the 3D Lxy bins and manually determine the limits for the valid region.
+
+<Another graph showing the excluded region in the three-channel white-out/black-out bins>
+
 
 
 \section{Preservation of Color Information}\label{sec:PreservationOfColorInformation}
