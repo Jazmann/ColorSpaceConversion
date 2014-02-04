@@ -204,7 +204,7 @@ For numerical reasons, the value for $\theta$ was found iteratively by performin
 
 A naive approach is to take a directory of images and process them using our color space transformation with the free angle $\theta$, processing them into three-dimensional pixel value bins. It was discovered that the region of interest is relatively small in this 3D space, so it was made possible the use of a bin of width greater than 1 lumio-chromatic value. However, it is quickly found that the region of interest is so small that using a more encompassing lumio-chromatic bin is actually detrimental to the numerics involved in finding and appropriate Gaussian fit, so a lumio-chromatic bin of width 1 is used.
 
-Because the region is so small, when the transformation is applied, we must also retain all the information therein. Initially, we did not know this; our transformed images were represented as the same data type as the original. But because the transformed information is a less efficient representation of the original information, there is a significant amount of lost information.
+Because the region is so small, when the transformation is applied, we must also retain all the information therein. Initially, we did not know this; our transformed images were represented as the same data type as the original. But because the transformed information is a less efficient representation of the original information, a significant amount of that information is lost.
 
 \begin{figure}[h!]
   \caption{Convergence of color space orientation $\theta$.}
@@ -212,6 +212,10 @@ Because the region is so small, when the transformation is applied, we must also
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/ConvergenceOfSkinSpaceFinal.eps}
 \end{figure}
+
+With this in mind, a better approach would be to iterate over the free angle $\theta$ of the Gaussian fit of the two-dimensional bin, which was found by collapsing the 3D bins along the luminosity axis, until convergence; at best, convergence was achieved after 3 iterations. Unfortunately, this approach --- though conceptually straightforward --- is very wasteful. Since all of the necessary information can be found in the RGB bin statistics, a more nuanced approach can be taken:
+
+\subsection{Transformation with Zero Angle}\label{TransWithZeroAngle}
 
 
 \subsection{Removing Zeroes}\label{sec:RemovingZeroes}
