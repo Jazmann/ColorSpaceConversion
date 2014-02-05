@@ -39,7 +39,7 @@ classdef colorSpace
             
             if nargin>=4
                 obj.sig = sig; obj.sigma = sigma;
-                obj.g = [ obj.sRange./(sqrt(2) .* sig(1) .* sigma(1)), obj.sRange./(sqrt(2) .* sig(2) .* sigma(2)), obj.sRange./(sqrt(2) .* sig(3) .* sigma(3))];
+                obj.g = [ 1./(sqrt(2) .* sig(1) .* sigma(1)), 1./(sqrt(2) .* sig(2) .* sigma(2)), 1./(sqrt(2) .* sig(3) .* sigma(3))];
             end
             
             if nargin>=1
