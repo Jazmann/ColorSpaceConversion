@@ -272,7 +272,7 @@ The more interpretable statistics for this project is a set of bins which contai
 
 The obvious idea is to find all the non-zero bins and fit an interpolating function between them. This will effectively remove the empty bin artifacts within the density-packed region which is the distribution we're interested in. However, the empty bins outside the main distribution are not artifacts and are genuinely empty bins, so removing all the empty bins and then fitting the function joins together any outlying points or secondary distributions corresponding to regions such as the background. We therefore desire a method which will allow us to keep all the non-empty bins and the empty bins outside the main distribution, i.e. all the genuinely empty bins. To achieve this, we designed a Matlab routine which essentially paints a region around each non-zero point, marking it as part of the main distribution. It then takes all the unmarked regions and includes all the empty bins in those regions. So, the set of points which is all the non-empty bins and all the empty bins in the unmarked regions satisfies the requirement, and a simple interpolating function can easily be fitted to those points.
 
-<flow chart, maybe? Or maybe at the end; we'll see.>
+%<flow chart, maybe? Or maybe at the end; we'll see.>
 
 \subsection{White-Out and Black-Out}\label{sec:WhiteOutBlackOut}
 
@@ -280,13 +280,13 @@ Naively collapsing the bins along the luminosity axis artificially skews the chr
 
 To accommodate this, we collapse the bins excluding the bins which are clearly suffering from white-out and black-out. This could be done mathematically by taking the bin of the distribution which is furthest from the luminosity axis, and then finding the intersection with the RGB cube when this chromatic value is at its limits, just before it reaches the edge of the cube where it suffers from white-out or black-out. But it's a simple matter to look at the three projections of the 3D Lxy bins and manually determine the limits for the valid region.
 
-<Insert white-out/black-out bins here>
+%<Insert white-out/black-out bins here>
 
 \subsection{Removing the Background Distribution}\label{sec:RemovingBGDistribution}
 
 Having removed the empty bin artifacts and compensated for white-out/black-out effects, the final step is to remove the bin counts of the bins which are associated with the background, thereby leaving a distribution which corresponds to chromatic skin values and which is artifact- and systematic-error-free. With the chromatic bins processed as they have been so far, it is clear that there is a distinct distribution for the skin and a distinct distribution for the background. However, a distribution for the background was produced earlier, compensating for the iPhone's pre-AP-layer processing. Background removal is automated using a Matlab function which will negate the bins from one sample set using the distribution found for a second sample set.
 
-<Graph showing the overlap of the background and a skin background sample set; briefly describe what that shows.>
+%<Graph showing the overlap of the background and a skin background sample set; briefly describe what that shows.>
 
 \subsection{Results}\label{sec:Results}
 
