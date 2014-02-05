@@ -62,7 +62,7 @@ classdef Bin
                     [Cr, Cb] = meshgrid(Crv, Cbv);
                     Cr = Cr';
                     Cb = Cb';
-                  %  CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) ./ ( TScale) + 0.5;
+                    %  CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) ./ ( TScale) + 0.5;
                     CrCbT = T * vertcat(reshape(Cr,1,[]),reshape(Cb,1,[])) * TScale  + 0.5;
                     CrT = reshape(CrCbT(1,:),size(obj.fBin));
                     CbT = reshape(CrCbT(2,:),size(obj.fBin));
@@ -206,6 +206,7 @@ classdef Bin
                 elseif d==3
                     binOut.bin = squeeze(sum(obj.bin,d));
                 end
+                binOut.count = obj.count;
             else
                 if d==1
                     binOut.bin = squeeze(sum(obj.bin(range(1):range(2),:,:),d));
@@ -214,8 +215,8 @@ classdef Bin
                 elseif d==3
                     binOut.bin = squeeze(sum(obj.bin(:,:,range(1):range(2)),d));
                 end
+                binOut.count = sum(sum(binOut.bin));
             end
-            binOut.count = obj.count;
         end
         
         function obj = add(obj, addBin)
@@ -255,6 +256,7 @@ classdef Bin
         function obj = show(obj)
             if obj.dims ==3
                 figure('Name',horzcat('3D ',obj.name,' bin'),'NumberTitle','off');
+                title(horzcat('2D ',obj.name,' bin'));
                 subplot(1,3,1)
                 imagesc(obj.vals{3},obj.vals{2},squeeze(sum(obj.bin,1)));
                 xlabel(obj.axisNames(3));
@@ -272,6 +274,7 @@ classdef Bin
                 imagesc(obj.vals{2},obj.vals{1},obj.bin);
                 xlabel(obj.axisNames(2));
                 ylabel(obj.axisNames(1));
+                title(horzcat('2D ',obj.name,' bin'));
             end
             figure(gcf);
         end
@@ -289,6 +292,7 @@ classdef Bin
             end
             if obj.dims ==3
                 figure('Name',obj.name,'NumberTitle','off');
+                title(obj.name);
                 subplot(1,3,1)
                 contour(obj.vals{3},obj.vals{2},squeeze(sum(obj.bin,1)), v);
                 xlabel(obj.axisNames(3));
@@ -306,6 +310,7 @@ classdef Bin
                 contour(obj.vals{2},obj.vals{1},obj.bin, v);
                 xlabel(obj.axisNames(2));
                 ylabel(obj.axisNames(1));
+                title(obj.name);
             end
             figure(gcf);
         end
@@ -328,11 +333,13 @@ classdef Bin
                 contour(obj.vals{2},obj.vals{1},squeeze(sum(obj.fBin,3)), nContours);
                 xlabel(obj.axisNames(2));
                 ylabel(obj.axisNames(1));
+                title(horzcat('Normalized, Smoothed ',obj.name));
             elseif obj.dims == 2
                 figure('Name',horzcat('Normalized, Smoothed  ',obj.name),'NumberTitle','off');
                 contour(obj.vals{2},obj.vals{1},obj.fBin, nContours);
                 xlabel(obj.axisNames(2));
                 ylabel(obj.axisNames(1));
+                title(horzcat('Normalized, Smoothed ',obj.name));
             end
             figure(gcf);
         end
@@ -361,6 +368,7 @@ classdef Bin
             contour(obj.vals{2},obj.vals{1},gF, nContours);
             xlabel(obj.axisNames(2));
             ylabel(obj.axisNames(1));
+            title(horzcat('Gaussian fit ',obj.name));
             figure(gcf);
         end
     end
