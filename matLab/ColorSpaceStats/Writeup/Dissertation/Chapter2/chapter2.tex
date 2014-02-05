@@ -62,42 +62,39 @@ Unlike more general cameras, the iPhone's camera performs certain pre-processing
   \caption{The white point for the general skin sample set described in Section~\ref{sec:SkinStatistics}.}
   \label{fig:WhitePoint}
   \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/lxy_general_white_point.eps}
+    \includegraphics[width=0.80\textwidth]{Chapter2/Figs/lxy_general_white_point.eps}
 \end{figure}
 
 While gathering skin statistics for the purposes of this project, the original approach involved taking photos of individual skin --- each with distinct color characteristics --- taken under different lighting conditions with a constant background using the iPhone camera. The background was included in order to obtain data on the edges of the skin. The background would be photographed, then again with each individual's hand over the same background. Afterward, the statistics would be collected and the background removed by negating the background statistics.
 
-Surprisingly, this approached failed to work; the background reappeared.
+Surprisingly, this approached failed to work; the background reappeared (Figure~\ref{fig:BGFailure}).
 
 \begin{figure}[h!]
   \caption{Initial attempt at removing background; unsuccessful.}
   \label{fig:BGFailure}
   \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/xy_bg_failed.eps}
+    \includegraphics[width=0.60\textwidth]{Chapter2/Figs/xy_bg_failed.eps}
 \end{figure}
 
-The background statistics changed with the skin present in the photo. This is because the iPhone adjusts to images with very strong color characteristics. This is an undocumented feature of the iPhone processing. The only way to compensate for this unwelcome pre-processing is to photograph the background with a strongly contrasting object present, but one which is easily cropped out of the image before the background stats are collected.
+The background statistics changed with the skin present in the photo. This is because the iPhone adjusts to images with very strong color characteristics. This is an undocumented feature of the iPhone processing. The only way to compensate for this unwelcome pre-processing is to photograph the background with a strongly contrasting object present, but one which is easily cropped out of the image before the background stats are collected. After collecting the statistics again, the result was much improved (Figure~\ref{fig:BGSuccess}).
 
 \begin{figure}[h!]
   \caption{The red marker cap contrasts with the green background.}
   \label{fig:BGCap}
   \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/bg_cap.eps}
+    \includegraphics[width=0.60\textwidth]{Chapter2/Figs/bg_cap.eps}
 \end{figure}
-
-After collecting the statistics again, the result was much improved.
 
 \begin{figure}[h!]
   \caption{Successful background removal.}
   \label{fig:BGSuccess}
   \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/xy_bg_success.eps}
+    \includegraphics[width=0.60\textwidth]{Chapter2/Figs/xy_bg_success.eps}
 \end{figure}
 
 In a real world context, it is relatively safe to presume that the scene will be chromatically complex enough that the color correction won't be detrimental to detection, and perhaps even beneficial under unusual lighting conditions. But for gathering statistics, it proved to be a massive pain.
 
 \subsection{Rotation Matrix}\label{sec:RotationMatrix}
-
 Any rotation about an axis can be represented by a matrix. Such rotations can be expressed as a 3x3 square matrix in a 3D space. Since they are generally invertible, they're guaranteed to be non-singular. For this application, we require rotation about three different axes, which can be expressed thus:
 
 
@@ -256,13 +253,11 @@ Because the region is so small, when the transformation is applied, we must also
 
 A better approach would be to iterate over the free angle $\theta$ of the Gaussian fit of the two-dimensional bin, which was found by collapsing the 3D bins along the luminosity axis, until convergence; at best, convergence was achieved after 3 iterations. Unfortunately, this approach --- though conceptually straightforward --- is very wasteful; all of the necessary information can be found in the RGB bin statistics. 
 
-With this in mind, a more nuanced approach can be taken:
+Given that we are unable to apply this process in a reasonably efficient manner to individuals and general samples, if this project is to be finished sometime this century, a more nuanced approach is necessary.
 
 \subsection{Transformation with Zero Angle}\label{sec:TransWithZeroAngle}
 
-
-
-\subsection{Removing Zeroes}\label{sec:RemovingZeroes}
+The more interpretable statistics for this project is a set of bins which contains all the information in the RGB bins, but is oriented such that there is a luminosity axis and two chromatic axes. Although the rotation matrices aren't unique, a set can be chosen and an angle $\theta$ determined in the chromatic space to be zero.
 
 \begin{figure}[h!]
   \caption{The projection along the L axis showing the chromatic space with a free rotational angle of 0.}
@@ -270,6 +265,10 @@ With this in mind, a more nuanced approach can be taken:
   \centering
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/xy_Polygon.eps}
 \end{figure}
+
+
+
+\subsection{Removing Zeroes}\label{sec:RemovingZeroes}
 
 The obvious idea is to find all the non-zero bins and fit an interpolating function between them. This will effectively remove the empty bin artifacts within the density-packed region which is the distribution we're interested in. However, the empty bins outside the main distribution are not artifacts and are genuinely empty bins, so removing all the empty bins and then fitting the function joins together any outlying points or secondary distributions corresponding to regions such as the background. We therefore desire a method which will allow us to keep all the non-empty bins and the empty bins outside the main distribution, i.e. all the genuinely empty bins. To achieve this, we designed a Matlab routine which essentially paints a region around each non-zero point, marking it as part of the main distribution. It then takes all the unmarked regions and includes all the empty bins in those regions. So, the set of points which is all the non-empty bins and all the empty bins in the unmarked regions satisfies the requirement, and a simple interpolating function can easily be fitted to those points.
 
