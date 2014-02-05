@@ -54,7 +54,7 @@ Because we're searching for particular points in the real color space -- which, 
 
 As such, there is a need to develop techniques which keep the relevant information while quickly and efficiently discarding the irrelevant information. This is true for the RGB space at the moment, and the aim of this first part of the work.
 
-\subsection{iPhone Camera Characteristics \label{sec:iPhoneCameraCharacteristics}
+\subsection{iPhone Camera Characteristics }\label{sec:iPhoneCameraCharacteristics}
 
 
 
@@ -629,13 +629,6 @@ We are interested in which elements in each row share the same sign, as these wi
  \left(
 \begin{array}{ccc}
  1 & 1 & 1 \\
- 0 & 0 & 0 \\
- 0 & 0 & 0 \\
-\end{array}
-\right) & \theta =\frac{\pi }{6}\lor \theta =\frac{\pi }{2}\lor \theta =\frac{5 \pi }{6}\lor \theta =\frac{7 \pi }{6}\lor \theta =\frac{3 \pi }{2}\lor \theta =\frac{11 \pi }{6} \\
- \left(
-\begin{array}{ccc}
- 1 & 1 & 1 \\
  1 & -1 & 1 \\
  1 & -1 & 1 \\
 \end{array}
@@ -649,9 +642,9 @@ We are interested in which elements in each row share the same sign, as these wi
 \right) & \frac{\pi }{2}<\theta <\frac{5 \pi }{6}\lor \frac{3 \pi }{2}<\theta <\frac{11 \pi }{6} \\
 \end{cases}
 \end{equation}
-So for a pixel $\{R,G,B\}$ 
+So for a pixel $\{R,G,B\}$  % \parpic{\includegraphics[width=100mm]{Chapter2/Figs/ErrorIntheRotation.eps}}
 \begin{equation}
-\begin{cases}
+\raisebox{-22mm}{\includegraphics[width = 44mm]{Chapter2/Figs/ErrorIntheRotation.eps}}\begin{cases}
  G + B < 1 & \frac{\pi }{6}<\theta <\frac{\pi }{2}\lor \frac{7 \pi }{6}<\theta <\frac{3 \pi }{2} \\
  R + B < 1 & 0\leq \theta <\frac{\pi }{6}\lor \frac{5 \pi }{6}<\theta <\frac{7 \pi }{6}\lor \frac{11 \pi }{6}<\theta <2 \pi  \\
  R + G < 1 & \frac{\pi }{2}<\theta <\frac{5 \pi }{6}\lor \frac{3 \pi }{2}<\theta <\frac{11 \pi }{6} \\
@@ -660,11 +653,6 @@ So for a pixel $\{R,G,B\}$
 
 where 1 indicates that the element shares its sign with another element in the same row and -1 indicates the opposite. One channel from the source can be left error free whilst the sum of the other two must be less than one. this divides the color space in two. If the portion of the source which is to be preserved better than in a 2:1 ratio lies entirely within the error free half then the rotation matrix can be stored in the same data type as the source itself.
 
-\begin{figure}[h!]
-  \caption{RGB channels.}
-  \centering
-    \includegraphics[width=\textwidth]{Chapter2/Figs/ErrorIntheRotation.eps}
-\end{figure}
 
 \begin{eqnarray}\label{eq:allSrc}
 \quad max(\delR \cdot \uSrc) \le ~\forall~\uSrc\\
