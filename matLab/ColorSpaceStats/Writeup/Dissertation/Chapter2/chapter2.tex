@@ -54,9 +54,47 @@ Because we're searching for particular points in the real color space -- which, 
 
 As such, there is a need to develop techniques which keep the relevant information while quickly and efficiently discarding the irrelevant information. This is true for the RGB space at the moment, and the aim of this first part of the work.
 
-\subsection{iPhone Camera Characteristics \label{sec:iPhoneCameraCharacteristics}
+\subsection{iPhone Camera Characteristics} \label{sec:iPhoneCameraCharacteristics}
 
+Unlike more general cameras, the iPhone's camera performs certain pre-processing tasks on the raw image before it reaches the AP layer. Typically, cameras have a specific white point value, which is the value corresponding to white. It isn't necessarily the corner of the RGB cube; finding this value is part of the camera calibration. It also determines the orientation of the luminosity axis, which passes through zero to the white point. This is why all pre-defined color space functions have an implicit white point correction. However, the iPhone's white point is always set to the corner of the RGB cube before the image reaches the AP layer. So, when developing an algorithm for the iPhone, white point correction is not necessary, while on other devices the algorithm may need to be adapted accordingly.
 
+\begin{figure}[h!]
+  \caption{The white point for the general skin sample set described in Section~\ref{sec:SkinStatistics}.}
+  \label{fig:WhitePoint}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/lxy_general_white_point.eps}
+\end{figure}
+
+While gathering skin statistics for the purposes of this project, the original approach involved taking photos of individual skin --- each with distinct color characteristics --- taken under different lighting conditions with a constant background using the iPhone camera. The background was included in order to obtain data on the edges of the skin. The background would be photographed, then again with each individual's hand over the same background. Afterward, the statistics would be collected and the background removed by negating the background statistics.
+
+Surprisingly, this approached failed to work; the background reappeared.
+
+\begin{figure}[h!]
+  \caption{Initial attempt at removing background; unsuccessful.}
+  \label{fig:BGFailure}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/xy_bg_failed.eps}
+\end{figure}
+
+The background statistics changed with the skin present in the photo. This is because the iPhone adjusts to images with very strong color characteristics. This is an undocumented feature of the iPhone processing. The only way to compensate for this unwelcome pre-processing is to photograph the background with a strongly contrasting object present, but one which is easily cropped out of the image before the background stats are collected.
+
+\begin{figure}[h!]
+  \caption{The red marker cap contrasts with the green background.}
+  \label{fig:BGCap}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/bg_cap.eps}
+\end{figure}
+
+After collecting the statistics again, the result was much improved.
+
+\begin{figure}[h!]
+  \caption{Successful background removal.}
+  \label{fig:BGSuccess}
+  \centering
+    \includegraphics[width=\textwidth]{Chapter2/Figs/xy_bg_success.eps}
+\end{figure}
+
+In a real world context, it is relatively safe to presume that the scene will be chromatically complex enough that the color correction won't be detrimental to detection, and perhaps even beneficial under unusual lighting conditions. But for gathering statistics, it proved to be a massive pain.
 
 \subsection{Rotation Matrix}\label{sec:RotationMatrix}
 
@@ -257,9 +295,20 @@ We're trying to develop a skin model from the Humane project, which provides a s
 
 To that effect, we selected three individuals with different skin tones; ordering by pigmentation from dark to light, we will henceforth refer to these as subjects F, N and J. Statistics were collected for the three subjects using the procedure outlined previously in this section. A two-dimensional Gaussian was fitted to the distribution for each individual.
 
-
+\begin{figure}[h!]
+  \caption{The xy bins after processing and the Gaussian fit.}
+  \label{fig:FBinAndGFit}
+  \centering
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/FHands_XY_fBin.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/FHands_XY_gFit.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/NHands_XY_fBin.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/NHands_XY_gFit.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/JHands_XY_fBin.eps}
+    \includegraphics[width=0.49\textwidth]{Chapter2/Figs/JHands_XY_gFit.eps}
+\end{figure}
 
 The individual statistics are as follows:
+\newline
 
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
@@ -269,8 +318,11 @@ F & 0.4249 & 0.3335 & 0.0081 & 0.0251 & -0.7724 & 0.7984 \\\hline
 N & 0.4281 & 0.3443 & 0.0080 & 0.0195 & -0.5549 & 0.5969 \\\hline
 J & 0.4022 & 0.3302 & 0.0119 & 0.0253 & -0.8954 & 0.6754 \\\hline
 \end{tabular}
-
+\newline
+\vspace{0.5 cm}
+\newline
 The statistics for the general sample set are as follows:
+\newline
 
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
