@@ -157,11 +157,10 @@ classdef colorSpace
             uRotImage = obj.nT.toRot(uImage);
             
             uProb = zeros(rows * cols, 2);
-            uProb(:,1) = uImage(:,1)<(obj.sMax-obj.cubeSkin)/obj.sMax & uImage(:,2)<(obj.sMax-obj.cubeSkin)/obj.sMax & uImage(:,3)<(obj.sMax-obj.cubeSkin)/obj.sMax & uImage(:,1)>(obj.cubeSkin + obj.sMin)/obj.sMax & uImage(:,2)>(obj.cubeSkin + obj.sMin)/obj.sMax & uImage(:,3)>(obj.cubeSkin + obj.sMin)/obj.sMax;
-            uProb(:,2) = 1. ./ ( exp((uRotImage(:,2) - obj.uC(2)).^2 ./ ( 2. * (obj.sig(2) * obj.sigma(2)/obj.sRange)^2)) .* exp((uRotImage(:,3) - obj.uC(3)).^2 ./ ( 2. * (obj.sig(3) * obj.sigma(3)/obj.sRange)^2)));
-            
+            uProb(:,1) = 1. ./ ( exp((uRotImage(:,2) - obj.uC(2)).^2 ./ ( 2. * (obj.sig(2) * obj.sigma(2))^2)) .* exp((uRotImage(:,3) - obj.uC(3)).^2 ./ ( 2. * (obj.sig(3) * obj.sigma(3))^2)));
+            uProb(:,2) = uProb(:,1)>0.1;
             %# Convert back to type uint8 and reshape to its original size:
-            outImage = reshape(horzcat(uint8(uImage.* obj.dRange),uint8(scaledImage),uint8(uProb.* obj.dRange)),[rows, cols, chans+5]);
+            outImage = reshape(horzcat(uint8(uImage.* obj.dRange),uint8(uProb.* obj.dRange)),[rows, cols, chans+2]);
             
         end % function
         
