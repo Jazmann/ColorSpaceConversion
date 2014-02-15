@@ -3,7 +3,7 @@ classdef colorSpace
     %   Detailed explanation goes here
     
     properties
-        sigma; sig; g; c; uC; nT; T;
+        theta; sigma; sig; g; c; uC; nT; T;
         sMin; sMax; sRange;
         dMin; dMax; dRange;
         ErfA; ErfB; ErfAB;
@@ -14,7 +14,7 @@ classdef colorSpace
     
     methods
         function obj = colorSpace(theta, c, sigma, sig, sMin, sMax, dMin, dMax, cubeSkin, cInSrc)
-            
+            obj.theta = theta;
             if nargin>=10
                 CInSrc = cInSrc;
             else
@@ -81,7 +81,7 @@ classdef colorSpace
             
         end % function
         
-        function obj = setTheta(theta)
+        function obj = setTheta(obj,theta)
             obj.nT = transform(theta,'yes');
             obj.T  = transform(theta,'no');
         end % function
