@@ -22,27 +22,27 @@ classdef findContours
         end
         
         function obj = findRect(obj)
-            cv.minAreaRect(obj.contours{1})
-            obj.box = cv.minAreaRect(obj.contours{1});
+            for i = 1:obj.nContours
+            obj.box{i} = cv.minAreaRect(obj.contours{i});
             
+            obj.boxEdges{i} = [-obj.box{i}.size(1)/2,  0                   , obj.box{i}.size(1)/2, 0;
+                                0                    , obj.box{i}.size(2)/2, 0                ,-obj.box{i}.size(2)/2];
             
-            obj.boxEdges = [-obj.box.size(1)/2, 0               , obj.box.size(1)/2, 0;
-                0                ,obj.box.size(2)/2, 0                ,-obj.box.size(2)/2];
+            obj.boxVerts{i} = [-obj.box{i}.size(1)/2,obj.box{i}.size(1)/2, obj.box{i}.size(1)/2,-obj.box{i}.size(1)/2;
+                obj.box{i}.size(2)/2,obj.box{i}.size(2)/2,-obj.box{i}.size(2)/2,-obj.box{i}.size(2)/2];
             
-            obj.boxVerts = [-obj.box.size(1)/2,obj.box.size(1)/2, obj.box.size(1)/2,-obj.box.size(1)/2;
-                obj.box.size(2)/2,obj.box.size(2)/2,-obj.box.size(2)/2,-obj.box.size(2)/2];
-            
-            rr = [cos(obj.box.angle*2*pi/360.0), - sin(obj.box.angle*2*pi/360.0); sin(obj.box.angle*2*pi/360.0), cos(obj.box.angle*2*pi/360.0)];
+            rr = [cos(obj.box{i}.angle*2*pi/360.0), - sin(obj.box{i}.angle*2*pi/360.0); sin(obj.box{i}.angle*2*pi/360.0), cos(obj.box{i}.angle*2*pi/360.0)];
             obj.boxEdges = rr * obj.boxEdges;
             obj.boxVerts = rr * obj.boxVerts;
-            obj.boxEdges(1,:) = obj.boxEdges(1,:) + obj.box.center(1);
-            obj.boxEdges(2,:) = obj.boxEdges(2,:) + obj.box.center(2);
-            obj.boxVerts(1,:) = obj.boxVerts(1,:) + obj.box.center(1);
-            obj.boxVerts(2,:) = obj.boxVerts(2,:) + obj.box.center(2);
+            obj.boxEdges(1,:) = obj.boxEdges(1,:) + obj.box{i}.center(1);
+            obj.boxEdges(2,:) = obj.boxEdges(2,:) + obj.box{i}.center(2);
+            obj.boxVerts(1,:) = obj.boxVerts(1,:) + obj.box{i}.center(1);
+            obj.boxVerts(2,:) = obj.boxVerts(2,:) + obj.box{i}.center(2);
             
             
             line(obj.boxVerts(1,:),obj.boxVerts(2,:))
             line([obj.boxVerts(1,:),obj.boxVerts(1,1)],[obj.boxVerts(2,:),obj.boxVerts(2,1)])
+            end
             
         end
         
