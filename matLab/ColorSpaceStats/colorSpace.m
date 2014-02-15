@@ -150,7 +150,7 @@ classdef colorSpace
         end % function
         
         function outImage = toProbability(obj, img)
-            
+            blobLevels = 5;
             [rows, cols, chans] = size(img);
             
             uImage = reshape(double(img)./obj.sRange,[],3);
@@ -158,7 +158,8 @@ classdef colorSpace
             
             uProb = zeros(rows * cols, 2);
             uProb(:,1) = 1. ./ ( exp((uRotImage(:,2) - obj.uC(2)).^2 ./ ( 2. * (obj.sig(2) * obj.sigma(2))^2)) .* exp((uRotImage(:,3) - obj.uC(3)).^2 ./ ( 2. * (obj.sig(3) * obj.sigma(3))^2)));
-            uProb(:,2) = uProb(:,1)>0.1;
+            %uProb(:,2) = (uProb(:,1)>0.1) + (uProb(:,1)>0.2) + (uProb(:,1)>0.3) + (uProb(:,1)>0.4) + (uProb(:,1)>0.5) + (uProb(:,1)>0.6);
+            uProb(:,2) = floor(blobLevels .* uProb(:,1))/blobLevels;
             %# Convert back to type uint8 and reshape to its original size:
             outImage = reshape(horzcat(uint8(uImage.* obj.dRange),uint8(uProb.* obj.dRange)),[rows, cols, chans+2]);
             

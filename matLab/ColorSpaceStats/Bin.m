@@ -253,6 +253,14 @@ classdef Bin
             obj.fBin(Loc) = 0;
         end
         
+        function color = toColorSpace(obj)
+            if obj.dims==2
+            color = colorSpace(obj.gTheta, [0.5, obj.gMean(1),obj.gMean(2)], [1,obj.gSigma(1),obj.gSigma(2)], [3,3,3], 0, 255, 0, 255, 10, 0);
+            else
+            color = colorSpace(0.0, [obj.a(1), obj.a(2), obj.a(3)], [1,1,1], [3,3,3], 0, 255, 0, 255, 10, 0);
+            end
+        end
+        
         function obj = show(obj)
             if obj.dims ==3
                 figure('Name',horzcat('3D ',obj.name,' bin'),'NumberTitle','off');
