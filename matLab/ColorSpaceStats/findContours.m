@@ -19,25 +19,30 @@ classdef findContours
             obj.img = image;
             [obj.contours, obj.hierarchy] = cv.findContours(image);
             obj.nContours=size(obj.contours,2);
+            obj.box = cell(1,obj.nContours);
+            obj.boxVerts = cell(1,obj.nContours);
+            obj.boxEdges = cell(1,obj.nContours);
+            obj = obj.findRect;
+            
         end
         
         function obj = findRect(obj)
             for i = 1:obj.nContours
             obj.box{i} = cv.minAreaRect(obj.contours{i});
             
-            obj.boxEdges{i} = [-obj.box{i}.size(1)/2,  0                   , obj.box{i}.size(1)/2, 0;
-                                0                    , obj.box{i}.size(2)/2, 0                ,-obj.box{i}.size(2)/2];
+            obj.boxEdges{i} = [-obj.box{i}.size(1)/2,  0                   , obj.box{i}.size(1)/2, 0 ;
+                                0                    , obj.box{i}.size(2)/2, 0                   ,-obj.box{i}.size(2)/2];
             
             obj.boxVerts{i} = [-obj.box{i}.size(1)/2,obj.box{i}.size(1)/2, obj.box{i}.size(1)/2,-obj.box{i}.size(1)/2;
                 obj.box{i}.size(2)/2,obj.box{i}.size(2)/2,-obj.box{i}.size(2)/2,-obj.box{i}.size(2)/2];
             
             rr = [cos(obj.box{i}.angle*2*pi/360.0), - sin(obj.box{i}.angle*2*pi/360.0); sin(obj.box{i}.angle*2*pi/360.0), cos(obj.box{i}.angle*2*pi/360.0)];
-            obj.boxEdges = rr * obj.boxEdges;
-            obj.boxVerts = rr * obj.boxVerts;
-            obj.boxEdges(1,:) = obj.boxEdges(1,:) + obj.box{i}.center(1);
-            obj.boxEdges(2,:) = obj.boxEdges(2,:) + obj.box{i}.center(2);
-            obj.boxVerts(1,:) = obj.boxVerts(1,:) + obj.box{i}.center(1);
-            obj.boxVerts(2,:) = obj.boxVerts(2,:) + obj.box{i}.center(2);
+            obj.boxEdges{i} = rr * obj.boxEdges{i};
+            obj.boxVerts{i} = rr * obj.boxVerts{i};
+            obj.boxEdges{i}(1,:) = obj.boxEdges{i}(1,:) + obj.box{i}.center(1);
+            obj.boxEdges{i}(2,:) = obj.boxEdges{i}(2,:) + obj.box{i}.center(2);
+            obj.boxVerts{i}(1,:) = obj.boxVerts{i}(1,:) + obj.box{i}.center(1);
+            obj.boxVerts{i}(2,:) = obj.boxVerts{i}(2,:) + obj.box{i}.center(2);
             end
             
         end
@@ -46,7 +51,9 @@ classdef findContours
             figure('Name',horzcat('Contours for ',obj.name),'NumberTitle','off');
             imagesc(obj.img)
            
-            line([obj.boxVerts(1,:),obj.boxVerts(1,1)],[obj.boxVerts(2,:),obj.boxVerts(2,1)])
+            for i = 1:obj.nContours
+            line([obj.boxVerts{i}(1,:),obj.boxVerts{i}(1,1)],[obj.boxVerts{i}(2,:),obj.boxVerts{i}(2,1)])
+            end
             
             xlabel(obj.axisNames(2));
             ylabel(obj.axisNames(1));
