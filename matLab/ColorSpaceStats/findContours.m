@@ -38,10 +38,6 @@ classdef findContours
             obj.boxEdges(2,:) = obj.boxEdges(2,:) + obj.box{i}.center(2);
             obj.boxVerts(1,:) = obj.boxVerts(1,:) + obj.box{i}.center(1);
             obj.boxVerts(2,:) = obj.boxVerts(2,:) + obj.box{i}.center(2);
-            
-            
-            line(obj.boxVerts(1,:),obj.boxVerts(2,:))
-            line([obj.boxVerts(1,:),obj.boxVerts(1,1)],[obj.boxVerts(2,:),obj.boxVerts(2,1)])
             end
             
         end
@@ -49,8 +45,7 @@ classdef findContours
         function showRect(obj)
             figure('Name',horzcat('Contours for ',obj.name),'NumberTitle','off');
             imagesc(obj.img)
-            
-            line(obj.boxVerts(1,:),obj.boxVerts(2,:))
+           
             line([obj.boxVerts(1,:),obj.boxVerts(1,1)],[obj.boxVerts(2,:),obj.boxVerts(2,1)])
             
             xlabel(obj.axisNames(2));
