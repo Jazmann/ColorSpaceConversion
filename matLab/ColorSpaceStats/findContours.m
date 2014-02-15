@@ -13,7 +13,7 @@ classdef findContours
         function   obj = findContours(image)
             obj.img = image;
             [obj.contours, obj.hierarchy] = cv.findContours(image);
-            obj.nContours=size(contours,2);
+            obj.nContours=size(obj.contours,2);
         end
         
         
