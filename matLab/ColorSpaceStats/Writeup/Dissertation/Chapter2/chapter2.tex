@@ -59,10 +59,9 @@ As such, there is a need to develop techniques which keep the relevant informati
 Unlike more general cameras, the iPhone's camera performs certain pre-processing tasks on the raw image before it reaches the AP layer. Typically, cameras have a specific white point value, which is the value corresponding to white. It isn't necessarily the corner of the RGB cube; finding this value is part of the camera calibration. It also determines the orientation of the luminosity axis, which passes through zero to the white point. This is why all pre-defined color space functions have an implicit white point correction. However, the iPhone's white point is always set to the corner of the RGB cube before the image reaches the AP layer. So, when developing an algorithm for the iPhone, white point correction is not necessary, while on other devices the algorithm may need to be adapted accordingly.
 
 \begin{figure}[h!]
-  \label{fig:WhitePoint}
   \centering
     \includegraphics[width=0.80\textwidth]{Chapter2/Figs/lxy_general_white_point.eps}
-    \caption{The white point for the general skin sample set described in Section~\ref{sec:SkinStatistics}.}
+    \caption{The white point for the general skin sample set described in Section~\ref{sec:SkinStatistics}.}  \label{fig:WhitePoint}
 \end{figure}
 
 While gathering skin statistics for the purposes of this project, the original approach involved taking photos of individual skin --- each with distinct color characteristics --- taken under different lighting conditions with a constant background using the iPhone camera. The background was included in order to obtain data on the edges of the skin. The background would be photographed, then again with each individual's hand over the same background. Afterward, the statistics would be collected and the background removed by negating the background statistics.
@@ -70,26 +69,23 @@ While gathering skin statistics for the purposes of this project, the original a
 Surprisingly, this approached failed to work; the background reappeared (Figure~\ref{fig:BGFailure}).
 
 \begin{figure}[h!]
-  \label{fig:BGFailure}
   \centering
     \includegraphics[width=0.60\textwidth]{Chapter2/Figs/xy_bg_failed.eps}
-    \caption{Initial attempt at removing background; unsuccessful.}
+    \caption{Initial attempt at removing background; unsuccessful.} \label{fig:BGFailure}
 \end{figure}
 
 The background statistics changed with the skin present in the photo. This is because the iPhone adjusts to images with very strong color characteristics. This is an undocumented feature of the iPhone processing. The only way to compensate for this unwelcome pre-processing is to photograph the background with a strongly contrasting object present, but one which is easily cropped out of the image before the background stats are collected. After collecting the statistics again, the result was much improved (Figure~\ref{fig:BGSuccess}).
 
 \begin{figure}[h!]
-  \label{fig:BGCap}
   \centering
     \includegraphics[width=0.60\textwidth]{Chapter2/Figs/bg_cap.eps}
-    \caption{The red marker cap contrasts with the green background.}
+    \caption{The red marker cap contrasts with the green background.}  \label{fig:BGCap}
 \end{figure}
 
 \begin{figure}[h!]
-  \label{fig:BGSuccess}
   \centering
     \includegraphics[width=0.60\textwidth]{Chapter2/Figs/xy_bg_success.eps}
-    \caption{Successful background removal.}
+    \caption{Successful background removal.}  \label{fig:BGSuccess}
 \end{figure}
 
 In a real world context, it is relatively safe to presume that the scene will be chromatically complex enough that the color correction won't be detrimental to detection, and perhaps even beneficial under unusual lighting conditions. But for gathering statistics, it proved to be a massive pain.
@@ -170,10 +166,10 @@ The extent of the new axis is found by taking the maximum and minimum values of 
 
 A graphical representation of the problem can be seen in Figure~\ref{eq:YabCube}.
 
-\begin{figure}[h!]\label{fig:YABCubeEval}
+\begin{figure}[h!]
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/YABCubeEval.eps}
-    \caption{Evaluation of the color space problem.}
+    \caption{Evaluation of the color space problem.}\label{fig:YABCubeEval}
 \end{figure}
 
 In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the axis ranges are given by the following:
@@ -216,10 +212,9 @@ The image set consists of approximately 200 skin samples --- each of which shows
 
 
 \begin{figure}[h!]
-  \label{fig:InitBins}
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/InitialBins.eps}
-    \caption{Initial set of bins.}
+    \caption{Initial set of bins.}  \label{fig:InitBins}
 \end{figure}
 
 
@@ -229,10 +224,9 @@ Given that we are free to choose the orientation of the color space about the lu
 
 
 \begin{figure}[h!]
-  \label{fig:DistributionAndGaussianFit}
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/crosshairFigureFinal.eps}
-    \caption{Distribution and Gaussian fit to the chromatic pixel values in the new color space.}
+    \caption{Distribution and Gaussian fit to the chromatic pixel values in the new color space.}  \label{fig:DistributionAndGaussianFit}
 \end{figure}
 
 
@@ -246,10 +240,9 @@ A naive approach is to take a directory of images and process them using our col
 Because the region is so small, when the transformation is applied, we must also retain all the information therein. Initially, we did not know this; our transformed images were represented as the same data type as the original. But because the transformed information is a less efficient representation of the original information, a significant amount of that information is lost.
 
 \begin{figure}[h!]
-  \label{fig:ConvergenceTheta}
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/ConvergenceOfSkinSpaceFinal.eps}
-    \caption{Convergence of color space orientation $\theta$.}
+    \caption{Convergence of color space orientation $\theta$.}  \label{fig:ConvergenceTheta}
 \end{figure}
 
 A better approach would be to iterate over the free angle $\theta$ of the Gaussian fit of the two-dimensional bin, which was found by collapsing the 3D bins along the luminosity axis, until convergence; at best, convergence was achieved after 3 iterations. Unfortunately, this approach --- though conceptually straightforward --- is very wasteful; all of the necessary information can be found in the RGB bin statistics. 
@@ -261,10 +254,9 @@ Given that we are unable to apply this process in a reasonably efficient manner 
 The more interpretable statistics for this project is a set of bins which contains all the information in the RGB bins, but is oriented such that there is a luminosity axis and two chromatic axes. Although the rotation matrices aren't unique, a set can be chosen and an angle $\theta$ determined in the chromatic space to be zero.
 
 \begin{figure}[h!]
-  \label{fig:xyPolygon}
   \centering
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/xy_Polygon.eps}
-    \caption{The projection along the L axis showing the chromatic space with a free rotational angle of 0.}
+    \caption{The projection along the L axis showing the chromatic space with a free rotational angle of 0.}  \label{fig:xyPolygon}
 \end{figure}
 
 
@@ -296,7 +288,6 @@ We're trying to develop a skin model from the Humane project, which provides a s
 To that effect, we selected three individuals with different skin tones; ordering by pigmentation from dark to light, we will henceforth refer to these as subjects F, N and J. Statistics were collected for the three subjects using the procedure outlined previously in this section. A two-dimensional Gaussian was fitted to the distribution for each individual.
 
 \begin{figure}[h!]
-  \label{fig:FBinAndGFit}
   \centering
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/FHands_XY_fBin.eps}
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/FHands_XY_gFit.eps}
@@ -304,7 +295,7 @@ To that effect, we selected three individuals with different skin tones; orderin
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/NHands_XY_gFit.eps}
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/JHands_XY_fBin.eps}
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/JHands_XY_gFit.eps}
-    \caption{The xy bins after processing and the Gaussian fit.}
+    \caption{The xy bins after processing and the Gaussian fit.}  \label{fig:FBinAndGFit}
 \end{figure}
 
 The individual statistics are as follows:
@@ -344,10 +335,9 @@ Knowing the range of values produced by the rotation allows us to scale the tran
 
 
 \begin{figure}[h!]
-  \label{fig:UnitGraph}
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/unitGraph.eps}
-    \caption{Unit graph.}
+    \caption{Unit graph.}  \label{fig:UnitGraph}
 \end{figure}
 
 
@@ -380,8 +370,7 @@ To construct a distribution function, we first need to describe the relationship
 The Gaussian distribution and the cumulative distribution are shown in Figure~\ref{fig:ErrorFunctionGraph} for some values chosen for illustrative purposes. All that is required now is to fix the range dMin to dMax for the domain sMin to sMax.
 
 \begin{figure}[h!]
-  \caption{Error function.}
-  \label{fig:ErrorFunctionGraph}
+  \caption{Error function.}  \label{fig:ErrorFunctionGraph}
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/errorFunction.eps}
 \end{figure}
@@ -424,27 +413,24 @@ We now have an equation that gives us the four points in the source domain which
 
 
 \begin{figure}[h!]
-  \label{fig:Partition}
   \centering
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/partitionSmooth2.eps}
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/partitionColor2.eps}
-    \caption{Linear partition approximation.}
+    \caption{Linear partition approximation.}  \label{fig:Partition}
 \end{figure}
 
 \begin{figure}[h!]
-  \label{fig:Linear}
   \centering
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/linearSmooth2.eps}
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/linearColor2.eps}
-    \caption{Linear approximation.}
+    \caption{Linear approximation.}  \label{fig:Linear}
 \end{figure}
 
 \begin{figure}[h!]
-  \label{fig:ERF}
   \centering
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/ERFSmooth2.eps}
     \includegraphics[width=0.49\textwidth]{Chapter2/Figs/ERFColor2.eps}
-    \caption{Error Function distribution.}
+    \caption{Error Function distribution.}  \label{fig:ERF}
 \end{figure}
 
 There is one final value of interest to the development of the algorithm, which is the gradient at the mean. The reason this is of interest is because we're trying to compress the relevant data as much as possible. If the destination region is small (i.e. the destination machine type is smaller than the source type), then the gradient at the mean allows us to assess the fidelity required of the source type. If it weren't for the fact that the source is the result of a rotation transformation, then there would be little purpose in assessing this value. However, it is entirely possible that the lengthening of the axes resulting from the rotation is insignificant for the desired destination type; there's no point preserving information during the rotation which is then discarded by the redistribution. The gradient for a unit source and domain is given by
@@ -739,6 +725,21 @@ It is not possible to compress all the information in such a way that it is appr
 
 \section{Skin Detection}\label{sec:SkinDetection}
 
+With the image in the skin color space, skin detection is a significantly simplified problem; the average skin color is at the halfway point in both of the chromatic channels and the Gaussian distribution has already been applied, meaning that performing an eliptical thresholding in the normal color space is equivalent to a rectangular thresholding in the skin color space. The probability distribution can be obtained by combining the distributions in each chromatic channel. Because the thresholding levels in each channel are equivalent to the same points on the Gaussian, they can be straightforwardly combined, and then a single threshold used on the one resulting channel. This can be done by subtracting $\frac{1}{2}$ from both channels, squaring them, then adding them together.
+
+The next step is to identify the skin. For the purposes of this project, we're searching for a skin-colored object of a specific shape: a finger that comes into the frame, presses down on a surface, then exits the frame. One of its properties is that it meets the edge of the frame, appearing as a rectangle with a rounded end which --- on occasion --- can appear slightly bent due to the viewing angle or pressure placed on the finger as it presses down on the surface. But there's a limit to how great that deflection can be in the image.
+
+In order to find this shape, we begin by finding the contours in the binary probability image. This can be achieved by using the "findContours" method in OpenCV, which finds the contours and returns them as a vector of points. In the skin color space, finding the contours around the finger is very simple.
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.45\textwidth]{Chapter2/Figs/indexContours.eps}\label{fig:IndexContours}
+    \caption{Finger contours in the probability image.}
+\end{figure}
+
+Once the contours have been identified, a rectangle is drawn around the finger using OpenCV's "rectangle" method, with the tip of the finger touching one of its sides. This allows for <something>. Next, lines are drawn along the sides of the finger using the "line" method, and a convex hull identifies the semicircular fingertip, again using an OpenCV method, in this case "convexHull." This produces a set of verteces which allow us to locate the fingernail, at which point we highlight it with a square drawn using the "rectangle" method once more. The fingernail image within this square is then sent to the edge detector method for further processing.
+
+It should be noted that --- in the finger images in Figure~\ref{fig:IndexContours} --- the finger is deformed slightly due to the application of pressure on a flat surface, as was discussed previously. This doesn't necessarily share the same orientation as the tip. This can be remedied by taking the portion of the image highlighted by the rectangle and performing the operation again, thereby producing a rectangle which is properly oriented with the fingertip.
 
 \begin{figure}[h!]
   \centering
@@ -771,10 +772,9 @@ It is not possible to compress all the information in such a way that it is appr
 The image captured by a CCD camera is designed to fool the human eye. In physical reality, light reaching the sensor spans full spectral range. In the human eye --- and in the camera --- the diversity of chromatic information is lost by representing the spectrum as a combination of three chromatic Gaussians, as can be seen in Figure~\ref{fig:spectrum}.
 
 \begin{figure}[h!]
-  \label{fig:spectrum}
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/spectrum.eps}
-    \caption{Human eye representation of the color spectrum.}
+    \caption{Human eye representation of the color spectrum.}  \label{fig:spectrum}
 \end{figure}
 
 Human skin is made up of two layers, each with its own optical properties: the surface layer --- the "epidermis" --- and the "dermis," the vascular structure underneath in which the blood vessels, lymphatic vessels and other such fibroblast structures can be found (~\cite{Stamatas2004}). The molecules which make up these layers make an important contribution to skin color. The most significant of these are melanin --- which is found in the epidermis --- and oxy-hemoglobin and deoxy-hemoglobin --- both of which reside in the dermis. Melanin is the main spectral absorber in the epidermis and the greatest contributor to the visual perception of surface skin color; it features a monotonic increase toward short wavelengths on its spectral absorption curve in the visible, approaching linear in the region 600-750 nm (~\cite{Stamatas2004,Kollias1995}). Oxy-hemoglobin and deoxy-hemoglobin are actually different states of the same molecule --- hemoglobin --- which is found in the dermal blood supply. The molecule's chromophoric state is dependent upon whether it is delivering oxygen molecules to the tissues; it exists as oxy-hemoglobin if it is delivering oxygen and deoxy-hemoglobin if it isn't. The redness of skin in the areas where hemoglobin is found is due to the molecule's absorption of incident light (~\cite{Kollias1995}). It should be noted that each form of hemoglobin has its own characteristic absorption profile; oxy-hemoglobin's maxima on the absorption curve can be found at 415, 540 and 577 nm, whereas deoxy-hemoglobin's are located at 430 and 555 nm.
@@ -800,32 +800,29 @@ The equivalent RGB points for the colors of the absorption peaks can be calculat
 If the respective color is shined on a molecule with these properties, it will absorb them. To convert this into a scattering spectrum, spectrum of the incident light must be taken, subtracting the amount that is absorbed. Assuming a uniform line, the process is not unlike flipping the waveform on its Y axis.
 
 \begin{figure}[h!]
-  \label{fig:abs}
   \centering
     \includegraphics[width=0.45\textwidth]{Chapter2/Figs/absOxyHemo.eps}
     \includegraphics[width=0.45\textwidth]{Chapter2/Figs/absDeoxyHemo.eps}
     \includegraphics[width=0.45\textwidth]{Chapter2/Figs/absMelanin.eps}
-    \caption{Oxy-hemoglobin, deoxy-hemoglobin and melanin absorption characteristics.}
+    \caption{Oxy-hemoglobin, deoxy-hemoglobin and melanin absorption characteristics.}  \label{fig:abs}
 \end{figure}
 
 The scattering spectra needs to be represented in a three-function Gaussian basis. We will take the maximum values of these and make a quick transform of the scattering spectra, giving a color value for the molecules and their relative positions in the space. The scattering spectra are presented in Figure~\ref{fig:scat}.
 
 \begin{figure}[h!]
-  \label{fig:scat}
   \centering
     \includegraphics[width=0.45\textwidth]{Chapter2/Figs/scatOxyHemo.eps}
     \includegraphics[width=0.45\textwidth]{Chapter2/Figs/scatDeoxyHemo.eps}
     \includegraphics[width=0.45\textwidth]{Chapter2/Figs/scatMelanin.eps}
-    \caption{Oxy-hemoglobin, deoxy-hemoglobin and melanin scattering spectra.}
+    \caption{Oxy-hemoglobin, deoxy-hemoglobin and melanin scattering spectra.}  \label{fig:scat}
 \end{figure}
 
 Finally, we perform a color matching operation based on the CIE 1931 standard observer piecewise function to complete the transformation.
 
 \begin{figure}[h!]
-  \label{fig:colorBasis}
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/colorBasis.eps}
-    \caption{Final skin chromophore positions.}
+    \caption{Final skin chromophore positions.}  \label{fig:colorBasis}
 \end{figure}
 
 We have a function for the light source, but we will make the crude assumption of an equal amount of all wavelengths. This is sufficient for the purposes of this project.
