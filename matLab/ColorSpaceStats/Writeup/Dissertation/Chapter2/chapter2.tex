@@ -733,8 +733,9 @@ In order to find this shape, we begin by finding the contours in the binary prob
 
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=0.45\textwidth]{Chapter2/Figs/indexContours.eps}\label{fig:IndexContours}
-    \caption{Finger contours in the probability image.}
+      \includegraphics[width=0.45\textwidth]{Chapter2/Figs/imgJIndex1.eps}
+    \includegraphics[width=0.45\textwidth]{Chapter2/Figs/indexContours.eps}
+    \caption{Finger contours in the probability image.}\label{fig:IndexContours}
 \end{figure}
 
 Once the contours have been identified, a rectangle is drawn around the finger using OpenCV's "rectangle" method, with the tip of the finger touching one of its sides. This allows for <something>. Next, lines are drawn along the sides of the finger using the "line" method, and a convex hull identifies the semicircular fingertip, again using an OpenCV method, in this case "convexHull." This produces a set of verteces which allow us to locate the fingernail, at which point we highlight it with a square drawn using the "rectangle" method once more. The fingernail image within this square is then sent to the edge detector method for further processing.
