@@ -742,6 +742,8 @@ Once the contours have been identified, a rectangle is drawn around the finger u
 
 It should be noted that --- in the finger images in Figure~\ref{fig:IndexContours} --- the finger is deformed slightly due to the application of pressure on a flat surface, as was discussed previously. This doesn't necessarily share the same orientation as the tip. This can be remedied by taking the portion of the image highlighted by the rectangle and performing the operation again, thereby producing a rectangle which is properly oriented with the fingertip.
 
+Once the fingertip has been identified, its features are obtained using the SURF algorithm method provided by OpenCV's SURF class; the static features are used to <something>, while the dynamic features (blood flow, finger deformation due to pressure, etc.) are used to measure pressure. Differences in pressure are then found by finding the deltas between the images.
+
 \begin{figure}[h!]
   \centering
     \includegraphics[width=\textwidth]{Chapter2/Figs/rainbowmanRGB.eps}
@@ -785,9 +787,19 @@ The Canny edge detector method is perfect for implementing a decision by setting
 \end{tabular}
 \end{center}
 
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.70\textwidth]{Chapter2/Figs/2bitImage.eps}\label{fig:2BitImage}
+    \caption{The improved contour method in action.}
+\end{figure}
+
 \section{Fingertip Descriptor}\label{sec:FingertipDescriptor}
 
+Given that the SURF method fails to find any sort of reliable, small area features, we need a descriptor so we can accurately align points on the fingertip between successive images in the video stream. We need to do this because otherwise, any difference between the frames will be overwhelmed by physical movement of the digit rather than movement of the blood inside the digit. For this reason, we target the most stable portion of the finger: the nail. We have quite accurate tracking of the tip, so it's quite simple to place a point fairly centrally on a nail with no other information other than the position of the tip. We apply the Canny edge detector and find the edges which are radially located around that point. The radial edges are detected, which are used to align between frames. Essentially, they can be broken into four lines; two down the side being relatively straight. But it depends on the individual, and the digit. However, we know we're looking for something with a certain curvature, as well as the rough positions of the lines along the edges.
 
+For each of those four lines, we have an orientation and a curvature, as well as the distance between the opposing lines. So, using that descriptor, we have the next frame, and in the new frame, we apply the Canny edge detector and detect four lines with similar characteristics. Given those edges, we can produce our best estimate, minimizing the difference between this frame and the previous one, in terms of theor orientation and position. Based on this, we can work out a shift if there's been a change in position or orientation of the fingertip.
+
+Because we're going from one frame to another in a video stream, the descriptor is sufficient to overlay the frames accurately to within a few pixel widths. A brute force feature matching can be used as a further refinement if necessary. For the purposes of detecting a finger press, however, this was not found to be necessary.
 
 \section{Putting it All Together}\label{sec:PuttingItAllTogether}
 
