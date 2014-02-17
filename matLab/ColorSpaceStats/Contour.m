@@ -72,9 +72,9 @@ classdef Contour
         
         function crop = cropImg(obj,img)
             if length(size(img)) >2
-                crop = img(obj.redBoxCrop(1,1):obj.redBoxCrop(1,2),obj.redBoxCrop(2,1):obj.redBoxCrop(2,2),:);
+                crop = img(obj.redBoxCrop(2,1):obj.redBoxCrop(2,2),obj.redBoxCrop(1,1):obj.redBoxCrop(1,2),:);
             else
-                crop = img(obj.redBoxCrop(1,1):obj.redBoxCrop(1,2),obj.redBoxCrop(2,1):obj.redBoxCrop(2,2));
+                crop = img(obj.redBoxCrop(2,1):obj.redBoxCrop(2,2),obj.redBoxCrop(1,1):obj.redBoxCrop(1,2));
             end
         end
         
@@ -87,7 +87,7 @@ classdef Contour
             
         end
         
-        function drawRect(obj)
+        function obj = drawRect(obj)
             line([obj.boxVerts(1,:),obj.boxVerts(1,1)],[obj.boxVerts(2,:),obj.boxVerts(2,1)],'Color',[1,0.5,0])
             line([obj.redBoxVerts(1,:),obj.redBoxVerts(1,1)],[obj.redBoxVerts(2,:),obj.redBoxVerts(2,1)],'Color','red')
             for j = 1:size(obj.boxEdges,2)
