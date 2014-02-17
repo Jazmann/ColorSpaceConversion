@@ -3,13 +3,13 @@ function [ ] = getSURF(imgCell,fig,chan)
 kpts = cell(7);
 kptsImg = cell(7);
 
-kpts{1} = cv.SURF(imgCell{1}(:,:,chan));
-kpts{2} = cv.SURF(imgCell{2}(:,:,chan));
-kpts{3} = cv.SURF(imgCell{3}(:,:,chan));
-kpts{4} = cv.SURF(imgCell{4}(:,:,chan));
-kpts{5} = cv.SURF(imgCell{5}(:,:,chan));
-kpts{6} = cv.SURF(imgCell{6}(:,:,chan));
-kpts{7} = cv.SURF(imgCell{7}(:,:,chan));
+kpts{1} = cv.SURF(imgCell{1}((85):(215),(45):(175),chan),'Extended',0,'UpRight',1,'HessianThreshold',70,'NOctaves',4);
+kpts{2} = cv.SURF(imgCell{2}((85):(215),(45):(175),chan),'Extended',0,'UpRight',1,'HessianThreshold',70,'NOctaves',4);
+kpts{3} = cv.SURF(imgCell{3}((85):(215),(45):(175),chan),'Extended',0,'UpRight',1,'HessianThreshold',70,'NOctaves',4);
+kpts{4} = cv.SURF(imgCell{4}((85):(215),(45):(175),chan),'Extended',0,'UpRight',1,'HessianThreshold',70,'NOctaves',4);
+kpts{5} = cv.SURF(imgCell{5}((85):(215),(45):(175),chan),'Extended',0,'UpRight',1,'HessianThreshold',70,'NOctaves',4);
+kpts{6} = cv.SURF(imgCell{6}((85):(215),(45):(175),chan),'Extended',0,'UpRight',1,'HessianThreshold',70,'NOctaves',4);
+kpts{7} = cv.SURF(imgCell{7}((85):(215),(45):(175),chan),'Extended',0,'UpRight',1,'HessianThreshold',70,'NOctaves',4);
 
 kptsImg{1} = cv.drawKeypoints(imgCell{1}(:,:,chan),kpts{1});
 kptsImg{2} = cv.drawKeypoints(imgCell{2}(:,:,chan),kpts{2});

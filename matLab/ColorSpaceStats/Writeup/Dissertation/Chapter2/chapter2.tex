@@ -766,7 +766,32 @@ It should be noted that --- in the finger images in Figure~\ref{fig:IndexContour
     \caption{Rotated and scaled color space.}
 \end{figure}
 
+\section{Improved Contour Detection}\label{sec:ImprovedContourDetection}
+
+OpenCV's findContours method takes a binary image and finds the contours in that binary image. However, the problem with this method is that we're thresholding on chromatic values, i.e. using color information to break up the color information into blobs off of which we're finding the contours. This doesn't take into account the white-out and black-out, which was noted previously. It's straightforward to define regions in the image which are succeptible to white-out and black-out using the luminosity channel. This is done by taking a high and low threshold off the luminosity channel, thereby producing a binary image, which is 1 in the valid region, and 0 otherwise.
+
+We take that, and we add it to our thresholded chromatic channel, which produces a 2-bit image. For this purpose, a 2-bit data type was added to OpenCV. The question then is how to use it. Essentially, we have four different states: values which are neither the right color nor in the right region; values which are possibly the right color, but because they're outside the valid region, they've potentially suffered from white-out and black-out and as such they are not reliable indicators for either the start of an edge or the end of an edge; values which are in the right region, but the wrong color, and we are certain that they are not skin; and finally, values which are in the valid region and are of the right color.
+
+The Canny edge detector method is perfect for implementing a decision by setting a high threshold --- our strong criteria --- in the right region in the right color, and a low threshold so that it will continue following an edge across values which are in the invalid region. Whichever value we set the low threshold to depends on the state of the image; we use a lower value if there is ambiguity and a higher value if the result is fairly accurate:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c||c|c|}
+\hline
+\multicolumn{2}{|c|}{Image} & Color & Region & \multicolumn{2}{|c|}{Bit}\\\hline
+0 & 0 & 0 & 1 & Color & XAND(Color, Region)\\\hline
+0 & 1 & 0 & 0 & Color & XOR(Color, Region)\\\hline
+1 & 0 & 1 & 0 & Color & XOR(Color, Region)\\\hline
+1 & 1 & 1 & 1 & Color & XAND(Color, Region)\\\hline
+\end{tabular}
+\end{center}
+
+\section{Fingertip Descriptor}\label{sec:FingertipDescriptor}
+
+
+
 \section{Putting it All Together}\label{sec:PuttingItAllTogether}
+
+
 
 \section{Physiology Study}\label{sec:PhysiologyStudy}
 
