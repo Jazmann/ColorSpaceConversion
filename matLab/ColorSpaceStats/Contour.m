@@ -104,7 +104,7 @@ classdef Contour
             dist = sqrt((points(1,:) - pt(1)).^2 + (points(2,:) - pt(2)).^2);
             done = max(dist);
             for  i=1:num
-                indx(i) = find((dist-min(dist))==0);
+                indx(i) = find((dist-min(dist))==0,1,'first');
                 dist(indx(i)) = done;
             end
         end
