@@ -36,7 +36,7 @@ classdef findContours
         function obj = findRect(obj)
             for i = 1:obj.nContours
                 obj.box{i} = cv.minAreaRect(obj.contours{i});
-                obj.box{i}.angle = obj.box{i}.angle*2*pi/360
+                obj.box{i}.angle = obj.box{i}.angle*2*pi/360;
                 
                 obj.boxEdges{i} = [-obj.box{i}.size(1)/2,  0                   , obj.box{i}.size(1)/2, 0 ;
                     0                    , obj.box{i}.size(2)/2, 0                   ,-obj.box{i}.size(2)/2];
