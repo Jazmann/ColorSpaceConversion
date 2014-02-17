@@ -73,23 +73,15 @@ classdef findContours
         
         
         function out = showContours(obj)
-            out = obj.img;
+            out = zeros(size(obj.img));
             for j=1:obj.nContours
-                s = size(obj.contours{j},2);
+                s = size(obj.contours{j}.pts,2);
                 for i=1:s
-                    p = obj.contours{j}{1,i};
-                    out(p(2)+1,p(1)+1) = j+1;
+                    p = obj.contours{j}.pts{i};
+                    out(p(2)+1,p(1)+1) = j;
                 end
-                imagesc(out)
-                figure(gcf)
             end
             
-            figure('Name',horzcat('Contours for ',obj.name),'NumberTitle','off');
-            imagesc(out)
-            xlabel(obj.axisNames(2));
-            ylabel(obj.axisNames(1));
-            title(horzcat('Contours for ',obj.name));
-            figure(gcf)
             
         end
         
