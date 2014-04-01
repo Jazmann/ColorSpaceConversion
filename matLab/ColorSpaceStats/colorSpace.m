@@ -10,6 +10,7 @@ classdef colorSpace
         shift; scale; sUnitGrad; sLowHigh; dUnitGrad;
         linearConstant; shiftedErfConstant; dMaxShifted;
         cubeSkin;
+        valid;
     end
     
     methods
@@ -46,18 +47,18 @@ classdef colorSpace
                 obj.nT = transform(theta,'yes');
                 obj.T  = transform(theta,'no');
             end
-            if all(c < 1.0) && all(c > 0.0) 
-            if CInSrc
-                obj.uC = obj.nT.toRot(c);
+            if all(c < 1.0) && all(c > 0.0)
+                if CInSrc
+                    obj.uC = obj.nT.toRot(c);
+                else
+                    obj.uC = c;
+                end
             else
-                obj.uC = c;
-            end
-            else
-            if CInSrc
-                obj.uC = obj.nT.toRot(obj.srcToUnit(c));
-            else
-                obj.uC = obj.dstToUnit(c );
-            end
+                if CInSrc
+                    obj.uC = obj.nT.toRot(obj.srcToUnit(c));
+                else
+                    obj.uC = obj.dstToUnit(c );
+                end
             end
             obj.c = obj.unitToDst( obj.uC);
             obj.ErfA = erf(obj.g .* obj.uC );
@@ -78,6 +79,11 @@ classdef colorSpace
             obj.linearConstant = obj.dUnitGrad(1,:) - obj.sUnitGrad(1,:);
             obj.shiftedErfConstant = obj.sUnitGrad(2,:) + obj.dUnitGrad(1,:) - obj.sUnitGrad(1,:) - obj.dUnitGrad(2,:);
             obj.dMaxShifted = (obj.dMax + obj.shiftedErfConstant')';
+            
+            uCSrc = obj.nT.fromRot(obj.uC);
+            
+            S = [min(uCSrc),1-max(uCSrc)];
+            obj.valid = [obj.uC(1) - S(1),obj.uC(1) + S(2)];
             
         end % function
         
@@ -149,19 +155,22 @@ classdef colorSpace
             
         end % function
         
-        function outImage = toProbability(obj, img)
+        function outImage = toProbability(obj, img, tol)
             blobLevels = 5;
             [rows, cols, chans] = size(img);
             
             uImage = reshape(double(img)./obj.sRange,[],3);
             uRotImage = obj.nT.toRot(uImage);
             
-            uProb = zeros(rows * cols, 2);
+            uProb = zeros(rows * cols, 3);
             uProb(:,1) = 1. ./ ( exp((uRotImage(:,2) - obj.uC(2)).^2 ./ ( 2. * (obj.sig(2) * obj.sigma(2))^2)) .* exp((uRotImage(:,3) - obj.uC(3)).^2 ./ ( 2. * (obj.sig(3) * obj.sigma(3))^2)));
-            %uProb(:,2) = (uProb(:,1)>0.1) + (uProb(:,1)>0.2) + (uProb(:,1)>0.3) + (uProb(:,1)>0.4) + (uProb(:,1)>0.5) + (uProb(:,1)>0.6);
             uProb(:,2) = floor(blobLevels .* uProb(:,1))/blobLevels;
+            uValid = (uRotImage(:,1) > obj.valid(1) .* uRotImage(:,1) < obj.valid(2));
+            uColor = uProb(:,1) > tol;
+            uProb(:,3) = 2* uint8(uColor) + uint8(not(xor(uColor,uValid)));
+            
             %# Convert back to type uint8 and reshape to its original size:
-            outImage = reshape(horzcat(uint8(uImage.* obj.dRange),uint8(uProb.* obj.dRange)),[rows, cols, chans+2]);
+            outImage = reshape(uint8(uProb.* obj.dRange),[rows, cols, chans]);
             
         end % function
         

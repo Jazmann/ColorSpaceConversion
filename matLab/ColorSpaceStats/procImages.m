@@ -1,9 +1,17 @@
-function out = procImages(img1,img2,color_J)
+function out = procImages(img1,img2,color_J,compact)
+
+if nargin <4
+    compact = 0;
+end
 tol = 100;
 img1_prob = color_J.toProbability(img1);
 img1_mask = uint8(img1_prob(:,:,5) > tol);
 cont1_img = findContours(img1_mask);
+if compact
+img1_rot = color_J.toRotCompactScaled(img1);
+else
 img1_rot = color_J.toRot(img1);
+end
 img1_rot(:,:,1) = img1_rot(:,:,1) .* img1_mask;
 img1_rot(:,:,2) = img1_rot(:,:,2) .* img1_mask;
 img1_rot(:,:,3) = img1_rot(:,:,3) .* img1_mask;
@@ -18,7 +26,11 @@ img1_mask((1+kill/2):(row-kill/2),(1+kill/2):(col-kill/2)) = img1_mask((1+kill/2
 img2_prob = color_J.toProbability(img2);
 img2_mask = uint8(img2_prob(:,:,5) > tol);
 cont2_img = findContours(img2_mask);
+if compact
+img2_rot = color_J.toRotCompactScaled(img2);
+else
 img2_rot = color_J.toRot(img2);
+end
 img2_rot(:,:,1) = img2_rot(:,:,1) .* img2_mask;
 img2_rot(:,:,2) = img2_rot(:,:,2) .* img2_mask;
 img2_rot(:,:,3) = img2_rot(:,:,3) .* img2_mask;

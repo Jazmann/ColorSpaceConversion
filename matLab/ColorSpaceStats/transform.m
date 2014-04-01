@@ -5,6 +5,7 @@ classdef transform
     
     properties
         T;
+        iT;
         shift;
         range;
         unscaledAxisLength;
@@ -58,6 +59,8 @@ classdef transform
             obj.shift = [0, 0.5, 0.5];
             end
             
+            obj.iT = inv(obj.T);
+            
         end % function
         
         
@@ -67,6 +70,30 @@ classdef transform
             outImage(:,1) = (outImage(:,1) + obj.shift(1));
             outImage(:,2) = (outImage(:,2) + obj.shift(2));
             outImage(:,3) = (outImage(:,3) + obj.shift(3));
+        end % function
+        
+        
+        function outImage = toRotImg(obj, img)
+            sizeImg = size(img);
+            outImage = reshape(double(img),[],sizeImg(end));
+            outImage = obj.toRot(outImage);
+            outImage = reshape(outImage,sizeImg);
+        end % function
+        
+        function outImage = fromRotImg(obj, img)
+            sizeImg = size(img);
+            outImage = reshape(double(img),[],sizeImg(end));
+            outImage = obj.fromRot(outImage);
+            outImage = reshape(outImage,sizeImg);
+        end % function
+        
+            
+        function outImage = fromRot(obj, pixelList)
+            %# Shift each color plane (stored in each column of the N-by-3 matrix):
+            outImage(:,1) = (pixelList(:,1) - obj.shift(1));
+            outImage(:,2) = (pixelList(:,2) - obj.shift(2));
+            outImage(:,3) = (pixelList(:,3) - obj.shift(3));
+            outImage = outImage * obj.iT';
         end % function
         
         function indx = toRotIndx(obj, indx, scale)
