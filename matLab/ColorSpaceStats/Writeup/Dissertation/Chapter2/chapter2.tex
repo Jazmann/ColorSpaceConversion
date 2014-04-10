@@ -2,6 +2,63 @@
 %*********************************** Second Chapter **************************************
 %*****************************************************************************************
 
+\newcommand{\unitDst}{\text{uDst}} % Destination in the unit range 0:1
+\newcommand{\uDst}{\unitDst}       % Destination in the unit range 0:1
+\newcommand{\intDst}{\text{iDst}}  % Destination in the integer range dstMin:dstMax
+\newcommand{\iDst}{\intDst}        % Destination in the integer range dstMin:dstMax
+\newcommand{\dstMax}{\text{dstMax}}      % Destination integer range maximum
+\newcommand{\dstMin}{\text{dstMin}}      % Destination integer range mimimum
+\newcommand{\dstRange}{\text{dstRange}}  % Destination integer range
+\newcommand{\discreteDst}{\widetilde{\uDst}}   % Destination found using the discretized transformation matrix
+\newcommand{\dDst}{\discreteDst}               % Destination found using the discretized transformation matrix
+\newcommand{\delDst}{\delta\uDst}              % Error in the Destination found using the discretized transformation matrix
+
+\newcommand{\unitT}{\text{uT}}             % Rotated values in the unit range 0:1
+\newcommand{\uT}{\unitT}                   % Rotated values in the unit range 0:1
+\newcommand{\intT}{\text{iT}}              % Rotated values in the integer range tMin:tMax
+\newcommand{\iT}{\intT}                    % Rotated values in the integer range tMin:tMax
+\newcommand{\tMax}{\text{tMax}}            % Rotated values integer range maximum
+\newcommand{\tMin}{\text{tMin}}            % Rotated values integer range mimimum
+\newcommand{\tRange}{\text{tRange}}        % Rotated values integer range
+\newcommand{\discreteT}{\widetilde{\uT}}   % Rotated values found using the discretized transformation matrix
+\newcommand{\dT}{\discreteT}               % Rotated values found using the discretized transformation matrix
+\newcommand{\delT}{\delta\uT}              % Error in the Rotated values found using the discretized transformation matrix
+
+\newcommand{\unitSrc}{\text{uSrc}}       % Source in the unit range 0:1
+\newcommand{\uSrc}{\unitSrc}             % Source in the unit range 0:1
+\newcommand{\intSrc}{\text{iSrc}}        % Source in the integer range srcMin:srcMax
+\newcommand{\iSrc}{\intSrc}              % Source in the integer range srcMin:srcMax
+\newcommand{\srcMax}{\text{srcMax}}      % Source integer range maximum
+\newcommand{\srcMin}{\text{srcMin}}      % Source integer range mimimum
+\newcommand{\srcRange}{\text{srcRange}}  % Source integer range
+
+\newcommand{\unitX}{\text{uX}}       % Source in the unit range 0:1
+\newcommand{\uX}{\unitX}             % Source in the unit range 0:1
+\newcommand{\intX}{\text{iX}}        % Source in the integer range xMin:xMax
+\newcommand{\iX}{\intX}              % Source in the integer range xMin:xMax
+\newcommand{\xMax}{\text{xMax}}      % Source integer range maximum
+\newcommand{\xMin}{\text{xMin}}      % Source integer range mimimum
+\newcommand{\xRange}{\text{xRange}}  % Source integer range
+
+\newcommand{\unitY}{\text{uY}}       % Destination in the unit range 0:1
+\newcommand{\uY}{\unitY}             % Destination in the unit range 0:1
+\newcommand{\intY}{\text{iY}}        % Destination in the integer range yMin:yMax
+\newcommand{\iY}{\intY}              % Destination in the integer range yMin:yMax
+\newcommand{\yMax}{\text{yMax}}      % Destination integer range maximum
+\newcommand{\yMin}{\text{yMin}}      % Destination integer range mimimum
+\newcommand{\yRange}{\text{yRange}}  % Destination integer range
+
+\newcommand{\unitR}{\text{uR}}
+\newcommand{\uR}{\unitR}
+\newcommand{\intR}{\text{iR}}
+\newcommand{\iR}{\intR}
+\newcommand{\discreteR}{\widetilde{\uR}}
+\newcommand{\dR}{\discreteR}
+\newcommand{\delR}{\delta\uR}
+
+\newcommand{\tRange}{\text{rRange}}
+\newcommand{\dstRange}{\text{dstRange}}
+
 \chapter{Color Spaces and Information Storage for Computer Vision Processing}
 
 \ifpdf
@@ -97,9 +154,9 @@ A rotation which aligns the L axis along the luminosity direction is produced by
 R_{xyz}(\theta) =
 \left(
 \begin{array}{ccc}
- \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
- -\frac{\cos (\theta )}{2}-\frac{1}{2} \sqrt{3} \sin (\theta ) & \cos (\theta ) & \frac{1}{2} \sqrt{3} \sin (\theta )-\frac{\cos (\theta )}{2} \\
- \frac{\sin (\theta )}{2}-\frac{1}{2} \sqrt{3} \cos (\theta ) & -\sin (\theta ) & \frac{1}{2} \sqrt{3} \cos (\theta )+\frac{\sin (\theta )}{2} \\
+ \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} \\
+ -\sqrt{\frac{2}{3}} \sin \left(\theta +\frac{\pi }{6}\right) & \sqrt{\frac{2}{3}} \cos (\theta ) & -\sqrt{\frac{2}{3}} \sin \left(\frac{\pi }{6}-\theta \right) \\
+ -\sqrt{\frac{2}{3}} \cos \left(\theta +\frac{\pi }{6}\right) & -\sqrt{\frac{2}{3}} \sin (\theta ) & \sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-\theta \right) \\
 \end{array}
 \right)
 \end{equation}
@@ -127,8 +184,8 @@ $\displaystyle
 \left(
 \begin{array}{cccccccc}
  0 & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{2}{\sqrt{3}} & \sqrt{3} \\
- 0 & -\frac{\cos (\theta)}{\sqrt{6}}-\frac{\sin (\theta)}{\sqrt{2}} & \frac{\cos (\theta)}{\sqrt{6}}-\frac{\sin (\theta)}{\sqrt{2}} & \sqrt{\frac{2}{3}} \cos (\theta) & \frac{\cos (\theta)}{\sqrt{6}}+\frac{\sin (\theta)}{\sqrt{2}} & \frac{\sin (\theta)}{\sqrt{2}}-\frac{\cos (\theta)}{\sqrt{6}} & -\sqrt{\frac{2}{3}} \cos (\theta) & 0 \\
- 0 & \frac{\sin (\theta)}{\sqrt{6}}-\frac{\cos (\theta)}{\sqrt{2}} & -\frac{\cos (\theta)}{\sqrt{2}}-\frac{\sin (\theta)}{\sqrt{6}} & -\sqrt{\frac{2}{3}} \sin (\theta) & \frac{\cos (\theta)}{\sqrt{2}}-\frac{\sin (\theta)}{\sqrt{6}} & \frac{\cos (\theta)}{\sqrt{2}}+\frac{\sin (\theta)}{\sqrt{6}} & \sqrt{\frac{2}{3}} \sin (\theta) & 0 \\
+ 0 & -\sqrt{\frac{2}{3}} \sin \left(\theta +\frac{\pi }{6}\right) & \sqrt{\frac{2}{3}} \sin \left(\frac{\pi }{6}-\theta \right) & \sqrt{\frac{2}{3}} \cos (\theta ) & \sqrt{\frac{2}{3}} \sin \left(\theta +\frac{\pi }{6}\right) & -\sqrt{\frac{2}{3}} \sin \left(\frac{\pi }{6}-\theta \right) & -\sqrt{\frac{2}{3}} \cos (\theta ) & 0 \\
+ 0 & -\sqrt{\frac{2}{3}} \cos \left(\theta +\frac{\pi }{6}\right) & -\sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-\theta \right) & -\sqrt{\frac{2}{3}} \sin (\theta ) & \sqrt{\frac{2}{3}} \cos \left(\theta +\frac{\pi }{6}\right) & \sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-\theta \right) & \sqrt{\frac{2}{3}} \sin (\theta ) & 0 \\
 \end{array}
 \right)$}
 \end{multline}
@@ -161,6 +218,15 @@ In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the 
   \hline
 \end{tabular}
 
+\begin{tabular}{|c|c|c|}
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    & Min & Max \\ \hline
+  X & \(0\) & \(\sqrt{3}\) \\
+  Y & - \sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right) & \sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right) \\
+  Z & -\sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-(\theta  \bmod \frac{\pi }{3})\right) & \sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-(\theta  \bmod \frac{\pi }{3})\right) \\
+  \hline
+\end{tabular}
 
 It is convenient to produce a transformation which will result in axes of known length. Because the rotation cannot include a translation, we desire a transformation matrix which will result in the ranges $0:1$, -$\frac{1}2$ to $\frac{1}2$, and -$\frac{1}2$ to $\frac{1}2$. Such a transformation is easily obtained by multiplying the rotation matrix by a diagonal matrix with the reciprocal of the maximums found above placed along the diagonal. This will scale each axis to a unit length.
 
@@ -194,7 +260,7 @@ The image set consists of approximately 200 skin samples --- each of which shows
 \end{figure}
 
 
-Aside from differing lighting, this is consistent with the notion that skin has a distinct pigmentation and justifies our attempt to find an appropriate color space disregarding luminosity. In doing so, the distribution of the skin color characteristics neatly fit into a 2-dimensional Gaussian distribution. The Matlab code produces a fit with a 2-dimensional Gaussian distribution and provides an angle relative to the orientation of the Gaussian fit to the skin sample distribution in the current color space. 
+Aside from differing lighting, this is consistent with the notion that skin has a distinct pigmentation and justifies our attempt to find an appropriate color space disregarding luminosity. In doing so, the distribution of the skin color characteristics neatly fit into a 2-dimensional Gaussian distribution. The Matlab code produces a fit with a 2-dimensional Gaussian distribution and provides an angle relative to the orientation of the Gaussian fit to the skin sample distribution in the current color space.
 
 Given that we are free to choose the orientation of the color space about the luminosity axis, the Matlab code allows us to find an orientation $\theta$ of the color space about the luminosity axis in which the distribution can be expressed as a product of 1-dimensional Gaussians along the axes. The final resulting distribution is presented in Figure~\ref{fig:DistributionAndGaussianFit}.
 
@@ -221,7 +287,7 @@ Because the region is so small, when the transformation is applied, we must also
     \caption{Convergence of color space orientation $\theta$.}  \label{fig:ConvergenceTheta}
 \end{figure}
 
-A better approach would be to iterate over the free angle $\theta$ of the Gaussian fit of the two-dimensional bin, which was found by collapsing the 3D bins along the luminosity axis, until convergence; at best, convergence was achieved after 3 iterations. Unfortunately, this approach --- though conceptually straightforward --- is very wasteful; all of the necessary information can be found in the RGB bin statistics. 
+A better approach would be to iterate over the free angle $\theta$ of the Gaussian fit of the two-dimensional bin, which was found by collapsing the 3D bins along the luminosity axis, until convergence; at best, convergence was achieved after 3 iterations. Unfortunately, this approach --- though conceptually straightforward --- is very wasteful; all of the necessary information can be found in the RGB bin statistics.
 
 Given that we are unable to apply this process in a reasonably efficient manner to individuals and general samples, if this project is to be finished sometime this century, a more nuanced approach is necessary.
 
@@ -337,10 +403,11 @@ The error function distribution is mathematically correct, being directly relate
 
 Considering the preservation of information captured, mappings with a gradient greater than 1 are undesirable because they preserve all the information whilst being informatically wasteful in that there are functionally inaccessible discrete values in the destination range. Our stated aim is to preserve the information in the image pertaining to human skin; unevenly distributing this information across a discrete data type is not only wasteful in terms of memory, but also of processing resources because subsequent processing routines will treat the data as if it has a higher fidelity than it actually does.
 
-To construct a distribution function, we first need to describe the relationship of the error function to the Gaussian fit, and then produce a function with the appropriate range and domain. For a Gaussian fit with an amplitude A, a mean of $\mu$, and a standard deviation of $\sigma$, where $\mu$ and x lie in a source range sMin to sMax. The cumulative distribution is found by integrating from sMin to the point x, as can be seen in (\ref{eq:ErfDefinition}):
+\newcommand{
+To construct a distribution function, we first need to describe the relationship of the error function to the Gaussian fit, and then produce a function with the appropriate range and domain. For a Gaussian fit with an amplitude A, a mean of $\mu$, and a standard deviation of $\sigma$, where $\mu$ and x lie in a source range xRange from xMin to xMax. The cumulative distribution is found by integrating from xMin to the point x, as can be seen in (\ref{eq:ErfDefinition}):
 
 \begin{equation}\label{eq:ErfDefinition}
-  \int _{\text{sMin}}^{\text{x}} A \frac{e^{-\frac{(t-\mu )^2}{2 \sigma ^2}}}{\sqrt{2 \pi } \sigma }dt=\frac{1}{2} A \left(\text{erf}\left(\frac{\text{x}-\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\text{sMin}-\mu }{\sqrt{2} \sigma }\right)\right)
+  \int _{\text{xMin}}^{\text{x}} A \frac{e^{-\frac{(t-\mu )^2}{2 \sigma ^2}}}{\sqrt{2 \pi } \sigma }dt=\frac{1}{2} A \left(\text{erf}\left(\frac{\text{x}-\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\text{xMin}-\mu }{\sqrt{2} \sigma }\right)\right)
 \end{equation}
 
 The Gaussian distribution and the cumulative distribution are shown in Figure~\ref{fig:ErrorFunctionGraph} for some values chosen for illustrative purposes. All that is required now is to fix the range dMin to dMax for the domain sMin to sMax.
@@ -492,45 +559,18 @@ R_{xyz}(\theta) \quad where \quad
 \end{array}
 \right)
 \bigotimes
-R_{xyz}(\theta) \quad where \quad 
+R_{xyz}(\theta) \quad where \quad
 \begin{array}{c}
 \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
 \widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
 \end{array}
 \end{equation}
 
-The final piece of the metaphorical jigsaw is to add the capability to deal with the machine handling of the numerics. The transforms as defined above assume the capacity to represent the resulting numbers. Unfortunately, on a device, the numerics are not handled in such a pure way and --- whilst we are uninterested in the information overflow outside the destination representation --- this can cause instabilities in a practical implementation. In the development of the algorithm, it is therefore necessary to define these bounds. In the unit space, these bounds have already been defined by Equation~\ref{eq:LowHigh}; so long as the axis length can be represented on the device between these bounds, then overflow and underflow can be dealt with using a simple conditional statement. 
+The final piece of the metaphorical jigsaw is to add the capability to deal with the machine handling of the numerics. The transforms as defined above assume the capacity to represent the resulting numbers. Unfortunately, on a device, the numerics are not handled in such a pure way and --- whilst we are uninterested in the information overflow outside the destination representation --- this can cause instabilities in a practical implementation. In the development of the algorithm, it is therefore necessary to define these bounds. In the unit space, these bounds have already been defined by Equation~\ref{eq:LowHigh}; so long as the axis length can be represented on the device between these bounds, then overflow and underflow can be dealt with using a simple conditional statement.
 
 It is significantly advantageous to perform calculations using integer types, particularly given that the input and output types are integers with small ranges, meaning it's possible to construct algorithms which avoid conversion to floating point operations. To this end, we wish to determine the most efficient internal representation for the transformation.
 
 We have a well-defined distribution which represents the desired conservation of information, which itself is represented by the distribution function in the unit ranges. Each of these unit ranges is discretized into steps of $\frac{1}{sRange}$ and $\frac{1}{dRange}$. The question then is to what degree of accuracy do we need to represent the internal numerics? If we represent the transformation in a discrete type, we can express the problem in terms of the largest perturbation which can be made to the transformation without affecting the result.
-
-\newcommand{\unitDst}{\text{uDst}}
-\newcommand{\uDst}{\unitDst}
-\newcommand{\intDst}{\text{iDst}}
-\newcommand{\iDst}{\intDst}
-\newcommand{\discreteDst}{\widetilde{\uDst}}
-\newcommand{\dDst}{\discreteDst}
-\newcommand{\delDst}{\delta\uDst}
-
-\newcommand{\unitSrc}{\text{uSrc}}
-\newcommand{\uSrc}{\unitSrc}
-\newcommand{\intSrc}{\text{iSrc}}
-\newcommand{\iSrc}{\intSrc}
-\newcommand{\discreteSrc}{\widetilde{\uSrc}}
-\newcommand{\dSrc}{\discreteSrc}
-\newcommand{\delSrc}{\delta\uSrc}
-
-\newcommand{\unitR}{\text{uR}}
-\newcommand{\uR}{\unitR}
-\newcommand{\intR}{\text{iR}}
-\newcommand{\iR}{\intR}
-\newcommand{\discreteR}{\widetilde{\uR}}
-\newcommand{\dR}{\discreteR}
-\newcommand{\delR}{\delta\uR}
-
-\newcommand{\tRange}{\text{rRange}}
-\newcommand{\dstRange}{\text{dstRange}}
 
 
 \begin{eqnarray}\label{eq:lxyPixel}
@@ -554,10 +594,10 @@ therefore\quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
 therefore\quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
 \end{eqnarray}
 
-It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. We must therefore consider both the maximum and minimum of $\delDst$. As $\uSrc \ge 0$ the extrema of $\delDst$ are found where $\uSrc$ is a vector with elements of 0 and 1. If the matrix is decomposed into a sum of positive and negative elements $\delDst = \delDst_+ + \delDst_-$ then the extrema are given by $\max(\delDst_+ \cdot \mathbf{1})$ and $\min(\delDst_- \cdot \mathbf{1})$. Where the elements are positive or negative is determined by the sign of the elements in the rotation matrix $\uR$. If we were to scale the entire matrix evenly then the top row would dominate as it is always positive and the necessary discrete representation would be characterised by $\tRange = 3 \dstRange$. This would however necessitate the matrix being stored in a data type with at least 2 more bits than the source type. As the source type will be fully utilised in all but the most unusual applications this will result in a doubling of the bit depth for the matrix and a quadrupling of the bit depth for the working calculation. We will therefore consider each row individually and because the transformation is scaled by row as described previously. The second and third rows each sum to zero $\uR \mathbf{1} = [\sqrt{3},0,0]$ allowing us to state that each of the rows has one element of the opposite sign to the other two elements. The discretization for the second and third rows then only requires $\tRange = 2 \dstRange$. It is also possible to pull out common factors from the rows to facilitate the reduction in the required representation. 
+It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. We must therefore consider both the maximum and minimum of $\delDst$. As $\uSrc \ge 0$ the extrema of $\delDst$ are found where $\uSrc$ is a vector with elements of 0 and 1. If the matrix is decomposed into a sum of positive and negative elements $\delDst = \delDst_+ + \delDst_-$ then the extrema are given by $\max(\delDst_+ \cdot \mathbf{1})$ and $\min(\delDst_- \cdot \mathbf{1})$. Where the elements are positive or negative is determined by the sign of the elements in the rotation matrix $\uR$. If we were to scale the entire matrix evenly then the top row would dominate as it is always positive and the necessary discrete representation would be characterised by $\tRange = 3 \dstRange$. This would however necessitate the matrix being stored in a data type with at least 2 more bits than the source type. As the source type will be fully utilised in all but the most unusual applications this will result in a doubling of the bit depth for the matrix and a quadrupling of the bit depth for the working calculation. We will therefore consider each row individually and because the transformation is scaled by row as described previously. The second and third rows each sum to zero $\uR \mathbf{1} = [\sqrt{3},0,0]$ allowing us to state that each of the rows has one element of the opposite sign to the other two elements. The discretization for the second and third rows then only requires $\tRange = 2 \dstRange$. It is also possible to pull out common factors from the rows to facilitate the reduction in the required representation.
 
 \begin{equation}
-\uR(\theta) = 
+\uR(\theta) =
 \left(
 \begin{array}{c}
  \frac{1}{\sqrt{3}} \\
@@ -573,7 +613,7 @@ It should be noted that --- unlike the source type \uSrc --- the perturbation ca
 \end{array}
 \right)
 \end{equation}
-The rotation matrix may now be adequately represented in a discrete range of $\tRange = 2 \dstRange$ with all elements taking values between -1 and 1. 
+The rotation matrix may now be adequately represented in a discrete range of $\tRange = 2 \dstRange$ with all elements taking values between -1 and 1.
 
 One further optimization is possible if we consider the redistribution of the values which is performed after the rotation. Not all information contained in the source is of equal value, so an error introduced by using a less accurate discretization of the rotation may well be mitigated by the subsequent redistribution. Halving the discrete range will introduce errors of at most 1 for some of the pixel values. In general, using $\tRange = 2^{1-n)} \dstRange$ will introduce a maximum error of $\frac{2^n -1}{\dstRange}$ into the resulting matrix. We must now establish which elements are affected.
 
@@ -583,37 +623,37 @@ The sign of the rotation matrix is given by
 \left(
 \begin{array}{ccc}
 1
- & 
+ &
 1
- & 
+ &
 1
  \\
 \begin{cases}
    1 & \frac{5 \pi }{6}<\theta <\frac{11 \pi }{6} \\
  -1 & \left\lgroup \begin{array}{c} 0\leq \theta <\frac{5 \pi }{6} \\ \frac{11 \pi }{6}<\theta <2 \pi  \end{array} \right.\\
 \end{cases}
- & 
+ &
 \begin{cases}
  1   & \left\lgroup \begin{array}{c} 0\leq \theta <\frac{\pi }{2} \\ \frac{3 \pi }{2}<\theta <2 \pi  \end{array} \right.\\
  -1 & \frac{\pi }{2}<\theta <\frac{3 \pi }{2} \\
 \end{cases}
- & 
+ &
 \begin{cases}
  1 & \frac{\pi }{6}<\theta <\frac{7 \pi }{6} \\
  -1 & \left\lgroup \begin{array}{c}  0\leq \theta <\frac{\pi }{6} \\ \frac{7 \pi }{6}<\theta <2 \pi  \end{array} \right.\\
 \end{cases}
  \\
- 
+
 \begin{cases}
  1 & \frac{\pi }{3}<\theta <\frac{4 \pi }{3} \\
  -1 & \left\lgroup \begin{array}{c} 0 \leq \theta <\frac{\pi }{3} \\ \frac{4 \pi }{3}<\theta <2 \pi \end{array} \right. \\
 \end{cases}
- & 
+ &
 \begin{cases}
  1 & \pi <\theta <2 \pi  \\
  -1 & 0<\theta <\pi  \\
 \end{cases}
- & 
+ &
 \begin{cases}
    1 & \left\lgroup \begin{array}{c} 0\leq \theta <\frac{2 \pi }{3} \\ \frac{5 \pi }{3}<\theta <2 \pi  \end{array} \right.\\
  -1 & \frac{2 \pi }{3}<\theta <\frac{5 \pi }{3} \\
@@ -665,7 +705,7 @@ So for a pixel $\{R,G,B\}$  % \parpic{\includegraphics[width=100mm]{Chapter2/Fig
 \end{cases}
 \end{equation}
 
-where 1 indicates that the element shares its sign with another element in the same row and -1 indicates the opposite. One channel from the source can be left error free whilst the sum of the other two must be less than one. this divides the color space in two. If the portion of the source which is to be preserved better than in a 2:1 ratio lies entirely within the error free half then the rotation matrix can be stored in the same data type as the source itself. This can be designed as it does not matter if we rotate the colorspace in $\frac{\pi}{2}$ steps. 
+where 1 indicates that the element shares its sign with another element in the same row and -1 indicates the opposite. One channel from the source can be left error free whilst the sum of the other two must be less than one. this divides the color space in two. If the portion of the source which is to be preserved better than in a 2:1 ratio lies entirely within the error free half then the rotation matrix can be stored in the same data type as the source itself. This can be designed as it does not matter if we rotate the colorspace in $\frac{\pi}{2}$ steps.
 
 
 

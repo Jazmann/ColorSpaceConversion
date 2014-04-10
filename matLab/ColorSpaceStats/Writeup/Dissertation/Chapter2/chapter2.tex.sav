@@ -218,6 +218,15 @@ In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the 
   \hline
 \end{tabular}
 
+\begin{tabular}{|c|c|c|}
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+    & Min & Max \\ \hline
+  X & \(0\) & \(\sqrt{3}\) \\
+  Y & - \sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right) & \sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right) \\
+  Z & -\sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-(\theta  \bmod \frac{\pi }{3})\right) & \sqrt{\frac{2}{3}} \cos \left(\frac{\pi }{6}-(\theta  \bmod \frac{\pi }{3})\right) \\
+  \hline
+\end{tabular}
 
 It is convenient to produce a transformation which will result in axes of known length. Because the rotation cannot include a translation, we desire a transformation matrix which will result in the ranges $0:1$, -$\frac{1}2$ to $\frac{1}2$, and -$\frac{1}2$ to $\frac{1}2$. Such a transformation is easily obtained by multiplying the rotation matrix by a diagonal matrix with the reciprocal of the maximums found above placed along the diagonal. This will scale each axis to a unit length.
 
