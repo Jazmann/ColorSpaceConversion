@@ -451,22 +451,21 @@ Rearranging for $x$, we find:
 
 We now have equations which gives us the four points in the source domain which mark the boundaries of the five characteristic regions. The equations are valid in the unit source domain $0:1$. It is a simple matter to scale and shift these values to give the points in a more general source domain.
 
-
-\begin{equation}\label{eq:PreservedRegionGen}
+\begin{equation}\label{eq:PreservedRegionGen1}
 \Lambda^-(\mu,\sigma) = \xMin + \xRange \mu - \xRange \sigma  \sqrt{-2 \log \left(\sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}
 \end{equation}
 
-\begin{equation}\label{eq:PreservedRegionGen}
+\begin{equation}\label{eq:PreservedRegionGen2}
 \Lambda^+(\mu,\sigma) = \xMin + \xRange \mu + \xRange \sigma  \sqrt{-2 \log \left(\sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}
 \end{equation}
 
-\begin{equation}\label{eq:LowHighGen}
+\begin{equation}\label{eq:LowHighGen1}
 \lambda^+(\mu,\sigma)  =  \xMin + \xRange \sqrt{2} \sigma  \text{erf}^{-1}\left((-\text{dL}) \text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right) +(\text{dL}-1) \; \text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)+\mu
 \quad \text{where} \quad
 \text{dL} = \frac{1}{\yRange}
 \end{equation}
 
-\begin{equation}\label{eq:LowHighGen}
+\begin{equation}\label{eq:LowHighGen2}
 \lambda^-(\mu,\sigma)  =  \xMin + \xRange \sqrt{2} \sigma  \text{erf}^{-1}\left((\text{dL}-1) \text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{dL} \; \text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)+\mu
 \end{equation}
 
