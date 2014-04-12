@@ -452,21 +452,33 @@ Rearranging for $x$, we find:
 We now have equations which gives us the four points in the source domain which mark the boundaries of the five characteristic regions. The equations are valid in the unit source domain $0:1$. It is a simple matter to scale and shift these values to give the points in a more general source domain.
 
 \begin{equation}\label{eq:PreservedRegionGen1}
-\Lambda^-(\mu,\sigma) = \xMin + \xRange \mu - \xRange \sigma  \sqrt{-2 \log \left(\sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}
+\begin{equation}
+\Sigma^- = \text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)
+\end{equation}
+
+\begin{equation}
+\Sigma^+ = \text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)
+\end{equation}
+
+\Lambda^-(\mu,\sigma) = \xMin + \xRange \mu - \xRange \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}
 \end{equation}
 
 \begin{equation}\label{eq:PreservedRegionGen2}
-\Lambda^+(\mu,\sigma) = \xMin + \xRange \mu + \xRange \sigma  \sqrt{-2 \log \left(\sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}
+\Lambda^-(\mu,\sigma) = \xMin + \xRange \mu - \xRange \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}
+\end{equation}
+
+\begin{equation}\label{eq:PreservedRegionGen}
+\Lambda^+(\mu,\sigma) = \xMin + \xRange \mu + \xRange \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}
 \end{equation}
 
 \begin{equation}\label{eq:LowHighGen1}
-\lambda^+(\mu,\sigma)  =  \xMin + \xRange \sqrt{2} \sigma  \text{erf}^{-1}\left((-\text{dL}) \text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right) +(\text{dL}-1) \; \text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)+\mu
+\lambda^+(\mu,\sigma)  =  \xMin + \xRange \sqrt{2} \sigma  \text{erf}^{-1}\left((-\text{dL}) \Sigma^+ +(\text{dL}-1) \; \Sigma^-\right)+\mu
 \quad \text{where} \quad
 \text{dL} = \frac{1}{\yRange}
 \end{equation}
 
 \begin{equation}\label{eq:LowHighGen2}
-\lambda^-(\mu,\sigma)  =  \xMin + \xRange \sqrt{2} \sigma  \text{erf}^{-1}\left((\text{dL}-1) \text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{dL} \; \text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)+\mu
+\lambda^-(\mu,\sigma)  =  \xMin + \xRange \sqrt{2} \sigma  \text{erf}^{-1}\left((\text{dL}-1) \Sigma^+-\text{dL} \; \Sigma^-\right)+\mu
 \end{equation}
 
 
@@ -494,14 +506,10 @@ We now have equations which gives us the four points in the source domain which 
 There is one final value of interest to the development of the algorithm, which is the gradient at the mean. The reason this is of interest is because we're trying to compress the relevant data as much as possible. If the destination region is small (i.e. the destination machine type is smaller than the source type), then the gradient at the mean allows us to assess the fidelity required of the source type. If it weren't for the fact that the source is the result of a rotation transformation, then there would be little purpose in assessing this value. However, it is entirely possible that the lengthening of the axes resulting from the rotation is insignificant for the desired destination type; there's no point preserving information during the rotation which is then discarded by the redistribution. The gradient for a unit source and domain is given by
 
 \begin{equation}
-\Delta(\mu,\sigma) = \frac{\yRange}{\xRange}  \frac{ \sqrt{2} }{ \sqrt{\pi } \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)}
+\Delta(\mu,\sigma) = \frac{\yRange}{\xRange}  \frac{ \sqrt{2} }{ \sqrt{\pi } \sigma  \left(\Sigma^+-\Sigma^-\right)}
 \end{equation}
 
-The required fidelity in the source domain can be found using $ \Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm it is useful to know the length of the source domain axis which would cover the destination range if a linear distribution with a gradient $\Delta$ were to be used. For a unit range this length is given by $\frac{1}{\Delta}$ which is a function of the mean and standard deviation
-
-\begin{equation}\label{Fidelity}
-\Lambda(\mu,\sigma) =  \sqrt{\frac{\pi }{2}} \sigma  \left(\text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)-\text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)\right)
-\end{equation}
+The required fidelity in the source domain can be found using $ \Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm evaluating the maximum gradient $\Delta$ allows us to be sure that  $\Lambda$ exists if $\Delta >1$ or tells us that the x axis can be shortened if  $\Delta < 1$. In the algorithm $\Delta$ is used to find an appropreate working data type for the rotated colorspace and to define the axis scaling for the rotation matrix.
 
 \section{The Skin Color Space Algorithm}
 
