@@ -453,33 +453,28 @@ We now have equations which gives us the four points in the source domain which 
 
 
 \begin{equation}
-\Sigma^- = \text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right)
-\end{equation}
-
-\begin{equation}
-\Sigma^+ = \text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right)
-\end{equation}
-
-\begin{equation}\label{eq:PreservedRegionGen}
-\Lambda^-(\mu,\sigma) = \xMin + \xRange \mu - \xRange \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}
+\begin{aligned}
+\Sigma^- &= \text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right) &
+ \Sigma^+ &= \text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right) &
+  \text{dL} &= \frac{1}{\yRange}
+\end{aligned}
 \end{equation}
 
 \begin{equation}\label{eq:PreservedRegionGen}
-\Lambda^-(\mu,\sigma) = \xMin + \xRange \mu - \xRange \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}
-\end{equation}
-
-\begin{equation}\label{eq:PreservedRegionGen}
-\Lambda^+(\mu,\sigma) = \xMin + \xRange \mu + \xRange \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}
+\begin{aligned}
+\Lambda^-(\mu,\sigma) &= \xMin + \xRange\left( \mu - \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}\right) \\
+\Lambda^+(\mu,\sigma) &= \xMin + \xRange \left(\mu + \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}\right)
+\end{aligned}
 \end{equation}
 
 \begin{equation}\label{eq:LowHighGen}
-\lambda^+(\mu,\sigma)  =  \xMin + \xRange \sqrt{2} \sigma  \text{erf}^{-1}\left((-\text{dL}) \Sigma^+ +(\text{dL}-1) \; \Sigma^-\right)+\mu
-\quad \text{where} \quad
-\text{dL} = \frac{1}{\yRange}
+\begin{aligned}
+\lambda^+(\mu,\sigma)  &=  \xMin + \xRange \sqrt{2} \sigma  \text{erf}^{-1}\left((\text{dL}-1) \Sigma^- -\text{dL} \; \Sigma^+ \right)+\mu \\
+\lambda^-(\mu,\sigma)  &=  \xMin + \xRange \sqrt{2} \sigma  \text{erf}^{-1}\left((\text{dL}-1) \Sigma^+-\text{dL} \; \Sigma^-\right)+\mu
+\end{aligned}
 \end{equation}
 
 \begin{equation}\label{eq:LowHighGen}
-\lambda^-(\mu,\sigma)  =  \xMin + \xRange \sqrt{2} \sigma  \text{erf}^{-1}\left((\text{dL}-1) \Sigma^+-\text{dL} \; \Sigma^-\right)+\mu
 \end{equation}
 
 
