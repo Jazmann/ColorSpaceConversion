@@ -474,8 +474,6 @@ We now have equations which gives us the four points in the source domain which 
 \end{aligned}
 \end{equation}
 
-\begin{equation}\label{eq:LowHighGen}
-\end{equation}
 
 
 \begin{figure}[h!]
@@ -499,9 +497,9 @@ We now have equations which gives us the four points in the source domain which 
     \caption{Error Function distribution.}  \label{fig:ERF}
 \end{figure}
 
-There is one final value of interest to the development of the algorithm, which is the gradient at the mean. The reason this is of interest is because we're trying to compress the relevant data as much as possible. If the destination region is small (i.e. the destination machine type is smaller than the source type), then the gradient at the mean allows us to assess the fidelity required of the source type. If it weren't for the fact that the source is the result of a rotation transformation, then there would be little purpose in assessing this value. However, it is entirely possible that the lengthening of the axes resulting from the rotation is insignificant for the desired destination type; there's no point preserving information during the rotation which is then discarded by the redistribution. The gradient for a unit source and domain is given by
+There is one final value of interest to the development of the algorithm, which is the gradient at the mean. The reason this is of interest is because we're trying to compress the relevant data as much as possible. If the destination region is small (i.e. the destination machine type is smaller than the source type), then the gradient at the mean allows us to assess the fidelity required of the source type. If it weren't for the fact that the source is the result of a rotation transformation, then there would be little purpose in assessing this value. However, it is entirely possible that the lengthening of the axes resulting from the rotation is insignificant for the desired destination type; there's no point preserving information during the rotation which is then discarded by the redistribution. The gradient is given by
 
-\begin{equation}
+\begin{equation}\label{eq:gradient}
 \Delta(\mu,\sigma) = \frac{\yRange}{\xRange}  \frac{ \sqrt{2} }{ \sqrt{\pi } \sigma  \left(\Sigma^+-\Sigma^-\right)}
 \end{equation}
 
@@ -511,9 +509,9 @@ The required fidelity in the source domain can be found using $ \Delta$ in the s
 
 Now that all of the values necessary to preserve the skin information have been obtained, we can use them to build a color space transformation algorithm which can make intelligent decisions about the numerical precision for the intermediate and final variables, as well as determining the most efficient transformation methods. The algorithm described herein will take values of $\theta$, the rotation about the luminosity axis, the standard deviations and mean values for the two chromatic axes, and will automatically decide upon the necessary intermediate working data types and the most efficient redistribution methods.
 
-Previously, we found the lengths of the new axes after the rotational transformation. If we were to keep the same data type for the color space as is used for the RGB values, then the axes would have to be rescaled with the accompanying loss of information. Given that we have values which allow us to assess where all the relevant information lies, a more sophisticated approach is possible. For a chromatic axis --- which, after rotation, has a length $L(\theta)$ --- we can determine the positions on that axis at which the information is considered irrelevant using Equation~(\ref{eq:LowHigh}). If the distance between these two points is less than or equal to 1, then all the relevant information can be retained for that axis in the same data type as was used for the RGB color space. The only further consideration is to ensure that the values outside that range are prevented from causing errors associated with overflow. To exclude this possibility, a conditional statement can be used which checks the bounds as stated, assigning an appropriate value as necessary. The alternative is to use an intermediate value with a higher bit depth, and then to recast into the destination data type in such a way that overflow and underflow are handled appropriately. The OpenCV library provides a casting method --- "saturateCast" --- which serves this purpose.
+Previously, we found the lengths of the new axes after the rotational transformation. If we were to keep the same data type for the color space as is used for the RGB values, then the axes would have to be rescaled with the accompanying loss of information. Given that we have values which allow us to assess where all the relevant information lies, a more sophisticated approach is possible. For a chromatic axis --- which, after rotation, has a length $L(\theta)$ --- we can determine the positions on that axis at which the information is considered irrelevant using Equation~(\ref{eq:LowHigh}) and the positions where the information is all considered relavant. If the gradient \ref{eq:gradient} is less than 1, then the distribution looses information at all points on the axis and the axis can be shortened without loss of relavent information. The only further consideration is to ensure that the values outside that range are prevented from causing errors associated with overflow. To exclude this possibility, a conditional statement can be used which checks the bounds as stated, assigning an appropriate value as necessary. The alternative is to use an intermediate value with a higher bit depth, and then to recast into the destination data type in such a way that overflow and underflow are handled appropriately. The OpenCV library provides a casting method --- "saturateCast" --- which serves this purpose.
 
-We need to consider the requested compression of information alongside the spread of information caused by the rotation, and the desired focus on the specific region of interest dictated by the statistics. Each axis in the color space is to be represented by a discrete set of numbers. The size of these sets dictates the discretization of the axis, and the ratios between them indicates the spread or compression of the information they contain. We assume that the RGB axes are each discretized to the same extent, each containing $\text{rgbRange}$ values. After the application of the un-normalized rotational transformation, the axes contain differing numbers of values given by $\text{sRange}_1 =\text{rgbRange} \sqrt{3} $, $\text{sRange}_2 = \text{rgbRange} L_2(\theta) $  and $\text{sRange}_3 = \text{rgbRange} L_3(\theta)$.
+We need to consider the requested compression of information alongside the spread of information caused by the rotation, and the desired focus on the specific region of interest dictated by the statistics. Each axis in the color space is to be represented by a discrete set of numbers. The size of these sets dictates the discretization of the axis, and the ratios between them indicates the spread or compression of the information they contain. We assume that the RGB axes are each discretized to the same extent, each containing $\text{rgbRange}$ values. After the application of the un-normalized rotational transformation, the axes contain differing numbers of values given by $\tRange_1 =\sRange \sqrt{3} $, $\tRange_2 = \sRange L_2(\theta) $  and $\tRange_3 = \sRange L_3(\theta)$.
 
 \begin{align}\label{eq:L}
   L_2(\theta) & \sqrt{\frac{2}{3}} \sin \left(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3}\right) + \sqrt{2} \cos \left(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3}\right) \\
@@ -524,19 +522,19 @@ The destination color space is designed with a maximum discretization $dRange$ g
 
 The analysis of the distribution is mathematically stated in a unit, source, and domain range. The maximum gradient of the distribution, when looked at in these terms, must always be greater than or equal to 1. This indicates a focusing of interest around the mean. It's not possible to extract more information than is contained in the source. For this reason, the destination axis may usefully only be shorter than or of equal length to the source axis. In terms of the machine representation, this indicates that the destination data type may be designed to contain a smaller range of values. The question for the rotational transformation is whether the rotated axis should be rescaled with the associated loss of information or not. We can now write an algorithm which determines the necessary scaling for the axes, and whether truncation of the extreme values is significant.
 
-The length of the axis after rescaling should be whichever is the shorter of
+The length of the axis after rescaling should be
 
 \begin{equation}\label{eq:RescaleAxis}
-\min\left\{ \frac{\text{rgbRange} L(\theta)}{dRange} \Lambda(\mu,\sigma) , L(\theta) \right\}
+\min\left\{ \frac{\Delta(\mu,\sigma) , 1\right\} \text{rgbRange} L(\theta)}{dRange} 
 \end{equation}
 
 The condition for rescaling the axis is
 
 \begin{equation}\label{eq:RescaleAxisCondition}
-\frac{dRange}{\text{rgbRange} L(\theta) \Lambda(\mu,\sigma)} \le 1
+\Delta(\mu,\sigma) \le 1
 \end{equation}
 
-We can now re-formulate the transformation matrix in three different ways.
+We can now re-formulate the transformation matrix in three different ways: pure rotation without rescaling, unit scaling which preserves the discretization of the axis before the rotation and scaled which shortens the axis as much as possible without loosing statistically relavent data. 
 
 \begin{equation}\label{eq:Rotation}
  R_{xyz}(\theta) = \left(
@@ -552,13 +550,15 @@ We can now re-formulate the transformation matrix in three different ways.
 \right)
 \end{equation}
 
+The remaining two roations can be specified by application of a scaling to each row
+
 \begin{equation}\label{eq:CompressedRotation}
  \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
 \left(
 \begin{array}{c}
- 1  \\
- \kappa \Lambda(\mu_2,\sigma_2) \\
- \kappa \Lambda(\mu_3,\sigma_3) \\
+\Delta(\mu_1,\sigma_1)  \\
+\Delta(\mu_2,\sigma_2) \\
+\Delta(\mu_3,\sigma_3) \\
 \end{array}
 \right)
 \bigotimes
@@ -572,7 +572,7 @@ R_{xyz}(\theta) \quad where \quad
  \overline{R}_{xyz}(\theta) =
 \left(
 \begin{array}{c}
- 1  \\
+ 1/\sqrt{3}  \\
  \frac{1}{3 \cos \left(\widetilde{\vartheta}\right)+\sqrt{3} \sin \left(\widetilde{\vartheta}\right)} \\
  \frac{1}{3 \cos \left(\widetilde{\theta}\right)+\sqrt{3} \sin \left(\widetilde{\theta}\right)}  \\
 \end{array}
@@ -584,6 +584,8 @@ R_{xyz}(\theta) \quad where \quad
 \widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
 \end{array}
 \end{equation}
+
+
 
 The final piece of the metaphorical jigsaw is to add the capability to deal with the machine handling of the numerics. The transforms as defined above assume the capacity to represent the resulting numbers. Unfortunately, on a device, the numerics are not handled in such a pure way and --- whilst we are uninterested in the information overflow outside the destination representation --- this can cause instabilities in a practical implementation. In the development of the algorithm, it is therefore necessary to define these bounds. In the unit space, these bounds have already been defined by Equation~\ref{eq:LowHigh}; so long as the axis length can be represented on the device between these bounds, then overflow and underflow can be dealt with using a simple conditional statement.
 
@@ -738,7 +740,7 @@ It is not possible to compress all the information in such a way that it is appr
 
 \section{Skin Detection}\label{sec:SkinDetection}
 
-With the image in the skin color space, skin detection is a significantly simplified problem; the average skin color is at the halfway point in both of the chromatic channels and the Gaussian distribution has already been applied, meaning that performing an eliptical thresholding in the normal color space is equivalent to a rectangular thresholding in the skin color space. The probability distribution can be obtained by combining the distributions in each chromatic channel. Because the thresholding levels in each channel are equivalent to the same points on the Gaussian, they can be straightforwardly combined, and then a single threshold used on the one resulting channel. This can be done by subtracting $\frac{1}{2}$ from both channels, squaring them, then adding them together.
+With the image in the skin color space, skin detection is a significantly simplified problem; the average skin color is at the halfway point in both of the chromatic channels and the Gaussian distribution has already been applied, meaning that performing an elliptical thresholding in the normal color space is equivalent to a rectangular thresholding in the skin color space. The probability distribution can be obtained by combining the distributions in each chromatic channel. Because the thresholding levels in each channel are equivalent to the same points on the Gaussian, they can be straightforwardly combined, and then a single threshold used on the one resulting channel. This can be done by subtracting $\frac{1}{2}$ from both channels, squaring them, then adding them together.
 
 The next step is to identify the skin. For the purposes of this project, we're searching for a skin-colored object of a specific shape: a finger that comes into the frame, presses down on a surface, then exits the frame. One of its properties is that it meets the edge of the frame, appearing as a rectangle with a rounded end which --- on occasion --- can appear slightly bent due to the viewing angle or pressure placed on the finger as it presses down on the surface. But there's a limit to how great that deflection can be in the image.
 
