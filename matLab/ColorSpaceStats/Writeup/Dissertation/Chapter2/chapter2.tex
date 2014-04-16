@@ -511,21 +511,21 @@ Now that all of the values necessary to preserve the skin information have been 
 
 Previously, we found the lengths of the new axes after the rotational transformation. If we were to keep the same data type for the color space as is used for the RGB values, then the axes would have to be rescaled with the accompanying loss of information. Given that we have values which allow us to assess where all the relevant information lies, a more sophisticated approach is possible. For a chromatic axis --- which, after rotation, has a length $L(\theta)$ --- we can determine the positions on that axis at which the information is considered irrelevant using Equation~(\ref{eq:LowHigh}) and the positions where the information is all considered relavant. If the gradient \ref{eq:gradient} is less than 1, then the distribution looses information at all points on the axis and the axis can be shortened without loss of relavent information. The only further consideration is to ensure that the values outside that range are prevented from causing errors associated with overflow. To exclude this possibility, a conditional statement can be used which checks the bounds as stated, assigning an appropriate value as necessary. The alternative is to use an intermediate value with a higher bit depth, and then to recast into the destination data type in such a way that overflow and underflow are handled appropriately. The OpenCV library provides a casting method --- "saturateCast" --- which serves this purpose.
 
-We need to consider the requested compression of information alongside the spread of information caused by the rotation, and the desired focus on the specific region of interest dictated by the statistics. Each axis in the color space is to be represented by a discrete set of numbers. The size of these sets dictates the discretization of the axis, and the ratios between them indicates the spread or compression of the information they contain. We assume that the RGB axes are each discretized to the same extent, each containing $\text{rgbRange}$ values. After the application of the un-normalized rotational transformation, the axes contain differing numbers of values given by $\tRange_1 =\sRange \sqrt{3} $, $\tRange_2 = \sRange L_2(\theta) $  and $\tRange_3 = \sRange L_3(\theta)$.
+We need to consider the requested compression of information alongside the spread of information caused by the rotation, and the desired focus on the specific region of interest dictated by the statistics. Each axis in the color space is to be represented by a discrete set of numbers. The size of these sets dictates the discretization of the axis, and the ratios between them indicates the spread or compression of the information they contain. We assume that the RGB axes are each discretized to the same extent, each containing $\srcRange$ values. After the application of the un-normalized rotational transformation, the axes contain differing numbers of values given by $\tRange_1 =\srcRange \sqrt{3} $, $\tRange_2 = \srcRange L_2(\theta) $  and $\tRange_3 = \srcRange L_3(\theta)$.
 
 \begin{align}\label{eq:L}
   L_2(\theta) & \sqrt{\frac{2}{3}} \sin \left(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3}\right) + \sqrt{2} \cos \left(\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3}\right) \\
   L_3(\theta) & \sqrt{\frac{2}{3}} \sin \left(\theta  \bmod \frac{\pi }{3}\right) + \sqrt{2} \cos \left(\theta  \bmod \frac{\pi }{3}\right)
 \end{align}
 
-The destination color space is designed with a maximum discretization $dRange$ given by the required data type.
+The destination color space is designed with a maximum discretization $\dstRange$ given by the required data type.
 
 The analysis of the distribution is mathematically stated in a unit, source, and domain range. The maximum gradient of the distribution, when looked at in these terms, must always be greater than or equal to 1. This indicates a focusing of interest around the mean. It's not possible to extract more information than is contained in the source. For this reason, the destination axis may usefully only be shorter than or of equal length to the source axis. In terms of the machine representation, this indicates that the destination data type may be designed to contain a smaller range of values. The question for the rotational transformation is whether the rotated axis should be rescaled with the associated loss of information or not. We can now write an algorithm which determines the necessary scaling for the axes, and whether truncation of the extreme values is significant.
 
 The length of the axis after rescaling should be
 
 \begin{equation}\label{eq:RescaleAxis}
-\min\left\{ \frac{\Delta(\mu,\sigma) , 1\right\} \text{rgbRange} L(\theta)}{dRange} 
+\min\left\{ \Delta(\mu,\sigma) , 1\right\} \srcRange L(\theta)\dstRange 
 \end{equation}
 
 The condition for rescaling the axis is
@@ -564,7 +564,7 @@ The remaining two roations can be specified by application of a scaling to each 
 \bigotimes
 R_{xyz}(\theta) \quad where \quad
 \begin{array}{c}
-\kappa = \frac{\text{rgbRange} }{dRange}
+\kappa = \frac{\srcRange }{\dstRange}
 \end{array}
 \end{equation}
 
@@ -591,7 +591,7 @@ The final piece of the metaphorical jigsaw is to add the capability to deal with
 
 It is significantly advantageous to perform calculations using integer types, particularly given that the input and output types are integers with small ranges, meaning it's possible to construct algorithms which avoid conversion to floating point operations. To this end, we wish to determine the most efficient internal representation for the transformation.
 
-We have a well-defined distribution which represents the desired conservation of information, which itself is represented by the distribution function in the unit ranges. Each of these unit ranges is discretized into steps of $\frac{1}{sRange}$ and $\frac{1}{dRange}$. The question then is to what degree of accuracy do we need to represent the internal numerics? If we represent the transformation in a discrete type, we can express the problem in terms of the largest perturbation which can be made to the transformation without affecting the result.
+We have a well-defined distribution which represents the desired conservation of information, which itself is represented by the distribution function in the unit ranges. Each of these unit ranges is discretized into steps of $\frac{1}{sRange}$ and $\frac{1}{\dstRange}$. The question then is to what degree of accuracy do we need to represent the internal numerics? If we represent the transformation in a discrete type, we can express the problem in terms of the largest perturbation which can be made to the transformation without affecting the result.
 
 
 \begin{eqnarray}\label{eq:lxyPixel}
