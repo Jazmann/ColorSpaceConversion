@@ -208,8 +208,7 @@ In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the 
 
 \begin{tabular}{|c|c|c|}
   \hline
-  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
-    & Min & Max \\ \hline
+     & Min & Max \\ \hline
   X & \(0\) & \(\sqrt{3}\) \\
   Y & \(-\frac{\sin \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{6}}-\frac{\cos \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{2}}\) & \(\frac{\sin \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{6}}+\frac{\cos \left((\left(\theta -\frac{\pi }{6}\right) \bmod \frac{\pi }{3})\right)}{\sqrt{2}}\) \\
   Z & \(-\frac{\sin \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{6}}-\frac{\cos \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{2}} \) & \(\frac{\sin \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{6}}+\frac{\cos \left((\theta  \bmod \frac{\pi }{3})\right)}{\sqrt{2}}\) \\
@@ -226,9 +225,40 @@ In the range 0 to $\frac{\pi}{3}$, both sin and cos are positive, therefore the 
   \hline
 \end{tabular}
 
+The lengths of the axis after rotation are given by:
+\begin{equation}\label{eq:L}
+\mathbf{L}(\theta) = \left(
+\begin{array}{c}
+\sqrt{3} \\
+ \sqrt{\frac{2}{3}} \sin \left(\widetilde{\vartheta}\right) + \sqrt{2} \cos \left(\widetilde{\vartheta}\right) \\  
+\sqrt{\frac{2}{3}} \sin \left(\widetilde{\theta}\right) + \sqrt{2} \cos \left(\widetilde{\theta}\right) 
+\end{array}
+\right)
+\quad \text{where}  \quad 
+\begin{array}{c}
+\widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\ 
+\widetilde{\vartheta} = \left(\theta - \frac{\pi }{6}\right) \bmod \frac{\pi }{3}
+\end{array}
+\end{equation}
+
 It is convenient to produce a transformation which will result in axes of known length. Because the rotation cannot include a translation, we desire a transformation matrix which will result in the ranges $0:1$, -$\frac{1}2$ to $\frac{1}2$, and -$\frac{1}2$ to $\frac{1}2$. Such a transformation is easily obtained by multiplying the rotation matrix by a diagonal matrix with the reciprocal of the maximums found above placed along the diagonal. This will scale each axis to a unit length.
 
-The normalized rotation matrix is given by:
+The normalized 'rotation' matrix is given by:
+
+
+\begin{equation}\label{eq:NormRxyz2}
+ \overline{R}_{xyz}(\theta) =
+\left(
+\begin{array}{c}
+ \frac{1}{\sqrt{3}}  \\
+ \frac{1}{L_2(\theta)} \\
+ \frac{1}{L_3(\theta) }  \\
+\end{array}
+\right)
+\bigotimes
+R_{xyz}(\theta)
+\end{equation}
+
 \begin{gather*}
   \widetilde{\theta} = \theta  \bmod \frac{\pi }{3} \\
 \widetilde{\vartheta} = \left(\theta +\frac{\pi }{6}\right) \bmod \frac{\pi }{3}
