@@ -486,14 +486,15 @@ We now have equations which gives us the four points in the source domain which 
 \begin{aligned}
 \Sigma^- &= \text{erf}\left(\frac{\mu -1}{\sqrt{2} \sigma }\right) &
  \Sigma^+ &= \text{erf}\left(\frac{\mu }{\sqrt{2} \sigma }\right) &
-  \text{dL} &= \frac{1}{\yRange}
+  \text{dL} &= \frac{1}{\yRange} &
+  \kappa &= \frac{\yRange}{\xRange} 
 \end{aligned}
 \end{equation}
 
 \begin{equation}\label{eq:PreservedRegionGen}
 \begin{aligned}
-\Lambda^-(\mu,\sigma) &= \xMin + \xRange\left( \mu - \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}\right) \\
-\Lambda^+(\mu,\sigma) &= \xMin + \xRange \left(\mu + \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)+2 \log \left(\frac{\xRange}{\yRange}\right)+\log \left(\frac{2}{\pi }\right)}\right)
+\Lambda^-(\mu,\sigma) &= \xMin + \xRange\left( \mu - \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right) - 2 \log \left(\kappa\right)+\log \left(\frac{2}{\pi }\right)}\right) \\
+\Lambda^+(\mu,\sigma) &= \xMin + \xRange \left(\mu + \sigma  \sqrt{-2 \log \left(\sigma  \left(\Sigma^+-\Sigma^-\right)\right)-2 \log \left(\kappa\right)+\log \left(\frac{2}{\pi }\right)}\right)
 \end{aligned}
 \end{equation}
 
@@ -530,8 +531,12 @@ We now have equations which gives us the four points in the source domain which 
 There is one final value of interest to the development of the algorithm, which is the gradient at the mean. The reason this is of interest is because we're trying to compress the relevant data as much as possible. If the destination region is small (i.e. the destination machine type is smaller than the source type), then the gradient at the mean allows us to assess the fidelity required of the source type. If it weren't for the fact that the source is the result of a rotation transformation, then there would be little purpose in assessing this value. However, it is entirely possible that the lengthening of the axes resulting from the rotation is insignificant for the desired destination type; there's no point preserving information during the rotation which is then discarded by the redistribution. The gradient is given by
 
 \begin{equation}\label{eq:gradient}
-\Delta(\mu,\sigma) = \frac{\yRange}{\xRange}  \frac{ \sqrt{2} }{ \sigma \sqrt{\pi }  \left(\Sigma^+-\Sigma^-\right)}
+\begin{aligned}
+\Delta(\mu,\sigma) &= \kappa  \delta(\mu,\sigma)  & \delta(\mu,\sigma)  &= \frac{ \sqrt{2} }{ \sigma \sqrt{\pi }  \left(\Sigma^+-\Sigma^-\right)}
+\end{aligned}
 \end{equation}
+
+Because the compression ratio is at most one to one $\kappa <=1$ and the gradient in the unt space must always be greater than 1 $ \kappa \le \Delta(\mu,\sigma) \le \delta(\mu,\sigma)$
 
 The required fidelity in the source domain can be found using $ \Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm evaluating the maximum gradient $\Delta$ allows us to be sure that  $\Lambda$ exists if $\Delta >1$ or tells us that the x axis can be shortened if  $\Delta < 1$. In the algorithm $\Delta$ is used to find an appropreate working data type for the rotated colorspace and to define the axis scaling for the rotation matrix.
 
@@ -586,33 +591,39 @@ maximum scaling which scales to the destination range
 
 \begin{equation}\label{eq:NormRxyz2}
  \overline{R}_{xyz}(\theta) =
-\left(
-\begin{array}{c}
- \frac{\kappa}{\sqrt{3}}  \\
- \frac{\kappa}{L_2(\theta)} \\
- \frac{\kappa}{L_3(\theta) }  \\
-\end{array}
-\right)
+\kappa
 \bigotimes
 R_{xyz}(\theta) \quad where \quad
 \begin{array}{c}
-\kappa = \frac{\dstRange }{\srcRange}
-\end{array} \quad \text{for} \quad    \Delta(\mu,\sigma) < \kappa
+\kappa = \frac{\dstRange }{\mathbf{L} \srcRange}
+\end{array} \quad \text{for} \quad    \Delta(\mu,\sigma) \le \kappa
 \end{equation}
 
  and scaled which shortens the axis as much as possible without loosing statistically relavent data. 
 
 \begin{equation}\label{eq:CompressedRotation}
  \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
+\mathbf{\Delta}(\mathbf{\mu},\mathbf{\sigma})
+\bigotimes
+R_{xyz}(\theta) \quad \text{for} \quad  \kappa < \Delta(\mu,\sigma) < 1
+\end{equation}
+because $\Delta$ is always greater or equal to $\kappa$ these special cases can be combined into a general scaling for each axis
+
+\begin{equation}\label{eq:CombinedRotation}
+ \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
 \left(
 \begin{array}{c}
-\Delta(\mu_1,\sigma_1)  \\
-\Delta(\mu_2,\sigma_2) \\
-\Delta(\mu_3,\sigma_3) \\
+\min\left\{\Delta(\mu_1,\sigma_1), 1 \right\} \\
+\min\left\{\Delta(\mu_2,\sigma_2), 1 \right\}  \\
+\min\left\{\Delta(\mu_3,\sigma_3), 1 \right\}  \\
 \end{array}
 \right)
 \bigotimes
-R_{xyz}(\theta) \quad \text{for} \quad  \kappa < \Delta(\mu,\sigma) < 1
+R_{xyz}(\theta) \quad where \quad
+\begin{array}{c}
+\kappa = \frac{\dstRange }{\mathbf{L} \srcRange} \\
+\Delta(\mu,\sigma) = \kappa \delta(\mu,\sigma)
+\end{array}
 \end{equation}
 
 The final piece of the metaphorical jigsaw is to add the capability to deal with the machine handling of the numerics. The transforms as defined above assume the capacity to represent the resulting numbers. Unfortunately, on a device, the numerics are not handled in such a pure way and --- whilst we are uninterested in the information overflow outside the destination representation --- this can cause instabilities in a practical implementation. In the development of the algorithm, it is therefore necessary to define these bounds. In the unit space, these bounds have already been defined by Equation~\ref{eq:LowHigh}; so long as the axis length can be represented on the device between these bounds, then overflow and underflow can be dealt with using a simple conditional statement.
