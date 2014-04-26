@@ -560,7 +560,7 @@ The analysis of the distribution is mathematically stated in a unit, source, and
 The length of the axis after rescaling should be
 
 \begin{equation}\label{eq:RescaleAxis}
-\min\left\{ \Delta(\mu,\sigma) , 1\right\} \srcRange \; L(\theta)
+\min\left\{ \Delta(\mu,\sigma) , 1\right\} \srcRange \; \mathbf{L}(\theta)
 \end{equation}
 
 The condition for rescaling the axis is
@@ -594,7 +594,7 @@ maximum scaling which scales to the destination range
 \bigotimes
 R_{xyz}(\theta) \quad where \quad
 \begin{array}{c}
-\kappa = \frac{\dstRange }{\mathbf{L} \srcRange}
+\kappa = \frac{\dstRange }{\srcRange \mathbf{L}(\theta)}
 \end{array} \quad \text{for} \quad    \Delta(\mu,\sigma) \le \kappa
 \end{equation}
 
@@ -602,14 +602,14 @@ R_{xyz}(\theta) \quad where \quad
 
 \begin{equation}\label{eq:CompressedRotation}
  \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
-\mathbf{\Delta}(\mathbf{\mu},\mathbf{\sigma})
+\Delta(\mu,\sigma)
 \bigotimes
 R_{xyz}(\theta) \quad \text{for} \quad  \kappa < \Delta(\mu,\sigma) < 1
 \end{equation}
 because $\Delta$ is always greater or equal to $\kappa$ these special cases can be combined into a general scaling for each axis
 
 \begin{equation}\label{eq:CombinedRotation}
- \widetilde{R}_{xyz}(\theta,\mathbf{\mu},\mathbf{\sigma}) =
+ \widetilde{R}_{xyz}(\theta,\mu,\sigma) =
 \left(
 \begin{array}{c}
 \min\left\{\Delta(\mu_1,\sigma_1), 1 \right\} \\
