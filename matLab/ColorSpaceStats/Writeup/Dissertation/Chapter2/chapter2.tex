@@ -534,12 +534,13 @@ The required fidelity in the source domain can be found using $ \Delta$ in the s
 
 Now that all of the values necessary to preserve the skin information have been obtained, we can use them to build a color space transformation algorithm which can make intelligent decisions about the numerical precision for the intermediate and final variables, as well as determining the most efficient transformation methods. The algorithm described herein will take values of $\theta$, the rotation about the luminosity axis, the standard deviations and mean values for the two chromatic axes, and will automatically decide upon the necessary intermediate working data types and the most efficient redistribution methods.
 
-
+During the color space conversion, the pixel values are represented in three different ways: input, working and output representations. At each stage, we are concerned with preserving the information from the previous stage required by the next. For this reason, we have defined terms for the mathematical analysis of the problem, as well as terms for the algorithm development. The terms associated with each stage are as follows:
 
 \begin{tabular}{|c|c|c|c|}
   \hline
      Data Types & Src Pixel Values & Trans Pixel Values & Dst Pixel Values \\ \hline
-  Where? & Input & After Rotation & After Re-distribution \\ \hline
+  What? & Input & Working & Output \\ \hline
+  Where? & Initial & After Rotation & After Re-Distribution \\ \hline
   Unit Range Value & $ \uSrc $ & $\uT$ & $\uDst$ \\ \cline{1-1}
   Int Range Value & $\iSrc$ & $\iT$ & $\iDst$ \\ \cline{1-1}
   Max & $\srcMax$ & $\tMax$ & $\dstMax$ \\ \cline{1-1}
