@@ -527,7 +527,7 @@ There is one final value of interest to the development of the algorithm, which 
 
 The compression ratio is at most one-to-one, therefore $\kappa <=1$ and the gradient in the unit space must always be greater than 1 $ \kappa \le \Delta(\mu,\sigma) \le \delta(\mu,\sigma)$.
 
-The required fidelity in the source domain can be found using $ \Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm evaluating the maximum gradient $\Delta$ allows us to be sure that  $\Lambda$ -- the region on the x axis where all the information is to be preserved -- exists if $\Delta >1$ or tells us that the x axis can be shortened if  $\Delta < 1$. In the algorithm $\Delta$ is used to find an appropreate working data type for the rotated color space and to define the axis scaling for the rotation matrix.
+The required fidelity in the source domain can be found using $ \Delta$ in the sense that the correspondence between one information step in the source must produce a step of $\Delta$ in the destination type. For the algorithm evaluating the maximum gradient $\Delta$ allows us to be sure that  $\Lambda$ --- the region on the x axis where all the information is to be preserved --- exists if $\Delta >1$ or tells us that the x axis can be shortened if  $\Delta < 1$. In the algorithm $\Delta$ is used to find an appropreate working data type for the rotated color space and to define the axis scaling for the rotation matrix.
 
 \section{The Skin Color Space Algorithm}
 
@@ -615,17 +615,11 @@ R_{xyz}(\theta) \quad where \quad
 \end{array}
 \end{equation}
 
-The point that would be nice to clarify where we're at: right, what we're saying is that each pixel has three representations during the algorithm: it comes in as a source; we have an intermediate rep which is after the rotation and scaling to the new color space; we have a re-distribution to the destination colorspace. SO! There are three "stages", let's call them.
-
-The point is that, given the stats, we know what information is relevant to our problem, so we can say that, for example, for each of the three axes in the new color space, the lengths must be between the destination (dst) range and at most -- hold on, here we're talking about the T range; the intermediate range; the working type, so between the dst range and the unscaled, rotated axis length. That's the L(theta) factor times the source range. L(theta), that's like, the length the axis gains by the rotation, because we know it MUST be longer.
-So, the point is that L(theta) > 1, so it's longer, it must be longer, than the source range.
-
-So-- this is so simple, but so hard to explain-- so, if T-range is L(theta) * srcRange, then there's no loss of info; This is lossless if it's that long. Why is the dst range important? Well, it KIND of isn't, but if we can shorten the axis to the dst range-- if we can JUSTIFY shortening the rotated axis -- if we can rotate the cube and we can squash it, then we know there isn't any information that we actually NEED lost, so we'd might as well do that; doing it further than that, there's no point. So! The shortest we ever want the axis to be is equal to the dst range. The longest? Equal to the rotated cube range retaining all the information.
 The final piece of the metaphorical jigsaw is to add the capability to deal with the machine handling of the numerics. The transforms as defined above assume the capacity to represent the resulting numbers. Unfortunately, on a device, the numerics are not handled in such a pure way and --- whilst we are uninterested in the information overflow outside the destination representation --- this can cause instabilities in a practical implementation. In the development of the algorithm, it is therefore necessary to define these bounds. In the unit space, these bounds have already been defined by Equation~\ref{eq:LowHigh}; so long as the axis length can be represented on the device between these bounds, then overflow and underflow can be dealt with using a simple conditional statement.
 
 It is significantly advantageous to perform calculations using integer types, particularly given that the input and output types are integers with small ranges, meaning it's possible to construct algorithms which avoid conversion to floating point operations. To this end, we wish to determine the most efficient internal representation for the transformation.
 
-We have a well-defined distribution which represents the desired conservation of information, which itself is represented by the distribution function in the unit ranges. Each of these unit ranges is discretized into steps of $\frac{1}{sRange}$ and $\frac{1}{\dstRange}$. The question then is to what degree of accuracy do we need to represent the internal numerics? If we represent the transformation in a discrete type, we can express the problem in terms of the largest perturbation which can be made to the transformation without affecting the result.
+We have a well-defined distribution which represents the desired conservation of information, which itself is represented by the distribution function in the unit ranges. Each of these unit ranges is discretized into steps of $\frac{1}{\srcRange}$ and $\frac{1}{\dstRange}$. The question then is to what degree of accuracy do we need to represent the internal numerics? If we represent the transformation in a discrete type, we can express the problem in terms of the largest perturbation which can be made to the transformation without affecting the result.
 
 
 \begin{eqnarray}\label{eq:lxyPixel}
@@ -638,18 +632,13 @@ We have a well-defined distribution which represents the desired conservation of
 
 The continuous rotation $\uR$ can be expressed as the sum of its discrete representation $\dR$ and the perturbation $\delR$. The elements of the discrete rotation can be expressed as rational fractions.
 
-\begin{eqnarray}\label{eq:dRot}
-\dR = \dfrac{int(\uR \tRange)}{\tRange}\quad \text{where}\quad int(1.5) = 1, int (-1.5) = -1\\
-therefore\quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
-\end{eqnarray}
-
 \begin{eqnarray}\label{eq:dRRange}
 \uR = \dR + \delR\\
 \dR = \dfrac{int(\uR \cdot \tRange)}{\tRange}\quad where\quad int(1.5) = 1, int (-1.5) = -1\\
 therefore\quad \dfrac{-1}{\tRange} < \delR  < \dfrac{1}{\tRange}
 \end{eqnarray}
 
-It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. We must therefore consider both the maximum and minimum of $\delDst$. As $\uSrc \ge 0$ the extrema of $\delDst$ are found where $\uSrc$ is a vector with elements of 0 and 1. If the matrix is decomposed into a sum of positive and negative elements $\delDst = \delDst_+ + \delDst_-$ then the extrema are given by $\max(\delDst_+ \cdot \mathbf{1})$ and $\min(\delDst_- \cdot \mathbf{1})$. Where the elements are positive or negative is determined by the sign of the elements in the rotation matrix $\uR$. If we were to scale the entire matrix evenly then the top row would dominate as it is always positive and the necessary discrete representation would be characterised by $\tRange = 3 \dstRange$. This would however necessitate the matrix being stored in a data type with at least 2 more bits than the source type. As the source type will be fully utilised in all but the most unusual applications this will result in a doubling of the bit depth for the matrix and a quadrupling of the bit depth for the working calculation. We will therefore consider each row individually and because the transformation is scaled by row as described previously. The second and third rows each sum to zero $\uR \mathbf{1} = [\sqrt{3},0,0]$ allowing us to state that each of the rows has one element of the opposite sign to the other two elements. The discretization for the second and third rows then only requires $\tRange = 2 \dstRange$. It is also possible to pull out common factors from the rows to facilitate the reduction in the required representation.
+It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. We must therefore consider both the maximum and minimum of $\delDst$. As $\uSrc \ge 0$ the extrema of $\delDst$ are found where $\uSrc$ is a vector with elements of 0 and 1. If the matrix is decomposed into a sum of positive and negative elements $\delDst = \delDst_+ + \delDst_-$ then the extrema are given by $\max(\delDst_+ \cdot \mathbf{1})$ and $\min(\delDst_- \cdot \mathbf{1})$. Where the elements are positive or negative is determined by the sign of the elements in the rotation matrix $\uR$. If we were to scale the entire matrix evenly then the top row would dominate as it is always positive and the necessary discrete representation would be characterised by $\tRange = 3 \; \dstRange$. This would, however, necessitate the matrix being stored in a data type with at least 2 more bits than the source type. As the source type will be fully utilised in all but the most unusual applications this will result in a doubling of the bit depth for the matrix and a quadrupling of the bit depth for the working calculation. We will therefore consider each row individually and because the transformation is scaled by row as described previously. The second and third rows each sum to zero $\uR \mathbf{1} = [\sqrt{3},0,0]$ allowing us to state that each of the rows has one element of the opposite sign to the other two elements. The discretization for the second and third rows then only requires $\tRange = 2 \dstRange$. It is also possible to pull out common factors from the rows to facilitate the reduction in the required representation.
 
 \begin{equation}
 \uR(\theta) =
@@ -670,7 +659,7 @@ It should be noted that --- unlike the source type \uSrc --- the perturbation ca
 \end{equation}
 The rotation matrix may now be adequately represented in a discrete range of $\tRange = 2 \dstRange$ with all elements taking values between -1 and 1.
 
-One further optimization is possible if we consider the redistribution of the values which is performed after the rotation. Not all information contained in the source is of equal value, so an error introduced by using a less accurate discretization of the rotation may well be mitigated by the subsequent redistribution. Halving the discrete range will introduce errors of at most 1 for some of the pixel values. In general, using $\tRange = 2^{1-n)} \dstRange$ will introduce a maximum error of $\frac{2^n -1}{\dstRange}$ into the resulting matrix. We must now establish which elements are affected.
+One further optimization is possible if we consider the redistribution of the values which is performed after the rotation. Not all information contained in the source is of equal value, so an error introduced by using a less accurate discretization of the rotation may well be mitigated by the subsequent redistribution. Halving the discrete range will introduce errors of at most 1 for some of the pixel values. In general, using $\tRange = 2^{1-n} \; \dstRange$ will introduce a maximum error of $\frac{2^n -1}{\dstRange}$ into the resulting matrix. We must now establish which elements are affected.
 
 The sign of the rotation matrix is given by
 
