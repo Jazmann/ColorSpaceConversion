@@ -629,7 +629,21 @@ R_{xyz}(\theta) \quad where \quad
 \Delta(\mu,\sigma) = \kappa \delta(\mu,\sigma)
 \end{array}
 \end{equation}
+this produces a $\tRange$ of
 
+\begin{equation}\label{eq:CombinedRotation}
+\begin{aligned}
+ \tRange(\theta,\mu,\sigma) &= \min\left\{\Delta(\mu,\sigma), 1 \right\} \srcRange \mathbf{L}(\theta) \\
+ &= 
+\left(
+\begin{array}{c}
+\min\left\{\dstRange \delta(\mu_1,\sigma_1), \srcRange \text{L}_1 \right\} \\
+\min\left\{\dstRange \delta(\mu_2,\sigma_2), \srcRange \text{L}_2(\theta) \right\}  \\
+\min\left\{\dstRange \delta(\mu_3,\sigma_3), \srcRange \text{L}_3(\theta) \right\}  \\
+\end{array}
+\right)
+\end{aligned}
+\end{equation}
 The final piece of the metaphorical jigsaw is to add the capability to deal with the machine handling of the numerics. The transforms as defined above assume the capacity to represent the resulting numbers. Unfortunately, on a device, the numerics are not handled in such a pure way and --- whilst we are uninterested in the information overflow outside the destination representation --- this can cause instabilities in a practical implementation. In the development of the algorithm, it is therefore necessary to define these bounds. In the unit space, these bounds have already been defined by Equation~\ref{eq:LowHigh}; so long as the axis length can be represented on the device between these bounds, then overflow and underflow can be dealt with using a simple conditional statement.
 
 It is significantly advantageous to perform calculations using integer types, particularly given that the input and output types are integers with small ranges, meaning it's possible to construct algorithms which avoid conversion to floating point operations. To this end, we wish to determine the most efficient internal representation for the transformation.
@@ -652,7 +666,7 @@ The continuous rotation $\uR$ can be expressed as the sum of its discrete repres
 therefore\quad \dfrac{-1}{\rRange} < \delR  < \dfrac{1}{\rRange}
 \end{eqnarray}
 
-It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. The definition of the function $int$ results in the sign of the perturbation matching the sign of the discertized transformation matrix. We must therefore consider both the maximum and minimum of $\delT$. As $0 \le\uSrc \le 1$ the extrema of $\delT$ are found where $\uSrc$ is a vector with elements of 0 and 1. If the matrix is decomposed into a sum of positive and negative elements $\delT = \delT_+ + \delT_-$ then the extrema are given by $\max(\delDst_+ \cdot \mathbf{1})$ and $\min(\delDst_- \cdot \mathbf{1})$. Where the elements are positive or negative is determined by the sign of the elements in the rotation matrix $\uR$. If we were to scale the entire matrix evenly then the top row would dominate as it is always positive and the necessary discrete representation would be characterised by $\rRange = 3 \; \tRange$. This would, however, necessitate the matrix being stored in a data type with at least 2 more bits than the source type. As the source type will be fully utilised in all but the most unusual applications this will result in a doubling of the bit depth for the matrix and a quadrupling of the bit depth for the working calculation. We will therefore consider each row individually and because the transformation is scaled by row as described previously. The second and third rows each sum to zero $\uR \mathbf{1} = [\sqrt{3},0,0]$ allowing us to state that each of the rows has one element of the opposite sign to the other two elements. The discretization for the second and third rows then only requires $\rRange = 2 \; \tRange$. It is also possible to pull out common factors from the rows to facilitate the reduction in the required representation.
+It should be noted that --- unlike the source type \uSrc --- the perturbation can be negative. The definition of the function $int$ results in the sign of the perturbation matching the sign of the discertized transformation matrix. We must therefore consider both the maximum and minimum of $\delT$. As $0 \le\uSrc \le 1$ the extrema of $\delT$ are found where $\uSrc$ is a vector with elements of 0 and 1. If the matrix is decomposed into a sum of positive and negative elements $\delT = \delT_+ + \delT_-$ then the extrema are given by $\max(\delT_+ \cdot \mathbf{1})$ and $\min(\delT_- \cdot \mathbf{1})$. Where the elements are positive or negative is determined by the sign of the elements in the rotation matrix $\uR$. If we were to scale the entire matrix evenly then the top row would dominate as it is always positive and the necessary discrete representation would be characterised by $\rRange = 3 \; \tRange$. This would, however, necessitate the matrix being stored in a data type with at least 2 more bits than the source type. As the source type will be fully utilised in all but the most unusual applications this will result in a doubling of the bit depth for the matrix and a quadrupling of the bit depth for the working calculation. We will therefore consider each row individually and because the transformation is scaled by row as described previously. The second and third rows each sum to zero $\uR \mathbf{1} = [\sqrt{3},0,0]$ allowing us to state that each of the rows has one element of the opposite sign to the other two elements. The discretization for the second and third rows then only requires $\rRange = 2 \; \tRange$. It is also possible to pull out common factors from the rows to facilitate the reduction in the required representation.
 
 \begin{equation}
 \uR(\theta) =
@@ -766,7 +780,96 @@ So for a pixel $\{R,G,B\}$  % \parpic{\includegraphics[width=100mm]{Chapter2/Fig
 where 1 indicates that the element shares its sign with another element in the same row and -1 indicates the opposite. One channel from the source can be left error free whilst the sum of the other two must be less than one. this divides the color space in two. If the portion of the source which is to be preserved better than in a 2:1 ratio lies entirely within the error free half then the rotation matrix can be stored in the same data type as the source itself. This can be designed as it does not matter if we rotate the colorspace in $\frac{\pi}{2}$ steps.
 
 
+\begin{equation}
+\intR =
+\text{int}\left(
+\left(
+\begin{array}{c}
+ 1 \\
+ 2^{1-n_2} \; \tRange_2\\
+ 2^{1-n_3} \; \tRange_3 \\
+\end{array}
+\right) 
+\bigotimes
+\left(
+\begin{array}{ccc}
+ 1 & 1 & 1 \\
+ -\sin \left(\theta +\frac{\pi }{6}\right) &  \cos (\theta ) &  \sin \left(\theta -\frac{\pi }{6}\right) \\
+ -\cos \left(\theta +\frac{\pi }{6}\right) & - \sin (\theta ) & \cos \left(\theta -\frac{\pi }{6}\right) \\
+\end{array}
+\right)
+\right)
+\end{equation}
 
+\begin{equation}
+\widehat{R}_{xyz}(\theta,\mu,\sigma) =
+\left(
+\begin{array}{c}
+ \frac{\min\left\{\Delta(\mu_1,\sigma_1), 1 \right\}}{\sqrt{3}}  \\
+ \sqrt{\frac{2}{3}} \frac{\min\left\{\Delta(\mu_2,\sigma_2), 1 \right\} }{2^{1-n_2} \; \tRange_2} \\
+ \sqrt{\frac{2}{3}} \frac{\min\left\{\Delta(\mu_3,\sigma_3), 1 \right\}}{2^{1-n_3} \; \tRange_3} \\
+\end{array}
+\right) 
+\bigotimes
+\intR 
+\end{equation}
+
+using $\tRange(\theta,\mu,\sigma) = \min\left\{\Delta(\mu,\sigma), 1 \right\} \srcRange \mathbf{L}(\theta) $
+\begin{equation}
+\widehat{R}_{xyz}(\theta,\mu,\sigma) =
+\left(
+\begin{array}{c}
+ \frac{\min\left\{\Delta(\mu_1,\sigma_1), 1 \right\}}{\sqrt{3}}  \\
+ \sqrt{\frac{2}{3}} \frac{1}{2^{1-n_2} \; \srcRange \text{L}_2(\theta)} \\
+ \sqrt{\frac{2}{3}} \frac{1}{2^{1-n_3} \; \srcRange \text{L}_3(\theta)} \\
+\end{array}
+\right) 
+\bigotimes
+\intR 
+\end{equation}
+\begin{equation}
+\widehat{R}_{xyz}(\theta,\mu,\sigma) =
+\left(
+\begin{array}{c}
+\min\left\{\Delta(\mu_1,\sigma_1), 1 \right\} \\
+\min\left\{\Delta(\mu_2,\sigma_2), 1 \right\}  \\
+\min\left\{\Delta(\mu_3,\sigma_3), 1 \right\}  \\
+\end{array}
+\right)
+\bigotimes
+\left(
+\begin{array}{c}
+ \frac{1}{\sqrt{3}} \\
+ \sqrt{\frac{2}{3}}  \\
+ \sqrt{\frac{2}{3}} \\
+\end{array}
+\right) \bigotimes
+\left(
+\begin{array}{c}
+ 1 \\
+ \frac{1}{2^{1-n_2} \; \tRange_2} \\
+ \frac{1}{2^{1-n_3} \; \tRange_3} \\
+\end{array}
+\right) 
+\bigotimes
+\text{int}\left(
+\left(
+\begin{array}{c}
+ 1 \\
+ 2^{1-n_2} \; \tRange_2\\
+ 2^{1-n_3} \; \tRange_3 \\
+\end{array}
+\right) 
+\bigotimes
+\left(
+\begin{array}{ccc}
+ 1 & 1 & 1 \\
+ -\sin \left(\theta +\frac{\pi }{6}\right) &  \cos (\theta ) &  \sin \left(\theta -\frac{\pi }{6}\right) \\
+ -\cos \left(\theta +\frac{\pi }{6}\right) & - \sin (\theta ) & \cos \left(\theta -\frac{\pi }{6}\right) \\
+\end{array}
+\right)
+\right)
+\end{equation}
 
 \section{Setting up the 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 
