@@ -769,7 +769,7 @@ We are interested in which elements in each row share the same sign, as these wi
 \end{cases}
 \end{equation}
 So for a pixel $\{R,G,B\}$  % \parpic{\includegraphics[width=100mm]{Chapter2/Figs/ErrorIntheRotation.eps}}
-\begin{equation}
+\begin{equation}\label{eq:errorFreeConditions}
 \raisebox{-22mm}{\includegraphics[width = 44mm]{Chapter2/Figs/ErrorIntheRotation.eps}}\begin{cases}
  G + B < 1 & \frac{\pi }{6}<\theta <\frac{\pi }{2}\lor \frac{7 \pi }{6}<\theta <\frac{3 \pi }{2} \\
  R + B < 1 & 0\leq \theta <\frac{\pi }{6}\lor \frac{5 \pi }{6}<\theta <\frac{7 \pi }{6}\lor \frac{11 \pi }{6}<\theta <2 \pi  \\
@@ -871,6 +871,8 @@ using $\tRange(\theta,\mu,\sigma) = \min\left\{\Delta(\mu,\sigma), 1 \right\} \s
 \right)
 \right)
 \end{equation}
+
+All that remains is to determine if the statistics allow for a reduced representation of the rotation. An equtaion for the boundary of the one to one fidelity region must be found in the source color space and then checked against the conditions given above \ref{eq:errorFreeConditions}. 
 
 \section{Setting up the 2-Channel Representation}\label{sec:SettingUp2-ChannelRepresentation}
 
