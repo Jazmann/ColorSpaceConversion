@@ -6,6 +6,7 @@
 #include <opencv2/core/mat.hpp>
 #import <UIKit/UIKit.h>
 #import <opencv2/highgui/cap_ios.h>
+#import <AudioToolbox/AudioToolbox.h> 
 #import "SettingsViewController.h"
 #import "ImagePickerController.h"
 
