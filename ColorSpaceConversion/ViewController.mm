@@ -6,6 +6,7 @@
 #import "ViewController.h"
 #import "ImageFilter.h"
 #import <opencv2/highgui/cap_ios.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 #include <list>
 #import "UIImageCVMatConverter.h"
@@ -470,6 +471,9 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 	}
 }
 
+- (void)vibrate {
+    AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+}
 
 
 - (IBAction)switchCamera:(id)sender;
