@@ -148,12 +148,13 @@ cv::Mat imageHistory[10];
 #pragma mark - 
 #pragma mark button action
 
--(void)sVecPrint:(cv::sVec<uint8_t, 3>)vec{
-    printf("Test sVec \n");
-    printf("    / %u \\  / %f \\ \n", vec[0],    vec(0));
-    printf("%4.1f| %u |= | %f | \n",  vec.scale, vec[1], vec(1));
-    printf("    \\ %u /  \\ %f / \n", vec[2],    vec(2));
-}
+//-(void)sVecPrint:(cv::sVec<uint8_t, 3>)vec{
+//    printf("Test sVec \n");
+//    printf("    / %u \\  / %f \\ \n", vec[0],    vec(0));
+//    printf("%4.1f| %u |= | %f | \n",  vec.scale, vec[1], vec(1));
+//    printf("    \\ %u /  \\ %f / \n", vec[2],    vec(2));
+// }
+
 -(void)printDataInfo:(int)type{
     printf("CV_DEPTH_BITS_MAGIC = %llu \n",CV_DEPTH_BITS_MAGIC);
     printf("To get back the information put into CV_MAKETYPE( depth_Type, cn) use.\n");
@@ -214,14 +215,14 @@ template<typename _Tp, int m> std::string toString(_Tp mat[m]){
     return output;
 }
 
-template<typename _Tp, int cn> std::string toString(cv::sVec<_Tp, cn> vec){
-     std::string output = std::to_string(vec.scale) + "  / " + std::to_string(vec[0]) + " \\  / " + std::to_string(vec(0)) + " \\ \n";
-     for (int i=1; i<cn-1; i++) {
-         output += "          | " + std::to_string(vec[i]) + " |= | " + std::to_string(vec(i)) + " | \n";
-     }
-     output += "          \\ " + std::to_string(vec[cn-1]) + " /  \\ " + std::to_string(vec(cn-1)) + " / \n";
-     return output;
-}
+//template<typename _Tp, int cn> std::string toString(cv::sVec<_Tp, cn> vec){
+//     std::string output = std::to_string(vec.scale) + "  / " + std::to_string(vec[0]) + " \\  / " + std::to_string(vec(0)) + " \\ \n";
+//     for (int i=1; i<cn-1; i++) {
+//         output += "          | " + std::to_string(vec[i]) + " |= | " + std::to_string(vec(i)) + " | \n";
+//     }
+//     output += "          \\ " + std::to_string(vec[cn-1]) + " /  \\ " + std::to_string(vec(cn-1)) + " / \n";
+//     return output;
+//}
 
 
 //template<typename _Tp, int cn> inline cv::sVec<_Tp, cn> sVecRat(const cv::Matx<float, cn, 1>& vec, int64_t max_denom)
@@ -429,8 +430,8 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     cv::Matx<int, 3, 3> T(0, 1, 1, 0, 1, 1, 0, 1, 1);
 
     
-    cv::ABC2Metric<CV_8UC3,CV_8UC3> skinColorSpace(T, c);
-    cv::convertColor<CV_8UC3,CV_8UC3>(imageHistory[currentImageIndex], imageHistory[nextImageIndex], skinColorSpace);
+//    cv::ABC2Metric<CV_8UC3,CV_8UC3> skinColorSpace(T, c);
+//    cv::convertColor<CV_8UC3,CV_8UC3>(imageHistory[currentImageIndex], imageHistory[nextImageIndex], skinColorSpace);
     
     // Update Current Image Index and put up on screen.
     // convert cvMat to UIImage
