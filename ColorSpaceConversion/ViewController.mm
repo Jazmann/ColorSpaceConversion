@@ -6,8 +6,8 @@
 #import "ViewController.h"
 #import "ImageFilter.h"
 #import <opencv2/highgui/cap_ios.h>
+#import <AudioToolbox/AudioServices.h>
 #import <AudioToolbox/AudioToolbox.h>
-
 #include <list>
 #import "UIImageCVMatConverter.h"
 #import "CvFilterController.h"
@@ -713,6 +713,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
 		NSLog(@"Blob detection");
     } else if ([choice isEqualToString:EDGE_DETECTION]) {
 		NSLog(@"Edge detection");
+        [self vibrate];
         [self actionCanny:nil];
     } else if ([choice isEqualToString:FEATURE_EXTRACTION]) {
 		NSLog(@"Feature extraction");
