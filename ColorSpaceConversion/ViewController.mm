@@ -467,7 +467,7 @@ template<typename _Tp, int m, int n> inline cv::Matx<_Tp, m, 1> MinInRow(cv::Mat
     
     // Update Current Image Index and put up on screen.
     // convert cvMat to UIImage
-    [self forward];
+    //[self forward];
 }
 
 
