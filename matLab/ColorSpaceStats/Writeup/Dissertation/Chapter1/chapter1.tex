@@ -12,6 +12,35 @@
 
 Initially, this project was intended to be focused on skin detection and feature recognition for the potential application of hand tracking and posture prediction. However, it was quickly noticed that many authors were sticking to the RGB space, which suffers from disadvantages due to changes in lighting affecting the results. It was also noted that there seemed to be some significant disagreement over the methodology behind using a skin model~\cite{Shin2002a}~\cite{Sigal2000a}~\cite{Skarbek1994}~\cite{Soriano2000a}~\cite{Terrillon1999a}~\cite{Vezhnevets2003}~\cite{Brown2001a}. It appears that the reason many authors avoided luminosity-oriented color spaces was down to the computational intensity of performing the transform, the loss of information, and what seems like a rather perplexing issue to do with white-out, black-out and camera calibration. After reading over the literature, it was decided that two of these three issues were soluble, and the third was worthy of investigation.
 
+
+The purpose of this project is to create a chromatic skin and feature detector for application in mobile devices. Using a given device's built-in CCD camera, objects with characteristics matching those of human skin are identified. This presents a number of challenges. Since we are trying to use the chromatic information of human skin to distinguish objects (e.g. hands, fingers) in a given scene, working in a chromatic space helps to simplify this problem. A chromatic space is a color space wherein the color information is laid out in as few dimensions as possible, with a separate dimension for luminosity --- the brightness information. Fundamentally, the issue with this is that CCD cameras capture information using RGB values in a spectrum which mixes the chromatic information with the luminosity. Separating this information is the first part of the challenge.
+
+The second part of the challenge is, because we are searching for objects which exhibit certain chromatic characteristics, a statistical model must be developed and applied in order to characterize the objects as such.
+
+The third and final challenge is developing efficient, discrete maths to perform the chromatic space rotation and statistical model efficiently enough such that all the chromatic information about the target object is retained, whilst all irrelevant information is discarded.
+
+While several people have developed algorithms for skin detection, their focus has been squarely on detection rather than retention of information.
+
+<insert people words here.>
+
+Regardless of the color spaces and statistical models used, all of these algoritms have the same fundamental approach: the image is transformed into some color space, and the statistical model is applied, resulting in a binary image which classifies whether any given pixel is skin. This information is then used as a mask and applied to the original image. This algorithm is fundamentally different to the one used for this project; the primary goal is to preserve information about the skin, as opposed to simply detecting whether a given object is skin or not. We process the image into a new chromatic space, then apply the statistical model, resulting in an image which contains all the chromatic and luminosity information about the skin within it, and information about non-skin areas is lost. 
+
+We are preserving the information in a targeted way, reducing the overall infromation in the image whilst preserving the relevant information about the object we're interested in. This is a clear difference from the more common binary categorization approach, though it is possible to adapt our approach to the same process. However, as it stands, the entire process should be more efficient than the first step in a binary classifier, and should be faster than even moving to an HSV image.
+
+
+-Most used HSV color space (list them)
+
+-One used Normalized RGB (Soriano, for video; HSV too computationally-intensive)
+
+-Histogram thresholding (Soriano, Sigal) and 2D/3D Gaussians (2D: Terrillon; Single Gaussian, Mixture of Gaussians (2D, 3D, etc.), Multiple Gaussian clusters (three 3D Gaussians; YCbCr): Veshnevets) most common means of gathering stats
+
+-Brown used Self-Organizing Map (SOM)
+
+-All used doubles
+
+
+
+
 \section{Overview of Color Spaces}
 
 For the purposes of this project, a color space dedicated to human skin is necessary. When it comes to pattern recognition, it is beneficial to reduce the number of channels which the algorithm must process, as well as reducing the information density in those channels. It is also hoped that, in an appropriate color space, it will be a simple matter to separate the characteristics associated with saturation of tissue with blood, which changes under mechanical stress from the unchanging pigmentation of the cells (\cite{Stamatas2004}). Color spaces --- when they are normally defined --- are a combination of rotations, scaling and translations, while some (e.g. HSV (\cite{Vezhnevets2003, Zarit1999a} )) also perform a coordinate transform. The color space defined for this project is unusual in that it uses a non-linear redistribution of the values. It should be noted that this is not a pixel-based classifier (\cite{Jones2002}). However, seeing as the color space contains both the statistical information and the skin color information, it can be interpreted in a probabilistic way.
